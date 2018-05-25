@@ -1,0 +1,471 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  react-native-splash-screen 给安卓项目添加启动图 - kaelinda
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="kaelinda" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:kaelinda.top ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">最近更新</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">归档目录</a></li>
+        
+        <li id="ios.css"><a target="_self" href="ios.html">iOS</a></li>
+        
+        <li id="swift.css"><a target="_self" href="swift.html">Swift</a></li>
+        
+        <li id="reactnative.css"><a target="_self" href="reactnative.html">RN</a></li>
+        
+        <li id="js.css"><a target="_self" href="js.html">JS</a></li>
+        
+        <li id="shell.css"><a target="_self" href="shell.html">shell</a></li>
+        
+        <li id="coding.css"><a target="_self" href="coding.html">编程</a></li>
+        
+        <li id="live.css"><a target="_self" href="live.html">随笔</a></li>
+        
+        <li id="app.css"><a target="_blank" href="app.html">APP推荐</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; kaelinda</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="_self" href="index.html">最近更新</a></li>
+        
+        <li><a target="_self" href="archives.html">归档目录</a></li>
+        
+        <li><a target="_self" href="ios.html">iOS</a></li>
+        
+        <li><a target="_self" href="swift.html">Swift</a></li>
+        
+        <li><a target="_self" href="reactnative.html">RN</a></li>
+        
+        <li><a target="_self" href="js.html">JS</a></li>
+        
+        <li><a target="_self" href="shell.html">shell</a></li>
+        
+        <li><a target="_self" href="coding.html">编程</a></li>
+        
+        <li><a target="_self" href="live.html">随笔</a></li>
+        
+        <li><a target="_blank" href="app.html">APP推荐</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="reactnative.html">React-Native</a></li>
+        
+            <li><a href="ios.html">iOS</a></li>
+        
+            <li><a href="app.html">MacAPP</a></li>
+        
+            <li><a href="swift.html">Swift</a></li>
+        
+            <li><a href="js.html">JavaScript</a></li>
+        
+            <li><a href="vue.html">Vue</a></li>
+        
+            <li><a href="shell.html">shell</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>react-native-splash-screen 给安卓项目添加启动图</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2018/1/5</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='reactnative.html'>React-Native</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <h2 id="toc_0">react-native-splash-screen 基本配置</h2>
+
+<ul>
+<li>安装插件：<code>npm install react-native-splash-screen --save</code></li>
+<li>关联项目：<code>react-native link react-native-splash-screen</code> or <code>rnpm link react-native-splash-screen</code></li>
+</ul>
+
+<blockquote>
+<p>link 之后，安卓项目中会自动添加头文件 以及部分代码，为保证项目顺利运行，还请确认下面代码是否已经完善。</p>
+</blockquote>
+
+<ul>
+<li><p>确保 <code>android/settings.gradle</code>文件夹已经有下面代码</p>
+
+<pre><code class="language-JavaScript">include &#39;:react-native-splash-screen&#39;   
+project(&#39;:react-native-splash-screen&#39;).projectDir = new File(rootProject.projectDir, &#39;../node_modules/react-native-splash-screen/android&#39;)
+</code></pre></li>
+<li><p>android/app/build.gradle 文件中 添加依赖 <code>react-native-splash-screen</code></p>
+
+<pre><code>...
+dependencies {
+...
+compile project(&#39;:react-native-splash-screen&#39;)
+}
+</code></pre></li>
+<li><p>更新 <code>MainApplication.java</code> 文件</p></li>
+</ul>
+
+<pre><code>// react-native-splash-screen &gt;= 0.3.1
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
+// react-native-splash-screen &lt; 0.3.1
+import com.cboy.rn.splashscreen.SplashScreenReactPackage;
+
+public class MainApplication extends Application implements ReactApplication {
+
+    private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
+        @Override
+        protected boolean getUseDeveloperSupport() {
+            return BuildConfig.DEBUG;
+        }
+
+        @Override
+        protected List&lt;ReactPackage&gt; getPackages() {
+            return Arrays.&lt;ReactPackage&gt;asList(
+                    new MainReactPackage(),
+            new SplashScreenReactPackage()  //here
+            );
+        }
+    };
+
+    @Override
+    public ReactNativeHost getReactNativeHost() {
+        return mReactNativeHost;
+    }
+}
+</code></pre>
+
+<h2 id="toc_1">准备添加代码和文件配置</h2>
+
+<ul>
+<li><code>app/src/main/res/layout</code> 文件夹下 添加 <code>launch_screen.xml</code> 并copy如下代码：</li>
+</ul>
+
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:orientation=&quot;vertical&quot; android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:background=&quot;@drawable/launch_screen&quot;&gt;
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<ul>
+<li>创建文件夹 <code>drawable-xhdpi</code>、 <code>drawable-xxhdpi</code>（暂时先创建这两个就够了），将准备好的启动图 命名为 <code>launch_screen.png</code> 分别放入创建好的文件夹</li>
+<li><p>白屏问题，设置透明背景：<code>android/app/src/main/res/values/styles.xml</code> 文件夹下 添加 <code>&lt;item name=&quot;android:windowIsTranslucent&quot;&gt;true&lt;/item&gt;</code></p>
+
+<pre><code>&lt;resources&gt;
+&lt;!-- Base application theme. --&gt;
+&lt;style name=&quot;AppTheme&quot; parent=&quot;Theme.AppCompat.Light.NoActionBar&quot;&gt;
+    &lt;!-- Customize your theme here. --&gt;
+    &lt;!--设置透明背景--&gt;
+    &lt;item name=&quot;android:windowIsTranslucent&quot;&gt;true&lt;/item&gt;
+&lt;/style&gt;
+&lt;/resources&gt;
+</code></pre></li>
+<li><p><code>android/app/src/main/res/values/colors.xml</code> 文件夹下，添加如下：</p>
+
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt; &lt;resources&gt; &lt;color name=&quot;primary_dark&quot;&gt;#660B0B0B&lt;/color&gt; &lt;/resources&gt;
+</code></pre></li>
+<li><p>适当的时刻 隐藏启动图  可以是在视图挂载完毕，可以是网络请求结束之后</p></li>
+</ul>
+
+<pre><code>import SplashScreen from &#39;react-native-splash-screen&#39;
+componentDidMount() {
+    SplashScreen.hide();
+  }
+</code></pre>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15172908985351.html" 
+          title="Previous Post: iOS设备上实现DLNA功能 Platinum 篇">&laquo; iOS设备上实现DLNA功能 Platinum 篇</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15168925544178.html" 
+          title="Next Post: 从零开始学习使用 vuex">从零开始学习使用 vuex &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fmpk9088gsj30sg0sgn33.jpg" /></div>
+            
+                <h1>kaelinda</h1>
+                <div class="site-des">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+                <div class="social">
+
+
+
+
+
+
+
+
+
+<a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="reactnative.html"><strong>React-Native</strong></a>
+        
+            <a href="ios.html"><strong>iOS</strong></a>
+        
+            <a href="app.html"><strong>MacAPP</strong></a>
+        
+            <a href="swift.html"><strong>Swift</strong></a>
+        
+            <a href="js.html"><strong>JavaScript</strong></a>
+        
+            <a href="vue.html"><strong>Vue</strong></a>
+        
+            <a href="shell.html"><strong>shell</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15261167596297.html">OC 多线程之 GCD知识从基础到进阶 （1）</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15257437237715.html">OC中的各种遍历</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15253400374602.html">多线程 之 NSThread</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15200726964422.html">iOS Block 知识点拾遗</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15235286649865.html">音视频学习笔记 1</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+
+  </body>
+</html>

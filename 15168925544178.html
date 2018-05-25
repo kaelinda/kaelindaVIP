@@ -1,0 +1,731 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  从零开始学习使用 vuex - kaelinda
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="kaelinda" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:kaelinda.top ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">最近更新</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">归档目录</a></li>
+        
+        <li id="ios.css"><a target="_self" href="ios.html">iOS</a></li>
+        
+        <li id="swift.css"><a target="_self" href="swift.html">Swift</a></li>
+        
+        <li id="reactnative.css"><a target="_self" href="reactnative.html">RN</a></li>
+        
+        <li id="js.css"><a target="_self" href="js.html">JS</a></li>
+        
+        <li id="shell.css"><a target="_self" href="shell.html">shell</a></li>
+        
+        <li id="coding.css"><a target="_self" href="coding.html">编程</a></li>
+        
+        <li id="live.css"><a target="_self" href="live.html">随笔</a></li>
+        
+        <li id="app.css"><a target="_blank" href="app.html">APP推荐</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; kaelinda</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="_self" href="index.html">最近更新</a></li>
+        
+        <li><a target="_self" href="archives.html">归档目录</a></li>
+        
+        <li><a target="_self" href="ios.html">iOS</a></li>
+        
+        <li><a target="_self" href="swift.html">Swift</a></li>
+        
+        <li><a target="_self" href="reactnative.html">RN</a></li>
+        
+        <li><a target="_self" href="js.html">JS</a></li>
+        
+        <li><a target="_self" href="shell.html">shell</a></li>
+        
+        <li><a target="_self" href="coding.html">编程</a></li>
+        
+        <li><a target="_self" href="live.html">随笔</a></li>
+        
+        <li><a target="_blank" href="app.html">APP推荐</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="reactnative.html">React-Native</a></li>
+        
+            <li><a href="ios.html">iOS</a></li>
+        
+            <li><a href="app.html">MacAPP</a></li>
+        
+            <li><a href="swift.html">Swift</a></li>
+        
+            <li><a href="js.html">JavaScript</a></li>
+        
+            <li><a href="vue.html">Vue</a></li>
+        
+            <li><a href="shell.html">shell</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>从零开始学习使用 vuex</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2018/1/25</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='vue.html'>Vue</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <blockquote>
+<p>本文是建立在，对vuex理论有一定理解的基础上写的。<br/>
+因为官方文档的写法是 针对 有一定的vue开发经验 和 JavaScript 有一定理解的开发者看的，对于小白级别的我来说，理解起来有一定困难。所以，唯一想我一向的小白想尽快上手vuex....</p>
+</blockquote>
+
+<p><a href="https://vuex.vuejs.org/zh-cn/installation.html">详情请参考vuex官方文档</a></p>
+
+<h2 id="toc_0">安装</h2>
+
+<h3 id="toc_1">直接下载 CDN 安装</h3>
+
+<p>CDN 链接地址：<code>https://unpkg.com/vuex</code><br/>
+指定到固定版本：<code>https://unpkg.com/vuex@2.0.0</code></p>
+
+<pre><code>&lt;script src=&quot;/path/to/vue.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/path/to/vuex.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+
+<h3 id="toc_2">npm 方式安装 （推荐！简单快捷，便于管理）</h3>
+
+<p><code>npm install -save vuex</code></p>
+
+<h3 id="toc_3">yar</h3>
+
+<p><code>yarn add vuex</code></p>
+
+<h3 id="toc_4">自己构建</h3>
+
+<pre><code class="language-bash">git clone https://github.com/vuejs/vuex.git node_modules/vuex
+cd node_modules/vuex
+npm install
+npm run build
+</code></pre>
+
+<h2 id="toc_5">导入vue工程中使用</h2>
+
+<ul>
+<li>main.js 入口文件</li>
+</ul>
+
+<blockquote>
+<p>按照如下方式导入，工程就可以使用vuex的环境了</p>
+</blockquote>
+
+<pre><code class="language-JavaScript">// 导入vuex头文件
+import Vuex from &#39;vuex&#39;
+// 这里表示全局导入vuex
+Vue.use(Vuex)
+// 这里是我自定义的store文件 导出store对象
+import store from &#39;@/study/vuexStudy/store/store.js&#39;
+</code></pre>
+
+<blockquote>
+<p>入口组件<App/>中，绑定store</p>
+</blockquote>
+
+<pre><code>new Vue({
+  el: &#39;#app&#39;,
+  template: &#39;&lt;App/&gt;&#39;,
+  components: { App },
+  store
+})
+</code></pre>
+
+<p>到这里 算是万里长征走了第一步。</p>
+
+<h3 id="toc_6">创建Store对象</h3>
+
+<h4 id="toc_7">store 的结构:</h4>
+
+<pre><code class="language-JavaScript">export const store = new Vuex.Store({
+
+  // ------state:状态值存储,这里可以存储n个状态的值
+  state: {count: &#39;1&#39;},
+  
+  // ------getter:store中定义的getters可以认为是store的计算属性
+  // getters接收state作为其第一个参数
+  getters: {
+    done (state) {
+      return state.count + 5
+    }
+  },
+  
+  // ------mutations:状态值的改变，操作状态值
+  // $store.commit(mutationsName, params)是更改状态值的唯一方法
+  mutations: {
+    increment (state) {
+      // 变更状态
+      state.count++
+    }
+  },
+
+  // ------actions:可以认为是包装了mutations的function 需要用 dispatch(actionName) 的方式去派发
+  actions: {
+    add (context) {
+      context.commit(&#39;increment&#39;)
+    },
+    addAsync (context) {
+      // 延时1秒
+      setTimeout(() =&gt; {
+        context.commit(&#39;increment&#39;)
+      }, 1000)
+    }
+  },
+  // store可以合并几个子store，以此来进行项目的模块化
+  modules: {
+    a: moduleA,
+    b: moduleB
+  }
+})
+</code></pre>
+
+<h4 id="toc_8">编辑定义store实体对象：</h4>
+
+<ul>
+<li>store.js文件中</li>
+</ul>
+
+<blockquote>
+<p>这里为了便于抽离 我们外部声明城对象实体后嵌入绑定到store</p>
+</blockquote>
+
+<ol>
+<li><p>创建一个store对象</p>
+
+<pre><code class="language-JavaScript">export default const store = new Vuex.Store({
+  state,//绑定之前创建的state对象到store中
+  mutations,
+  getters,
+  actions,
+  modules
+})
+</code></pre></li>
+<li><p>定义一个状态对象 <code>state</code>（实体）</p>
+
+<pre><code class="language-JavaScript">const state = {
+  count: 0,
+  state1: 1,
+  state2: 2,
+  state3: 3
+}
+</code></pre></li>
+<li><p>定义getters对象</p>
+
+<pre><code>const getters = {
+  done (state) {
+    return state.count + 5
+  },
+  getState1: function (state) {
+    return state.state3
+  },
+  // ES6简写
+  getState2: state =&gt;  state.state2
+}
+</code></pre></li>
+<li><p>.vue 文件中直接获取state值</p>
+
+<p>首先导入辅助函数：</p>
+
+<pre><code>import { 
+    mapState, 
+    mapGetters, 
+    mapMutations, 
+    mapActions 
+    } from &#39;vuex&#39;
+</code></pre>
+
+<ul>
+<li>第一种方式：绑定到组件属性中，直接获取 （一般不用这个，绑定到computed中是最合适的）<code>$store.state.count</code>并使用</li>
+</ul>
+
+<pre><code class="language-JavaScript">export default {
+    data() {
+        return {
+          testCount: this.$store.state.count
+        }
+    }
+}
+</code></pre>
+
+<ul>
+<li>第二种方式： 绑定到计算属性中（适合对store中的原始状态值进行一定处理的情况）</li>
+</ul>
+
+<pre><code class="language-JavaScript">export default {
+    data() {
+        return {
+          testCount: this.$store.state.count
+        }
+    },
+    computed:{
+        testComputedCount1: function () {
+            return this.$store.state.count + 22
+        }
+    }
+}
+</code></pre>
+
+<ul>
+<li>第三种方式：mapState辅助函数绑定状态state值到组件计算属性中</li>
+</ul>
+
+<pre><code class="language-JavaScript">export default {
+    data() {
+        return {
+          testCount: this.$store.state.count
+        }
+    },
+    computed:{
+        testComputedCount1: function () {
+            return this.$store.state.count + 22
+        },
+        ...mapState({
+            count: state =&gt; state.count,
+            mapState1: state =&gt; state.state1,
+            mapState2: state =&gt; state.state2
+        }),
+    }
+}
+</code></pre>
+
+<ul>
+<li>第四种方式：使用store中绑定的getters进行获取</li>
+</ul>
+
+<pre><code class="language-JavaScript">export default {
+    data() {
+        return {
+          testCount: this.$store.state.count
+        }
+    },
+    computed:{
+        testComputedCount1: function () {
+            return this.$store.state.count + 22
+        },
+        ...mapState({
+            count: state =&gt; state.count,
+            mapState1: state =&gt; state.state1,
+            mapState2: state =&gt; state.state2
+        }),
+        testComputedGettersCount2: funtion () {
+            return this.$store.getters.done
+        }
+    }
+}
+</code></pre>
+
+<ul>
+<li>第五种方式： 借助mapGetters辅助函数绑定getters到vue的计算属性中</li>
+</ul>
+
+<pre><code class="language-JavaScript">export default {
+    data() {
+        return {
+          testCount: this.$store.state.count
+        }
+    },
+    computed:{
+        testComputedCount1: function () {
+            return this.$store.state.count + 22
+        },
+        ...mapState({
+            count: state =&gt; state.count,
+            mapState1: state =&gt; state.state1,
+            mapState2: state =&gt; state.state2
+        }),
+        testComputedGettersCount2: funtion () {
+            return this.$store.getters.done
+        },
+
+        //直接绑定方法数组的方式
+        ...mapGetters([
+            &#39;getState1&#39;,
+            &#39;getState2&#39;,
+            &#39;getState3&#39;
+        ]),
+
+        //重命名对象绑定方式
+        ...mapGetters({
+          mapGetterState1: &#39;getState1&#39;,
+          mapGetterState3: &#39;getState3&#39;
+        }),
+    }
+}
+</code></pre></li>
+<li><p>触发动作行为改变状态值</p>
+
+<blockquote>
+<p>方式一：$store.commit(&#39;mutationsName&#39;)</p>
+
+<p>方式二：$store.dispatch(&#39;actionsName&#39;)    </p>
+</blockquote>
+
+<p>store.js文件中：</p>
+
+<ul>
+<li>初始化 mutations 和 actions (相当于是methods)</li>
+</ul>
+
+<pre><code>const mutations = {
+    increment (state) {
+        // 变更状态
+        state.count = state.count * 5
+    }
+}
+</code></pre>
+
+<pre><code>import {action4} from &#39;@/path/actions.js&#39;
+const actions = {
+    // 同步方法
+    add: function (context) {
+        context.commit(&#39;increment&#39;)
+    },
+    // 延时操作 用于网络请求啊啥的
+    addAsync (context) {
+        // 延时1秒
+        setTimeout(() =&gt; {
+            context.commit(&#39;increment&#39;)
+        }, 1000)
+    },
+    // 简写方式
+    action2 (context) {
+        context.commit(&#39;increment&#39;)
+    },
+    // 抽离到单独文件中，在导进封装好的变量来直接使用即可（导进来的目的是为了接收第一个参数：state），不绑定到store，需要手动传入store对象
+    action4: action4,
+}
+</code></pre></li>
+</ol>
+
+<ul>
+<li><p>绑定action 和 mutations 到 methods，然后 调用就行了</p>
+
+<pre><code>export default {
+    methods: {
+        // 数组形式直接载入
+        ...mapActions([
+            &#39;add&#39;
+        ]),
+        // 重命名形式 
+        ...mapActions({
+            add: &#39;add&#39;,
+            addAsync: &#39;addAsync&#39;,
+            action4: &#39;action4&#39;
+        }),
+        // 同上
+        ...mapMutations([
+            &#39;increment&#39;
+        ]),
+        ...mapMutations({
+            incrementMutation: &#39;increment&#39;
+        })
+    }
+}
+</code></pre></li>
+</ul>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15151216159291.html" 
+          title="Previous Post: react-native-splash-screen 给安卓项目添加启动图">&laquo; react-native-splash-screen 给安卓项目添加启动图</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15145327105445.html" 
+          title="Next Post: 佛祖镇楼 bug辟易">佛祖镇楼 bug辟易 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fmpk9088gsj30sg0sgn33.jpg" /></div>
+            
+                <h1>kaelinda</h1>
+                <div class="site-des">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+                <div class="social">
+
+
+
+
+
+
+
+
+
+<a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="reactnative.html"><strong>React-Native</strong></a>
+        
+            <a href="ios.html"><strong>iOS</strong></a>
+        
+            <a href="app.html"><strong>MacAPP</strong></a>
+        
+            <a href="swift.html"><strong>Swift</strong></a>
+        
+            <a href="js.html"><strong>JavaScript</strong></a>
+        
+            <a href="vue.html"><strong>Vue</strong></a>
+        
+            <a href="shell.html"><strong>shell</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15261167596297.html">OC 多线程之 GCD知识从基础到进阶 （1）</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15257437237715.html">OC中的各种遍历</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15253400374602.html">多线程 之 NSThread</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15200726964422.html">iOS Block 知识点拾遗</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15235286649865.html">音视频学习笔记 1</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+
+  </body>
+</html>

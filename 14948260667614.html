@@ -1,0 +1,464 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  SectionListView - kaelinda
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="kaelinda" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:kaelinda.top ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">最近更新</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">归档目录</a></li>
+        
+        <li id="ios.css"><a target="_self" href="ios.html">iOS</a></li>
+        
+        <li id="swift.css"><a target="_self" href="swift.html">Swift</a></li>
+        
+        <li id="reactnative.css"><a target="_self" href="reactnative.html">RN</a></li>
+        
+        <li id="js.css"><a target="_self" href="js.html">JS</a></li>
+        
+        <li id="shell.css"><a target="_self" href="shell.html">shell</a></li>
+        
+        <li id="coding.css"><a target="_self" href="coding.html">编程</a></li>
+        
+        <li id="live.css"><a target="_self" href="live.html">随笔</a></li>
+        
+        <li id="app.css"><a target="_blank" href="app.html">APP推荐</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; kaelinda</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="_self" href="index.html">最近更新</a></li>
+        
+        <li><a target="_self" href="archives.html">归档目录</a></li>
+        
+        <li><a target="_self" href="ios.html">iOS</a></li>
+        
+        <li><a target="_self" href="swift.html">Swift</a></li>
+        
+        <li><a target="_self" href="reactnative.html">RN</a></li>
+        
+        <li><a target="_self" href="js.html">JS</a></li>
+        
+        <li><a target="_self" href="shell.html">shell</a></li>
+        
+        <li><a target="_self" href="coding.html">编程</a></li>
+        
+        <li><a target="_self" href="live.html">随笔</a></li>
+        
+        <li><a target="_blank" href="app.html">APP推荐</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="reactnative.html">React-Native</a></li>
+        
+            <li><a href="ios.html">iOS</a></li>
+        
+            <li><a href="app.html">MacAPP</a></li>
+        
+            <li><a href="swift.html">Swift</a></li>
+        
+            <li><a href="js.html">JavaScript</a></li>
+        
+            <li><a href="vue.html">Vue</a></li>
+        
+            <li><a href="shell.html">shell</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>SectionListView</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2017/5/15</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='reactnative.html'>React-Native</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <h2 id="toc_0">属性</h2>
+
+<ol>
+<li>ItemSeparatorComponent  <code>{highlighted,leadingItem,leandingSection,section,trailingItem}</code><br/>
+返回一个行与行之间的分割组件，不会出现在第一行之前和最后一行之后。
+
+<ul>
+<li><code>highlighted</code> 当前行（分割线上面👆的Item）是否是高亮状态</li>
+<li><code>leadingItem</code> 当前行分配到的数据源</li>
+<li><code>leandingSection</code> 目前我也没搞明白啥意思 这里是<code>undefined</code></li>
+<li><code>section</code> 当前段分配到的数据源</li>
+<li><code>trailingItem</code> 尾段数据</li>
+</ul></li>
+<li>ListEmptyCompone  <code>没有接收参数</code><br/>
+渲染一个cell为空时的缓冲组件<br/></li>
+<li>ListFooterComponent  <code>没有接收参数</code><br/>
+渲染整个组件的Footer</li>
+<li>ListHeaderComponent   <code>没有接收参数</code><br/>
+渲染整个组件的Header</li>
+</ol>
+
+<span id="more"></span><!-- more -->
+
+<ol>
+<li><p>SectionSeparatorComponent <code>{highlighted,leadingItem,leandingSection,section,trailingItem}</code><br/>
+段分割组件</p>
+
+<ul>
+<li><code>highlighted</code> 当前行（分割线上面👆的Item）是否是高亮状态</li>
+<li><code>leadingItem</code> 当前行分配到的数据源 这里是<code>undefined</code></li>
+<li><code>leandingSection</code> 目前我也没搞明白啥意思 这里是<code>undefined</code></li>
+<li><code>section</code> 当前段分配到的数据源</li>
+<li><code>trailingItem</code> 尾段数据</li>
+</ul></li>
+<li><p>extraData<br/><br/>
+如果有除data以外的数据用在列表中（不论是用在renderItem还是Header或者Footer中），请在此属性中指定。同时此数据在修改时也需要先修改其引用地址（比如先复制到一个新的Object或者数组中），然后再修改其值，否则界面很可能不会刷新。</p></li>
+</ol>
+
+<blockquote>
+<p>文档说的挺乱，总而言之言而总之：sectionList的刷新首先决定于Data，当Data没变化，但是你想强制刷新UI的时候，有个状态控制，那么这个状态控制需要在这里写一下，关联一下，否则你的这个状态不会被关联，UI不会被刷新。</p>
+</blockquote>
+
+<ol>
+<li><p>initialNumToRender<br/><br/>
+指定一开始渲染的item 数量,预加载item 数</p></li>
+<li><p>keyExtractor <code>(item: ItemT, index: number) =&gt; string</code><br/>
+此函数用于为<strong>给定的item</strong>生成一个不重复的key。Key的作用是使React能够区分同类元素的不同个体，以便在刷新时能够确定其变化的位置，减少重新渲染的开销。若不指定此函数，则默认抽取item.key作为key值。若item.key也不存在，则使用数组下标。</p></li>
+<li><p>onEndReachedThreshold  <code>number</code><br/><br/>
+数值。决定当距离内容最底部还有多远时触发onEndReached回调。注意此参数是一个比值而非像素单位。比如，0.5表示距离内容最底部的距离为当前列表可见长度的一半时触发</p></li>
+<li><p>onEndReached  <code>(info: {distanceFromEnd: number}) =&gt; void</code></p>
+
+<p>传入一个对象info，info包含number类型的<code>distanceFromEnd</code>属性。</p></li>
+<li><p>onViewableItemsChanged <code>(info: {viewableItems: Array&lt;ViewToken&gt;, changed: Array&lt;ViewToken&gt;}) =&gt; void</code></p>
+
+<ul>
+<li>viewableItems 可是Item对应的数据</li>
+<li>changed 改变的数据<br/>
+可视元素发生变化时调用<br/></li>
+</ul></li>
+<li><p>refreshing <code>boolean</code><br/><br/>
+等待新数据加载时此属性设置为true，列表会显示出正在加载的符号</p></li>
+<li><p>renderItem  <code>(info: {item: Item, index: number}) =&gt; ?React.Element&lt;any&gt;</code><br/><br/>
+渲染每一个section中的item    </p>
+
+<ul>
+<li>item 每个item渲染所需数据</li>
+<li>index item在其section中的位置索引</li>
+</ul></li>
+<li><p>renderSectionHeader?: <code>{section: SectionT}</code><br/>
+接收一个对象，这个对象包含<code>section</code>属性，<br/>
+返回一个组件，用作段头    </p></li>
+<li><p>sections <code>ReadOnlyArray&lt;SectionT&gt;</code></p>
+
+<p>传入一个sections数组<br/>
+<code><br/>
+[<br/>
+{data:[{name:&#39;nader&#39;},{name:&#39;chris&#39;}],key:&#39;A&#39;},<br/>
+{data:[{name:&#39;nick&#39;},{name:&#39;amanda&#39;}],key:&#39;B&#39;},<br/>
+{data:[{name:&#39;nick&#39;},{name:&#39;amanda&#39;}],key:&#39;C&#39;},<br/>
+{data:[{name:&#39;nick&#39;}],key:&#39;D&#39;},<br/>
+]<br/>
+</code></p></li>
+<li><p>stickySectionHeadersEnabled <code>boolean</code></p></li>
+</ol>
+
+<h2 id="toc_1">方法</h2>
+
+<ul>
+<li><code>scrollToLocation (params: object)</code> -- {sectionIndex,itemIndex}:代码控制 UI交互跳转到指定位置</li>
+<li><code>recordInteraction()</code> 告诉ListView 交互已经发生了</li>
+<li><code>flashScrollIndicators()</code>显示指示滚动</li>
+</ul>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15117133773045.html" 
+          title="Previous Post: 可选型 Optional">&laquo; 可选型 Optional</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fmpk9088gsj30sg0sgn33.jpg" /></div>
+            
+                <h1>kaelinda</h1>
+                <div class="site-des">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+                <div class="social">
+
+
+
+
+
+
+
+
+
+<a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="reactnative.html"><strong>React-Native</strong></a>
+        
+            <a href="ios.html"><strong>iOS</strong></a>
+        
+            <a href="app.html"><strong>MacAPP</strong></a>
+        
+            <a href="swift.html"><strong>Swift</strong></a>
+        
+            <a href="js.html"><strong>JavaScript</strong></a>
+        
+            <a href="vue.html"><strong>Vue</strong></a>
+        
+            <a href="shell.html"><strong>shell</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15261167596297.html">OC 多线程之 GCD知识从基础到进阶 （1）</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15257437237715.html">OC中的各种遍历</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15253400374602.html">多线程 之 NSThread</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15200726964422.html">iOS Block 知识点拾遗</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15235286649865.html">音视频学习笔记 1</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+
+  </body>
+</html>

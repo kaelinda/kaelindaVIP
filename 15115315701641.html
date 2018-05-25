@@ -1,0 +1,736 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  React Native 集成 Redux - kaelinda
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="kaelinda" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:kaelinda.top ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">最近更新</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">归档目录</a></li>
+        
+        <li id="ios.css"><a target="_self" href="ios.html">iOS</a></li>
+        
+        <li id="swift.css"><a target="_self" href="swift.html">Swift</a></li>
+        
+        <li id="reactnative.css"><a target="_self" href="reactnative.html">RN</a></li>
+        
+        <li id="js.css"><a target="_self" href="js.html">JS</a></li>
+        
+        <li id="shell.css"><a target="_self" href="shell.html">shell</a></li>
+        
+        <li id="coding.css"><a target="_self" href="coding.html">编程</a></li>
+        
+        <li id="live.css"><a target="_self" href="live.html">随笔</a></li>
+        
+        <li id="app.css"><a target="_blank" href="app.html">APP推荐</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; kaelinda</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="_self" href="index.html">最近更新</a></li>
+        
+        <li><a target="_self" href="archives.html">归档目录</a></li>
+        
+        <li><a target="_self" href="ios.html">iOS</a></li>
+        
+        <li><a target="_self" href="swift.html">Swift</a></li>
+        
+        <li><a target="_self" href="reactnative.html">RN</a></li>
+        
+        <li><a target="_self" href="js.html">JS</a></li>
+        
+        <li><a target="_self" href="shell.html">shell</a></li>
+        
+        <li><a target="_self" href="coding.html">编程</a></li>
+        
+        <li><a target="_self" href="live.html">随笔</a></li>
+        
+        <li><a target="_blank" href="app.html">APP推荐</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="reactnative.html">React-Native</a></li>
+        
+            <li><a href="ios.html">iOS</a></li>
+        
+            <li><a href="app.html">MacAPP</a></li>
+        
+            <li><a href="swift.html">Swift</a></li>
+        
+            <li><a href="js.html">JavaScript</a></li>
+        
+            <li><a href="vue.html">Vue</a></li>
+        
+            <li><a href="shell.html">shell</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>React Native 集成 Redux</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2017/11/24</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='reactnative.html'>React-Native</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <h2 id="toc_0">课程介绍</h2>
+
+<ul>
+<li>Flux/reFlux/Redux</li>
+<li><p>简单/单一状态树</p></li>
+<li><p>react 和 redux 数据流的关系</p></li>
+<li><p>JS、CSS、HTML</p></li>
+<li><p>JSX</p></li>
+<li><p>webpack 构建</p></li>
+</ul>
+
+<h2 id="toc_1">数据流</h2>
+
+<ul>
+<li>MVC 状态复杂之后，action会触发事件 并且不可预测</li>
+<li>flux: state Tree will send data to view,but view can&#39;t send data to state-tree.</li>
+<li>Redux :  state 是包含在store中的</li>
+</ul>
+
+<span id="more"></span><!-- more -->
+
+<h2 id="toc_2">安装</h2>
+
+<pre><code>npm install react
+npm install redux react-redux --save
+</code></pre>
+
+<h2 id="toc_3">快速开始（速成版本）：</h2>
+
+<h3 id="toc_4">核心概念</h3>
+
+<ul>
+<li><code>action</code> : React行为/变化的描述 是一个对象</li>
+<li><code>dispatch</code> : 派发用户行为的一个方法 <code>store</code>的一个属性</li>
+<li><code>reducer</code> : 接收<code>action</code>,并进行简单的拼接，其内部是<code>纯函数</code>（到底什么是纯函数请移步百度 ： <a href="https://www.baidu.com/s?wd=%E7%BA%AF%E5%87%BD%E6%95%B0">传送门</a> 、 <a href="http://blog.csdn.net/hongweigg/article/details/44035283">速达传送门</a>）</li>
+<li><code>store</code> :存储数据的地方</li>
+</ul>
+
+<h3 id="toc_5">Get start:</h3>
+
+<ul>
+<li><p>step1 : <strong>安装依赖</strong> </p>
+
+<pre><code>npm install redux react-redux --save
+</code></pre></li>
+<li><p>step2 : 创建一个 AppProvider.js 并导出AppProvider组件 ：  <strong>AppProvider 作为APP的入口组件</strong></p>
+
+<pre><code>export default AppProvider;
+</code></pre></li>
+<li><p>step3 : AppProvider.js 中导入头文件    </p>
+
+<pre><code>    import { Provider } from &#39;react-redux&#39;;    
+    import { createStore } from &#39;redux&#39;;
+</code></pre></li>
+<li><p>step4 : 准备AppProvider的包装数据：</p>
+
+<ul>
+<li><p>创建全局的store用于存储状态,并绑定<strong>reducer</strong></p>
+
+<pre><code>const store = createStore(AppReducer)
+</code></pre></li>
+<li><p>包装APPProvider：</p>
+
+<pre><code>const AppProvider = () =&gt; {
+    return (
+      //KR-1 包裹一层Provider   之后进入被包裹控件内部 进行关联处理
+        &lt;Provider store={store}&gt;
+            &lt;RootStack /&gt;
+        &lt;/Provider&gt;
+    )
+};
+</code></pre></li>
+<li><p>index.ios.js 文件中注册下 AppProvider对象</p>
+
+<pre><code>AppRegistry.registerComponent(&#39;XinLiFM&#39;, () =&gt; AppProvider);
+</code></pre></li>
+</ul></li>
+<li><p>step5 : <strong>数据绑定</strong> 找到打算有 数据流传递 的对象 AppFind</p>
+
+<ul>
+<li><p>导入头文件：</p>
+
+<pre><code>import { connect } from &#39;react-redux&#39;;
+</code></pre></li>
+<li><p>绑定数据：</p>
+
+<pre><code>//用来获取更新后的数据   监听数据更新
+const mapStateToProps = (state,ownProps) =&gt; {
+    console.log(state);
+    return {
+        testShow: state.find.testShow,
+     }
+}
+
+//用来派发消息
+const mapDispatchToProps = (dispatch,ownProps) =&gt; ({
+  changeTabBar: (...args) =&gt; dispatch(showTabBar(...args)),
+});
+
+//用来进行数据流  和  控件的绑定关系
+export default connect(mapStateToProps,mapDispatchToProps)(AppFind)
+
+</code></pre></li>
+<li><p>派发消息：</p>
+
+<pre><code>this.props.changeTabBar(!this.props.testShow)
+</code></pre></li>
+<li><p>消息处理：step4 中绑定的reducer文件中:</p>
+
+<pre><code>//1.导入头文件
+import { combineReducers } from &#39;redux&#39;;
+//2.创建初始化状态
+const initialState = { testShow: true};
+//3.逻辑处理
+const find = (state = initialState, action) =&gt; {
+ switch (action.type) {
+        case &#39;findshowTabBar&#39;:{
+          return Object.assign({}, state, {
+                testShow: action.testShow
+            })
+        }
+        default:
+            return state;
+
+    }
+}
+//4.组合所有的逻辑块
+const AppReducer = combineReducers({
+    find,
+    //如果业务繁多这里可能还有别的模块
+});
+//5.导出
+export default AppReducer;
+</code></pre></li>
+<li><p>获取更改状态值：</p>
+
+<pre><code>//因为上一步的绑定数据  就是将state的状态值 绑定到AppFind的props上，
+//所以取值的时候直接从this。props中取即可
+var {testShow,isShowTab,showTabBar} = this.props;
+&lt;Text 
+    style={{fontSize:17,color:testShow?&quot;red&quot;:&#39;rgb(39, 249, 110)&#39;}}&gt;
+    {testShow?&quot;我要显示某个东西&quot;:&quot;我要隐藏某个东西&quot;}
+&lt;/Text&gt;
+</code></pre></li>
+</ul></li>
+</ul>
+
+<blockquote>
+<p>总结：<br/>
+其实这里最重要的就三步：1. 包装   2、数据绑定 3、数据处理</p>
+</blockquote>
+
+<h2 id="toc_6">基础</h2>
+
+<h3 id="toc_7">1. action</h3>
+
+<p>信息的携带者。<br/>
+<strong>派发消息的几种方式：</strong></p>
+
+<ul>
+<li>直接发送：</li>
+</ul>
+
+<pre><code>dispatch({type:&#39;action_name&#39;,index:2});
+
+const myAction = {
+  type:&#39;action_name&#39;,
+  index: 1,
+}
+dispatch(myAction);
+</code></pre>
+
+<ul>
+<li>通过Action的创建函数发送：</li>
+</ul>
+
+<pre><code>//我们可以把所有的Action封装到一个固定文件 就想CSS文件那样 头文件导入的方式 去引用
+const actionFunc = (text) =&gt; {
+  return {
+    type: &#39;action_name&#39;,
+    index: 2,
+  }
+}
+
+//派发消息时候 直接引用创建函数的返回结果即可
+dispatch(actionFunc(&#39;test&#39;));
+</code></pre>
+
+<ul>
+<li>绑定的Action创建函数</li>
+</ul>
+
+<pre><code>//基本action创建函数
+const actionFunc = (text) =&gt; {
+  return {
+    type: &#39;action_name&#39;,
+    index: 2,
+  }
+}
+//绑定派发方法
+const boundAction = (test) =&gt; {
+  dispatch(actionFunc(test));
+}
+
+//使用绑定好的派发函数
+boundAction(&#39;test&#39;);
+</code></pre>
+
+<h3 id="toc_8">2. reducer</h3>
+
+<p>纯函数；</p>
+
+<ul>
+<li><p>方法结构</p>
+
+<pre><code>(previouseState,action) =&gt; newState
+</code></pre>
+
+<p>给一个旧的state 和一个action 生成 一个新的 state。</p></li>
+<li><p>基本方法</p>
+
+<pre><code>const initialState = { testShow: true};
+
+const home = (state = initialState, action) =&gt; {
+  switch (action.type) {
+    case &#39;homeshowTabBar&#39;:{
+
+      console.log(&quot;homeshowTabBar：%s&quot;,action.testShow);
+
+    //合并状态值
+      return Object.assign({}, state, {
+        testShow: action.testShow;
+      })
+    }
+    default:
+    return state;
+
+  }
+}   
+</code></pre>
+
+<p>合并state的时候下面的方法也是能达到相同效果的</p>
+
+<pre><code>{...state, ...newState} 
+</code></pre></li>
+<li><p>拆分合并reducer</p>
+
+<pre><code>const home = (state = initialState, action) =&gt; {
+    switch (action.type) {
+        case &#39;homeshowTabBar&#39;:{
+            console.log(&quot;homeshowTabBar：%s&quot;,action.testShow);
+            return Object.assign({}, state, {
+                testShow: action.testShow
+            })
+        }
+        default:
+        return state;
+    }
+}
+
+const find = (state = initialState, action) =&gt; {
+    switch (action.type) {
+        case &#39;findshowTabBar&#39;:{
+            return Object.assign({}, state, {
+            testShow: action.testShow
+            })
+        }
+        default:
+        return state;
+
+    }
+}
+
+//合并
+const AppReducer = combineReducers({
+    nav,
+    home,
+    find,
+});
+export default AppReducer
+</code></pre>
+
+<p><strong>注意上面的写法和下面完全等价!!!</strong>：</p>
+
+<pre><code>const AppReducer = (state={}, action) =&gt; {
+    return {
+        home: home(state.home,action),
+        find: find(sate.find,action),
+    }
+}
+</code></pre></li>
+<li><p>减少代码量 自动定义 reducerCreator</p>
+
+<pre><code>export const testCreator = myCreatorForReducer([], {
+ [ActionTypes.ADD_TODO](state, action) {
+ let text = action.text.trim();
+ return [...state, text];
+ }
+})
+
+const myCreatorForReducer = (initialState,handles) =&gt; {
+
+    return (state=initialState,action) =&gt; {
+        return handles[action.type](state,action);
+    }else {
+     return state;
+    }
+
+}
+</code></pre>
+
+<p>设置不同的Key、调用不同的方法:</p>
+
+<pre><code>const reducer = combineReducers({
+    a: doSomethingWithA,
+    b: processB,
+    c: c
+})
+
+function reducer(state = {}, action) {
+    return {
+        a: doSomethingWithA(state.a, action),
+        b: processB(state.b, action),
+        c: c(state.c, action)
+    }
+}
+</code></pre></li>
+</ul>
+
+<h3 id="toc_9">3. store</h3>
+
+<ul>
+<li>维持应用的 <code>state</code>；</li>
+<li>提供 <code>getState()</code> 方法获取 <code>state</code>；</li>
+<li>提供 <code>dispatch(action)</code> 方法更新 <code>state</code>；</li>
+<li>通过 <code>subscribe(listener)</code> 注册监听器;</li>
+<li>通过 <code>subscribe(listener)</code> 返回的函数注销监听器。</li>
+</ul>
+
+<pre><code>import { createStore } from &#39;redux&#39;
+import todoApp from &#39;./reducers&#39;
+let store = createStore(todoApp)
+</code></pre>
+
+<blockquote>
+<p>后续会更新的................</p>
+</blockquote>
+
+<h2 id="toc_10">高级</h2>
+
+<h3 id="toc_11">异步action</h3>
+
+<h3 id="toc_12">异步数据流</h3>
+
+<h3 id="toc_13">Middleware 中间件</h3>
+
+<h3 id="toc_14">搭配 React Router</h3>
+
+<h2 id="toc_15">技巧</h2>
+
+<h2 id="toc_16">API</h2>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15139059079620.html" 
+          title="Previous Post: 学习资源网址">&laquo; 学习资源网址</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15117133773045.html" 
+          title="Next Post: 可选型 Optional">可选型 Optional &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fmpk9088gsj30sg0sgn33.jpg" /></div>
+            
+                <h1>kaelinda</h1>
+                <div class="site-des">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+                <div class="social">
+
+
+
+
+
+
+
+
+
+<a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="reactnative.html"><strong>React-Native</strong></a>
+        
+            <a href="ios.html"><strong>iOS</strong></a>
+        
+            <a href="app.html"><strong>MacAPP</strong></a>
+        
+            <a href="swift.html"><strong>Swift</strong></a>
+        
+            <a href="js.html"><strong>JavaScript</strong></a>
+        
+            <a href="vue.html"><strong>Vue</strong></a>
+        
+            <a href="shell.html"><strong>shell</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15261167596297.html">OC 多线程之 GCD知识从基础到进阶 （1）</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15257437237715.html">OC中的各种遍历</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15253400374602.html">多线程 之 NSThread</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15200726964422.html">iOS Block 知识点拾遗</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15235286649865.html">音视频学习笔记 1</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+
+  </body>
+</html>
