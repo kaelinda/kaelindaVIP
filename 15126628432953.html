@@ -122,6 +122,8 @@
             <li><a href="vue.html">Vue</a></li>
         
             <li><a href="shell.html">shell</a></li>
+        
+            <li><a href="%E7%BD%91%E7%BB%9C.html">网络</a></li>
          
 
       </ul>
@@ -176,23 +178,21 @@
 
 <ul>
 <li><p><a href="https://infer.liaohuqiu.net">infer官网 传送门</a></p>
-
 <p><em>具体使用</em></p>
-
-<pre><code>infer -- xcodebuild -target &lt;target name&gt; -configuration &lt;build configuration&gt; -sdk iphonesimulator
+<pre><code class="language-text">infer -- xcodebuild -target &lt;target name&gt; -configuration &lt;build configuration&gt; -sdk iphonesimulator
 </code></pre></li>
 </ul>
 
 <span id="more"></span><!-- more -->
 
-<p><em>例如：</em><br/>
-  ```<br/>
-  #分析之前先把之前的build缓存清理下<br/>
-  xcodebuild -workspace HIGHTONG_Public.xcworkspace -scheme HIGHTONG_Jktv -configuration Debug -sdk iphoneos11.0</p>
+<p><em>例如：</em></p>
 
-<p>#根据自己醒目名字使用infer 命令进行分析<br/>
-  infer -- xcodebuild -workspace HIGHTONG_Public.xcworkspace -scheme HIGHTONG_Jktv -configuration Debug -sdk iphoneos11.0<br/>
-  ```</p>
+<pre><code class="language-text">  #分析之前先把之前的build缓存清理下
+  xcodebuild -workspace HIGHTONG_Public.xcworkspace -scheme HIGHTONG_Jktv -configuration Debug -sdk iphoneos11.0
+
+  #根据自己醒目名字使用infer 命令进行分析
+  infer -- xcodebuild -workspace HIGHTONG_Public.xcworkspace -scheme HIGHTONG_Jktv -configuration Debug -sdk iphoneos11.0
+</code></pre>
 
 <p><em>infer的优势</em></p>
 
@@ -211,16 +211,12 @@
 <li>安装： <code>brew install sonar</code></li>
 <li>配置文件修改 <code>run-sonar.sh</code> <code>sonar-project.properties</code></li>
 <li><p>执行run-sonar.sh脚本，检测代码</p>
-
 <p><em>资源下载</em></p>
-
 <ul>
 <li><p><a href="https://raw.githubusercontent.com/octo-technology/sonar-objective-c/master/src/main/shell/run-sonar.sh">run-sonar.sh</a></p></li>
 <li><p><a href="https://raw.githubusercontent.com/octo-technology/sonar-objective-c/master/sample/sonar-project.properties">sonar-project.properties</a></p></li>
 </ul>
-
 <p><em>参考资源</em></p>
-
 <ul>
 <li><p><a href="http://www.jianshu.com/p/f58e89573d33">IOS-Sonar代码质量监控</a></p></li>
 <li><p><a href="https://my.oschina.net/ChenTF/blog/806565">[实践]Sonar Xcode8兼容</a></p></li>
@@ -234,31 +230,21 @@
 
 <ul>
 <li><p>安装xcpretty</p>
-
-<pre><code>sudo gem install xcpretty
+<pre><code class="language-text">sudo gem install xcpretty
 </code></pre></li>
-<li><p>安装OCLint<br/>
-```<br/>
-brew tap oclint/formulae</p>
-
-<p>brew install oclint<br/>
-```</p></li>
-<li><p>根目录下 运行脚本：<br/>
-```</p>
-
-<h1 id="toc_4">清理</h1>
-
-<p>xcodebuild clean</p>
-
-<h1 id="toc_5">生成JSON文件 用于分析</h1>
-
-<p>xcodebuild  -workspace demo.xcworkspace -scheme demo -configuration Debug \<br/>
+<li><p>安装OCLint</p>
+<pre><code class="language-text">brew tap oclint/formulae
+brew install oclint
+</code></pre></li>
+<li><p>根目录下 运行脚本：</p>
+<pre><code class="language-text">#清理
+xcodebuild clean<br/>
+#生成JSON文件 用于分析<br/>
+xcodebuild  -workspace demo.xcworkspace -scheme demo -configuration Debug \<br/>
 | tee xcodebuild.log \<br/>
-| xcpretty -r json-compilation-database -o compile_commands.json</p>
-
-<h1 id="toc_6">OCLint 分析（根据一定规则进行分析）</h1>
-
-<p>oclint-json-compilation-database -v \<br/>
+| xcpretty -r json-compilation-database -o compile_commands.json<br/>
+#OCLint 分析（根据一定规则进行分析）<br/>
+oclint-json-compilation-database -v \<br/>
 -e Pods \<br/>
 -e MGLivenessDetection \<br/>
 -e MGBaseKit \<br/>
@@ -274,13 +260,10 @@ oclint_args -- -report-type html -o oclintReport.html \<br/>
 -rc=NESTED_BLOCK_DEPTH=5 \<br/>
 -rc=TOO_MANY_FIELDS=20 \<br/>
 -rc=TOO_MANY_METHODS=30 \<br/>
--rc=TOO_MANY_PARAMETERS=6</p>
-
-<h1 id="toc_7">oclint_args -- -report-type xcode \</h1>
-
-<pre><code>
-高级用法，代码检测规则：
-</code></pre></li>
+-rc=TOO_MANY_PARAMETERS=6<br/>
+# oclint_args -- -report-type xcode \
+</code></pre>
+<p>高级用法，代码检测规则：</p></li>
 <li><p><a href="http://www.jianshu.com/p/4f505e92d557">iOS使用OCLint做静态代码分析</a></p></li>
 <li><p><a href="http://www.cocoachina.com/ios/20170928/20669.html">让XCode自动CodeReview你的代码-OCLint使用</a></p></li>
 <li><p><a href="https://blog.yourtion.com/static-code-analysis-ios-using-oclint.html">iOS静态代码扫描</a>  <a href="https://blog.yourtion.com/static-code-analysis-ios-using-oclint.html">原文链接</a></p></li>
@@ -295,16 +278,16 @@ oclint_args -- -report-type html -o oclintReport.html \<br/>
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15126415331235.html" 
-          title="Previous Post: iOS WKWebView 本地HTML、JS、CSS文件加载详解">&laquo; iOS WKWebView 本地HTML、JS、CSS文件加载详解</a>
+          <a href="15129168744096.html" 
+          title="Previous Post: 关于iOS沙盒文件的那些事儿">&laquo; 关于iOS沙盒文件的那些事儿</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15129168744096.html" 
-          title="Next Post: 关于iOS沙盒文件的那些事儿">关于iOS沙盒文件的那些事儿 &raquo;</a>
+          <a  href="15126415331235.html" 
+          title="Next Post: iOS WKWebView 本地HTML、JS、CSS文件加载详解">iOS WKWebView 本地HTML、JS、CSS文件加载详解 &raquo;</a>
       
       </p>
         </div>
@@ -342,7 +325,7 @@ oclint_args -- -report-type html -o oclintReport.html \<br/>
 
 
 
-
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/KaelLVLinda" title="Twitter">Twitter</a>
 <a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
 <a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
   <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
@@ -373,6 +356,8 @@ oclint_args -- -report-type html -o oclintReport.html \<br/>
             <a href="vue.html"><strong>Vue</strong></a>
         
             <a href="shell.html"><strong>shell</strong></a>
+        
+            <a href="%E7%BD%91%E7%BB%9C.html"><strong>网络</strong></a>
          
         </p>
 
@@ -389,31 +374,31 @@ oclint_args -- -report-type html -o oclintReport.html \<br/>
 	      
 		      
 			      <li class="post">
-			        <a href="15261167596297.html">OC 多线程之 GCD知识从基础到进阶 （1）</a>
+			        <a href="15523077857608.html">OC中枚举写法  以及 字符串枚举探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15257437237715.html">OC中的各种遍历</a>
+			        <a href="15522686353535.html">iOS 动画全解 (1)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15253400374602.html">多线程 之 NSThread</a>
+			        <a href="15501356584731.html">UITableView顶部空白的几种解决办法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15200726964422.html">iOS Block 知识点拾遗</a>
+			        <a href="15488351784332.html">Objective-C中的字符串类型枚举 探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15235286649865.html">音视频学习笔记 1</a>
+			        <a href="15409691048860.html">【Swift笔记】引用计数</a>
 			      </li>
 		     
 		  
@@ -488,7 +473,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 

@@ -122,6 +122,8 @@
             <li><a href="vue.html">Vue</a></li>
         
             <li><a href="shell.html">shell</a></li>
+        
+            <li><a href="%E7%BD%91%E7%BB%9C.html">网络</a></li>
          
 
       </ul>
@@ -165,7 +167,7 @@
 <p>CDN 链接地址：<code>https://unpkg.com/vuex</code><br/>
 指定到固定版本：<code>https://unpkg.com/vuex@2.0.0</code></p>
 
-<pre><code>&lt;script src=&quot;/path/to/vue.js&quot;&gt;&lt;/script&gt;
+<pre><code class="language-text">&lt;script src=&quot;/path/to/vue.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;/path/to/vuex.js&quot;&gt;&lt;/script&gt;
 </code></pre>
 
@@ -195,7 +197,7 @@ npm run build
 <p>按照如下方式导入，工程就可以使用vuex的环境了</p>
 </blockquote>
 
-<pre><code class="language-JavaScript">// 导入vuex头文件
+<pre><code class="language-javascript">// 导入vuex头文件
 import Vuex from &#39;vuex&#39;
 // 这里表示全局导入vuex
 Vue.use(Vuex)
@@ -207,7 +209,7 @@ import store from &#39;@/study/vuexStudy/store/store.js&#39;
 <p>入口组件<App/>中，绑定store</p>
 </blockquote>
 
-<pre><code>new Vue({
+<pre><code class="language-text">new Vue({
   el: &#39;#app&#39;,
   template: &#39;&lt;App/&gt;&#39;,
   components: { App },
@@ -221,7 +223,7 @@ import store from &#39;@/study/vuexStudy/store/store.js&#39;
 
 <h4 id="toc_7">store 的结构:</h4>
 
-<pre><code class="language-JavaScript">export const store = new Vuex.Store({
+<pre><code class="language-javascript">export const store = new Vuex.Store({
 
   // ------state:状态值存储,这里可以存储n个状态的值
   state: {count: &#39;1&#39;},
@@ -275,235 +277,211 @@ import store from &#39;@/study/vuexStudy/store/store.js&#39;
 
 <ol>
 <li><p>创建一个store对象</p>
-
-<pre><code class="language-JavaScript">export default const store = new Vuex.Store({
-  state,//绑定之前创建的state对象到store中
-  mutations,
-  getters,
-  actions,
-  modules
+<pre><code class="language-javascript">export default const store = new Vuex.Store({
+  state,//绑定之前创建的state对象到store中<br/>
+  mutations,<br/>
+  getters,<br/>
+  actions,<br/>
+  modules<br/>
 })
 </code></pre></li>
 <li><p>定义一个状态对象 <code>state</code>（实体）</p>
-
-<pre><code class="language-JavaScript">const state = {
-  count: 0,
-  state1: 1,
-  state2: 2,
-  state3: 3
+<pre><code class="language-javascript">const state = {
+  count: 0,<br/>
+  state1: 1,<br/>
+  state2: 2,<br/>
+  state3: 3<br/>
 }
 </code></pre></li>
 <li><p>定义getters对象</p>
-
-<pre><code>const getters = {
-  done (state) {
-    return state.count + 5
-  },
-  getState1: function (state) {
-    return state.state3
-  },
-  // ES6简写
-  getState2: state =&gt;  state.state2
+<pre><code class="language-text">const getters = {
+  done (state) {<br/>
+    return state.count + 5<br/>
+  },<br/>
+  getState1: function (state) {<br/>
+    return state.state3<br/>
+  },<br/>
+  // ES6简写<br/>
+  getState2: state =&gt;  state.state2<br/>
 }
 </code></pre></li>
 <li><p>.vue 文件中直接获取state值</p>
-
 <p>首先导入辅助函数：</p>
-
-<pre><code>import { 
-    mapState, 
-    mapGetters, 
-    mapMutations, 
-    mapActions 
+<pre><code class="language-text">import { 
+    mapState, <br/>
+    mapGetters, <br/>
+    mapMutations, <br/>
+    mapActions <br/>
     } from &#39;vuex&#39;
 </code></pre>
-
 <ul>
 <li>第一种方式：绑定到组件属性中，直接获取 （一般不用这个，绑定到computed中是最合适的）<code>$store.state.count</code>并使用</li>
 </ul>
-
-<pre><code class="language-JavaScript">export default {
-    data() {
-        return {
-          testCount: this.$store.state.count
-        }
-    }
+<pre><code class="language-javascript">export default {
+    data() {<br/>
+        return {<br/>
+          testCount: this.$store.state.count<br/>
+        }<br/>
+    }<br/>
 }
 </code></pre>
-
 <ul>
 <li>第二种方式： 绑定到计算属性中（适合对store中的原始状态值进行一定处理的情况）</li>
 </ul>
-
-<pre><code class="language-JavaScript">export default {
-    data() {
-        return {
-          testCount: this.$store.state.count
-        }
-    },
-    computed:{
-        testComputedCount1: function () {
-            return this.$store.state.count + 22
-        }
-    }
+<pre><code class="language-javascript">export default {
+    data() {<br/>
+        return {<br/>
+          testCount: this.$store.state.count<br/>
+        }<br/>
+    },<br/>
+    computed:{<br/>
+        testComputedCount1: function () {<br/>
+            return this.$store.state.count + 22<br/>
+        }<br/>
+    }<br/>
 }
 </code></pre>
-
 <ul>
 <li>第三种方式：mapState辅助函数绑定状态state值到组件计算属性中</li>
 </ul>
-
-<pre><code class="language-JavaScript">export default {
-    data() {
-        return {
-          testCount: this.$store.state.count
-        }
-    },
-    computed:{
-        testComputedCount1: function () {
-            return this.$store.state.count + 22
-        },
-        ...mapState({
-            count: state =&gt; state.count,
-            mapState1: state =&gt; state.state1,
-            mapState2: state =&gt; state.state2
-        }),
-    }
+<pre><code class="language-javascript">export default {
+    data() {<br/>
+        return {<br/>
+          testCount: this.$store.state.count<br/>
+        }<br/>
+    },<br/>
+    computed:{<br/>
+        testComputedCount1: function () {<br/>
+            return this.$store.state.count + 22<br/>
+        },<br/>
+        ...mapState({<br/>
+            count: state =&gt; state.count,<br/>
+            mapState1: state =&gt; state.state1,<br/>
+            mapState2: state =&gt; state.state2<br/>
+        }),<br/>
+    }<br/>
 }
 </code></pre>
-
 <ul>
 <li>第四种方式：使用store中绑定的getters进行获取</li>
 </ul>
-
-<pre><code class="language-JavaScript">export default {
-    data() {
-        return {
-          testCount: this.$store.state.count
-        }
-    },
-    computed:{
-        testComputedCount1: function () {
-            return this.$store.state.count + 22
-        },
-        ...mapState({
-            count: state =&gt; state.count,
-            mapState1: state =&gt; state.state1,
-            mapState2: state =&gt; state.state2
-        }),
-        testComputedGettersCount2: funtion () {
-            return this.$store.getters.done
-        }
-    }
+<pre><code class="language-javascript">export default {
+    data() {<br/>
+        return {<br/>
+          testCount: this.$store.state.count<br/>
+        }<br/>
+    },<br/>
+    computed:{<br/>
+        testComputedCount1: function () {<br/>
+            return this.$store.state.count + 22<br/>
+        },<br/>
+        ...mapState({<br/>
+            count: state =&gt; state.count,<br/>
+            mapState1: state =&gt; state.state1,<br/>
+            mapState2: state =&gt; state.state2<br/>
+        }),<br/>
+        testComputedGettersCount2: funtion () {<br/>
+            return this.$store.getters.done<br/>
+        }<br/>
+    }<br/>
 }
 </code></pre>
-
 <ul>
 <li>第五种方式： 借助mapGetters辅助函数绑定getters到vue的计算属性中</li>
 </ul>
-
-<pre><code class="language-JavaScript">export default {
-    data() {
-        return {
-          testCount: this.$store.state.count
-        }
-    },
-    computed:{
-        testComputedCount1: function () {
-            return this.$store.state.count + 22
-        },
-        ...mapState({
-            count: state =&gt; state.count,
-            mapState1: state =&gt; state.state1,
-            mapState2: state =&gt; state.state2
-        }),
-        testComputedGettersCount2: funtion () {
-            return this.$store.getters.done
-        },
-
-        //直接绑定方法数组的方式
-        ...mapGetters([
-            &#39;getState1&#39;,
-            &#39;getState2&#39;,
-            &#39;getState3&#39;
-        ]),
-
-        //重命名对象绑定方式
-        ...mapGetters({
-          mapGetterState1: &#39;getState1&#39;,
-          mapGetterState3: &#39;getState3&#39;
-        }),
-    }
+<pre><code class="language-javascript">export default {
+    data() {<br/>
+        return {<br/>
+          testCount: this.$store.state.count<br/>
+        }<br/>
+    },<br/>
+    computed:{<br/>
+        testComputedCount1: function () {<br/>
+            return this.$store.state.count + 22<br/>
+        },<br/>
+        ...mapState({<br/>
+            count: state =&gt; state.count,<br/>
+            mapState1: state =&gt; state.state1,<br/>
+            mapState2: state =&gt; state.state2<br/>
+        }),<br/>
+        testComputedGettersCount2: funtion () {<br/>
+            return this.$store.getters.done<br/>
+        },<br/>
+        //直接绑定方法数组的方式<br/>
+        ...mapGetters([<br/>
+            &#39;getState1&#39;,<br/>
+            &#39;getState2&#39;,<br/>
+            &#39;getState3&#39;<br/>
+        ]),<br/>
+        //重命名对象绑定方式<br/>
+        ...mapGetters({<br/>
+          mapGetterState1: &#39;getState1&#39;,<br/>
+          mapGetterState3: &#39;getState3&#39;<br/>
+        }),<br/>
+    }<br/>
 }
 </code></pre></li>
 <li><p>触发动作行为改变状态值</p>
-
 <blockquote>
 <p>方式一：$store.commit(&#39;mutationsName&#39;)</p>
-
 <p>方式二：$store.dispatch(&#39;actionsName&#39;)    </p>
 </blockquote>
-
 <p>store.js文件中：</p>
-
 <ul>
 <li>初始化 mutations 和 actions (相当于是methods)</li>
 </ul>
-
-<pre><code>const mutations = {
-    increment (state) {
-        // 变更状态
-        state.count = state.count * 5
-    }
+<pre><code class="language-text">const mutations = {
+    increment (state) {<br/>
+        // 变更状态<br/>
+        state.count = state.count * 5<br/>
+    }<br/>
 }
 </code></pre>
-
-<pre><code>import {action4} from &#39;@/path/actions.js&#39;
-const actions = {
-    // 同步方法
-    add: function (context) {
-        context.commit(&#39;increment&#39;)
-    },
-    // 延时操作 用于网络请求啊啥的
-    addAsync (context) {
-        // 延时1秒
-        setTimeout(() =&gt; {
-            context.commit(&#39;increment&#39;)
-        }, 1000)
-    },
-    // 简写方式
-    action2 (context) {
-        context.commit(&#39;increment&#39;)
-    },
-    // 抽离到单独文件中，在导进封装好的变量来直接使用即可（导进来的目的是为了接收第一个参数：state），不绑定到store，需要手动传入store对象
-    action4: action4,
+<pre><code class="language-text">import {action4} from &#39;@/path/actions.js&#39;
+const actions = {<br/>
+    // 同步方法<br/>
+    add: function (context) {<br/>
+        context.commit(&#39;increment&#39;)<br/>
+    },<br/>
+    // 延时操作 用于网络请求啊啥的<br/>
+    addAsync (context) {<br/>
+        // 延时1秒<br/>
+        setTimeout(() =&gt; {<br/>
+            context.commit(&#39;increment&#39;)<br/>
+        }, 1000)<br/>
+    },<br/>
+    // 简写方式<br/>
+    action2 (context) {<br/>
+        context.commit(&#39;increment&#39;)<br/>
+    },<br/>
+    // 抽离到单独文件中，在导进封装好的变量来直接使用即可（导进来的目的是为了接收第一个参数：state），不绑定到store，需要手动传入store对象<br/>
+    action4: action4,<br/>
 }
 </code></pre></li>
 </ol>
 
 <ul>
 <li><p>绑定action 和 mutations 到 methods，然后 调用就行了</p>
-
-<pre><code>export default {
-    methods: {
-        // 数组形式直接载入
-        ...mapActions([
-            &#39;add&#39;
-        ]),
-        // 重命名形式 
-        ...mapActions({
-            add: &#39;add&#39;,
-            addAsync: &#39;addAsync&#39;,
-            action4: &#39;action4&#39;
-        }),
-        // 同上
-        ...mapMutations([
-            &#39;increment&#39;
-        ]),
-        ...mapMutations({
-            incrementMutation: &#39;increment&#39;
-        })
-    }
+<pre><code class="language-text">export default {
+    methods: {<br/>
+        // 数组形式直接载入<br/>
+        ...mapActions([<br/>
+            &#39;add&#39;<br/>
+        ]),<br/>
+        // 重命名形式 <br/>
+        ...mapActions({<br/>
+            add: &#39;add&#39;,<br/>
+            addAsync: &#39;addAsync&#39;,<br/>
+            action4: &#39;action4&#39;<br/>
+        }),<br/>
+        // 同上<br/>
+        ...mapMutations([<br/>
+            &#39;increment&#39;<br/>
+        ]),<br/>
+        ...mapMutations({<br/>
+            incrementMutation: &#39;increment&#39;<br/>
+        })<br/>
+    }<br/>
 }
 </code></pre></li>
 </ul>
@@ -567,7 +545,7 @@ const actions = {
 
 
 
-
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/KaelLVLinda" title="Twitter">Twitter</a>
 <a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
 <a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
   <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
@@ -598,6 +576,8 @@ const actions = {
             <a href="vue.html"><strong>Vue</strong></a>
         
             <a href="shell.html"><strong>shell</strong></a>
+        
+            <a href="%E7%BD%91%E7%BB%9C.html"><strong>网络</strong></a>
          
         </p>
 
@@ -614,31 +594,31 @@ const actions = {
 	      
 		      
 			      <li class="post">
-			        <a href="15261167596297.html">OC 多线程之 GCD知识从基础到进阶 （1）</a>
+			        <a href="15523077857608.html">OC中枚举写法  以及 字符串枚举探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15257437237715.html">OC中的各种遍历</a>
+			        <a href="15522686353535.html">iOS 动画全解 (1)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15253400374602.html">多线程 之 NSThread</a>
+			        <a href="15501356584731.html">UITableView顶部空白的几种解决办法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15200726964422.html">iOS Block 知识点拾遗</a>
+			        <a href="15488351784332.html">Objective-C中的字符串类型枚举 探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15235286649865.html">音视频学习笔记 1</a>
+			        <a href="15409691048860.html">【Swift笔记】引用计数</a>
 			      </li>
 		     
 		  
@@ -713,7 +693,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 

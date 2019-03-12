@@ -122,6 +122,8 @@
             <li><a href="vue.html">Vue</a></li>
         
             <li><a href="shell.html">shell</a></li>
+        
+            <li><a href="%E7%BD%91%E7%BB%9C.html">网络</a></li>
          
 
       </ul>
@@ -143,1089 +145,6 @@
 	<div class="large-8 medium-8 columns">
 		<div class="markdown-body home-categories">
 		
-			<div class="article">
-                <a class="clearlink" href="15173774932057.html">
-                
-                  <h1>DLNA DMS</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>上源码：</p>
-
-<pre><code>#if defined(TARGET_OS_IPHONE)
-#import &lt;UIKit/UIKit.h&gt;
-#else
-#import &lt;Foundation/NSArray.h&gt;
-#import &lt;Foundation/NSString.h&gt;
-#endif
-
-#import &lt;CyberLink/UPnP.h&gt;
-
-@class CGUpnpAvContentDirectory;
-@class CGUpnpAvObject;
-@class CGUpnpAvContainer;
-@class CGUpnpAvServer;
-
-#if !defined(_CG_CLINKCAV_SERVER_H_)
-typedef void CgUpnpAvServer;
-#endif
-
-@protocol CGUpnpAvServerDelegate &lt;NSObject&gt;
-@optional
-- (void)upnpAvServer:(CGUpnpAvServer *)upnpAvServer browse:(CGUpnpAction *)browseAction avObject:(CGUpnpAvObject *)avObject;
-- (void)upnpAvServer:(CGUpnpAvServer *)upnpAvServer search:(CGUpnpAction *)searchAction avObject:(CGUpnpAvObject *)avObject;
-@end
-
-/**
- * The CGUpnpAvServer class is a UPnP/AV media server class.
- * 这个 CGUpnpAvServer 类是UPnP/AV 谜题资源服务类
- */
-@interface CGUpnpAvServer : CGUpnpDevice
-{
-}
-
-@property(readonly) CGUpnpAvContentDirectory *contentDirectory;
-// DMS 可以持有子服务作为属性
-@property(readonly) CgUpnpAvServer *cAvObject;
-// 设置代理
-@property(assign) id&lt;CGUpnpAvServerDelegate&gt; delegate;
-
-#if defined(TARGET_OS_IPHONE)
-@property(retain) UIImage *thumbnailImage;
-#endif
-
-/*
- * Create a new UPnP/AV server.
- * 
- * @return New instance if successfull; otherwise nil.
- */
-- (id)init;
-/**
- * Create a new UPnP/AV server with the C instance.
- * 
- * @return New instance if successfull; otherwise nil.
- */
-- (id)initWithCObject:(CgUpnpDevice *)cobj;
-- (void)setUserObject:(id)aUserObj;
-- (id)userObject;
-// 浏览某一个CGUpnpAvObject 的ID 是否成功
-- (BOOL)browse:(NSString *)aObjectId browseFlag:(NSString *)aBrowseFlag options:(NSDictionary *)options;
-// 浏览二进制
-- (CGUpnpAvObject *)browseMetadata:(NSString *)aObjectId;
-// 所有子对象个数
-- (NSArray *)browseDirectChildren:(NSString *)aObjectId;
-// 获取指定个数的子对象
-- (NSArray *)browseDirectChildren:(NSString *)aObjectId requestedCount:(NSUInteger) aRequestedCount;
-// 获取指定个数的子对象
-- (NSArray *)browseDirectChildren:(NSString *)aObjectId requestedCount:(NSUInteger)aRequestedCount startingIndex:(NSUInteger)aStartingIndex;
-// 浏览行为
-- (CGUpnpAction *)browseAction;
-// 查找某个东西
-- (NSArray *)search:(NSString *)aSearchCriteria;
-// 同上
-- (NSArray *)searchByBrowse:(NSString *)aSearchCriteria;
-- (NSArray *)searchByBrowse:(NSString *)aSearchCriteria objectId:(NSString *)objectId;
-// 查找UPnPAction
-- (CGUpnpAction *)searchAction;
-// 跟对象 （对象可以持有别的对象作为属性）
-- (CGUpnpAvContainer *)rootObject;
-// 通过ID获取AVObject
-- (CGUpnpAvObject *)objectForId:(NSString *)aObjectId;
-// 通过titlePath 获取AVObject对象
-- (CGUpnpAvObject *)objectForTitlePath:(NSString *)aTitlePath;
-// 开始
-- (BOOL)start;
-// 停止
-- (BOOL)stop;
-// 锁定
-- (void)lock;
-// 解锁
-- (void)unlock;
-@end
-</code></pre>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2018/1/31</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15173790393385.html">
-                
-                  <h1>DLNA DMC</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">CGUpnpControlPoint</h2>
-
-<pre><code>
-#if !defined(_CG_UPNP_CCONTROLPOINT_H_)
-typedef void CgUpnpControlPoint;
-#endif
-
-@class CGUpnpDevice;
-@class CGUpnpControlPoint;
-
-@protocol CGUpnpControlPointDelegate &lt;NSObject&gt;
-@optional
-// deviceUdn 设备的UDID 设备添加，更新，移除，失效的协议方法
-- (void)controlPoint:(CGUpnpControlPoint *)controlPoint deviceAdded:(NSString *)deviceUdn;
-- (void)controlPoint:(CGUpnpControlPoint *)controlPoint deviceUpdated:(NSString *)deviceUdn;
-- (void)controlPoint:(CGUpnpControlPoint *)controlPoint deviceRemoved:(NSString *)deviceUdn;
-- (void)controlPoint:(CGUpnpControlPoint *)controlPoint deviceInvalid:(NSString *)deviceUdn;
-@end
-
-/**
- * The CGUpnpControlPoint class is a wrapper class for CgUpnpControlPoint of CyberLink for C to 
- * program using only Objective-C directly on MacOSX.
- * Currently, the only basic methods are wrapped to control UPnP devices.
- */
-@interface CGUpnpControlPoint : NSObject 
-{
-    CgUpnpControlPoint *cObject;
-}
-// 子控制点
-@property(readonly) CgUpnpControlPoint *cObject;
-// 代理对象
-@property(assign) id&lt;CGUpnpControlPointDelegate&gt; delegate;
-
-// get方法
-- (CgUpnpControlPoint *)cObject;
-/**
- * Activate some background threads of the control point such as SSDP and 
- * HTTP servers to listen messages and events of UPnP. You must call this 
- * method before you can actually use a control point.
- *
- * @return TRUE if successful; otherwise FALSE
- *
- */
- // 激活DMC的子线程 SSDP HTTP服务，去监听UPnP信息和时间
- // 使用控制点之前必须要激活
-- (BOOL)start;
-/**
- * Stop some background threads of the control point such as SSDP and 
- * HTTP servers to listen messages and events of UPnP. 
- *
- * @return TRUE if successful; otherwise FALSE
- *
- */
- // 停止后台线程 和 SSDP HTTP 服务
-- (BOOL)stop;
-/**
- * Check if the controll point is running.
- *
- * @return YES if the device is started normally, otherwise NO.
- */
- // 检测DMC是否正在运行
-- (BOOL)isRunning;
-/**
- * Send a M-SEARCH request to find for the all UPnP devices of UPnP in the network.
- * The method waits for the specified MX time. Use setSsdpSearchMX:(NSInteger)aMX to change the time.
- * The method is same as searchWithST() when the ST parameter is &quot;ssdp:all&quot;.
- */
- 
- // 发送M-SEARCH 请求去发现局域网内所有的UPnP设备
-- (void)search;
-/**
- * Send a M-SEARCH request to find for the specified UPnP devices by a ST parameter in the network.
- * The method waits for the specified MX time. Use setSsdpSearchMX:(NSInteger)aMX to change the time.
- *
- * @param aST The Search Target parameter (ex. &quot;ssdp:all&quot;)
- */
-- (void)searchWithST:(NSString *)aST;
-/**
- * Set a MX parameter used for SSDP searches in seconds.
- * The parameter is used to wait for M-SEARCH responses in search() and searchWithST:(NSString *)aST.
- *
- * @param aMX Time to wait
- */
-- (void)setSsdpSearchMX:(NSInteger)aMX;
-/**
- * Get a MX parameter used for SSDP searches in seconds.
- * The parameter is used to wait for M-SEARCH responses in search() and searchWithST:(NSString *)aST.
- *
- * @return Time to wait
- */
-// 等待时间
-- (NSInteger)ssdpSearchMX;
-/**
- * Get all UPnP devices which the control point found as a NSArray object. The array has the devices as instances of CGUpnpDevice.
- * @return NSArray of CGUpnpDevice.
- */
- // DMC发现的所有设备
-- (NSArray *)devices;
-/**
- * Get a specified UPnP devices by the UDN.
- * @return CGUpnpDevice when the specified device is found, otherwise nil.
- */
- // 通过UDN 获取指定的upnp设备
-- (CGUpnpDevice *)deviceForUDN:(NSString *)udn;
-</code></pre>
-
-<h2 id="toc_1">CGUpnpAvContentDirectory</h2>
-
-<pre><code>/**
- * The CGUpnpAvContentDirectory class has UPnP/AV objects of a media servers.
- *
- */
-@interface CGUpnpAvContentDirectory : NSObject
-{
-    CGUpnpAvContentManager *contentMgr;
-}
-- (CGUpnpAvContainer *)rootObject;
-- (CGUpnpAvObject *)objectForId:(NSString *)aObjectId;
-- (CGUpnpAvObject *)objectForTitlePath:(NSString *)aTitlePath;
-@end
-</code></pre>
-
-<h2 id="toc_2">CGUpnpAvContentManager</h2>
-
-<pre><code>/**
- * The CGUpnpAvContentDirectory class has UPnP/AV objects of a media servers.
- *
- */
-@interface CGUpnpAvContentManager : NSObject
-{
-    CGUpnpAvRoot *rootObj;
-}
-- (CGUpnpAvContainer *)rootObject;
-- (CGUpnpAvObject *)objectForId:(NSString *)aObjectId;
-- (CGUpnpAvObject *)objectForTitlePath:(NSString *)aTitlePath;
-</code></pre>
-
-<h2 id="toc_3">CGUpnpAvObject</h2>
-
-<pre><code>
-/**
- * The CGUpnpAvObject class is a wrapper class for CgUpnpAvObject of CyberLink for C.
- */
-
-#define CGUPNPAV_OBJECT_MOVIE_FILEEXT @&quot;mov&quot;
-#define CGUPNPAV_OBJECT_SOUND_FILEEXT @&quot;snd&quot;
-#define CGUPNPAV_OBJECT_IMAGE_FILEEXT @&quot;img&quot;
-
-@interface CGUpnpAvObject : CGXmlNode 
-{
-    // 父类对象
-    CGUpnpAvObject *parent;
-}
-@property(retain) id userObject;
-#if defined(TARGET_OS_IPHONE)
-@property(retain) UIImage *thumbnailImage;
-#endif
-
-// xml字符串转成对象
-+ (NSArray *)arrayWithXMLString:(NSString *)aXmlString;
-// 初始化方法
-- (id)init;
-#if  !defined(TARGET_OS_IPHONE)
-- (id)initWithXMLNode:(NSXMLElement *)aXmlNode;
-#else
-- (id)initWithXMLNode:(CgXmlNode *)aXmlNode;
-- (id)initWithMediaContent:(CgUpnpAvContent *)aMediaContent;
-#endif
-// 判断方法
-- (BOOL)isEqual:(id)anObject;
-- (BOOL)isContainer;
-- (BOOL)isItem;
-// 设置、获取父亲类
-- (void)setParent:(CGUpnpAvObject *)aParent;
-- (CGUpnpAvObject *)parent;
-// 祖先类对象
-- (CGUpnpAvObject *)ancestor;
-// 对象ID
-- (NSString *)objectId;
-// 子类对象个数
-- (NSUInteger)childCount;
-// 标题（文件名 不带后缀）
-- (NSString *)title;
-// upnp 类型
-- (NSString *)upnpClass;
-// 日期
-- (NSString *)date;
-// 相册URI
-- (NSString *)albumArtURI;
-// 设置对象ID、title等
-- (void)setObjectId:(NSString *)aValue;
-- (void)setTitle:(NSString *)aValue;
-- (void)setUpnpClass:(NSString *)aValue;
-// 是否包含某一资源对象
-- (BOOL)isObjectId:(NSString *)aObjectId;
-- (BOOL)isTitle:(NSString *)aTitle;
-- (BOOL)isUpnpClass:(NSString *)aUpnpClass;
-// 文件全名 （带后缀）
-- (NSString *)toFileNameString;
-// 艺术家 作者
-- (NSString *)artist;
-</code></pre>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2018/1/31</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15172908985351.html">
-                
-                  <h1>iOS设备上实现DLNA功能 Platinum 篇</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">DLNA 相关</h2>
-
-<ul>
-<li>DLNA</li>
-<li>Miracast</li>
-<li>Airplay</li>
-</ul>
-
-<p>网络环境：同一个网关下，即同一个局域网的同一网段</p>
-
-<h3 id="toc_1">基本名词解释</h3>
-
-<ul>
-<li>DLNA全称： DIGITAL LIVING NETWORK ALLIANCE(数字生活网络联盟)</li>
-<li>宗旨： Enjoy your music, photos and videos, anywhere anytime</li>
-<li>协议： DLNA包含若干协议和标准，最重要的也是我们最常用的就是UPnP技术</li>
-<li>通用即插即用 (UPnP) 是一种用于 PC 机和智能设备（或仪器）的常见对等网络连接的体系结构，尤其是在家庭中。UPnP 以 Internet 标准和技术（例如 TCP/IP、HTTP 和 XML）为基础，使这样的设备彼此可自动连接和协同工作，从而使网络（尤其是家庭网络）对更多的人成为可能</li>
-</ul>
-
-<h3 id="toc_2">技术名词解释</h3>
-
-<ul>
-<li>DMC：控制点</li>
-<li>DMS：资源服务器</li>
-<li>DMR：渲染器</li>
-</ul>
-
-<h3 id="toc_3">发现设备</h3>
-
-<p>智能终端设备加入组网，搜索其他设备的基本流程。当一个新的DMC加入局域网，为了获取当前网段里有哪些智能设备，需要遵循<code>SSDP</code>向默认的多播IP和端口发送获取信息的请求。对于<code>DMC</code> 可以使用DLNA定义的 <code>搜索响应方式</code> 来发现设备，这会用到HTTP的扩展协议<code>M-SEARCH</code></p>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2018/1/30</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15151216159291.html">
-                
-                  <h1>react-native-splash-screen 给安卓项目添加启动图</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">react-native-splash-screen 基本配置</h2>
-
-<ul>
-<li>安装插件：<code>npm install react-native-splash-screen --save</code></li>
-<li>关联项目：<code>react-native link react-native-splash-screen</code> or <code>rnpm link react-native-splash-screen</code></li>
-</ul>
-
-<blockquote>
-<p>link 之后，安卓项目中会自动添加头文件 以及部分代码，为保证项目顺利运行，还请确认下面代码是否已经完善。</p>
-</blockquote>
-
-<ul>
-<li><p>确保 <code>android/settings.gradle</code>文件夹已经有下面代码</p>
-
-<pre><code class="language-JavaScript">include &#39;:react-native-splash-screen&#39;   
-project(&#39;:react-native-splash-screen&#39;).projectDir = new File(rootProject.projectDir, &#39;../node_modules/react-native-splash-screen/android&#39;)
-</code></pre></li>
-<li><p>android/app/build.gradle 文件中 添加依赖 <code>react-native-splash-screen</code></p>
-
-<pre><code>...
-dependencies {
-...
-compile project(&#39;:react-native-splash-screen&#39;)
-}
-</code></pre></li>
-<li><p>更新 <code>MainApplication.java</code> 文件</p></li>
-</ul>
-
-<pre><code>// react-native-splash-screen &gt;= 0.3.1
-import org.devio.rn.splashscreen.SplashScreenReactPackage;
-// react-native-splash-screen &lt; 0.3.1
-import com.cboy.rn.splashscreen.SplashScreenReactPackage;
-
-public class MainApplication extends Application implements ReactApplication {
-
-    private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
-        @Override
-        protected boolean getUseDeveloperSupport() {
-            return BuildConfig.DEBUG;
-        }
-
-        @Override
-        protected List&lt;ReactPackage&gt; getPackages() {
-            return Arrays.&lt;ReactPackage&gt;asList(
-                    new MainReactPackage(),
-            new SplashScreenReactPackage()  //here
-            );
-        }
-    };
-
-    @Override
-    public ReactNativeHost getReactNativeHost() {
-        return mReactNativeHost;
-    }
-}
-</code></pre>
-
-<h2 id="toc_1">准备添加代码和文件配置</h2>
-
-<ul>
-<li><code>app/src/main/res/layout</code> 文件夹下 添加 <code>launch_screen.xml</code> 并copy如下代码：</li>
-</ul>
-
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    android:orientation=&quot;vertical&quot; android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot;
-    android:background=&quot;@drawable/launch_screen&quot;&gt;
-&lt;/LinearLayout&gt;
-</code></pre>
-
-<ul>
-<li>创建文件夹 <code>drawable-xhdpi</code>、 <code>drawable-xxhdpi</code>（暂时先创建这两个就够了），将准备好的启动图 命名为 <code>launch_screen.png</code> 分别放入创建好的文件夹</li>
-<li><p>白屏问题，设置透明背景：<code>android/app/src/main/res/values/styles.xml</code> 文件夹下 添加 <code>&lt;item name=&quot;android:windowIsTranslucent&quot;&gt;true&lt;/item&gt;</code></p>
-
-<pre><code>&lt;resources&gt;
-&lt;!-- Base application theme. --&gt;
-&lt;style name=&quot;AppTheme&quot; parent=&quot;Theme.AppCompat.Light.NoActionBar&quot;&gt;
-    &lt;!-- Customize your theme here. --&gt;
-    &lt;!--设置透明背景--&gt;
-    &lt;item name=&quot;android:windowIsTranslucent&quot;&gt;true&lt;/item&gt;
-&lt;/style&gt;
-&lt;/resources&gt;
-</code></pre></li>
-<li><p><code>android/app/src/main/res/values/colors.xml</code> 文件夹下，添加如下：</p>
-
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt; &lt;resources&gt; &lt;color name=&quot;primary_dark&quot;&gt;#660B0B0B&lt;/color&gt; &lt;/resources&gt;
-</code></pre></li>
-<li><p>适当的时刻 隐藏启动图  可以是在视图挂载完毕，可以是网络请求结束之后</p></li>
-</ul>
-
-<pre><code>import SplashScreen from &#39;react-native-splash-screen&#39;
-componentDidMount() {
-    SplashScreen.hide();
-  }
-</code></pre>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2018/1/5</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='reactnative.html'>React-Native</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15168925544178.html">
-                
-                  <h1>从零开始学习使用 vuex</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<blockquote>
-<p>本文是建立在，对vuex理论有一定理解的基础上写的。<br/>
-因为官方文档的写法是 针对 有一定的vue开发经验 和 JavaScript 有一定理解的开发者看的，对于小白级别的我来说，理解起来有一定困难。所以，唯一想我一向的小白想尽快上手vuex....</p>
-</blockquote>
-
-<p><a href="https://vuex.vuejs.org/zh-cn/installation.html">详情请参考vuex官方文档</a></p>
-
-<h2 id="toc_0">安装</h2>
-
-<h3 id="toc_1">直接下载 CDN 安装</h3>
-
-<p>CDN 链接地址：<code>https://unpkg.com/vuex</code><br/>
-指定到固定版本：<code>https://unpkg.com/vuex@2.0.0</code></p>
-
-<pre><code>&lt;script src=&quot;/path/to/vue.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;/path/to/vuex.js&quot;&gt;&lt;/script&gt;
-</code></pre>
-
-<h3 id="toc_2">npm 方式安装 （推荐！简单快捷，便于管理）</h3>
-
-<p><code>npm install -save vuex</code></p>
-
-<h3 id="toc_3">yar</h3>
-
-<p><code>yarn add vuex</code></p>
-
-<h3 id="toc_4">自己构建</h3>
-
-<pre><code class="language-bash">git clone https://github.com/vuejs/vuex.git node_modules/vuex
-cd node_modules/vuex
-npm install
-npm run build
-</code></pre>
-
-<h2 id="toc_5">导入vue工程中使用</h2>
-
-<ul>
-<li>main.js 入口文件</li>
-</ul>
-
-<blockquote>
-<p>按照如下方式导入，工程就可以使用vuex的环境了</p>
-</blockquote>
-
-<pre><code class="language-JavaScript">// 导入vuex头文件
-import Vuex from &#39;vuex&#39;
-// 这里表示全局导入vuex
-Vue.use(Vuex)
-// 这里是我自定义的store文件 导出store对象
-import store from &#39;@/study/vuexStudy/store/store.js&#39;
-</code></pre>
-
-<blockquote>
-<p>入口组件<App/>中，绑定store</p>
-</blockquote>
-
-<pre><code>new Vue({
-  el: &#39;#app&#39;,
-  template: &#39;&lt;App/&gt;&#39;,
-  components: { App },
-  store
-})
-</code></pre>
-
-<p>到这里 算是万里长征走了第一步。</p>
-
-<h3 id="toc_6">创建Store对象</h3>
-
-<h4 id="toc_7">store 的结构:</h4>
-
-<pre><code class="language-JavaScript">export const store = new Vuex.Store({
-
-  // ------state:状态值存储,这里可以存储n个状态的值
-  state: {count: &#39;1&#39;},
-  
-  // ------getter:store中定义的getters可以认为是store的计算属性
-  // getters接收state作为其第一个参数
-  getters: {
-    done (state) {
-      return state.count + 5
-    }
-  },
-  
-  // ------mutations:状态值的改变，操作状态值
-  // $store.commit(mutationsName, params)是更改状态值的唯一方法
-  mutations: {
-    increment (state) {
-      // 变更状态
-      state.count++
-    }
-  },
-
-  // ------actions:可以认为是包装了mutations的function 需要用 dispatch(actionName) 的方式去派发
-  actions: {
-    add (context) {
-      context.commit(&#39;increment&#39;)
-    },
-    addAsync (context) {
-      // 延时1秒
-      setTimeout(() =&gt; {
-        context.commit(&#39;increment&#39;)
-      }, 1000)
-    }
-  },
-  // store可以合并几个子store，以此来进行项目的模块化
-  modules: {
-    a: moduleA,
-    b: moduleB
-  }
-})
-</code></pre>
-
-<h4 id="toc_8">编辑定义store实体对象：</h4>
-
-<ul>
-<li>store.js文件中</li>
-</ul>
-
-<blockquote>
-<p>这里为了便于抽离 我们外部声明城对象实体后嵌入绑定到store</p>
-</blockquote>
-
-<ol>
-<li><p>创建一个store对象</p>
-
-<pre><code class="language-JavaScript">export default const store = new Vuex.Store({
-  state,//绑定之前创建的state对象到store中
-  mutations,
-  getters,
-  actions,
-  modules
-})
-</code></pre></li>
-<li><p>定义一个状态对象 <code>state</code>（实体）</p>
-
-<pre><code class="language-JavaScript">const state = {
-  count: 0,
-  state1: 1,
-  state2: 2,
-  state3: 3
-}
-</code></pre></li>
-<li><p>定义getters对象</p>
-
-<pre><code>const getters = {
-  done (state) {
-    return state.count + 5
-  },
-  getState1: function (state) {
-    return state.state3
-  },
-  // ES6简写
-  getState2: state =&gt;  state.state2
-}
-</code></pre></li>
-<li><p>.vue 文件中直接获取state值</p>
-
-<p>首先导入辅助函数：</p>
-
-<pre><code>import { 
-    mapState, 
-    mapGetters, 
-    mapMutations, 
-    mapActions 
-    } from &#39;vuex&#39;
-</code></pre>
-
-<ul>
-<li>第一种方式：绑定到组件属性中，直接获取 （一般不用这个，绑定到computed中是最合适的）<code>$store.state.count</code>并使用</li>
-</ul>
-
-<pre><code class="language-JavaScript">export default {
-    data() {
-        return {
-          testCount: this.$store.state.count
-        }
-    }
-}
-</code></pre>
-
-<ul>
-<li>第二种方式： 绑定到计算属性中（适合对store中的原始状态值进行一定处理的情况）</li>
-</ul>
-
-<pre><code class="language-JavaScript">export default {
-    data() {
-        return {
-          testCount: this.$store.state.count
-        }
-    },
-    computed:{
-        testComputedCount1: function () {
-            return this.$store.state.count + 22
-        }
-    }
-}
-</code></pre>
-
-<ul>
-<li>第三种方式：mapState辅助函数绑定状态state值到组件计算属性中</li>
-</ul>
-
-<pre><code class="language-JavaScript">export default {
-    data() {
-        return {
-          testCount: this.$store.state.count
-        }
-    },
-    computed:{
-        testComputedCount1: function () {
-            return this.$store.state.count + 22
-        },
-        ...mapState({
-            count: state =&gt; state.count,
-            mapState1: state =&gt; state.state1,
-            mapState2: state =&gt; state.state2
-        }),
-    }
-}
-</code></pre>
-
-<ul>
-<li>第四种方式：使用store中绑定的getters进行获取</li>
-</ul>
-
-<pre><code class="language-JavaScript">export default {
-    data() {
-        return {
-          testCount: this.$store.state.count
-        }
-    },
-    computed:{
-        testComputedCount1: function () {
-            return this.$store.state.count + 22
-        },
-        ...mapState({
-            count: state =&gt; state.count,
-            mapState1: state =&gt; state.state1,
-            mapState2: state =&gt; state.state2
-        }),
-        testComputedGettersCount2: funtion () {
-            return this.$store.getters.done
-        }
-    }
-}
-</code></pre>
-
-<ul>
-<li>第五种方式： 借助mapGetters辅助函数绑定getters到vue的计算属性中</li>
-</ul>
-
-<pre><code class="language-JavaScript">export default {
-    data() {
-        return {
-          testCount: this.$store.state.count
-        }
-    },
-    computed:{
-        testComputedCount1: function () {
-            return this.$store.state.count + 22
-        },
-        ...mapState({
-            count: state =&gt; state.count,
-            mapState1: state =&gt; state.state1,
-            mapState2: state =&gt; state.state2
-        }),
-        testComputedGettersCount2: funtion () {
-            return this.$store.getters.done
-        },
-
-        //直接绑定方法数组的方式
-        ...mapGetters([
-            &#39;getState1&#39;,
-            &#39;getState2&#39;,
-            &#39;getState3&#39;
-        ]),
-
-        //重命名对象绑定方式
-        ...mapGetters({
-          mapGetterState1: &#39;getState1&#39;,
-          mapGetterState3: &#39;getState3&#39;
-        }),
-    }
-}
-</code></pre></li>
-<li><p>触发动作行为改变状态值</p>
-
-<blockquote>
-<p>方式一：$store.commit(&#39;mutationsName&#39;)</p>
-
-<p>方式二：$store.dispatch(&#39;actionsName&#39;)    </p>
-</blockquote>
-
-<p>store.js文件中：</p>
-
-<ul>
-<li>初始化 mutations 和 actions (相当于是methods)</li>
-</ul>
-
-<pre><code>const mutations = {
-    increment (state) {
-        // 变更状态
-        state.count = state.count * 5
-    }
-}
-</code></pre>
-
-<pre><code>import {action4} from &#39;@/path/actions.js&#39;
-const actions = {
-    // 同步方法
-    add: function (context) {
-        context.commit(&#39;increment&#39;)
-    },
-    // 延时操作 用于网络请求啊啥的
-    addAsync (context) {
-        // 延时1秒
-        setTimeout(() =&gt; {
-            context.commit(&#39;increment&#39;)
-        }, 1000)
-    },
-    // 简写方式
-    action2 (context) {
-        context.commit(&#39;increment&#39;)
-    },
-    // 抽离到单独文件中，在导进封装好的变量来直接使用即可（导进来的目的是为了接收第一个参数：state），不绑定到store，需要手动传入store对象
-    action4: action4,
-}
-</code></pre></li>
-</ol>
-
-<ul>
-<li><p>绑定action 和 mutations 到 methods，然后 调用就行了</p>
-
-<pre><code>export default {
-    methods: {
-        // 数组形式直接载入
-        ...mapActions([
-            &#39;add&#39;
-        ]),
-        // 重命名形式 
-        ...mapActions({
-            add: &#39;add&#39;,
-            addAsync: &#39;addAsync&#39;,
-            action4: &#39;action4&#39;
-        }),
-        // 同上
-        ...mapMutations([
-            &#39;increment&#39;
-        ]),
-        ...mapMutations({
-            incrementMutation: &#39;increment&#39;
-        })
-    }
-}
-</code></pre></li>
-</ul>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2018/1/25</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='vue.html'>Vue</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15145327105445.html">
-                
-                  <h1>佛祖镇楼 bug辟易</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<pre><code class="language-Objective-C">//                            _ooOoo_
-//                           o8888888o
-//                           88&quot; . &quot;88
-//                           (| -_- |)
-//                            O\ = /O
-//                        ____/`---&#39;\____
-//                      .   &#39; \\| |// `.
-//                       / \\||| : |||// \
-//                     / _||||| -:- |||||- \
-//                       | | \\\ - /// | |
-//                     | \_| &#39;&#39;\---/&#39;&#39; | |
-//                      \ .-\__ `-` ___/-. /
-//                   ___`. .&#39; /--.--\ `. . __
-//                .&quot;&quot; &#39;&lt; `.___\_&lt;|&gt;_/___.&#39; &gt;&#39;&quot;&quot;.
-//               | | : `- \`.;`\ _ /`;.`/ - ` : | |
-//                 \ \ `-. \_ __\ /__ _/ .-` / /
-//         ======`-.____`-.___\_____/___.-`____.-&#39;======
-//                            `=---=&#39;
-//
-//         .............................................
-//                  佛祖镇楼                  BUG辟易
-//          佛曰:
-//                  写字楼里写字间，写字间里程序员；
-//                  程序人员写程序，又拿程序换酒钱。
-//                  酒醒只在网上坐，酒醉还来网下眠；
-//                  酒醉酒醒日复日，网上网下年复年。
-//                  但愿老死电脑间，不愿鞠躬老板前；
-//                  奔驰宝马贵者趣，公交自行程序员。
-//                  别人笑我忒疯癫，我笑自己命太贱；
-//                  不见满街漂亮妹，哪个归得程序员？
-</code></pre>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2017/12/29</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15115206889632.html">
-                
-                  <h1>Mac app 推荐</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">开发工具篇</h2>
-
-<h3 id="toc_1">Postman （Chrome 工具）</h3>
-
-<p><img src="media/15115206889632/15115207580615.jpg" alt="Postman_Icon"/><br/>
-这款APP 最初是 谷歌浏览器的插件...</p>
-
-<h3 id="toc_2">Gif Brewery （AppStore 免费）</h3>
-
-<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fmpkcy93u9j307206oab2.jpg" alt="Gif Brewery"/><br/>
-这是录制gif文件的APP，有了它再也不用为制作gif发愁了</p>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2017/11/24</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='app.html'>MacAPP</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15115332074317.html">
-                
-                  <h1>Xcode 代码块</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">一、创建自定义代码块的好处</h2>
-
-<p>由于项目、所用语言或者编码习惯的差别，不同的程序员习惯用的代码片段也不尽相同，这就有了自定义代码片段的需求，好在Xcode是支持该功能的。他的好处是使程序员以最快的速度输入很常用的代码片段，提高编程效率。</p>
-
-<p>该功能是从Xcode4开始引入的。在Xcode中的位置如下图所示：</p>
-
-<p>如上图，右边系统就定义很对的代码块，包括一些我们很常用的@interface 和@implementation的声明和实现。</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15115332074317.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/11/24</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
 			<div class="article">
                 <a class="clearlink" href="15137627946753.html">
                 
@@ -1269,32 +188,129 @@ const actions = {
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15126415331235.html">
+                <a class="clearlink" href="15137621729153.html">
                 
-                  <h1>iOS WKWebView 本地HTML、JS、CSS文件加载详解</h1>
+                  <h1>ES6笔记（解构赋值）</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<blockquote>
-<p><strong>Tips:</strong><br/>
-NSString类型的文件路径转换为URL的时候，一定要用 <br/>
-<code>NSURL *pathURL = [NSURL fileURLWithPath:filePath];</code>方法去转换，否则资源URL不合法，APP会崩溃</p>
-</blockquote>
+                        	<h2 id="toc_0">解构赋值</h2>
 
-<h2 id="toc_0">上源码接口：</h2>
-
-<h3 id="toc_1">loadRequest方式加载</h3>
+<h3 id="toc_1">变量的解构：</h3>
 
 <ul>
-<li><p>API : iOS8即可使用</p>
+<li>解构赋值允许指定默认值。</li>
+<li>解构赋值必须保证赋值方  被赋值方类型一直  但Item允许有遗漏或者多出。</li>
+<li>默认值可以引用解构赋值的其他变量，但该变量必须已经声明</li>
+</ul>
 
-<p><code>- (nullable WKNavigation *)loadRequest:(NSURLRequest *)request;</code>      </p></li>
-<li><p>用途：</p>
+<pre><code class="language-text">let [x = 1, y = x] = [];     // x=1; y=1
+let [x = y, y = 1] = [];     // ReferenceError
+</code></pre>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15137621729153.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/12/20</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='js.html'>JavaScript</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15117133773045.html">
+                
+                  <h1>可选型 Optional</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h3 id="toc_0">定义</h3>
 
 <ul>
-<li>1：主要用来加载网络URL<br/></li>
-<li>2：也可以加载本地HTML文件（本文重点）</li>
+<li>当数据可能接收nil的时候，使用optional是比较合适的</li>
+<li>当非可选型被赋值为nil的时候 系统会崩溃</li>
+<li>当可选型被赋值为nil的时候 系统会首先判断值是否为nil，如果为nil 则会赋值nil;如果不为nil，那就正常操作。</li>
+</ul>
+
+<h3 id="toc_1">Optional 可选型 写法</h3>
+
+<p><code>var sexy : String? = &quot;boy&quot;</code></p>
+
+<h3 id="toc_2">强制解包</h3>
+
+<pre><code class="language-text">if sexy != nil {
+    print(&quot;i am a \(String(describing: sexy))&quot;)
+}else{
+    print(&quot;none&quot;)
+}
+</code></pre>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15117133773045.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/11/27</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='swift.html'>Swift</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15115315701641.html">
+                
+                  <h1>React Native 集成 Redux</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">课程介绍</h2>
+
+<ul>
+<li>Flux/reFlux/Redux</li>
+<li><p>简单/单一状态树</p></li>
+<li><p>react 和 redux 数据流的关系</p></li>
+<li><p>JS、CSS、HTML</p></li>
+<li><p>JSX</p></li>
+<li><p>webpack 构建</p></li>
+</ul>
+
+<h2 id="toc_1">数据流</h2>
+
+<ul>
+<li>MVC 状态复杂之后，action会触发事件 并且不可预测</li>
+<li>flux: state Tree will send data to view,but view can&#39;t send data to state-tree.</li>
+<li>Redux :  state 是包含在store中的</li>
 </ul>
 
 
@@ -1304,8 +320,1187 @@ NSString类型的文件路径转换为URL的时候，一定要用 <br/>
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15126415331235.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/12/7</span>
+                   <a href="15115315701641.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/11/24</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='reactnative.html'>React-Native</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15115206889632.html">
+                
+                  <h1>Mac app 推荐</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">开发工具篇</h2>
+
+<h3 id="toc_1">Postman （Chrome 工具）</h3>
+
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcly1ftrz0axodgj306g05yaa5.jpg" alt=""/></p>
+
+<p>这款APP 最初是 谷歌浏览器的插件...</p>
+
+<h3 id="toc_2">Gif Brewery （AppStore 免费）</h3>
+
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fmpkcy93u9j307206oab2.jpg" alt="Gif Brewery"/><br/>
+这是录制gif文件的APP，有了它再也不用为制作gif发愁了</p>
+
+<h2 id="toc_3">效率篇</h2>
+
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fs4sjq44lvj31kw0e97im.jpg" alt=""/></p>
+
+<ul>
+<li>Magnet:分屏工具</li>
+<li>Manico:快捷键启动APP工具</li>
+<li>Sip：非常好用的取色工具</li>
+<li>Alfred：排名第一的效率工具</li>
+<li>Go3Shell: 终端内cd到选中文件目录下</li>
+<li>iterm2: 可自定制主题 支持多tab横屏竖屏新建tab的替代terminal的工具</li>
+<li>截图：腾讯出品的良心免费截图工具</li>
+</ul>
+
+<h2 id="toc_4">办公</h2>
+
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcly1ftrwgam12sj309u086myk.jpg" alt=""/></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2017/11/24</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='app.html'>MacAPP</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="14948260667614.html">
+                
+                  <h1>SectionListView</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">属性</h2>
+
+<ol>
+<li>ItemSeparatorComponent  <code>{highlighted,leadingItem,leandingSection,section,trailingItem}</code><br/>
+返回一个行与行之间的分割组件，不会出现在第一行之前和最后一行之后。
+<ul>
+<li><code>highlighted</code> 当前行（分割线上面👆的Item）是否是高亮状态</li>
+<li><code>leadingItem</code> 当前行分配到的数据源</li>
+<li><code>leandingSection</code> 目前我也没搞明白啥意思 这里是<code>undefined</code></li>
+<li><code>section</code> 当前段分配到的数据源</li>
+<li><code>trailingItem</code> 尾段数据</li>
+</ul></li>
+<li>ListEmptyCompone  <code>没有接收参数</code><br/>
+渲染一个cell为空时的缓冲组件<br/></li>
+<li>ListFooterComponent  <code>没有接收参数</code><br/>
+渲染整个组件的Footer</li>
+<li>ListHeaderComponent   <code>没有接收参数</code><br/>
+渲染整个组件的Header</li>
+</ol>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="14948260667614.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/5/15</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='reactnative.html'>React-Native</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15468313301172.html">
+                
+                  <h1>内存区域</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">1、介绍下内存区域</h2>
+
+<ul>
+<li><p>栈(Stack)</p>
+<ul>
+<li>【特点】：先进先出</li>
+<li>【分配和释放】：编译器自动分配、自动释放；</li>
+<li>存放函数的参数值、局部变量，方法调用的实参也是保存在栈区的。</li>
+<li>栈是系统数据结构，对应线程/进程是唯一的</li>
+<li>优点是快速高效，缺点是有限制，数据不灵活</li>
+</ul></li>
+<li><p>堆(Heap)</p></li>
+<li><p>全局区(静态区)</p></li>
+<li><p>常量区/数据段</p></li>
+<li><p>代码区/代码段</p></li>
+</ul>
+
+<p>【面试】 阿里p6面试题</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2019/1/7</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15422507660830.html">
+                
+                  <h1>使用Masonry，布局UIScrollViewView</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p><code>UIScrollView</code>比较特殊，frame布局时我们需要设置<code>contentSize</code>属性</p>
+
+<ol>
+<li><p>初始化ScrollView并添加到父视图 并 进行约束</p>
+<pre><code class="language-text">// ------ 初始化ScrollView
+UIScrollView *scrollView = UIScrollView.new;<br/>
+self.scrollView = scrollView;<br/>
+scrollView.backgroundColor = [UIColor grayColor];<br/>
+// ------ 添加到父视图<br/>
+[self addSubview:scrollView];<br/>
+// ------ 对ScrollView进行约束<br/>
+[self.scrollView makeConstraints:^(MASConstraintMaker *make) {<br/>
+    make.edges.equalTo(self);<br/>
+}];
+</code></pre></li>
+<li><p>初始化ContentView 并进行约束</p>
+<pre><code class="language-text">UIView* contentView = UIView.new;
+// 添加contentView 到ScrollView上<br/>
+[self.scrollView addSubview:contentView];<br/>
+// 约束contentView<br/>
+[contentView makeConstraints:^(MASConstraintMaker *make) {<br/>
+    make.edges.equalTo(self.scrollView);<br/>
+    make.width.equalTo(self.scrollView);<br/>
+}];
+</code></pre></li>
+<li><p>添加子视图到contentView上 并再次对contentView进行约束</p>
+<pre><code class="language-text">UIView *lastView;
+CGFloat height = 25;<br/>
+for (int i = 0; i &lt; 10; i++) {<br/>
+    UIView *view = UIView.new;<br/>
+    view.backgroundColor = [self randomColor];<br/>
+    // 注意！！！ 这里是添加视图到 contentView上<br/>
+    [contentView addSubview:view];<br/>
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTap:)];<br/>
+    [view addGestureRecognizer:singleTap];<br/>
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {<br/>
+        make.top.equalTo(lastView ? lastView.bottom : @0);<br/>
+        make.left.equalTo(@0);<br/>
+        make.width.equalTo(contentView.width);<br/>
+        make.height.equalTo(@(height));<br/>
+    }];<br/>
+    height += 25;<br/>
+    lastView = view;<br/>
+}<br/>
+// ------&gt;&gt;&gt;&gt;&gt;&gt;: 这里 很关键！！！！<br/>
+[contentView makeConstraints:^(MASConstraintMaker *make) {<br/>
+    make.bottom.equalTo(lastView.bottom);<br/>
+}];
+</code></pre></li>
+</ol>
+
+<blockquote>
+<p>讲解</p>
+</blockquote>
+
+<p>第一次约束是这样的：<br/>
+先设置下edgs 让contentView能撑起scrollView来。<br/>
+然后,如果竖直方向高度不固定，就先约束下相对固定的宽度；<br/>
+如果水平方向宽度不固定，就需要先约束下高度；</p>
+
+<pre><code class="language-text">// 约束contentView
+    [contentView makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.scrollView);
+        make.width.equalTo(self.scrollView);
+    }];
+</code></pre>
+
+<p>再次更新 加强约束时：<br/>
+如果竖直方向高度不固定，则需要在此时约束下bottom 或者 top<br/>
+如果水平方向不固定，则需要在此时约束下 left 或者 right</p>
+
+<pre><code class="language-text">// ------&gt;&gt;&gt;&gt;&gt;&gt;: 这里 很关键！！！！
+    [contentView makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(lastView.bottom);
+    }];
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/11/15</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15477923365213.html">
+                
+                  <h1>iOS 获取汉字【简体中文】笔画数</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">思路</h2>
+
+<ul>
+<li><p>汉字字典库匹配笔画数</p>
+<ul>
+<li>优点： 实现逻辑简单，字典库好扩展</li>
+<li>缺点： 内存消耗较大（不过也能承担）</li>
+</ul>
+<p><strong>思路：</strong> 这种实现思路是比较简单的，具体思路是将简体汉字所有字都穷举出来，然后分别匹配上指定的笔画数，当做一个大的数据库，每次都去查询一下。</p></li>
+<li><p>汉字GBK编码匹配笔画数</p>
+<ul>
+<li>优点：相比字典库匹配，效率高，速度快</li>
+<li>缺点：添加编码库不好添加，不好扩展</li>
+</ul>
+<p><strong>思路：</strong> 这种实现方案是需要获取GBK编码分别对应的笔画数，放到指定数组（数据库）中，每次通过输入的汉字 转码为二进制，通过二进制的值 匹配数据库中的笔画数。</p>
+<p>-**************************<br/>
+废话少说，盘它！<br/>
+-**************************</p></li>
+</ul>
+
+<h2 id="toc_1">上代码，盘它！</h2>
+
+<h3 id="toc_2">先来看下成果</h3>
+
+<p>** 测试代码 **</p>
+
+<pre><code class="language-text">dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        // 处理耗时操作的代码块...
+        NSString *testString = @&quot;浓睡不消残酒&quot;;
+        // 字典查询匹配
+        [self testStrokeCount:testString];
+        // 编码查询匹配
+        [self chineseCharactersCount:testString];
+    });
+</code></pre>
+
+<p>** 测试结果 **</p>
+
+<pre><code class="language-text">------- 字典查询匹配
+
+TemplateApp[78833:3000133] 汉字：浓 ------ 笔画数：9
+TemplateApp[78833:3000133] 汉字：睡 ------ 笔画数：13
+TemplateApp[78833:3000133] 汉字：不 ------ 笔画数：4
+TemplateApp[78833:3000133] 汉字：消 ------ 笔画数：10
+TemplateApp[78833:3000133] 汉字：残 ------ 笔画数：9
+TemplateApp[78833:3000133] 汉字：酒 ------ 笔画数：10
+
+------  编码查询匹配
+TemplateApp[78833:3000133] 汉字：浓  ------ 笔画数：9
+TemplateApp[78833:3000133] 汉字：睡  ------ 笔画数：13
+TemplateApp[78833:3000133] 汉字：不  ------ 笔画数：4
+TemplateApp[78833:3000133] 汉字：消  ------ 笔画数：10
+TemplateApp[78833:3000133] 汉字：残  ------ 笔画数：9
+TemplateApp[78833:3000133] 汉字：酒  ------ 笔画数：10
+</code></pre>
+
+<h3 id="toc_3">汉字字典库匹配笔画数 核心代码</h3>
+
+<pre><code class="language-text">-(NSDictionary *)chineseCharacters{
+    if (!_chineseCharacters) {
+        _chineseCharacters = [[NSDictionary alloc] init];
+        _chineseCharacters = [self readLocalJsonFileWithName:@&quot;Chinese&quot; type:@&quot;json&quot;];
+    }
+    return _chineseCharacters;
+}
+- (NSArray *)bytesArray{
+    if (!_bytesArray) {
+        _bytesArray = [[NSArray alloc] init];
+        _bytesArray = [self readLocalJsonFileWithName:@&quot;byteNum&quot; type:@&quot;json&quot;];
+    }
+    return _bytesArray;
+}
+
+
+#pragma mark - **************** Tool function
+/** 读取本地文件 */
+-(nullable id)readLocalJsonFileWithName:(NSString *)fileName type:(NSString *)type{
+    // 获取文件路径
+    NSString *path = [[NSBundle mainBundle] pathForResource:fileName ofType:type];
+    // 将文件数据化
+    NSData *data = [[NSData alloc] initWithContentsOfFile:path];
+    // 对数据进行JSON格式化并返回字典形式
+    return [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+}
+
++(BOOL)isAllCCString:(NSString *)tempStr{
+    for (int i=0; i&lt;tempStr.length; i++) {
+        NSString *indexstr = [tempStr substringWithRange:NSMakeRange(i, 1)];
+        NSInteger strlength = [KLChineseCharactersTool getCharactCountOfString:indexstr];
+        if (strlength != 2) {
+            return NO;
+        }
+        
+    }
+    return YES;
+}
+
+-(BOOL)isBlankString:(NSString *)string{
+    
+    if (string ==nil || string ==NULL) {
+        return YES;
+    }
+    if ([string isKindOfClass:[NSNull class]]) {
+        return YES;
+    }
+    if ([[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]length]==0) {//特殊字符判断
+        return YES;
+    }
+    return NO;
+}
+
+-(NSInteger)getSigleChineseStrokeCountWith:(NSString *)str{
+    NSInteger count = 0;
+    
+    BOOL isALLCC = [[self class] isAllCCString:str];
+    if (!isALLCC) {
+        // 如果不是纯汉字返回笔画数为0
+        return 0;
+    }
+    
+    // 单字符判断
+    if (str.length&lt;=0) {
+        NSLog(@&quot;字符串不合法&quot;);
+        return 0;
+    }
+    
+    // 多字符 取第一个字符判断
+    NSString *sigleStr = @&quot;&quot;;
+    if (str.length &gt; 1) {
+        NSLog(@&quot;并非单个字符&quot;);
+        sigleStr = [str substringWithRange:NSMakeRange(0, 1)];
+    }
+    
+    if (str.length == 1) {
+        sigleStr = str;
+    }
+    
+    
+    // 获取笔划列表
+    NSDictionary *chineseDic = self.chineseCharacters;
+    
+    // 查询
+    for (int i=0; i&lt;25; i++) {
+        // 按次序获取某个笔划数的所有汉字组成的字符
+        NSString *itemString = [chineseDic objectForKey:[NSString stringWithFormat:@&quot;%d&quot;,(i+1)]];
+        //如果 传入汉字不为空 异常判断
+        if (![self isBlankString:itemString] &amp;&amp; itemString.length &gt; 0 ) {
+            // 包含这个汉字 将笔画数 i+1 返回
+            if ([itemString rangeOfString:sigleStr].location != NSNotFound) {
+                NSLog(@&quot;汉字：%@  ------ 笔画数：%d&quot;,sigleStr,i+1);
+                count = count + (i+1);
+                break;
+            }
+        }
+        
+    }
+    
+    if (count == 0) {
+        NSLog(@&quot;字库中暂时没有该汉字&quot;);
+    }
+    
+    return count;
+}
+
+-(NSInteger)getChineseStrokeCountWith:(NSString *)chineseString{
+    NSInteger count = 0;
+    
+    // 单个汉字？
+    if (chineseString.length == 1 ) {
+        return [self getSigleChineseStrokeCountWith:chineseString];
+    }
+    
+    // 多汉字
+    // 获取笔划列表
+    
+    for (int i=0; i&lt;chineseString.length; i++) {
+        // 将传入字符分割成单个字
+        NSString *indexStr = [chineseString substringWithRange:NSMakeRange(i, 1)];
+        NSInteger sigleCount = [self getSigleChineseStrokeCountWith:indexStr];
+        count = count + sigleCount;
+    }
+    
+    NSLog(@&quot;%@  --- 共计：%ld划&quot;,chineseString ,(long)count);
+    
+    return count;
+}
+</code></pre>
+
+<h3 id="toc_4">GBK编码查询法 核心代码</h3>
+
+<pre><code class="language-text">#pragma mark - **************** BGBK汉字编码 匹配
++(int)getCharactCountOfString:(NSString *)strtemp{
+    
+    int strlength = 0;
+    char* p = (char*)[strtemp cStringUsingEncoding:NSUnicodeStringEncoding];
+    for (int i=0 ; i&lt;[strtemp lengthOfBytesUsingEncoding:NSUnicodeStringEncoding] ;i++) {
+        if (*p) {
+            p++;
+            strlength++;
+        }
+        else {
+            p++;
+        }
+        
+    }
+    return strlength;
+}
+
+
+
+-(NSInteger)getStrokeCountWithHighByte:(int)highByte lowByte:(int)lowByte{
+    NSInteger strokeCount = 0;
+    //high: 176 - 247       low: 161 - 154  该范围才是汉子区域
+    if (highByte &lt; 0xB0 || highByte &gt; 0xF7 || lowByte &lt; 0xA1 || lowByte &gt; 0xFE) {
+        // 非GB2312合法字符
+        return 0;
+    }else{
+        int offset = (highByte - 0xB0) * (0xFE - 0xA0) + (lowByte - 0xA1);
+        NSArray *byteArr = self.bytesArray;
+        strokeCount = ((NSNumber *)[byteArr objectAtIndex:offset]).intValue;
+        return strokeCount;
+    }
+    return strokeCount;
+}
+
+
+-(NSInteger)getBytesChineseStrokeCountWith:(NSString *)ccString{
+    NSInteger count = 0;
+    
+    // 单个汉字？
+    if (ccString.length == 1 ) {
+        return [self getBytesSigleChineseStrokeCountWith:ccString];
+    }
+    
+    for (int i=0; i&lt;ccString.length; i++) {
+        
+        NSString *indexstr = [ccString substringWithRange:NSMakeRange(i, 1)];
+        
+        NSInteger strlength = [KLChineseCharactersTool getCharactCountOfString:indexstr];
+        
+        if (strlength!=2) {
+            NSLog(@&quot;kael --  字符 不合法 %@&quot;,indexstr);
+            break;
+        }
+        
+        if (strlength == 2) {
+            count = count + [self getBytesSigleChineseStrokeCountWith:indexstr];
+        }
+        
+        
+    }
+    
+    return count;
+}
+
+-(NSInteger)getBytesSigleChineseStrokeCountWith:(NSString *)ccString{
+    NSInteger count = 0;
+    // 1、先判断是否是汉字
+    BOOL isALLCC = [[self class] isAllCCString:ccString];
+    if (!isALLCC) {
+        // 如果不是纯汉字返回笔画数为0
+        return 0;
+    }
+    
+    // 2、判断字符个数
+    // 不合法
+    if (ccString.length&lt;=0) {
+        NSLog(@&quot;字符串不合法&quot;);
+        return 0;
+    }
+    
+    // 多字符 取第一个字符判断
+    NSString *sigleStr = @&quot;&quot;;
+    if (ccString.length &gt; 1) {
+        NSLog(@&quot;并非单个字符&quot;);
+        sigleStr = [ccString substringWithRange:NSMakeRange(0, 1)];
+    }
+    
+    // 单字符判断
+    if (ccString.length == 1) {
+        sigleStr = ccString;
+    }
+    
+    
+    NSInteger strlength = [KLChineseCharactersTool getCharactCountOfString:sigleStr];
+    
+    if (strlength!=2) {
+        NSLog(@&quot;kael --  字符 不合法 %@&quot;,ccString);
+        return 0;
+    }else{
+        // BGK 编码 --&gt; 转为 NSData
+        NSStringEncoding enc =CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+        NSData *indexData = [ccString dataUsingEncoding:enc];
+        // NSData --&gt; Bytes
+        Byte *indexByte = (Byte *)[indexData bytes];
+        // 取高8位 低8位
+        int highByte = indexByte[0];
+        int lowByte = indexByte[1];
+        
+        count = [self getStrokeCountWithHighByte:highByte lowByte:lowByte];
+        NSLog(@&quot;汉字：%@ ------ 笔画数：%ld&quot;,sigleStr,count);
+        
+    }
+    
+    return count;
+}
+</code></pre>
+
+<h3 id="toc_5">核心数据 及 【文件】</h3>
+
+<ul>
+<li>汉字字典库匹配字典</li>
+</ul>
+
+<pre><code class="language-text">{&quot;1&quot;:&quot;一乙&quot;,
+ &quot;2&quot;:&quot;丁七乃乜九了二人亻儿入八冂几凵刀刁力勹匕十厂厶又&quot;,
+ &quot;3&quot;:&quot;万丈三上下丌个丫丸久乇么义乞也习乡亍于亏亡亿兀凡刃勺千卫叉口囗土士夕大女子孑孓寸小尢尸山巛川工己已巳巾干幺广廾弋弓才门飞马&quot;,
+ &quot;4&quot;:&quot;不与丐丑专中丰丹为之乌书予云互亓五井亢什仁仂仃仄仅仆仇仉今介仍从仑仓允元公六兮内冈冗凤凶分切刈劝办勾勿匀化匹区卅升午卞厄厅历及友双反壬天太夫夭孔少尤尹尺屯巴币幻廿开引心忆戈户手扎支攴攵文斗斤方无日曰月木欠止歹殳毋比毛氏气水火爪父爻爿片牙牛犬王瓦肀艺见计订讣认讥贝车邓长闩队韦风且丕世丘丙业丛东丝主乍乎乏&quot;,
+ &quot;5&quot;:&quot;乐仔仕他仗付仙仝仞仟仡代令以仨仪仫们兄兰冉册写冬冯凸凹出击刊刍功加务劢包匆北匝卉半卟占卡卢卮卯厉去发古句另叨叩只叫召叭叮可台叱史右叵叶号司叹叻叼叽囚四圣处外央夯失头奴奶孕宁它宄对尔尕尻尼左巧巨市布帅平幼庀弁弗弘归必忉戊戋扑扒打扔斥旦旧未末本札术正母氐民氕永汀汁汇汉灭犯犰玄玉瓜甘生用甩田由甲申电疋白皮皿目矛矢石示礼禾穴立纠艽艾艿节讦讧讨让讪讫训议讯记轧边辽邗邙邛邝钅闪阡阢饥驭鸟龙&quot;,
+ &quot;6&quot;:&quot;丞丢乒乓乔乩买争亘亚交亥亦产仰仲仳仵件价任份仿企伉伊伍伎伏伐休众优伙会伛伞伟传伢伤伥伦伧伪伫佤充兆先光全共关兴再军农冰冱冲决凫凼刎刑划刖列刘则刚创劣动匈匠匡华协印危压厌厍吁吃各吆合吉吊同名后吏吐向吒吓吕吖吗囝回囟因囡团在圩圪圬圭圮圯地圳圹场圾壮夙多夷夸夹夺夼奸她好妁如妃妄妆妇妈字存孙宅宇守安寺寻导尖尘尥尧尽屹屺屿岁岂岌州巡巩帆师年并庄庆延廷异式弛当忏忖忙戌戍戎戏成托扛扣扦执扩扪扫扬收旨早旬旭旮旯曲曳有朱朴朵机朽杀杂权次欢此死毕氖氘氽汆汊汐汔汕汗汛汜汝江池污汤汲灯灰爷牝牟犴犷犸玎玑百祁竹米糸纡红纣纤纥约级纨纩纪纫缶网羊羽老考而耒耳聿肉肋肌臣自至臼舌舛舟艮色芄芊芋芍芎芏芑芒芗芝芨虍虫血行衣西观讲讳讴讵讶讷许讹论讼讽设访诀贞负轨达迁迂迄迅过迈邡邢那邦邪邬钆钇闫闭问闯阪阮阱防阳阴阵阶页饧驮驯驰齐&quot;,
+ &quot;7&quot;:&quot;两严串丽乱亨亩伯估伲伴伶伸伺似伽佃但位低住佐佑体何佗佘余佚佛作佝佞佟你佣佥佧克免兑兕兵况冶冷冻初删判刨利别刭助努劫劬劭励劲劳匣医卣卤即却卵县君吝吞吟吠吡吣否吧吨吩含听吭吮启吱吲吴吵吸吹吻吼吾呀呃呆呈告呋呐呒呓呔呕呖呗员呙呛呜囤囫园困囱围囵圻址坂均坊坌坍坎坏坐坑块坚坛坜坝坞坟坠声壳奁奂妊妍妒妓妖妗妙妞妣妤妥妨妩妪妫姊姒孚孛孜孝宋完宏寿尬尾尿局屁层岈岍岐岑岔岖岗岘岙岚岛岜希帏帐庇床庋序庐庑库应弃弄弟张形彤彷役彻忌忍忐忑忒志忘忡忤忧忪快忭忮忱忸忻忾怀怃怄怅怆我戒扭扮扯扰扳扶批扼找技抄抉把抑抒抓投抖抗折抚抛抟抠抡抢护报拒拟攸改攻旰旱时旷更杆杈杉杌李杏材村杓杖杜杞束杠条来杨杩极欤步歼每氙氚求汞汨汩汪汰汴汶汹汽汾沁沂沃沅沆沈沉沌沏沐沔沙沛沟没沣沤沥沦沧沩沪泐泛灵灶灸灼灾灿炀牡牢状犹狁狂狃狄狈玖玛甫甬男甸町疔疖疗皂盯矣矶社祀秀私秃究穷系纬纭纯纰纱纲纳纵纶纷纸纹纺纽纾罕羌肓肖肘肚肛肜肝肟肠良芈芘芙芜芟芡芤芥芦芩芪芫芬芭芮芯芰花芳芴芷芸芹芽芾苁苄苇苈苊苋苌苍苎苏苡苣虬补角言证诂诃评诅识诈诉诊诋诌词诎诏译诒谷豆豕豸贡财赤走足身轩轫辛辰迎运近迓返迕还这进远违连迟邑邮邯邰邱邳邴邵邶邸邹邺邻酉里针钉钊钋钌闰闱闲闳间闵闶闷阻阼阽阿陀陂附际陆陇陈陉韧饨饩饪饫饬饭饮驱驳驴鸠鸡麦龟&quot;,
+ &quot;8&quot;:&quot;丧乖乳事些亟享京佩佬佯佰佳佴佶佻佼佾使侃侄侈侉例侍侏侑侔侗供依侠侣侥侦侧侨侩侪侬兔兖其具典冼冽净凭凯函刮到刳制刷券刹刺刻刽刿剀剁剂劾势匦卑卒卓单卖卦卧卷卺厕叁参叔取呢呤呦周呱味呵呶呷呸呻呼命咀咂咄咆咋和咎咏咐咒咔咕咖咙咚咛咝哎囹固国图坡坤坦坨坩坪坫坭坯坳坶坷坻坼垂垃垄垅垆备夜奄奇奈奉奋奔妮妯妲妹妻妾姆始姐姑姓委姗孟孢季孤孥学宓宕宗官宙定宛宜宝实宠审尚居屈屉届岢岣岩岫岬岭岱岳岵岷岸岽岿峁峄巫帑帔帕帖帘帙帚帛帜幸底庖店庙庚府庞废建弥弦弧弩弪录彼往征徂径忝忠念忽忿态怂怊怍怏怔怕怖怙怛怜怡怦性怩怪怫怯怵怿戕或戗戽戾房所承抨披抬抱抵抹抻押抽抿拂拄担拆拇拈拉拊拌拍拎拐拓拔拖拗拘拙拚招拢拣拥拦拧拨择放斧斩於旺昀昂昃昆昊昌明昏易昔昕昙朊朋服杪杭杯杰杲杳杵杷杼松板构枇枉枋析枕林枘枚果枝枞枢枣枥枧枨枪枫枭柜欣欧武歧殁殴氓氛沓沫沭沮沱沲河沸油治沼沽沾沿泄泅泊泌泓泔法泖泗泞泠泡波泣泥注泪泫泮泯泱泳泷泸泺泻泼泽泾浅炅炉炊炎炒炔炕炖炙炜炝炬爬爸版牦牧物狍狎狐狒狗狙狞玟玢玩玫玮环现瓮瓯甙画甾畀畅疙疚疝疟疠疡的盂盱盲直知矸矽矾矿砀码祆祈祉秆秉穸穹空竺籴线绀绁绂练组绅细织终绉绊绋绌绍绎经绐罔罗者耵耶肃股肢肤肥肩肪肫肭肮肯肱育肴肷肺肼肽肾肿胀胁臾舍艰苑苒苓苔苕苗苘苛苜苞苟苠苤若苦苫苯英苴苷苹苻茁茂范茄茅茆茇茉茌茎茏茑茔茕茚虎虏虮虱表衩衫衬规觅视诓诔试诖诗诘诙诚诛诜话诞诟诠诡询诣诤该详诧诨诩责贤败账货质贩贪贫贬购贮贯转轭轮软轰迢迤迥迦迨迩迪迫迭迮述迳邾郁郄郅郇郊郎郏郐郑郓采金钍钎钏钐钒钓钔钕钗闸闹阜陋陌降限陔陕隶隹雨青非顶顷饯饰饱饲饴驵驶驷驸驹驺驻驼驽驾驿骀鱼鸢鸣黾齿&quot;,
+ &quot;9&quot;:&quot;临举亭亮亲侮侯侵便促俄俅俊俎俏俐俑俗俘俚俜保俞俟信俣俦俨俩俪俭修兹养冒冠剃削剌前剐剑勃勇勉勋匍南卸厘厚受变叙叛呲咣咤咦咧咨咩咪咫咬咭咯咱咳咴咸咻咽咿哀品哂哄哆哇哈哉哌响哏哐哑哒哓哔哕哗哙哚哜哝哞哟哪囿型垌垒垓垛垠垡垢垣垤垦垧垩垫垭垮垲垴城埏复奎奏契奕奖姘姚姜姝姣姥姨姹姻姿威娃娄娅娆娇娈娜孩孪客宣室宥宦宪宫封将尜尝屋屎屏峋峒峙峡峤峥峦差巷帝带帧帮幽庠庥度庭弈弭弯彖彦彪待徇很徉徊律後怎怒思怠急怨总怼恂恃恍恒恢恤恨恪恫恬恸恹恺恻恼恽战扁扃拜括拭拮拯拱拴拶拷拼拽拾持挂指按挎挑挖挝挞挟挠挡挢挣挤挥挪挺政故斫施既昝星映春昧昨昭是昱昴昵昶昼显曷朐枯枰枳枵架枷枸柁柃柄柏某柑柒染柔柘柙柚柝柞柠柢查柩柬柯柰柱柳柽柿栀栅标栈栉栊栋栌栎栏树歪殂殃殄殆殇残段毒毖毗毡氟氡氢泉泵泶洁洄洇洋洌洎洒洗洙洚洛洞津洧洪洫洮洱洲洳洵洹活洼洽派浃浇浈浊测浍济浏浑浒浓浔涎炫炭炮炯炱炳炷炸点炻炼炽烀烁烂烃爰牮牯牲牵狠狡狨狩独狭狮狯狰狱狲玲玳玷玻珀珂珈珉珊珍珏珐珑瓴甚甭畈畋界畎畏疣疤疥疫疬疮疯癸皆皇皈盅盆盈相盹盼盾省眄眇眈眉看眍眨矜矧矩砂砉砌砍砑砒研砖砗砘砚砜砭祓祖祗祚祛祜祝神祠祢禹禺秋种科秒秕秭穿窀突窃窆竖竽竿笃笈类籼籽绑绒结绔绕绗绘给绚绛络绝绞统缸罘罚美羿耍耐耔耷胂胃胄胆背胍胎胖胗胙胚胛胜胝胞胡胤胥胧胨胩胪胫脉舁舡舢舣茈茗茛茜茧茨茫茬茭茯茱茳茴茵茶茸茹茺茼荀荃荆荇草荏荐荑荒荔荚荛荜荞荟荠荡荣荤荥荦荧荨荩荪荫荬荭荮药莒莛虐虹虺虻虼虽虾虿蚀蚁蚂蚤衍衲衽衿袂袄袅要觇览觉訇诫诬语诮误诰诱诲诳说诵诶贰贱贲贳贴贵贶贷贸费贺贻赳赴赵趴轱轲轳轴轵轶轷轸轹轺轻迷迸迹追退送适逃逄逅逆选逊郗郛郜郝郡郢郦郧酊酋重钙钚钛钜钝钞钟钠钡钢钣钤钥钦钧钨钩钪钫钬钭钮钯闺闻闼闽闾阀阁阂陛陟陡院除陧陨险面革韭音顸项顺须飑飒食饵饶饷饺饼首香骁骂骄骅骆骇骈骨鬼鸥鸦鸨鸩&quot;,
+ &quot;10&quot;:&quot;乘亳俯俱俳俸俺俾倌倍倏倒倔倘候倚倜借倡倥倦倨倩倪倬倭倮债值倾偌健党兼冢冤冥凄准凇凉凋凌剔剖剜剞剡剥剧勐匪匿卿厝原叟哥哦哧哨哩哭哮哲哳哺哼哽哿唁唆唇唉唏唐唑唔唛唠唢唣唤唧啊圃圄圆垸埂埃埋埒埔埕埘埙埚壶夏套奘奚姬娉娌娑娓娘娟娠娣娥娩娱娲娴婀孬宰害宴宵家宸容宽宾射屐屑展屙峨峪峭峰峻崂崃席帱座弱徐徒徕恁恋恐恕恙恚恝恣恧恩恭息恳恶悃悄悌悍悒悔悖悚悛悝悟悦悭悯扇拳拿挈挚挛挨挫振挹挽捂捃捅捆捉捋捌捍捎捏捐捕捞损捡换捣效敉敌敖斋料旁旃旄旅旆晁晃晋晌晏晒晓晔晕晖晚晟朔朕朗柴栓栖栗栝校栩株栲栳样核根格栽栾桀桁桂桃桄桅框案桉桊桌桎桐桑桓桔桕桠桡桢档桤桥桦桧桨桩梃梆梢梧梨殉殊殷毙毪氤氦氧氨氩泰流浆浙浚浜浞浠浣浦浩浪浮浯浴海浸浼涂涅消涉涌涑涓涔涕涛涝涞涟涠涡涣涤润涧涨涩烈烊烘烙烛烟烤烦烧烨烩烫烬热爱爹特牺狳狴狷狸狺狻狼猁猃玺珙珞珠珥珧珩班珲琊瓞瓶瓷畔留畚畛畜疰疱疲疳疴疸疹疼疽疾痂痃痄病症痈痉皋皱益盍盎盏盐监眙眚真眠眢眩砝弢砟砣砥砧砩砬砰破砷砸砹砺砻砼砾础祟祥祧祯离秘租秣秤秦秧秩秫积称窄窈窍站竞笄笆笊笋笏笑笔笕笫粉粑紊素索紧绠绡绢绣绥绦继绨缺罟罡罢羔羞翁翅耄耆耕耖耗耘耙耸耻耽耿聂胭胯胰胱胲胳胴胶胸胺胼能脂脆脊脍脎脏脐脑脒脓臬臭致舀舐舨航舫般舭舯舰舱艳荷荸荻荼荽莅莆莉莎莓莘莜莞莠莨莩莪莫莰莱莲莳莴莶获莸莹莺莼莽虑虔蚊蚋蚌蚍蚓蚕蚜蚝蚣蚧蚨蚩蚪蚬衄衮衰衷衾袁袍袒袖袜袢被觊请诸诹诺读诼诽课诿谀谁谂调谄谅谆谇谈谊豇豹豺贼贽贾贿赀赁赂赃资赅赆赶起趵趸趿躬軎轼载轾轿辁辂较辱逋逍透逐逑递途逖逗通逛逝逞速造逡逢逦邕部郫郭郯郴郸都酌配酎酏酐酒釜钰钱钲钳钴钵钶钷钸钹钺钻钼钽钾钿铀铁铂铃铄铅铆铈铉铊铋铌铍铎阃阄阅阆陪陬陲陴陵陶陷隼隽难顼顽顾顿颀颁颂颃预饽饿馀馁骊骋验骏高髟鬯鬲鸪鸫鸬鸭鸯鸱鸲鸳鸵&quot;,
+ &quot;11&quot;:&quot;龛鸶龀乾偃假偈偎偏偕做停偬偶偷偻偾偿傀兜兽冕减凑凰剪副勒勖勘匏匐匙匮匾厢厣厩唪唬售唯唰唱唳唷唼唾唿啁啃啄商啉啐啕啖啜啡啤啥啦啧啪啬啭啮啵啶啷啸喏喵圈圉圊埝域埠埤埭埯埴埸培基埽堀堂堆堇堋堍堑堕堵够奢娶娼婆婉婊婕婚婢婧婪婴婵婶孰宿寂寄寅密寇尉屠崆崇崎崔崖崛崞崤崦崧崩崭崮巢帷常帻帼庳庵庶康庸庹庾廊弹彗彩彬得徘徙徜恿悉悠患您悫悬悱悴悸悻悼情惆惊惋惕惘惚惜惝惟惦惧惨惬惭惮惯戚戛扈挲捧捩捭据捱捶捷捺捻掀掂掇授掉掊掎掏掐排掖掘掠探接控推掩措掬掭掮掳掴掷掸掺掼揶敏救敕教敛敝敢斛斜断旋旌旎族晗晡晤晦晨曹曼望桫桴桶桷梁梅梏梓梗梦梭梯械梳梵检棂欲欷殍殒殓毫氪涪涫涮涯液涵涸涿淀淄淅淆淇淋淌淑淖淘淙淝淞淠淡淤淦淫淬淮深淳混淹添清渊渌渍渎渐渑渔渖渗渚渠烯烷烹烽焉焊焐焓焕焖焘爽牾牿犁猊猎猓猕猖猗猛猜猝猞猡猪猫率球琅理琉琏琐瓠甜略畦疵痊痍痒痔痕痖皎皑皲盒盔盖盗盘盛眦眭眯眵眶眷眸眺眼着睁矫砦硅硇硌硎硐硒硕硖硗硭票祭祷祸秸移秽稆窑窒窕竟章笙笛笞笠笤笥符笨笪第笮笱笳笸笺笼笾筇粒粕粗粘粜粝累绩绪绫续绮绯绰绱绲绳维绵绶绷绸绺绻综绽绾绿缀缁缍羚羝羟翊翌翎耜聃聆聊聋职聍胬脖脘脚脞脬脯脱脲脶脸舂舳舴舵舶舷舸船舻艴菀菁菅菇菊菌菏菔菖菘菜菝菟菠菡菥菩菪菰菱菲菸菹菽萁萃萄萆萋萌萍萎萏萑萘萜萝萤营萦萧萨萸著虚蚯蚰蚱蚴蚵蚶蚺蛀蛄蛆蛇蛉蛊蛋蛎蛏衅衔袈袋袤袭袱袷袼裆裉觋觖谋谌谍谎谏谐谑谒谓谔谕谖谗谘谙谚谛谜谝豉豚象赇赈赉赊赦赧趺趼趾跃跄距躯辄辅辆逭逮逯逵逶逸逻郾鄂鄄酗酚酝酞野铐铑铒铕铖铗铘铙铛铜铝铞铟铠铡铢铣铤铥铧铨铩铪铫铬铭铮铯铰铱铲铳铴铵银铷阈阉阊阋阌阍阎阏阐隅隆隈隋隍随隐隗雀雩雪颅领颇颈馄馅馆馗骐骑骒骓骖鸷鸸鸹鸺鸽鸾鸿鹿麸麻黄龚&quot;,
+ &quot;12&quot;:&quot;亵傅傈傍傣傥傧储傩傲凿剩割募博厥厦厨啻啼啾喀喁喂喃善喇喈喉喊喋喑喔喘喙喜喝喟喧喱喳喷喹喻喽喾嗖嗟堙堞堠堡堤堪堰塄塔壹奠奥婷婺婿媒媚媛媪嫂孱孳富寐寒寓尊就属屡崴崽崾嵇嵋嵌嵘嵛嵝嵫嵬嵯巯巽帽幂幄幅弑强弼彘彭御徨循悲惑惠惩惫惰惴惶惹惺愀愉愎愕愠愣愤愦愧慌慨戟戡戢扉掌掣掰掾揄揆揉揍揎描提插揖揞揠握揣揩揪揭揲援揸揽揿搀搁搂搅搓搔搜搭搽摒敞散敦敬斌斐斑斯普景晰晴晶晷智晾暂暑曾替最朝期棉棋棍棒棕棘棚棠棣森棰棱棵棹棺棼椁椅椋植椎椐椒椟椠椤椭椰楗楮榔欹欺款殖殚殛毯毳毵毽氮氯氰淼渝渡渣渤渥温渫渭港渲渴游渺湃湄湍湎湓湔湖湘湛湟湫湮湾湿溃溅溆溉溲滁滋滑滞焙焚焦焯焰焱然煮牌牍犀犄犊犋犍猢猥猩猬猱猴猸猹猾琚琛琢琥琦琨琪琬琮琰琳琴琵琶琼瑛瓿甥甯番畲畴疏痘痛痞痢痣痤痦痧痨痪痫登皓皖皴睃睇睐睑矬短硝硪硫硬确硷祺禄禅禽稀稂稃程稍税窖窗窘窜窝竣童竦筅等筋筌筏筐筑筒答策筘筚筛筝筵粞粟粢粤粥粪紫絮絷缂缃缄缅缆缇缈缉缋缌缎缏缑缒缓缔缕编缗缘缙羡翔翕翘耋耠聒联脔脾腆腈腊腋腌腑腓腔腕腙腚腱腴舄舒舜舾艇萱萼落葆葑葙葚葛葜葡董葩葫葬葭葱葳葵葶葸葺蒂蒇蒈蒉蒋蒌蒎蛐蛑蛔蛘蛙蛛蛞蛟蛤蛩蛭蛮蛰蛱蛲蛳蛴蜒蜓街裁裂装裎裒裕裙裢裣裤裥覃觌觚觞詈谟谠谡谢谣谤谥谦谧貂赋赌赍赎赏赐赓赔赕趁趄超越趋跆跋跌跎跏跑跖跗跚跛跞践辇辈辉辊辋辍辎辜逼逾遁遂遄遇遍遏遐遑遒道遗酡酢酣酤酥釉释量铸铹铺铼铽链铿销锁锂锃锄锅锆锇锈锉锊锋锌锍锎锏锐锑锒锓锔锕阑阒阔阕隔隘隙雁雄雅集雇雯雳靓韩颉颊颌颍颏飓飧飨馇馈馊馋骗骘骚骛鱿鲁鲂鹁鹂鹃鹄鹅鹆鹇鹈黍黑黹鼋鼎&quot;,
+ &quot;13&quot;:&quot;催傺傻像剽剿勤叠嗄嗅嗉嗌嗍嗑嗒嗓嗔嗜嗝嗡嗣嗤嗥嗦嗨嗪嗫嗬嗯嗲嗳嗵嗷嘟塌塍塑塘塞塥填塬墓媲媳媵媸媾嫁嫉嫌嫒嫔嫫寝寞尴嵊嵩嵴幌幕廉廒廓彀徭微想愁愆愈愍意愚感愫慈慊慎慑戤戥搋搌搏搐搛搞搠搡搦搪搬携摁摄摅摆摇摈摊摸敫数斟新旒暄暇暌暖暗椴椹椽椿楂楔楚楝楞楠楣楦楫楱楷楸楹楼榀概榄榆榇榈榉榘槌槎槐歃歆歇歌殿毁毂毹氲溏源溘溜溟溢溥溧溪溯溱溴溶溷溺溻溽滂滇滏滓滔滗滚滟滠满滢滤滥滦滨滩漓漠漭煅煊煌煎煜煞煤煦照煨煲煳煸煺牒犏献猷猿獒瑁瑕瑗瑙瑚瑜瑞瑟瑰甄畸畹痰痱痴痹痼痿瘀瘁瘃瘅瘐皙盟睚睛睡睢督睥睦睨睫睬睹瞄矮硼碇碉碌碍碎碑碓碗碘碚碛碜碰禀禁禊福稔稗稚稞稠稣窟窠窥窦筠筢筮筱筲筷筹筻签简粮粱粲粳缚缛缜缝缟缠缡缢缣缤罨罩罪置署群羧耢聘肄肆腠腥腧腩腭腮腰腹腺腻腼腽腾腿舅艄艉蒗蒙蒜蒡蒯蒲蒴蒸蒹蒺蒽蒿蓁蓄蓉蓊蓍蓐蓑蓓蓖蓝蓟蓠蓣蓥蓦蓬虞蛸蛹蛾蜂蜃蜇蜈蜉蜊蜍蜕蜗蜣衙裔裘裟裨裰裱裸裼裾褂褚觎觜解觥触訾詹誉誊谨谩谪谫谬豢貅貉貊赖趑趔跟跣跤跨跪跫跬路跳跷跸跹跺跻躲辏辐辑输辔辞辟遘遛遢遣遥遨鄙鄞鄢鄣酩酪酬酮酯酰酱鉴锖锗锘错锚锛锝锞锟锡锢锣锤锥锦锨锩锪锫锬锭键锯锰锱阖阗阙障雉雍雎雏零雷雹雾靖靳靴靶韪韫韵颐频颓颔颖飕馍馏馐骜骝骞骟骰骱髡魁魂鲅鲆鲇鲈鲋鲍鲎鲐鹉鹊鹋鹌鹎鹏鹑麂鼓鼠龃龄&quot;,
+ &quot;14&quot;:&quot;龅龆僖僚僦僧僬僭僮僳儆兢凳劁劂厮嗽嗾嘀嘁嘈嘉嘌嘎嘏嘘嘛嘞嘣嘤嘧塾墁境墅墉墒墙墚夤夥嫖嫘嫜嫠嫡嫣嫦嫩嫱孵察寡寤寥寨屣嶂幔幛廑廖弊彰愿慕慝慢慵慷截戬搴搿摔摘摞摧摭摹摺撂撄撇撖敲斡旖旗暝暧暨榍榕榛榜榧榨榫榭榱榴榷榻槁槊槔槛槟槠槭模歉殡毓滴滹漂漆漉漏演漕漤漩漪漫漯漱漳漶漾潆潇潋潍潢潴澉煽熄熊熏熔熘熙熬犒獍獐瑭瑶瑷璃甍疑瘊瘌瘕瘗瘘瘙瘟瘥瘦瘩睽睾睿瞀瞅瞍碟碡碣碥碧碱碲碳碴碹磁磋禚稳窨窬窭竭端箅箍箐箔箕算箜箝管箢箦箧箨箩箪箫箬箸粹粼粽精糁綦綮缥缦缧缨缩缪缫罂罱罴翟翠翡翥耥聚肇腐膀膂膈膊膏膑膜臧舆舔舞艋蓰蓼蓿蔌蔑蔓蔗蔚蔟蔡蔫蔷蔸蔹蔺蔻蔼蔽蕖蜀蜘蜚蜜蜞蜡蜢蜥蜩蜮蜱蜴蜷蜻蜾蜿蝇蝈蝉螂裳裴裹褊褐褓褙褛褡褪觏觫誓谭谮谯谰谱谲豪貌赘赙赚赛赫跽踅踉踊踌辕辖辗辣遭遮鄯鄱酲酴酵酶酷酸酹酽酾酿銎銮锲锴锵锶锷锸锹锺锻锼锾锿镀镁镂镄镅阚隧雌雒需霁霆静靼鞅韬韶颗馑馒骠骡骢骶骷髦魃魄魅鲑鲒鲔鲕鲚鲛鲜鲞鲟鹕鹗鹘鹚鹛鹜麽鼐鼻&quot;,
+ &quot;15&quot;:&quot;龇龈僵僻儇儋凛劈劐勰嘬嘭嘱嘲嘶嘹嘻嘿噌噍噎噔噗噘噙噜噢噶墀增墟墨墩嬉寮履屦嶙嶝幞幡幢廛影徵德慧慰憋憎憔憧憨憬懂戮摩撅撑撒撕撙撞撤撩撬播撮撰撵撷撸撺擒敷暮暴暹槲槽槿樊樗樘樟横樯樱橄橡橥毅滕潘潜潦潭潮潲潸潺潼澄澈澌澍澎澜澳熟熠熨熳熵牖獗獠瑾璀璁璇璋璎璜畿瘛瘠瘢瘤瘪瘫瘼瞌瞎瞑瞒瞢碾磅磉磊磐磔磕磙稷稹稻稼稽稿窳箭箱箴篁篆篇篌篑篓糅糇糈糊糌糍缬缭缮缯羯羰翦翩耦耧聩聪膘膛膝膣艏艘蔬蕃蕈蕉蕊蕙蕞蕤蕨蕲蕴蕺虢蝌蝎蝓蝗蝙蝠蝣蝤蝥蝮蝰蝴蝶蝻蝼蝽蝾螋褒褥褫褴觐觑觯谳谴谵豌豫赜赭趟趣踏踔踝踞踟踢踣踩踪踬踮踯踺躺辘遴遵醅醇醉醋醌鋈镆镇镉镊镌镍镎镏镐镑镒镓镔霄震霈霉靠靥鞋鞍鞑鞒题颚颛颜额飘餍馓馔骣骸骺骼髫髯魇鲠鲡鲢鲣鲤鲥鲦鲧鲨鲩鲫鹞鹣鹤麾黎&quot;,
+ &quot;16&quot;:&quot;齑龉龊儒冀凝劓嘴噤器噩噪噫噬噱噻噼嚆圜墼壁壅嬖嬗嬴寰廨廪徼憝憩憷憾懈懊懒懔撼擀擂擅操擎擐擗擞整斓暾樨樵樽樾橇橐橘橙橛橱橹橼檎檠歙殪氅氆氇潞澡澧澶澹激濂濉濑濒熹燃燎燔燕燠燧犟獬獭璞瓢甏甑瘭瘰瘳瘴瘵瘸瘾瘿癀癃盥瞟瞠瞥瞰磨磬磲磺禧穆穑窿篙篚篝篡篥篦篪篮篱篷糕糖糗糙缰缱缲缳缴罹羲翮翰翱耨耩耪聱膦膨膪膳臻蕹蕻蕾薄薅薇薏薛薜薤薨薪薮薯螃螅螈融螓螗螟螨螭螯蟆蟒衡褰褶赝赞赠踱踵踹踽蹀蹁蹂蹄蹉辙辚辨辩遽避邀邂鄹醍醐醑醒醚醛錾镖镗镘镙镛镜镝镞镟隰雕霍霎霏霓霖靛鞔鞘颞颟颠颡飙飚餐髭髹髻魈魉鲭鲮鲰鲱鲲鲳鲴鲵鲶鲷鲸鲺鲻鹦鹧鹨鹾麇麈黉黔默&quot;,
+ &quot;17&quot;:&quot;鼽儡嚅嚎嚏嚓壑壕嬲嬷孺嶷徽懋懑懦戴擘擢擤擦曙朦檀檄檐檑檗檩檬濞濠濡濮濯燥燮爵獯璐璨璩甓疃癌癍皤瞧瞩瞪瞬瞳瞵磴磷礁礅穗篼篾簇簋簌簏簖簧糜糟糠縻繁繇罄罅罾羁翳翼膺膻臀臁臂臃臆臊臌艚薰薷薹藁藉藏藐藓螫螬螳螵螺螽蟀蟊蟋蟑蟓蟥襁襄觳謇豁豳貔貘赡赢蹇蹈蹊蹋蹑蹒辫邃邈醢醣鍪镡镢镣镤镥镦镧镨镩镪镫隳霜霞鞠馘骤髀髁魍魏鲼鲽鳃鳄鳅鳆鳇鳊鳋鹩鹪鹫鹬麋黏黛黜黻鼢鼾龋&quot;,
+ &quot;18&quot;:&quot;龌龠冁嚣彝懵戳曛曜檫瀑燹璧癔癖癜癞瞻瞽瞿礓礞簟簦簪糨翻艟藕藜藤藩蟛蟠蟪蟮襟覆謦蹙蹦蹩躇邋醪鎏鏊镬镭镯镰镱雠鞣鞫鞭鞯颢餮馥髂髅鬃鬈鳌鳍鳎鳏鳐鹭鹰&quot;,
+ &quot;19&quot;:&quot;黝黟黠鼬嚯孽巅攀攉攒曝瀚瀛瀣爆璺瓣疆癣礤簸簿籀籁缵羸羹艨藻藿蘅蘑蘧蟹蟾蠃蠊蠓蠖襞襦警谶蹬蹭蹯蹰蹲蹴蹶蹼蹿酃醭醮醯鏖镲霪霭靡鞲鞴颤骥髋髌鬏魑鳓鳔鳕鳖鳗鳘鳙鹱麒麓&quot;,
+ &quot;20&quot;:&quot;麴黢黼鼗嚷嚼壤孀巍攘曦瀵瀹灌獾瓒矍籍糯纂耀蘖蘩蠕蠛譬躁躅酆醴醵镳霰颥馨骧鬓魔鳜鳝鳞&quot;,
+ &quot;21&quot;:&quot;鳟黥黧黩黪鼍鼯夔曩灏爝癫礴禳羼蠡蠢赣躏醺鐾露霸霹颦髓&quot;,
+ &quot;22&quot;:&quot;鳢麝黯鼙囊懿氍瓤穰耱蘸蘼躐躔镶&quot;,
+ &quot;23&quot;:&quot;霾饔饕髑鬻鹳麟攥攫癯罐趱躜颧&quot;,
+ &quot;24&quot;:&quot;鬟鼷鼹齄灞矗蠲蠹衢襻躞鑫&quot;,
+ &quot;25&quot;:&quot;鬣馕囔戆攮纛&quot;,
+ &quot;26&quot;:&quot;蠼爨&quot;}
+
+</code></pre>
+
+<ul>
+<li><p>比特匹配汉字笔画数组</p>
+<pre><code class="language-text">[10,7,10, 10, 8, 10, 9, 11, 17, 14, 13, 5, 13, 10, 12, 15, 10, 6,
+10,9,13, 8, 10, 10, 8, 8, 10, 5, 10, 14, 16, 9, 12, 12, 15, 15, 7, <br/>
+10,5, 5, 7, 10, 2, 9, 4, 8, 12, 13, 7, 10, 7, 21, 10, 8, 5, 9, 6, 13,<br/>
+8, 8, 9, 13, 12, 10, 13, 7, 10, 10, 8, 8, 7, 8, 7, 19, 5, 4, 8, 5,<br/>
+9, 10, 14, 14, 9, 12, 15, 10, 15, 12, 12, 8, 9, 5, 15, 10,<br/>
+16, 13, 9, 12, 8, 8, 8, 7, 15, 10, 13, 19, 8, 13, 12, 8, 5, 12, 9,<br/>
+4, 9, 10, 7, 8, 12, 12, 10, 8, 8, 5, 11, 11, 11, 9, 9, 18, 9, 12,<br/>
+14, 4, 13, 10, 8, 14, 13, 14, 6, 10, 9, 4, 7, 13, 6, 11, 14, 5, 13,<br/>
+16, 17, 16, 9, 18, 5, 12, 8, 9, 9, 8, 4, 16, 16, 17, 12, 9, 11, 15,<br/>
+8, 19, 16, 7, 15, 11, 12, 16, 13, 10, 13, 7, 6, 9, 5, 8, 9, 9,<br/>
+10, 6, 8, 11, 15, 8, 10, 8, 12, 9, 13, 10, 14, 7, 8, 11, 11, 14,<br/>
+12, 8, 7, 10, 2, 10, 7, 11, 4, 5, 7, 19, 10, 8, 17, 11, 12, 7, 3,<br/>
+7, 12, 15, 8, 11, 11, 14, 16, 8, 10, 9, 11, 11, 7, 7, 10, 4, 7, 17,<br/>
+16, 16, 15, 11, 9, 8, 12, 8, 5, 9, 7, 19, 12, 3, 9, 9, 9, 14, 12,<br/>
+14, 7, 9, 8, 8, 10, 10, 12, 11, 14, 12, 11, 13, 11, 6, 11, 19, 8,<br/>
+11,<br/>
+6, 9, 11, 4, 11, 7, 2, 12, 8, 11, 10, 12, 7, 9, 12, 15, 15, 11, 7,<br/>
+8, 4, 7, 15, 12, 7, 15, 10, 6, 7, 6, 11, 7, 7, 7, 12, 8, 15, 10, 9,<br/>
+16, 6, 7, 10, 12, 12, 15, 8, 8, 10, 10, 10, 6, 13, 9, 11, 6, 7, 6,<br/>
+6, 10, 8, 8, 4, 7, 10, 5, 9, 6, 6, 6, 11, 8, 8, 13, 12, 14, 13, 13,<br/>
+13, 4, 11, 14, 4, 10, 7, 5, 16, 12, 18, 12, 13, 12, 9, 13,<br/>
+10, 12, 24, 13, 13, 5, 12, 3, 9, 13, 7, 11, 12, 7, 9, 12, 15, 7, 6,<br/>
+6, 7, 8, 11, 13, 8, 9, 13, 15, 10, 11, 7, 21, 18, 11, 11, 9, 14,<br/>
+14, 13, 13, 10, 7, 6, 8, 12, 6, 15, 12, 7, 5, 4, 5, 11, 11, 15, 17,<br/>
+9, 19, 16, 12, 14, 11, 13, 10, 13, 14, 11, 14, 7, 6, 3, 14, 15, 12,<br/>
+11, 10, 13, 12, 6, 12, 14, 5, 3, 7, 4, 12, 17, 9, 9, 5, 9, 11, 9,<br/>
+11,<br/>
+9, 10, 8, 4, 8, 10, 11, 9, 5, 12, 7, 11, 11, 8, 11, 11, 6, 9, 10,<br/>
+9, 10, 2, 10, 17, 10, 7, 11, 6, 8, 15, 11, 12, 11, 15, 11, 8, 19,<br/>
+6, 12, 12, 17, 14, 4, 12, 7, 14, 8, 10, 11, 7, 10, 14, 14, 8, 8, 6,<br/>
+12, 11, 9, 7, 10, 12, 16, 11, 13, 13, 9, 8, 16, 9, 5, 7, 7, 8, 11,<br/>
+12, 11, 13, 13, 5, 16, 10, 2, 11, 6, 8, 10, 12, 10, 14, 15, 8, 11,<br/>
+13,<br/>
+2, 7, 5, 7, 8, 12, 13, 8, 4, 6, 5, 5, 12, 15, 6, 9, 8, 9, 7, 9, 11,<br/>
+7, 4, 9, 7, 10, 12, 10, 13, 9, 12, 9, 10, 11, 13, 12, 7, 14, 7, 9,<br/>
+12, 7, 14, 12, 14, 9, 11, 12, 11, 7, 4, 5, 15, 7, 19, 12, 10, 7, 9,<br/>
+9, 12, 11, 9, 6, 6, 9, 13, 6, 13, 11, 8, 12, 11, 13, 10, 12, 9, 15,<br/>
+6, 10, 10, 4, 7, 12, 11, 10, 10, 6, 2, 6, 5, 9, 9, 2,<br/>
+9, 5, 9, 12, 6, 4, 9, 8, 9, 18, 6, 12, 18, 15, 8, 8, 17, 3, 10, 4,<br/>
+7, 8, 8, 5, 7, 7, 7, 7, 4, 8, 8, 6, 7, 6, 6, 7, 8, 11, 8, 11, 3, 8,<br/>
+10, 10, 7, 8, 8, 8, 9, 7, 11, 7, 8, 4, 7, 7, 12, 7, 10, 8, 6, 8,<br/>
+12, 12, 4, 9, 8, 13, 10, 12, 4, 9, 11, 10, 5, 13, 6, 8, 4, 7, 7, 4,<br/>
+15, 8, 14, 7, 8, 13, 12, 9, 11, 6, 9, 8,<br/>
+10, 11, 13, 11, 5, 7, 7, 11, 10, 10, 8, 11, 12, 8, 14, 9, 11, 18,<br/>
+12, 9, 12, 5, 8, 4, 13, 6, 12, 4, 7, 6, 13, 8, 15, 14, 8, 7, 13, 9,<br/>
+11, 12, 3, 5, 7, 9, 9, 7, 10, 13, 8, 11, 21, 4, 6, 9, 9, 7, 7, 7,<br/>
+12, 7, 16, 10, 10, 14, 10, 16, 13, 15, 15, 7, 10, 14, 12, 4, 11,<br/>
+10, 8, 12, 9, 12, 10, 12, 9, 12, 11, 3, 6, 9, 10, 13, 10, 7, 8, 19,<br/>
+10, 10, 11, 3, 7, 5, 10, 11, 8, 10, 4, 9, 3, 6, 7, 9, 7, 6, 9, 4,<br/>
+7, 8, 8, 9, 8, 8, 11, 12, 11, 8, 14, 7, 8, 8, 8, 13, 5, 11, 9, 7,<br/>
+8, 9, 10, 8, 12, 8, 5, 9, 14, 9, 13, 8, 8, 8, 12, 6, 8, 9, 6, 14,<br/>
+11, 23, 12, 20, 8, 6, 3, 10, 13, 8, 6, 11, 5, 7, 9, 6, 9, 8, 9, 10,<br/>
+8, 13, 9, 8, 12, 13, 12, 12, 10, 8, 8, 14, 6, 9, 15, 9, 10, 10, 6,<br/>
+10, 9, 12, 14, 7, 12, 7, 11, 12, 8, 12, 7, 16, 16, 10, 7, 16, 10,<br/>
+11, 6, 5, 5, 8, 10, 17, 17, 14, 11, 9, 6, 10, 5, 10, 8, 12, 10, 11,<br/>
+10, 5, 8, 7, 6, 11, 13, 9, 8, 11, 14, 14, 15, 9, 15, 12, 11, 9, 9,<br/>
+9, 10, 7, 15, 16, 9, 8, 9, 10, 9, 11, 9, 7, 5, 6, 12, 9, 12, 7, 9,<br/>
+10, 6, 8, 5, 8, 13, 10, 12, 9, 15, 8, 15, 12,<br/>
+8, 8, 11, 7, 4, 7, 4, 7, 9, 6, 12, 12, 8, 6, 4, 8, 13, 9, 7, 11, 7,<br/>
+6, 8, 10, 7, 12, 10, 11, 10, 12, 13, 11, 10, 9, 4, 9, 12, 11, 16,<br/>
+15, 17, 9, 11, 12, 13, 10, 13, 9, 11, 6, 9, 12, 17, 9, 12, 6, 13,<br/>
+10, 15, 5, 12, 11, 10, 11, 6, 10, 5, 6, 9, 9, 9, 8, 11, 13, 9, 11,<br/>
+17, 9, 6, 4, 10, 8, 12, 16, 8, 11, 5, 6, 11, 6, 13, 15, 10, 14,<br/>
+6, 5, 9, 16, 4, 7, 10, 11, 12, 6, 7, 12, 13, 20, 12, 3, 9, 10, 6,<br/>
+7, 13, 6, 9, 2, 10, 3, 13, 7, 16, 8, 6, 11, 8, 11, 9, 11, 11, 4, 5,<br/>
+9, 7, 7, 7, 10, 6, 14, 9, 6, 8, 10, 5, 9, 12, 10, 5, 10, 11, 15, 6,<br/>
+9, 8, 13, 7, 10, 7, 6, 11, 7, 13, 10, 8, 8, 6, 12, 9, 11, 9, 14,<br/>
+12, 8, 10, 13, 9, 11, 11, 9, 14, 13, 12, 9, 4, 13, 15, 6,<br/>
+10, 10, 9, 8, 11, 12, 10, 8, 15, 9, 9, 10, 6, 19, 12, 10, 9, 6, 6,<br/>
+13, 8, 15, 12, 17, 12, 10, 6, 8, 9, 9, 9, 20, 12, 11, 11, 8, 11, 9,<br/>
+7, 9, 16, 9, 13, 11, 14, 10, 10, 5, 12, 12, 11, 9, 11, 12, 6, 14,<br/>
+7, 5, 10, 8, 11, 13, 14, 9, 9, 13, 8, 7, 17, 7, 9, 10, 4, 9, 9, 8,<br/>
+3, 12, 4, 8, 4, 9, 18, 10, 13, 4, 13, 7, 13, 10, 13, 7, 10, 10,<br/>
+6, 7, 9, 14, 8, 13, 12, 16, 8, 11, 14, 13, 8, 4, 19, 12, 11, 14,<br/>
+14, 12, 16, 8, 10, 13, 11, 10, 8, 9, 12, 12, 7, 5, 7, 9, 3, 7, 2,<br/>
+10, 11, 11, 5, 6, 13, 8, 12, 8, 17, 8, 8, 10, 8, 8, 11, 7, 8, 9, 9,<br/>
+8, 14, 7, 11, 4, 8, 11, 15, 13, 10, 5, 11, 8, 10, 10, 12, 10, 10,<br/>
+11, 8, 10, 15, 23, 7, 11, 10, 17, 9, 6, 6, 9, 7, 11, 9, 6, 7, 10,<br/>
+9, 12, 10, 9, 10, 12, 8, 5, 9, 4, 12, 13, 8, 12, 5, 12, 11, 7, 9,<br/>
+9, 11, 14, 17, 6, 7, 4, 8, 6, 9, 10, 15, 8, 8, 9, 12, 15, 14, 9, 7,<br/>
+9, 5, 12, 7, 8, 9, 10, 8, 11, 9, 10, 7, 7, 8, 10, 4, 11, 7, 3, 6,<br/>
+11, 9, 10, 13, 8, 14, 7, 12, 6, 9, 9, 13, 10, 7, 13, 8, 7, 10, 12,<br/>
+6, 12, 7, 10, 8, 11, 7, 7, 3, 11, 8, 13, 12, 9, 13, 11,<br/>
+12, 12, 12, 8, 8, 10, 7, 9, 6, 13, 12, 8, 8, 12, 14, 12, 14, 11,<br/>
+10, 7, 13, 13, 11, 9, 8, 16, 12, 5, 15, 14, 12, 9, 16, 12, 9, 13,<br/>
+11, 12, 10, 11, 8, 10, 10, 10, 7, 7, 6, 8, 9, 13, 10, 10, 11, 5,<br/>
+13, 18, 16, 15, 11, 17, 9, 16, 6, 9, 8, 12, 13, 7, 9, 11, 11, 15,<br/>
+16, 10, 10, 13, 11, 7, 7, 15, 5, 10, 9, 6, 10, 7, 5, 7, 10, 4, 7,<br/>
+12, 8, 9,<br/>
+12, 5, 11, 7, 8, 2, 14, 10, 9, 12, 10, 7, 18, 13, 8, 10, 8, 11, 11,<br/>
+12, 10, 9, 8, 13, 10, 11, 13, 7, 7, 11, 12, 12, 9, 10, 15, 11, 14,<br/>
+7, 16, 14, 5, 15, 2, 14, 17, 14, 10, 6, 12, 10, 6, 11, 12, 8, 17,<br/>
+16, 9, 7, 20, 11, 15, 10, 7, 8, 9, 11, 13, 13, 10, 7, 11, 10, 7,<br/>
+10, 8, 11, 5, 5, 13, 11, 14, 12, 13, 10, 6, 15, 10, 9, 4, 5, 11, 8,<br/>
+11, 16,<br/>
+11, 8, 8, 7, 13, 9, 12, 15, 14, 8, 7, 5, 11, 7, 8, 11, 7, 8, 12,<br/>
+19, 13, 21, 13, 10, 11, 16, 12, 8, 7, 15, 7, 6, 11, 8, 10, 15, 12,<br/>
+12, 10, 12, 9, 11, 13, 11, 9, 10, 9, 13, 7, 7, 11, 11, 7, 8, 6, 4,<br/>
+7, 7, 6, 11, 17, 8, 11, 13, 14, 14, 13, 12, 9, 9, 9, 6, 11, 7, 8,<br/>
+9, 3, 9, 14, 6, 10, 6, 7, 8, 6, 9, 15, 14, 12, 13, 14, 11, 14, 14,<br/>
+13, 6, 9, 8, 8, 6, 10, 11, 8, 13, 4, 5, 10, 5, 8, 9, 12, 14, 9, 3,<br/>
+8, 8, 11, 14, 15, 13, 7, 9, 12, 14, 7, 9, 9, 12, 8, 12, 3, 7, 5,<br/>
+11, 13, 17, 13, 13, 11, 11, 8, 11, 15, 19, 17, 9, 11, 8, 6, 10, 8,<br/>
+8, 14, 11, 12, 12, 10, 11, 11, 7, 9, 10, 12, 9, 8, 11, 13, 17, 9,<br/>
+12, 8, 7, 14, 5, 5, 8, 5, 11, 10, 9, 8, 16, 8, 11, 6, 8, 13, 13,<br/>
+14, 19, 14, 14, 16, 15, 20, 8, 5, 10, 15, 16, 8, 13, 13, 8, 11, 6,<br/>
+9, 8, 7, 7, 8, 5, 13, 14, 13, 12, 14, 4, 5, 13, 8, 16, 10, 9, 7, 9,<br/>
+6, 9, 7, 6, 2, 5, 9, 8, 9, 7, 10, 22, 9, 10, 9, 8, 11, 8, 10, 4,<br/>
+14, 10, 8, 16, 10, 8, 5, 7, 7, 10, 13, 9, 13, 14, 8, 6, 15, 15, 11,<br/>
+8, 10, 14, 5, 7, 10, 10, 19, 11, 15, 15, 10, 11, 9, 8, 16, 5,<br/>
+8, 8, 4, 7, 9, 7, 10, 9, 6, 7, 5, 7, 9, 3, 13, 9, 8, 9, 17, 20, 10,<br/>
+10, 8, 9, 8, 18, 7, 11, 7, 11, 9, 8, 8, 8, 12, 8, 11, 12, 11, 12,<br/>
+9, 19, 15, 11, 15, 9, 10, 7, 9, 6, 8, 10, 16, 9, 7, 8, 7, 9, 10,<br/>
+12, 8, 8, 9, 11, 14, 12, 10, 10, 8, 7, 12, 9, 10, 8, 11, 15, 12,<br/>
+13, 12, 13, 16, 16, 8, 13, 11, 13, 8, 9, 21, 7, 8, 15, 12, 9,<br/>
+11, 12, 10, 5, 4, 12, 15, 7, 20, 15, 11, 4, 12, 15, 14, 16, 11, 14,<br/>
+16, 9, 13, 8, 9, 13, 6, 8, 8, 11, 5, 8, 10, 7, 9, 8, 8, 11, 11, 10,<br/>
+14, 8, 11, 10, 5, 12, 4, 10, 12, 11, 13, 10, 6, 10, 12, 10, 14, 19,<br/>
+18, 12, 12, 10, 11, 8, 2, 10, 14, 9, 7, 8, 12, 8, 8, 11, 11, 10, 6,<br/>
+14, 8, 6, 11, 10, 6, 3, 6, 7, 9, 9, 16, 4, 6, 7, 7, 8, 5, 11,<br/>
+9, 9, 9, 6, 8, 10, 3, 6, 13, 5, 12, 11, 16, 10, 10, 9, 15, 13, 8,<br/>
+15, 11, 12, 4, 14, 8, 7, 12, 7, 14, 14, 12, 7, 16, 14, 14, 10, 10,<br/>
+17, 6, 8, 5, 16, 15, 12, 10, 9, 10, 4, 8, 5, 8, 9, 9, 9, 9, 10, 12,<br/>
+13, 7, 15, 12, 13, 7, 8, 9, 9, 10, 10, 11, 16, 12, 12, 11, 8, 10,<br/>
+6, 12, 7, 9, 5, 7, 11, 7, 5, 9, 8, 12, 4, 11, 6, 11, 8, 7, 11,<br/>
+8, 11, 17, 15, 5, 11, 23, 6, 16, 10, 6, 11, 10, 4, 8, 4, 10, 8, 16,<br/>
+7, 13, 14, 12, 11, 12, 13, 12, 16, 5, 9, 22, 20, 20, 20, 5, 9, 7,<br/>
+9, 12, 10, 4, 4, 2, 7, 7, 6, 4, 3, 7, 6, 5, 4, 4, 6, 9, 13, 9, 16,<br/>
+14, 13, 10, 9, 4, 12, 9, 6, 9, 20, 16, 17, 6, 10, 8, 6, 2, 15, 8,<br/>
+6, 15, 13, 12, 7, 10, 8, 10, 15, 9, 11, 13, 17, 13, 14, 3, 8,<br/>
+6, 12, 10, 13, 8, 12, 12, 6, 12, 13, 6, 10, 12, 14, 10, 9, 6, 8, 7,<br/>
+7, 13, 11, 13, 12, 10, 9, 8, 7, 3, 7, 14, 8, 5, 8, 16, 17, 16, 12,<br/>
+6, 10, 15, 14, 6, 11, 12, 10, 3, 8, 14, 11, 10, 12, 10, 6, 3, 14,<br/>
+4, 10, 7, 8, 11, 11, 11, 6, 8, 11, 13, 10, 13, 10, 7, 6, 10, 5, 8,<br/>
+7, 7, 11, 10, 8, 9, 7, 8, 11, 9, 8, 13, 11, 7, 5, 12, 9, 4, 11,<br/>
+9, 11, 12, 9, 5, 6, 5, 9, 9, 12, 8, 3, 8, 2, 5, 9, 7, 4, 9, 9, 8,<br/>
+7, 5, 5, 8, 9, 8, 8, 6, 5, 3, 5, 9, 8, 9, 14, 10, 8, 9, 13, 16, 9,<br/>
+5, 8, 12, 8, 4, 5, 9, 9, 8, 8, 6, 4, 9, 6, 7, 11, 11, 8, 14, 11,<br/>
+15, 8, 11, 10, 7, 13, 8, 12, 11, 12, 4, 12, 11, 15, 16, 12, 17, 13,<br/>
+13, 12, 13, 12, 5, 8, 9, 7, 6, 9, 14, 11, 13, 14,<br/>
+10, 8, 9, 14, 10, 5, 5, 10, 9, 17, 4, 11, 10, 4, 13, 12, 7, 17, 9,<br/>
+12, 9, 11, 10, 9, 12, 15, 15, 9, 7, 5, 5, 6, 13, 6, 13, 5, 7, 6, 8,<br/>
+3, 8, 10, 8, 10, 9, 7, 6, 9, 12, 15, 16, 14, 7, 12, 9, 10, 10, 12,<br/>
+14, 13, 13, 11, 7, 8, 14, 13, 14, 9, 11, 11, 10, 21, 13, 6, 17, 12,<br/>
+14, 10, 6, 10, 10, 13, 11, 10, 14, 11, 10, 12, 8, 13, 5, 5, 6, 12,<br/>
+16, 9, 17, 15, 9, 8, 8, 5, 10, 11, 4, 8, 7, 7, 13, 8, 15, 13, 7,<br/>
+17, 13, 15, 14, 10, 8, 12, 10, 14, 11, 5, 9, 6, 13, 13, 11, 12, 15,<br/>
+10, 16, 10, 15, 11, 15, 10, 11, 10, 13, 10, 11, 10, 9, 11, 10, 5,<br/>
+10, 10, 18, 13, 10, 13, 11, 10, 15, 12, 12, 15, 16, 12, 7, 12, 17,<br/>
+11, 10, 9, 8, 4, 11, 13, 5, 11, 9, 14, 12, 9, 7, 8, 11, 13, 9, 10,<br/>
+8, 4, 7, 9,<br/>
+5, 6, 11, 9, 9, 9, 12, 10, 10, 13, 17, 6, 11, 7, 12, 11, 10, 12, 9,<br/>
+12, 11, 7, 5, 10, 5, 7, 9, 8, 10, 10, 10, 11, 3, 6, 8, 12, 6, 11,<br/>
+13, 13, 13, 14, 9, 7, 4, 17, 8, 6, 11, 10, 7, 6, 8, 12, 7, 8, 12,<br/>
+9, 9, 12, 9, 9, 4, 10, 9, 5, 15, 9, 12, 8, 10, 3, 11, 7, 13, 10,<br/>
+11, 12, 11, 8, 11, 3, 12, 7, 4, 3, 8, 6, 8, 8, 11, 7, 6, 9,<br/>
+20, 13, 6, 4, 7, 10, 7, 11, 11, 4, 14, 11, 7, 11, 8, 6, 6, 7, 7, 5,<br/>
+14, 8, 9, 9, 12, 17, 7, 12, 11, 11, 15, 3, 14, 12, 10, 4, 9, 7, 7,<br/>
+14, 10, 6, 13, 10, 8, 9, 13, 10, 12, 7, 14, 8, 12, 7, 7, 7, 9, 4,<br/>
+6, 9, 9, 4, 7, 11, 7, 7, 4, 8, 4, 10, 4, 14, 6, 9, 7, 5, 13, 11, 8,<br/>
+4, 5, 10, 9, 8, 14, 8, 6, 11, 8, 12, 15, 6, 13, 10,<br/>
+12, 10, 7, 11, 15, 3, 11, 14, 11, 13, 6, 12, 17, 11, 10, 3, 13, 12,<br/>
+11, 9, 7, 12, 6, 8, 15, 9, 7, 17, 14, 13, 9, 8, 9, 3, 12, 10, 6,<br/>
+11, 13, 6, 5, 14, 6, 9, 8, 11, 11, 7, 9, 8, 13, 9, 9, 8, 13, 7, 13,<br/>
+11, 12, 9, 10, 8, 8, 9, 11, 22, 9, 15, 17, 12, 3, 12, 10, 8, 13, 9,<br/>
+8, 9, 9, 15, 13, 6, 11, 11, 12, 15, 9, 10, 18, 12, 10, 10, 11, 10,<br/>
+3, 7, 10, 7, 11, 10, 10, 13, 8, 13, 15, 15, 6, 9, 13, 6, 11, 8, 11,<br/>
+5, 11, 9, 19, 16, 8, 8, 12, 10, 16, 7, 12, 8, 7, 13, 7, 4, 9, 11,<br/>
+9, 13, 12, 12, 6, 6, 9, 7, 6, 6, 16, 8, 7, 8, 8, 5, 4, 10, 6, 7,<br/>
+12, 14, 6, 9, 10, 6, 13, 12, 7, 10, 10, 14, 6, 14, 11, 14, 9, 10,<br/>
+6, 13, 11, 9, 6, 7, 10, 9, 12, 12, 11, 11, 7, 12, 9, 11, 11, 5,<br/>
+9, 19, 10, 9, 13, 16, 8, 5, 11, 6, 9, 14, 12, 6, 8, 6, 6, 6, 10, 6,<br/>
+5, 5, 9, 6, 6, 8, 9, 10, 7, 3, 7, 4, 10, 11, 13, 11, 12, 9, 6, 6,<br/>
+11, 9, 11, 10, 11, 10, 7, 9, 12, 8, 7, 7, 15, 11, 8, 8, 8, 11, 11,<br/>
+9, 14, 10, 12, 16, 6, 9, 12, 10, 9, 12, 10, 11, 10, 9, 5, 10, 10,<br/>
+7, 6, 8, 8, 6, 9, 6, 10, 6, 11, 9, 10, 14, 16, 13, 7, 14,<br/>
+13, 6, 13, 11, 12, 9, 9, 10, 9, 9, 20, 12, 15, 8, 6, 11, 7, 3, 6,<br/>
+11, 5, 5, 6, 12, 8, 11, 1, 12, 7, 12, 11, 8, 6, 6, 13, 6, 12, 11,<br/>
+5, 10, 14, 7, 8, 9, 18, 12, 9, 10, 3, 1, 7, 4, 4, 7, 8, 7, 6, 3, 7,<br/>
+17, 11, 13, 9, 6, 13, 13, 15, 4, 3, 10, 13, 8, 5, 10, 7, 6, 17, 11,<br/>
+8, 9, 9, 6, 10, 9, 6, 8, 7, 11, 11, 11, 7, 4, 4, 11,<br/>
+5, 8, 15, 11, 18, 7, 14, 10, 11, 11, 9, 14, 7, 17, 9, 15, 13, 12,<br/>
+9, 9, 8, 7, 17, 10, 11, 13, 14, 13, 8, 8, 10, 5, 11, 9, 5, 9, 6,<br/>
+11, 7, 4, 5, 7, 10, 7, 8, 12, 7, 6, 4, 5, 7, 12, 9, 2, 5, 6, 11, 3,<br/>
+8, 13, 13, 13, 14, 7, 9, 12, 8, 12, 12, 11, 11, 4, 10, 8, 3, 6, 9,<br/>
+6, 9, 6, 5, 11, 6, 8, 6, 12, 12, 10, 12, 13, 11, 9, 8, 13,<br/>
+10, 12, 12, 10, 15, 5, 10, 11, 10, 4, 9, 10, 10, 12, 14, 7, 7, 10,<br/>
+13, 13, 12, 7, 8, 14, 9, 9, 4, 6, 12, 11, 9, 8, 12, 4, 10, 10, 10,<br/>
+4, 9, 4, 9, 4, 7, 15, 11, 10, 13, 5, 5, 10, 6, 10, 9, 7, 10, 10, 6,<br/>
+6, 9, 19, 12, 16, 10, 10, 12, 14, 17, 12, 19, 8, 6, 16, 9, 20, 16,<br/>
+10, 7, 7, 17, 8, 8, 6, 8, 10, 9, 15, 15, 12, 16, 4, 12, 12, 5, 5,<br/>
+11, 8, 9, 9, 14, 8, 5, 9, 7, 14, 10, 6, 10, 10, 14, 18, 9, 13, 11,<br/>
+8, 10, 8, 14, 11, 10, 22, 9, 5, 9, 10, 12, 11, 15, 11, 14, 14, 7,<br/>
+12, 10, 7, 3, 7, 8, 5, 8, 16, 13, 8, 9, 7, 8, 9, 13, 13, 6, 14, 5,<br/>
+14, 7, 10, 12, 16, 8, 13, 14, 7, 10, 9, 13, 10, 13, 10, 16, 6, 7,<br/>
+8, 8, 10, 7, 15, 10, 15, 6, 13, 9, 11, 8, 9, 6, 8, 16, 9, 5, 9,<br/>
+9, 10, 8, 7, 6, 8, 4, 7, 14, 8, 8, 10, 5, 3, 8, 11, 8, 12, 12, 6,<br/>
+10, 8, 7, 9, 4, 11, 5, 6, 7, 7, 10, 11, 6, 10, 13, 8, 9, 8, 12, 10,<br/>
+13, 8, 8, 11, 12, 8, 11, 4, 9, 8, 9, 10, 8, 9, 8, 9, 6, 6, 6, 8, 6,<br/>
+9, 7, 12, 9, 7, 8, 8, 10, 8, 9, 17, 10, 10, 12, 6, 11, 10, 8, 10,<br/>
+6, 10, 12, 8, 17, 15, 5, 11, 9, 7, 11, 8, 12, 12,<br/>
+7, 8, 9, 8, 7, 4, 9, 4, 9, 8, 15, 14, 15, 10, 6, 12, 6, 15, 6, 7,<br/>
+12, 13, 9, 14, 7, 11, 10, 10, 10, 8, 8, 10, 12, 8, 10, 11, 11, 7,<br/>
+9, 9, 9, 10, 9, 12, 11, 7, 12, 5, 9, 13, 3, 6, 11, 6, 18, 12, 15,<br/>
+8, 11, 9, 7, 7, 7, 9, 12, 10, 7, 8, 11, 9, 7, 7, 8, 10, 20, 16, 15,<br/>
+12, 13, 12, 15, 9, 5, 7, 9, 11, 7, 7, 10, 0, 0, 0, 0, 0,<br/>
+3, 3, 3, 4, 4, 4, 5, 6, 6, 10, 10, 16, 1, 8, 1, 2, 3, 4, 4, 5, 5,<br/>
+6, 9, 11, 14, 14, 19, 1, 8, 14, 2, 6, 4, 7, 7, 11, 14, 4, 6, 10,<br/>
+11, 12, 14, 15, 16, 2, 5, 8, 11, 11, 15, 8, 7, 2, 4, 6, 7, 8, 8, 8,<br/>
+9, 10, 10, 10, 13, 13, 14, 14, 15, 16, 2, 8, 2, 4, 4, 4, 5, 5, 5,<br/>
+5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7,<br/>
+7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9,<br/>
+9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 11,<br/>
+11, 11, 11, 11, 11, 11, 12, 12, 12, 13, 14, 14, 14, 14, 14, 14, 15,<br/>
+15, 5, 6, 7, 7, 9, 17, 6, 8, 4, 12, 16, 17, 18, 21, 2, 9, 9, 11, 6,<br/>
+6, 7, 2, 8, 10, 10, 11, 12, 12, 12, 13, 16, 19, 19, 2, 6, 8, 8,<br/>
+10, 2, 10, 10, 2, 5, 5, 5, 6, 6, 6, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8,<br/>
+8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 11,<br/>
+11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 12, 12, 12, 12, 12, 13, 13,<br/>
+14, 14, 14, 15, 15, 19, 2, 8, 2, 5, 5, 6, 6, 7, 7, 7, 7, 8, 9, 9,<br/>
+10, 10, 10, 11, 11, 11, 16, 5, 5, 5, 5, 6, 6, 7, 7, 7, 7,<br/>
+7, 7, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 10, 10, 11, 11, 13, 13,<br/>
+13, 14, 14, 16, 19, 17, 5, 7, 5, 7, 7, 8, 10, 10, 11, 15, 9, 17,<br/>
+20, 2, 2, 6, 10, 2, 5, 10, 12, 7, 9, 9, 14, 16, 16, 17, 6, 6, 6, 6,<br/>
+6, 6, 6, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9,<br/>
+9, 9, 9, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11,<br/>
+11, 11, 11, 11, 11, 12, 12, 12, 12, 13, 13, 14, 14, 14, 15, 20, 21,<br/>
+22, 3, 5, 5, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,<br/>
+7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,<br/>
+8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,<br/>
+9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,<br/>
+9, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,<br/>
+10, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11,<br/>
+11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,<br/>
+11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,<br/>
+12, 12, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13,<br/>
+13, 14, 14, 14, 14, 14, 14, 14,<br/>
+14, 14, 14, 14, 15, 15, 15, 15, 15, 15, 15, 15, 15, 16, 16, 16, 16,<br/>
+16, 16, 16, 16, 16, 17, 17, 17, 17, 17, 18, 19, 19, 19, 20, 20, 22,<br/>
+3, 9, 6, 7, 9, 9, 10, 10, 11, 3, 5, 5, 12, 3, 6, 7, 8, 8, 8, 8, 9,<br/>
+9, 9, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,<br/>
+12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 13, 13, 13, 13, 13, 13, 13,<br/>
+13, 14, 14, 14, 14,<br/>
+14, 15, 15, 15, 15, 16, 16, 16, 17, 17, 19, 23, 25, 3, 7, 8, 12, 5,<br/>
+5, 5, 5, 5, 5, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8,<br/>
+8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,<br/>
+9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10,<br/>
+10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,<br/>
+11, 11, 11, 11, 11, 11, 11, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12,<br/>
+12, 12, 12, 12, 12, 12, 12, 12, 13, 13, 13, 13, 13, 13, 13, 13, 13,<br/>
+13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 14, 14, 14, 14, 14,<br/>
+14, 14, 14, 14, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 16, 16,<br/>
+16, 16, 16, 16, 17, 17, 19, 25, 3, 6, 6, 7, 7, 8, 9, 10, 11, 11,<br/>
+16, 7, 8, 8, 8, 10, 11, 11,<br/>
+11, 12, 14, 14, 15, 15, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8,<br/>
+8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 11, 11, 11, 11, 11, 11,<br/>
+11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 13, 13, 13, 14, 15, 15,<br/>
+17, 17, 19, 3, 7, 8, 9, 9, 9, 10, 11, 11, 12, 13, 15, 16, 24, 3, 3,<br/>
+5, 6, 6, 6, 7, 7, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10,<br/>
+10, 11, 11, 11, 11, 11, 11, 11, 12, 12, 12, 12, 12, 12, 14, 14, 15,<br/>
+15, 16, 17, 20, 6, 14, 12, 14, 3, 3, 6, 7, 7, 7, 7, 7, 8, 9, 10,<br/>
+10, 11, 12, 12, 13, 13, 14, 15, 15, 25, 5, 7, 7, 8, 9, 9, 11, 11,<br/>
+11, 11, 12, 13, 14, 15, 16, 16, 17, 3, 5, 6, 6, 7, 7, 7, 7, 7, 7,<br/>
+7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9,<br/>
+9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11,<br/>
+11, 12, 12, 12, 12, 12, 12, 12, 13, 13, 14, 15, 15, 15, 16, 16, 18,<br/>
+8, 17, 4, 6, 7, 7, 7, 7, 9, 9, 10, 10, 10, 11, 11, 11, 11, 11, 11,<br/>
+12, 12, 13, 13, 13, 14, 3, 4, 8, 3, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7,<br/>
+7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,<br/>
+9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10, 10, 10,<br/>
+10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11,<br/>
+11, 11, 11, 11, 11, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,<br/>
+12, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13,<br/>
+13, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 15, 15,<br/>
+15, 15, 15, 15, 16,<br/>
+16, 16, 16, 16, 16, 17, 17, 17, 17, 17, 19, 19, 19, 20, 20, 21, 24,<br/>
+3, 5, 8, 8, 9, 10, 12, 13, 14, 14, 15, 16, 16, 17, 17, 3, 7, 7, 8,<br/>
+8, 8, 8, 8, 8, 8, 9, 9, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 12,<br/>
+12, 12, 12, 13, 13, 13, 13, 15, 15, 16, 16, 17, 17, 18, 3, 11, 9,<br/>
+12, 5, 9, 10, 10, 12, 14, 15, 21, 8, 8, 9, 11, 12, 22, 3, 6, 6, 7,<br/>
+7, 7, 7,<br/>
+7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10,<br/>
+10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 12, 12, 12, 12, 13, 13,<br/>
+13, 13, 13, 13, 14, 14, 14, 14, 14, 14, 14, 15, 16, 16, 17, 17, 20,<br/>
+5, 9, 7, 8, 12, 3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 10, 11, 11,<br/>
+11, 11, 12, 12, 13, 13, 13, 14, 14, 15, 19, 20, 3, 6, 6, 6, 6, 6,<br/>
+7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 10, 10, 10, 11, 11, 11, 11,<br/>
+11, 11, 11, 11, 11, 11, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,<br/>
+13, 13, 13, 13, 13, 13, 13, 13, 14, 14, 14, 14, 14, 15, 15, 15, 16,<br/>
+16, 16, 16, 19, 3, 15, 3, 8, 10, 6, 6, 8, 8, 8, 9, 9, 9, 9, 9, 9,<br/>
+9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 11, 12, 12, 12, 12, 12,<br/>
+12, 12, 12,<br/>
+12, 12, 13, 13, 13, 13, 13, 14, 14, 15, 15, 15, 15, 15, 15, 15, 16,<br/>
+17, 17, 17, 18, 20, 20, 13, 13, 14, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8,<br/>
+8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,<br/>
+9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,<br/>
+10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 12, 12, 12, 12,<br/>
+12,<br/>
+12, 12, 12, 12, 12, 12, 12, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13,<br/>
+13, 13, 13, 13, 13, 13, 13, 13, 13, 14, 14, 14, 14, 14, 14, 14, 14,<br/>
+14, 14, 14, 14, 14, 15, 15, 15, 15, 15, 15, 15, 15, 16, 16, 16, 16,<br/>
+16, 16, 16, 16, 16, 16, 16, 17, 17, 17, 17, 18, 13, 14, 8, 9, 9, 9,<br/>
+11, 11, 11, 12, 12, 14, 16, 7, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10,<br/>
+10, 10, 10, 11, 12, 12,<br/>
+12, 12, 13, 15, 16, 10, 5, 8, 11, 12, 12, 13, 13, 13, 14, 14, 8, 9,<br/>
+12, 16, 16, 17, 4, 6, 6, 7, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9,<br/>
+10, 10, 10, 10, 10, 10, 11, 11, 12, 13, 13, 14, 14, 16, 18, 18, 20,<br/>
+21, 9, 9, 9, 9, 10, 10, 10, 10, 11, 11, 11, 12, 12, 14, 9, 10, 11,<br/>
+12, 13, 14, 15, 15, 9, 13, 6, 8, 9, 11, 11, 12, 12, 12, 13, 14, 10,<br/>
+11, 12,<br/>
+14, 17, 10, 10, 12, 12, 12, 13, 15, 16, 16, 22, 5, 6, 7, 7, 9, 10,<br/>
+10, 11, 13, 4, 11, 13, 12, 13, 15, 9, 15, 6, 7, 7, 7, 8, 8, 8, 8,<br/>
+8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10,<br/>
+10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 12, 12, 12, 12, 12, 12,<br/>
+12, 13, 13, 13, 13, 13, 13, 13, 13, 14, 14, 14, 15, 15, 16, 17, 17,<br/>
+17, 17,<br/>
+17, 16, 7, 11, 12, 13, 13, 16, 9, 9, 12, 13, 16, 16, 4, 13, 13, 17,<br/>
+12, 15, 16, 8, 10, 10, 10, 11, 11, 13, 14, 7, 8, 8, 8, 9, 9, 9, 9,<br/>
+9, 10, 10, 11, 11, 11, 12, 12, 13, 13, 13, 13, 13, 13, 13, 13, 14,<br/>
+15, 15, 15, 15, 16, 16, 16, 18, 21, 30, 4, 11, 13, 16, 8, 8, 9, 11,<br/>
+12, 4, 7, 8, 8, 9, 9, 9, 9, 9, 9, 9, 10, 10, 12, 12, 13, 14, 16,<br/>
+21, 7, 7,<br/>
+9, 10, 10, 10, 10, 10, 10, 11, 13, 13, 14, 16, 16, 17, 17, 24, 4,<br/>
+6, 8, 9, 12, 7, 8, 8, 9, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10,<br/>
+10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 12, 13, 13, 13, 13,<br/>
+13, 14, 14, 14, 14, 14, 15, 15, 15, 16, 16, 17, 17, 18, 19, 18, 21,<br/>
+11, 12, 17, 19, 8, 9, 9, 9, 9, 9, 10, 10, 10, 11, 11, 11, 11, 12,<br/>
+12, 12, 12, 13, 13,<br/>
+13, 13, 14, 14, 14, 14, 15, 15, 16, 16, 16, 17, 18, 7, 8, 9, 9, 9,<br/>
+10, 12, 13, 17, 9, 10, 10, 12, 13, 14, 14, 16, 17, 17, 10, 16, 23,<br/>
+5, 6, 6, 7, 7, 7, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,<br/>
+10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,<br/>
+10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,<br/>
+11, 11, 11,<br/>
+11, 11, 11, 11, 11, 11, 11, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12,<br/>
+12, 12, 12, 12, 12, 12, 12, 12, 13, 13, 13, 13, 13, 13, 13, 13, 13,<br/>
+13, 13, 13, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 15, 15,<br/>
+15, 15, 15, 15, 15, 15, 16, 16, 16, 16, 16, 16, 16, 16, 17, 17, 17,<br/>
+17, 17, 17, 17, 17, 17, 17, 18, 18, 18, 19, 20, 14, 9, 12, 13, 9,<br/>
+9, 10, 10, 11, 12, 12, 12, 13, 13,<br/>
+15, 15, 16, 17, 18, 22, 9, 11, 12, 13, 17, 10, 11, 7, 7, 8, 9, 9,<br/>
+10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 12, 12, 12, 12, 12, 12,<br/>
+13, 13, 13, 13, 13, 14, 14, 14, 14, 14, 15, 15, 16, 16, 16, 17, 17,<br/>
+17, 17, 18, 18, 22, 5, 7, 7, 8, 8, 9, 9, 10, 10, 10, 10, 10, 10,<br/>
+10, 10, 11, 11, 12, 12, 12, 12, 12, 12, 13, 13, 13, 13, 13, 13, 13,<br/>
+14, 14, 14, 14, 14, 14, 14,<br/>
+15, 15, 15, 15, 16, 16, 16, 16, 16, 16, 16, 16, 17, 18, 18, 18, 18,<br/>
+21, 23, 11, 12, 8, 8, 9, 9, 10, 11, 13, 13, 14, 14, 14, 15, 5, 8,<br/>
+9, 9, 9, 9, 10, 11, 11, 11, 11, 12, 12, 12, 12, 13, 13, 13, 13, 13,<br/>
+13, 14, 14, 14, 14, 14, 15, 15, 16, 17, 19, 24, 5, 9, 11, 12, 9, 6,<br/>
+9, 10, 12, 12, 13, 14, 15, 15, 16, 16, 22, 12, 8, 11, 11, 11, 12,<br/>
+15, 16, 12, 9, 10, 10,<br/>
+12, 12, 12, 12, 13, 15, 15, 16, 16, 16, 18, 20, 21, 6, 10, 7, 8, 9,<br/>
+9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11,<br/>
+11, 11, 11, 11, 11, 11, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,<br/>
+12, 12, 13, 13, 13, 13, 13, 13, 13, 13, 14, 14, 14, 14, 14, 14, 14,<br/>
+14, 14, 14, 14, 14, 14, 14, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,<br/>
+15, 15, 15, 15, 16, 16, 16, 16,<br/>
+16, 16, 16, 16, 16, 16, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17,<br/>
+18, 18, 18, 18, 19, 19, 19, 19, 20, 21, 24, 26, 6, 14, 17, 17, 10,<br/>
+8, 9, 9, 9, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11,<br/>
+11, 11, 11, 12, 12, 12, 12, 12, 12, 13, 13, 13, 13, 13, 13, 14, 14,<br/>
+14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 15, 15, 15, 15, 16, 16, 16,<br/>
+16, 16, 17, 17, 17, 17, 17, 17,<br/>
+18, 18, 18, 19, 19, 19, 8, 9, 11, 12, 10, 10, 9, 9, 9, 10, 10, 10,<br/>
+10, 11, 11, 11, 11, 12, 13, 13, 14, 15, 17, 18, 19, 10, 10, 11, 13,<br/>
+13, 19, 11, 11, 13, 15, 15, 16, 9, 10, 10, 11, 11, 12, 12, 13, 14,<br/>
+14, 14, 15, 15, 15, 15, 15, 16, 18, 6, 15, 9, 11, 12, 14, 14, 15,<br/>
+15, 16, 17, 6, 12, 14, 14, 17, 25, 11, 19, 9, 12, 13, 13, 23, 11,<br/>
+15, 10, 11, 9, 10, 10, 10, 12,<br/>
+12, 12, 13, 13, 13, 14, 14, 14, 14, 14, 15, 15, 16, 16, 16, 17, 17,<br/>
+18, 19, 19, 19, 20, 20, 21, 7, 16, 10, 13, 14, 18, 18, 10, 10, 11,<br/>
+11, 11, 12, 12, 12, 12, 12, 12, 12, 12, 13, 13, 13, 13, 13, 13, 13,<br/>
+14, 14, 15, 15, 15, 15, 15, 15, 15, 15, 16, 16, 16, 16, 16, 16, 16,<br/>
+16, 17, 17, 17, 19, 19, 19, 19, 19, 20, 21, 22, 22, 23, 24, 7, 12,<br/>
+13, 13, 17, 17, 11, 11, 12, 12, 13,<br/>
+13, 14, 15, 13, 18, 12, 11, 12, 12, 14, 14, 16, 16, 16, 19, 19, 20,<br/>
+22, 10, 13, 13, 13, 14, 14, 15, 15, 17, 8, 12, 20, 8, 10, 10, 13,<br/>
+14, 18, 18, 14, 14, 15, 16, 17, 18, 18, 21, 24, 12, 12, 13, 13, 13,<br/>
+13, 13, 13, 13, 13, 14, 14, 14, 14, 14, 14, 14, 14, 15, 15, 15, 15,<br/>
+15, 15, 15, 15, 15, 15, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16,<br/>
+16, 17, 17, 17, 17, 17, 17, 17, 17,<br/>
+18, 18, 18, 18, 18, 19, 19, 19, 19, 19, 19, 20, 20, 20, 21, 14, 14,<br/>
+15, 15, 16, 18, 18, 18, 19, 19, 13, 13, 14, 14, 14, 15, 15, 17, 17,<br/>
+18, 18, 19, 19, 22, 14, 14, 15, 16, 16, 17, 19, 12, 15, 18, 22, 22,<br/>
+10, 13, 14, 15, 15, 16, 16, 16, 18, 19, 20, 23, 25, 14, 15, 17, 13,<br/>
+16, 16, 17, 19, 19, 21, 23, 17, 17, 17, 18, 18, 19, 20, 20, 20, 20,<br/>
+21, 17, 18, 20, 23, 23, 16, 17, 23<br/>
+]
+</code></pre></li>
+</ul>
+
+<p>链接:<a href="https://pan.baidu.com/s/1yV5E9NZcDOJUFemTda4Daw">https://pan.baidu.com/s/1yV5E9NZcDOJUFemTda4Daw</a>  密码:p1b6</p>
+
+<p>感谢：<a href="http://www.voidcn.com/article/p-cslrisvm-oc.html">C# 计算中文汉字笔画数</a></p>
+
+<p>感谢：<a href="http://www.voidcn.com/article/p-zenngese-qo.html">VBS计算汉字笔画</a></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2019/1/18</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15450161964215.html">
+                
+                  <h1>【精选】Mac 手动内存清理教程</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">一、查看内存占用情况</h2>
+
+<p><img src="http://upload-images.jianshu.io/upload_images/412206-4734b7ee4a571010.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"/></p>
+
+<h2 id="toc_1">二、管理内存</h2>
+
+<p><img src="http://upload-images.jianshu.io/upload_images/412206-fe84152bd070aca0.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"/></p>
+
+<h3 id="toc_2">1、废纸篓</h3>
+
+<p>清理非废纸篓的道理我就不废话了吧。</p>
+
+<h3 id="toc_3">2、清理文稿</h3>
+
+<p>按照大小排序 清理文件 优先清理大文件</p>
+
+<p><img src="http://upload-images.jianshu.io/upload_images/412206-a28b01c486d51b60.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"/></p>
+
+<p>如果你是小白，清理玩这些也就差不多了。<br/>
+如果你是开发者（Coder），那请您继续：</p>
+
+<h2 id="toc_4">三、清理隐藏文件夹 中的垃圾文件</h2>
+
+<h3 id="toc_5">1、【显示】or【隐藏】  隐藏文件夹</h3>
+
+<ul>
+<li>显示隐藏文件：</li>
+</ul>
+
+<pre><code class="language-text">defaults write com.apple.finder AppleShowAllFiles -boolean true ; killall Finder
+</code></pre>
+
+<ul>
+<li>隐藏 隐性文件：</li>
+</ul>
+
+<pre><code class="language-text">defaults write com.apple.finder AppleShowAllFiles -boolean false ; killall Finder
+</code></pre>
+
+<h3 id="toc_6">2、超级用户的文件清理</h3>
+
+<h4 id="toc_7">勾选☑️显示侧边栏上的磁盘 【硬盘】</h4>
+
+<p><img src="http://upload-images.jianshu.io/upload_images/412206-d0d31f21c6f6a87a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"/></p>
+
+<h4 id="toc_8">清理已卸载APP留下的痕迹</h4>
+
+<p>这里需要注意的是，确定已卸载的，没用到的APP痕迹清理掉，不要清理多了，否则会导致部分APP失效。<br/>
+比如：我想清理掉所有Adobe系列的APP 以及缓存。<br/>
+<img src="http://upload-images.jianshu.io/upload_images/412206-9cac391a841fff2f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"/></p>
+
+<h3 id="toc_9">1、Mac 当前用户环境清理</h3>
+
+<p>Finder 侧边栏找到你的当前账户：<br/>
+<img src="http://upload-images.jianshu.io/upload_images/412206-9e82f8b508a2fa1f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"/></p>
+
+<p>如果你是安卓开发者、或者混合开发者，请看这里：</p>
+
+<p><img src="http://upload-images.jianshu.io/upload_images/412206-a76ad6d57a292aaf.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="安卓SDK"/></p>
+
+<p><img src="http://upload-images.jianshu.io/upload_images/412206-51d793f73aa7f519.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="安卓SDK buildTool 版本支持"/></p>
+
+<p>SDK根据自己开发项目选择下载（如果你磁盘够用，那你可以随便下）。</p>
+
+<p>如果你是iOS开发者请看下一条：</p>
+
+<h3 id="toc_10">2、iOS开发者清理内容</h3>
+
+<p><code>/Libary(资源库)/Developer</code>   文件夹下</p>
+
+<h4 id="toc_11">清理模拟器上面安装APP的缓存文件</h4>
+
+<p><img src="http://upload-images.jianshu.io/upload_images/412206-e72cb97e3e14504c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="模拟器上APP的缓存文件 沙盒路径"/></p>
+
+<h4 id="toc_12">清理打包文件缓存</h4>
+
+<p><img src="http://upload-images.jianshu.io/upload_images/412206-a5ba95c90daab824.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Archive 打包发布APP 的临时文件"/></p>
+
+<h4 id="toc_13">清理支持设备系统版本</h4>
+
+<p><img src="http://upload-images.jianshu.io/upload_images/412206-6df62dc27ca8e1dd.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="支持的模拟器的系统版本 老版本的可以删除掉了"/></p>
+
+<h4 id="toc_14">清理老版本Xcode安装插件遗留</h4>
+
+<p><img src="http://upload-images.jianshu.io/upload_images/412206-d1a2332e70a3eef6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="只有Xcode老用户才会有这个吧"/></p>
+
+<h4 id="toc_15">清理那些只安装在当前用户权限下的APP缓存</h4>
+
+<p>在这里，通过APP的boundleID 大概的能推断出哪些是你自己可清理的APP缓存吧？</p>
+
+<p><img src="http://upload-images.jianshu.io/upload_images/412206-24de398150dfa0e4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="/资源库/Application Script"/></p>
+
+<p>清理 Application Support:<br/>
+这里根据自己情况看看哪些是自己不再需要的APP，遗留下来的垃圾文件，有选择性的清理下。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fy9owaimynj30de0c3wgg.jpg" alt="/资源库/Application Support"/></p>
+
+<h4 id="toc_16">清理环境缓存 （比如Jenkins）</h4>
+
+<p>如果你不想再使用Jenkins环境了（你可能还会有别的环境），那么这里可以清理掉了：<br/>
+<img src="http://upload-images.jianshu.io/upload_images/412206-fac3ca55a37edcd3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"/></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/12/17</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
@@ -1357,7 +1552,7 @@ NSString类型的文件路径转换为URL的时候，一定要用 <br/>
 
 
 
-
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/KaelLVLinda" title="Twitter">Twitter</a>
 <a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
 <a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
   <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
@@ -1388,6 +1583,8 @@ NSString类型的文件路径转换为URL的时候，一定要用 <br/>
             <a href="vue.html"><strong>Vue</strong></a>
         
             <a href="shell.html"><strong>shell</strong></a>
+        
+            <a href="%E7%BD%91%E7%BB%9C.html"><strong>网络</strong></a>
          
         </p>
 
@@ -1404,31 +1601,31 @@ NSString类型的文件路径转换为URL的时候，一定要用 <br/>
 	      
 		      
 			      <li class="post">
-			        <a href="15261167596297.html">OC 多线程之 GCD知识从基础到进阶 （1）</a>
+			        <a href="15523077857608.html">OC中枚举写法  以及 字符串枚举探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15257437237715.html">OC中的各种遍历</a>
+			        <a href="15522686353535.html">iOS 动画全解 (1)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15253400374602.html">多线程 之 NSThread</a>
+			        <a href="15501356584731.html">UITableView顶部空白的几种解决办法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15200726964422.html">iOS Block 知识点拾遗</a>
+			        <a href="15488351784332.html">Objective-C中的字符串类型枚举 探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15235286649865.html">音视频学习笔记 1</a>
+			        <a href="15409691048860.html">【Swift笔记】引用计数</a>
 			      </li>
 		     
 		  
@@ -1503,7 +1700,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 

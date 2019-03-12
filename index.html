@@ -122,6 +122,8 @@
             <li><a href="vue.html">Vue</a></li>
         
             <li><a href="shell.html">shell</a></li>
+        
+            <li><a href="%E7%BD%91%E7%BB%9C.html">网络</a></li>
          
 
       </ul>
@@ -144,70 +146,125 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="15261167596297.html">
+                <a class="clearlink" href="15523077857608.html">
                 
-                  <h1>OC 多线程之 GCD知识从基础到进阶 （1）</h1>
+                  <h1>OC中枚举写法  以及 字符串枚举探索</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2 id="toc_0">概念认知</h2>
+                        	<h2 id="toc_0">常见枚举写法</h2>
 
-<p>基本概念：</p>
+<h3 id="toc_1">C语言模式的枚举写法：enum</h3>
 
-<ul>
-<li><p>GCD 全称 (Grand Center Dispatch),翻译成通俗中文“牛逼的中心调度机制”</p></li>
-<li><p>线程：执行任务调度的最小单位</p></li>
-<li><p>任务：就是一段代码，GCD中就是block中的内容。执行任务有两种方式：同步执行（sync）和异步执行（async）。两者的主要区别是：是否等待队列的任务执行结束，以及是否具备开启新线程的能力</p></li>
-<li><p>队列：用来存放任务的线性结构，采用 FIFO（先进先出）的原则。</p></li>
-</ul>
+<pre><code class="language-text">typedef enum{
+    KLTypeRed = 1,
+    KLTypeGreen = 2,
+    KLTypeOrange = 3,
+} KLType;
+</code></pre>
 
+<h3 id="toc_2">普通【整型】枚举写法 ：NS_ENUM</h3>
 
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15261167596297.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/5/12</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
+<pre><code class="language-text">typedef NS_ENUM(NSUInteger, KLType) {
+    KLTypeRed = 1,
+    KLTypeGreen = 2,
+    KLTypeOrange = 3,
+};
+</code></pre>
 
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15257437237715.html">
-                
-                  <h1>OC中的各种遍历</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<blockquote>
-<p>iOS开发中我们经常遇到各种的数据处理，所以就会经常遇到数组遍历 和 字典遍历。但是不同的遍历方式，效率不同，并且还有不同的限制。</p>
-</blockquote>
+<h3 id="toc_3">位移枚举 ：NS_OPTIONS</h3>
 
-<p>首先把数据源准备好：</p>
+<pre><code class="language-text">typedef NS_OPTIONS(NSUInteger, KLType) {
+    KLTypeRed = 1 &lt;&lt; 0,
+    KLTypeGreen = 1 &lt;&lt; 1,
+    KLTypeOrange = 1 &lt;&lt; 2,
+};
 
-<pre><code>_dataSource = [NSMutableArray array];
-_dataDic = [NSMutableDictionary dictionary];
-for (int i=0; i&lt;5; i++) {
-    [_dataSource addObject:@(i)];
-    [_dataDic setObject:@(i) forKey:[NSString stringWithFormat:@&quot;我是第%d个Item&quot;,i]];
+</code></pre>
+
+<h2 id="toc_4">字符串类型枚举实现方式探索</h2>
+
+<h3 id="toc_5">基于普通枚举，定义C方法实现</h3>
+
+<pre><code class="language-text">// 先定义一个常见的枚举
+typedef NS_ENUM(NSUInteger, KLType) {
+    KLTypeRed = 1,
+    KLTypeGreen = 2,
+    KLTypeOrange = 3,
+};
+// 定义一个C方法，C方法就是通过枚举值匹配字符串
+NSString *KLTypeString(KLType status) {
+    switch (status) {
+        case KLTypeRed:
+            return @&quot;红色&quot;;
+        case KLTypeGreen:
+            return @&quot;绿色&quot;;
+        case KLTypeOrange:
+            return @&quot;橘色&quot;;
+        default:
+            return @&quot;&quot;;
+    }
 }
 </code></pre>
 
+<h3 id="toc_6">基于普通枚举，定义C数组，设置 枚举值为 index</h3>
+
+<pre><code class="language-text">// 先定义一个常见的枚举
+typedef NS_ENUM(NSUInteger, KLType) {
+    KLTypeRed = 1,
+    KLTypeGreen = 2,
+    KLTypeOrange = 3,
+};
+// 这个是 Map NSString * 类型的数组
+NSString *KLTypeStringMap[] = {
+    [KLTypeRed] = @&quot;红色&quot;,
+    [KLTypeGreen] = @&quot;绿色&quot;,
+    [KLTypeOrange] = @&quot;橘色&quot;
+};
+
+
+// 使用：
+KLTypeStringMap[KLTypeRed];// 枚举值
+</code></pre>
+
+<h3 id="toc_7">日常做法 宏定义</h3>
+
+<pre><code class="language-text">#define static NSString * const KLTypeStringRed = @&quot;红色&quot;;
+#define static NSString * const KLTypeStringGreen = @&quot;绿色&quot;;
+#define static NSString * const KLTypeStringOrange = @&quot;橘色&quot;;
+</code></pre>
+
+<h3 id="toc_8">定义一种新的数据类型</h3>
+
+<pre><code class="language-text">// 定义一个新的类型 是 NSSting * 类型 类型名字叫 KLTypeStr
+typedef NSString *KLTypeStr NS_STRING_ENUM;
+
+static KLTypeStr const KLTypeStringRed = @&quot;红色&quot;;
+static KLTypeStr const KLTypeStringGreen = @&quot;绿色&quot;;
+static KLTypeStr const KLTypeStringOrange = @&quot;橘色&quot;;
+</code></pre>
+
+<h3 id="toc_9">Apple官方的做法</h3>
+
+<pre><code class="language-text">.h 文件中 -------------
+typedef NSString *KLTypeStr NS_STRING_ENUM;
+
+FOUNDATION_EXPORT KLTypeStr const KLTypeStringRed;
+FOUNDATION_EXPORT KLTypeStr const KLTypeStringGreen;
+FOUNDATION_EXPORT KLTypeStr const KLTypeStringOrange;
+
+.m 文件中 --------------
+NSString * const KLTypeStringRed = @&quot;红色&quot;;
+NSString * const KLTypeStringGreen = @&quot;绿色&quot;;
+NSString * const KLTypeStringOrange = @&quot;橘色&quot;; 
+
+</code></pre>
+
+<blockquote>
+<p>比较的时候 <code>StringEnum1 == StringEnum2</code> 直接比较的是内存地址，效率会更高。<br/>
+相比会产生过多二进制文件的宏定义方式,假如宏定义比较多,建议用FOUNDATION_EXPORT。</p>
+</blockquote>
 
                         
                       </div>
@@ -215,8 +272,8 @@ for (int i=0; i&lt;5; i++) {
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15257437237715.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/5/8</span>
+                  
+                    <span class="date">2019/3/11</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
@@ -233,24 +290,1008 @@ for (int i=0; i&lt;5; i++) {
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15253400374602.html">
+                <a class="clearlink" href="15522686353535.html">
                 
-                  <h1>多线程 之 NSThread</h1>
+                  <h1>iOS 动画全解 (1)</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2 id="toc_0">基本使用</h2>
+                        	<h2 id="toc_0">iOS动画&quot;概述&quot;（瞎说一通）</h2>
 
-<h2 id="toc_1">基本知识点学习笔记</h2>
+<p>Apple 为开发者提供的视图动画框架有如下几种：</p>
 
 <ul>
-<li>新创建的线程放到了内存的<code>可调度线程池内</code></li>
-<li>线程关系：
-<img src="https://ws1.sinaimg.cn/large/006tKfTcly1fqyaf1gkuvj31gm0nmx2b.jpg" alt=""/></li>
+<li><code>UIKit</code>：高级别框架,允许程序员创建视图,窗口,按钮,和其他 UI 相关的控件。它也将低层的 API 组合到一个 易于使用的高级别 API 中。</li>
+<li><code>Quartz 2D</code>：运行内部的用于 iOS 画图的主引擎;UIKit 使用了 Quarz。 重点在画图。</li>
+<li><p><code>Core Graphics</code>(核心图层)：加载图片，绘制图片等的框架重点在图形图片的渲染。</p></li>
+<li><p><code>Core Animation</code>：iOS上的最基础的，应用最广泛的动画框架。（加载到CALayer上的动画）<br/>
+<code>Core Animation</code> 其实是一个令人误解的命名。你可能认为它只是用来做动画的，但实际上它是从一个叫做<code>Layer Kit</code>这么一个不怎么和动画有关的名字演变而来，所以做动画这只是<code>Core Animation</code>特性的冰山一角。 <code>Core Animation</code>是一个复合引擎，它的职责就是尽可能快地组合屏幕上不同的可视内容，这个内容是被分解成独立的图层，存储在一个叫做图层树的体系之中。于是这个树形成了<code>UIKit</code>以及在iOS应用程序当中你所能在屏幕上 看见的一切的基础。</p></li>
+</ul>
+
+<h2 id="toc_1">CALayer 和 UIView</h2>
+
+<h3 id="toc_2">CALayer</h3>
+
+<p><code>CALayer</code> 类在概念上和 <code>UIView</code> 类似，同样也是一些被层级关系树管理的矩形块，同样也可以包含一些内 容(像图片，文本或者背景色)，管理子图层的位置。它们有一些方法和属性用来做动画和变换。和 最 大的不同是<code>CALayer</code>不处理用户的交互。</p>
+
+<h3 id="toc_3">平行的层级关系</h3>
+
+<p>每一个<code>UIView</code>都有一个<code>CALayer</code>实例的图层属性，也就是所谓的<code>backing layer</code>，视图的职责就是创建并管理这个图层，以确保当子视图在层级关系中添加或者被移除的时候，他们关联的图层也同样对应在层级关系树当中有相同的操作。(可以理解为 UIViewController  和 VC.view的关系，只不过VC是UIView的管理调度者,UIView 是 CALayer的管理调度者)</p>
+
+<h3 id="toc_4">CALayer的能力</h3>
+
+<ul>
+<li>阴影，圆角，带颜色的边框 • 3D变换</li>
+<li>非矩形范围</li>
+<li>透明遮罩</li>
+<li><p>多级非线性动画</p></li>
+<li><p>contents属性</p></li>
+</ul>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2019/3/11</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15501356584731.html">
+                
+                  <h1>UITableView顶部空白的几种解决办法</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<ul>
+<li><p>一、iOS7在Controller中增加了<code>automaticallyAdjustsScrollViewInsets</code>这个属性，当设置为YES时（默认YES），如果视图里面存在唯一一个UIScrollView或其子类View，那么它会自动设置相应的内边距，这样可以让scroll占据整个视图，又不会让导航栏遮盖。但是这个属性在iOS11之后被遗弃了，新增了一个<code>contentInsetAdjustmentBehavior</code>属性：</p>
+<pre><code class="language-text">if (@available(iOS 11.0, *)) {        
+    self.tableview.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;    <br/>
+}else {<br/>
+    self.automaticallyAdjustsScrollViewInsets = NO;<br/>
+}
+</code></pre></li>
+<li><p>二、UINavigationBar的透明度设置<code>self.navigationController.navigationBar.translucent = NO;</code><br/>
+当这个属性设为NO时，tableview会在上方留出64.f的高度给navigationbar</p></li>
+<li><p>三、tableView  </p>
+<p>section的Header/Footer高度设置如果这个Header/Footer的height设置为0时，系统会认为你没有设置，从而给一个默认40的高度；若不需要显示这两个view，将他们的height设置一个无限小的数字即可，常用：CGFLOAT_MIN。</p>
+<pre><code class="language-text">- (CGFloat)tableView:(UITableView*)tableView heightForHeaderInSection:(NSInteger)section{    
+    return CGFLOAT_MIN;<br/>
+}
+</code></pre></li>
+<li><p>四、tableHeaderView、tableFooterView高度设置以下操作会导致tableView顶部空白：</p>
+<pre><code class="language-text">self.tableView.tableHeaderView = nil; 
+self.tableView.tableHeaderView = [[UIView alloc] init]; <br/>
+self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectZero]; 
+</code></pre>
+<p>同理，tableFooterView也是如此。footer和header只要设置了任意一个都会使两个地方都出现空白。应这样设置：</p>
+<pre><code class="language-text">self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, CGFLOAT_MIN)]; 
+self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, CGFLOAT_MIN)];
+</code></pre></li>
+</ul>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2019/2/14</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15488351784332.html">
+                
+                  <h1>Objective-C中的字符串类型枚举 探索</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>实际开发中的iOSer会发现，有些情况我们需要字符串类型的枚举值。但是OC偏偏没有提供这种类型。Swift语言或者Java这些语言都有，于是我就有些不甘心了。经过一番探索，尝试了以下几种情况。</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2019/1/30</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15409691048860.html">
+                
+                  <h1>【Swift笔记】引用计数</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<ul>
+<li>和OC一样，Swift也是用ARC,也会有循环引用导致内存泄露</li>
+<li>吧如果属性是可选类型，只能用weak修饰符避免循环引用。所引用对象被回收后改属性会被自动置为nil</li>
+<li>如果属性不是可选类型，只能用无主引用（unowned）。所引用对象被回收后属性不会被置为nil，此时访问会导致运行时错误。类似OC中的unsafe_unretained修饰符</li>
+</ul>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/10/31</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='swift.html'>Swift</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15402889434646.html">
+                
+                  <h1>Swift中类（Class）和 结构体（Struct）</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">分析</h2>
+
+<p>共同点：</p>
+
+<ul>
+<li>定义属性用于存储值</li>
+<li>定义方法用于提供功能</li>
+<li>定义下标操作使得可以通过下标语法来访问实例所包含的值</li>
+<li>定义构造器用于生成初始化值</li>
+<li>通过扩展以增加默认实现的功能</li>
+<li>实现协议以提供某种标准功能</li>
+</ul>
+
+<p>与结构体相比，类还有如下的附加功能：</p>
+
+<ul>
+<li>继承允许一个类继承另一个类的特征</li>
+<li>类型转换允许在运行时检查和解释一个类实例的类型</li>
+<li>析构器允许一个类实例释放任何其所被分配的资源</li>
+<li>引用计数允许对一个类的多次引用（对象引用）结构体总是通过被复制的方式在代码中传递，不使用引用计数。</li>
+</ul>
+
+<h2 id="toc_1">逐一对比</h2>
+
+<h3 id="toc_2">定义</h3>
+
+<pre><code class="language-text">//: ### 定义
+class StudentClass{ }
+struct StudebtStruct{ }
+</code></pre>
+
+<h3 id="toc_3">定义存储属性</h3>
+
+<pre><code class="language-text">//: &gt; 类中定义的存储属性，如果不是可选类型，需要进行初始化；结构体则默认带有初始化方法
+class StudentC01{
+    var name: String!
+}
+struct StudebtS01{
+    var name: String!
+}
+</code></pre>
+
+<h3 id="toc_4">定义属性函数function</h3>
+
+<p>关于@objc 请参考 <a href="https://blog.csdn.net/qq_35612929/article/details/79563110">Swift 4.0学习之：@objc的使用</a></p>
+
+<pre><code class="language-text">//: ### 定义属性函数function
+//: &gt; 类中可以使用 static 和 class两种修饰符；但是结构体中只能使用static修饰
+class StudentC02{
+    static var des:String = &quot;学生的类&quot;
+    var name:String!
+    @objc class func objc_describe()-&gt;String{
+        return des
+    }
+    class func class_describe()-&gt;String{
+        return des
+    }
+    static func static_describe()-&gt;String{
+        return des
+    }
+}
+struct StudentS02{
+    static var des:String = &quot;学生的结构体&quot;
+    var name:String!
+    static func describe()-&gt;String{
+        return &quot;这是一个定义学生的类&quot;
+    }
+}
+</code></pre>
+
+<h3 id="toc_5">扩展下标</h3>
+
+<pre><code class="language-text">//: ### 扩展下标
+//: &gt; *subscript*
+class StudentC003{
+    var names:[String] = [&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;]
+    subscript (index:Int)-&gt;String?{
+        get{
+            if names.count &lt;= index{
+                return nil
+            }
+            return names[index]
+        }
+    }
+}
+struct StudentS003{
+    var names:[String] = [&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;]
+    subscript (index:Int)-&gt;String?{
+        get{
+            if names.count &lt;= index{
+                return nil
+            }
+            return names[index]
+        }
+    }
+}
+let sc003 = StudentC003()
+sc003[1]// 2
+let ss003 = StudentS003()
+ss003[1]// 2
+</code></pre>
+
+<h3 id="toc_6">初始化</h3>
+
+<pre><code class="language-text">//: ### 初始化
+//: &gt; 结构体自带初始化方法（可以不写初始化方法）;
+//: &gt; 类必须手写init方法，否则报错；
+class StudentC004{
+    var name:String
+    init(name:String) {
+        self.name = name
+    }
+}
+struct StudentS004 {
+    var name:String
+    
+}
+let studentc004 = StudentC004(name: &quot;行走在北方&quot;)
+let students004 = StudentS004(name: &quot;行走在北方&quot;)
+</code></pre>
+
+<h3 id="toc_7">扩展功能 Extention</h3>
+
+<pre><code class="language-text">//: ### 扩展功能 Extention
+extension StudentC004{
+    func discribe() -&gt; String {
+        return &quot;student class:&quot;+self.name
+    }
+}
+extension StudentS004{
+    func discribe() -&gt; String {
+        return &quot;student struct:&quot; + self.name
+    }
+}
+</code></pre>
+
+<h3 id="toc_8">实现协议 protocol</h3>
+
+<pre><code class="language-text">//: ### 实现协议 protocol
+//: * 定义协议
+protocol Capacity {
+    func draw()//协议方法
+}
+//: * 实现协议方法
+class StudentC05:Capacity{
+    internal func draw() {
+        
+    }
+    var name:String
+    init(name:String) {
+        self.name = name
+    }
+}
+struct StudentS05:Capacity{
+    internal func draw() {
+        
+    }
+    var name:String
+}
+</code></pre>
+
+<h3 id="toc_9">mutating 关键字的使用</h3>
+
+<p>科普下:</p>
+
+<ul>
+<li><p>枚举和结构体都是值类型，Swift默认值类型的对象方法不能修改属性值,但是如果一定要修改 那就在函数前面添加mutating关键字</p></li>
+<li><p>计算属性setter方法中不需要更改属性值的时候，不需要添加mutating关键字;</p></li>
+<li><p>计算属性setter方法中更改属性值的时候，必须要添加mutating关键字</p></li>
+</ul>
+
+<pre><code class="language-text">protocol Action{
+    var myY:Int{
+        mutating get
+    }
+}
+struct Point {
+    var x:Int
+    var y:Int
+    mutating func modifyX(x: Int){
+        self.x = x
+    }
+    var myY:Int{
+        mutating get {//getter方法前面添加mutating关键字
+            self.y = self.y*2
+            return y
+        }
+    }
+}
+class ActionClass {
+    var name:String?
+    init(name:String) {
+        self.name = name
+    }
+    var myName:String? {
+        get {// class 是对象类型 可以直接修改
+            self.name = &quot;666 -&gt; :&quot; + self.name!
+            return self.name
+        }
+    }
+    
+}
+let actionclass = ActionClass(name: &quot;NB&quot;)
+</code></pre>
+
+<h2 id="toc_10">判断两个对象地址是否相同（验证 引用类型 和 值类型）</h2>
+
+<pre><code class="language-text">//: ### 判断两个对象地址是否相同
+//: &gt; 类是引用类型；结构体是值类型；结构体不能通过=== 、！==类判断比较
+//: &gt;
+class StudentC07{
+    var name: String
+    init(name:String) {
+        self.name = name
+    }
+}
+
+let studentc071 = StudentC07(name: &quot;原始名字&quot;)
+var studentc072 = studentc071
+studentc071.name = &quot;新名字&quot;
+print(&quot;student071:\(studentc071.name)\nstudent072:\(studentc072.name)&quot;)
+if studentc071 === studentc072 {
+    print(&quot;类是引用类型，最终指向同一块内存&quot;)
+}
+struct StudentS07{
+    var name: String
+    init(name:String) {
+        self.name = name
+    }
+}
+let students071 = StudentS07(name: &quot;结构体：原始名字&quot;)
+var students072 = students071
+students072.name = &quot;结构体：新名字&quot;
+print(&quot;students071:\(students071.name)\nstudents072\(students072.name)&quot;)
+</code></pre>
+
+<h3 id="toc_11">deinit 释放资源</h3>
+
+<p><a href="https://www.jianshu.com/p/9e725362eeb1">Swift中的deinit方法</a></p>
+
+<pre><code class="language-text">//: ### deinit 释放资源
+//: &gt; 类有deinit方法；结构体中没有deinit方法。
+class StudentC08{
+    var name: String
+    init(name:String) {
+        self.name = name
+    }
+    deinit {
+        //这里释放资源
+    }
+}
+</code></pre>
+
+<h3 id="toc_12">lazy：延迟属性（懒加载）</h3>
+
+<p>class 有延迟属性；struct没有延迟属性</p>
+
+<pre><code class="language-text">//: &gt; 延迟存储属性是指当第一次被调用的时候才会计算其初始值的属性。在属性声明前使用 lazy 来标示一个延迟存储属性
+class Importor{
+    var fileName = &quot;data.txt&quot;
+}
+class DataManager{
+    lazy var importor = Importor()
+    var Data = [String]()
+}
+</code></pre>
+
+<h3 id="toc_13">继承</h3>
+
+<pre><code class="language-text">//: ### 继承
+//: &gt; 类能继承；结构体不能继承。
+class Person{
+    var name:String
+    init(name:String) {
+        self.name = name
+    }
+}
+class Student06: Person {
+    var score : Float
+    init(name: String, score: Float){
+        self.score = score//先给父类中没有的属性赋值，再调用父类init方法
+        super.init(name: name)
+    }
+}   
+</code></pre>
+
+<ul>
+<li><p>继承之后 可重写父类方法/属性</p>
+<ol>
+<li><p>重写计算属性：只能增加功能不能减少功能——&gt;父类中有setter getter,那么子类重写计算属性 setter getter都必须要有。父类中只有setter  子类中可以在重写setter的同时增加getter</p></li>
+<li><p>final 关键字可以让属性不被重写 或者 继承</p></li>
+</ol></li>
+</ul>
+
+<pre><code class="language-text">//: * 重写计算属性
+//: * 重写对象方法
+//: * 重写类方法
+//: * 重写初始化方法
+//: * 重写存储属性
+
+//: _父类_
+class Person{
+    //存储属性
+    var name:String = &quot;person&quot;
+    //计算属性
+    var rename:String{
+        return self.name
+    }
+    //初始化方法
+    init(_ name:String) {
+        self.name = name
+    }
+    //对象方法
+    func describe() -&gt; String {
+        return self.name
+    }
+    //类方法
+    class func describeClass()-&gt;String{
+        return &quot;这是一个描述人的类&quot;
+    }
+}
+//: _子类_
+class Man: Person {
+    //重写存储属性
+    override var name: String{
+        didSet{
+            print(&quot;man 对象中 name 的原始值：\(self.name)&quot;)
+            self.name = &quot;man:&quot;+self.name
+        }
+    }
+    var score : Double
+    //重写setter getter
+    override var rename: String{
+        set{
+            self.name = &quot;man:&quot;+newValue
+        }
+        get{
+            return &quot;_&quot;+self.name
+        }
+    }
+    //重写初始化方法
+    override init(_ name: String) {
+        self.score = 0.0
+        super.init(name)
+    }
+    //重写对象方法
+    override func describe() -&gt; String {
+        return self.name + &quot;_score:\(self.score)&quot;
+    }
+    // 重写类方法
+    override class func describeClass() -&gt; String {
+        return &quot;我是描述男人的类&quot;
+    }
+}
+var man00 = Man(&quot;kael&quot;)
+print(man00.name)
+</code></pre>
+
+<h3 id="toc_14">class 的类型检测</h3>
+
+<ol>
+<li>首先在自己的初始化方法中先给自己的属性初始化</li>
+<li>然后调用父类的初始化</li>
+<li>最后修改父类的属性</li>
+</ol>
+
+<pre><code class="language-text">//: ### 类型检测  is  as?
+var person01 = Person(&quot;person01&quot;)
+var man01 = Man(&quot;man01&quot;)
+
+if person01 is Person {
+    print(&quot;person01：我是Person&quot;)
+}else{
+    print(&quot;person01：我不是Person&quot;)
+}
+if person01 is Man {
+    print(&quot;person01：我是Man&quot;)
+}else{
+    print(&quot;person01：我不是Man&quot;)
+}
+if man01 is Person {
+    print(&quot;man01：我是Person&quot;)
+}else{
+    print(&quot;man01：我不是Person&quot;)
+}
+if man01 is Man {
+    print(&quot;man01：我是Man&quot;)
+}else{
+    print(&quot;man01：我不是Man&quot;)
+}
+
+if let p = person01 as? Person {
+    print(&quot;person01 是 Person&quot;)
+}
+if let p = person01 as? Man{
+    print(&quot;person01 是Man&quot;)
+}else{
+    print(&quot;person01 不是Man&quot;)
+}
+if let p = man01 as? Person {
+    print(&quot;man01 是 Person&quot;)
+}
+if let p = man01 as? Man{
+    print(&quot;man01 是Man&quot;)
+}else{
+    print(&quot;man01 不是Man&quot;)
+}
+
+
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/10/23</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='swift.html'>Swift</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15341646765442.html">
+                
+                  <h1>网络是怎样连接的</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">生成HTTP请求信息</h2>
+
+<p>URL种类：<code>http:</code> <code>ftp:</code> <code>file:</code> <code>mailto:</code> <code>news:</code></p>
+
+<p>URL组成：协议 + 用户名(可省略) + 密码(省略) + 服务器域名 + 端口号(可省略) + 文件路径名</p>
+
+<p><img src="https://ws2.sinaimg.cn/large/0069RVTdly1fu8d5d2w7jj313e19atf8.jpg" alt=""/></p>
+
+<h3 id="toc_1">网络请求</h3>
+
+<p><img src="https://ws1.sinaimg.cn/large/0069RVTdly1fu8fexsc00j313a10ewp6.jpg" alt=""/></p>
+
+<h3 id="toc_2">HTTP</h3>
+
+<ul>
+<li><code>URI</code>：Uniform Resource Identifier，统一资源标识符</li>
+<li><code>CGI</code>：对 Web 服务器程序调用其他程序的规则所做的定义就是 CGI</li>
+</ul>
+
+<h3 id="toc_3">DNS服务器</h3>
+
+<p>DNS查询服务包含下面三部分：</p>
+
+<ul>
+<li><code>域名</code>：服务器、邮件服务器(邮件地址中 @ 后面的部分)的名称</li>
+<li><code>Class</code>：在最早设计 DNS 方案时，DNS 在互联网以外的其他网络中的应用也被考虑到了，而 Class 就是用来识别网络的信息。不过，如今除了互联网并没有其他的网络了，因此 Class 的值永远是代表互联网的 IN</li>
+<li><code>记录类型</code>:表示域名对应何种类型的记录。例如，当类型为 A 时，表示域名 对应的是 IP 地址;当类型为 MX 时，表示域名对应的是邮件服务 器。对于不同的记录类型，服务器向客户端返回的信息也会不同</li>
+</ul>
+
+<p><img src="https://ws2.sinaimg.cn/large/0069RVTdly1fubcsxb3lzj318812ualm.jpg" alt="DNS服务器的基本工作"/></p>
+
+<p><strong>敲黑板，划重点！！！</strong></p>
+
+<blockquote>
+<p>上级 DNS 服务器保管着所有下级 DNS 服务器的信息，所以我们可以从根域开始一路往下顺藤摸瓜找到任意 一个域的 DNS 服务器；<br/>
+根域的 DNS 服务器信息保存在互联网中所有的 DNS 服务器中，任何 DNS 服务器就都可 以找到并访问根域 DNS 服务器了。</p>
+</blockquote>
+
+<p>协议栈传输数据：</p>
+
+<ol>
+<li>服务器一方创建套接字，等待客户端向该套接字连接管道 (创建套接字阶段)</li>
+<li>客户端创建一个套接字，然后从该套接字伸出管道去连接服务端的套接字 (创建套接字阶段 、连接套接字阶段)</li>
+<li>客户端套接字 和 服务端套接字建立连接以后就可以传输网络数据了（数字信息 digital data）(通信阶段)</li>
+<li>断开通道、删除套接字 (断开阶段)</li>
+</ol>
+
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fup9h6snmhj316s0zg7ah.jpg" alt=""/></p>
+
+<ul>
+<li>描述符:应用程序用来识别套接字的机制</li>
+<li>IP 地址和端口号:客户端和服务器之间用来识别对方套接字的机制
+<img src="https://ws2.sinaimg.cn/large/006tNbRwly1fupfvmg5jwj31j40x60xr.jpg" alt=""/></li>
+</ul>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/8/13</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='%E7%BD%91%E7%BB%9C.html'>网络</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15282021908171.html">
+                
+                  <h1>Alfred workflow 教程</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">简介</h2>
+
+<blockquote>
+<p>新创建一个空白的workflow<br/>
+<img src="https://ws1.sinaimg.cn/large/006tKfTcly1fs193q68k7j30we0kawh2.jpg" alt=""/><br/>
+<img src="https://ws3.sinaimg.cn/large/006tKfTcly1fs194xjqm9j30k804g0t0.jpg" alt=""/></p>
+
+<ul>
+<li>1.workflow 名字</li>
+<li>2.workflow功能描述</li>
+<li>3.Category：workflow的类别 工具  网络 或者别的分类</li>
+<li>4.唯一标识</li>
+<li>5.作者</li>
+<li>6.网站</li>
+</ul>
+
+<p>空白区，点击鼠标右键<br/>
+<img src="https://ws3.sinaimg.cn/large/006tKfTcly1fs0l0zl2crj307e0bydgg.jpg" alt=""/></p>
+
+<p>知识点：{query}   可以接收上个模块的输出参数<br/>
+如果是输出多个参数，那就是{var:var1,var:var2}</p>
+</blockquote>
+
+<h2 id="toc_1">Triggers 触发器</h2>
+
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1fs0ljq33rnj30g20c20ua.jpg" alt=""/></p>
+
+<h3 id="toc_2">Hotkey 热键触发</h3>
+
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1fs16vk8gidj30to0n4tc1.jpg" alt=""/><br/>
+<img src="https://ws2.sinaimg.cn/large/006tKfTcly1fs16yvki0ej30jy04qdgs.jpg" alt=""/><br/>
+<img src="https://ws1.sinaimg.cn/large/006tKfTcly1fs16zp561fj30my05yt9m.jpg" alt=""/></p>
+
+<ul>
+<li>Hotkey: 热键设置触发   选中后可以设置激活热键组合</li>
+<li><p>Action: 行为  </p>
+<ul>
+<li>Pass through to workflow</li>
+<li>Show Alfred</li>
+</ul>
+<blockquote>
+<p>当热键被按下时该怎么做。注意，如果你选择“show alfred”。即使连接成功，则不会从该处理器的输出中输出任何内容。</p>
+</blockquote></li>
+<li><p>Argument：</p>
+<ul>
+<li>none：什么都没有</li>
+<li>selection in macOS: 电脑中选中的内容</li>
+<li>MacOS Clipboard Content：电脑粘贴板内容</li>
+<li>Text： 输入文本</li>
+</ul></li>
+<li><p>prefix    ：前缀</p>
+<blockquote>
+<p>Argument是一个可选参数，如果输入的是文本那么会动态的添加prefix配置的前缀。</p>
+</blockquote></li>
+</ul>
+
+<h3 id="toc_3">Remote 远程触发</h3>
+
+<blockquote>
+<p>注意，这个触发器对象与远程对象是分离的。这里提供的图像和名称是建议默认的，并在使用中复制到Remote中。只要保持标识符的一致性，就可以删除和替换对象。</p>
+</blockquote>
+
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1fs17yod1hlj30vq0k20wk.jpg" alt=""/></p>
+
+<ul>
+<li>1.这是自定制的要触发的workflow 的 icon</li>
+<li>2.这是按钮上的button上的文字</li>
+<li>3.这个触发器内部使用的唯一标识符，通过远程标识要运行哪个触发器。</li>
+<li>4.触发器携带参数</li>
+<li>5.触发器携带参数前缀</li>
+<li>6.此触发器仅可用于添加到此工作流中的远程页面，而不能用于一般的远程页面。</li>
+</ul>
+
+<h3 id="toc_4">Snippet  片段触发</h3>
+
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fs3mx57k39j30qa0j4wh3.jpg" alt=""/></p>
+
+<ul>
+<li>1.关键字：</li>
+<li>关注APP的变量</li>
 <li></li>
 </ul>
 
+<h3 id="toc_5">External  扩展触发</h3>
+
+<p>触发该触发器后会执行一段Applescript 脚本</p>
+
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fs3pxvlwyvj30ui0futb2.jpg" alt=""/></p>
+
+<ul>
+<li>1.identifier : 触发ID</li>
+<li>2.简单脚本</li>
+</ul>
+
+<h3 id="toc_6">Connect Action</h3>
+
+<p>联系人Action，这个具体干什么笔者也没搞清楚。</p>
+
+<h3 id="toc_7">Fallback search</h3>
+
+<blockquote>
+<p>select the title and subtext you would like to use for this keyword based input.<br/>
+these represent the text you see in Alfred’s results when using the keyword.</p>
+</blockquote>
+
+<p>选择您希望用于这个基于关键字的输入的标题和字幕。这些代表在使用关键字时在Alfred的结果中看到的文本。</p>
+
+<h2 id="toc_8">Inputs 输入</h2>
+
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcly1fs0ll364vbj30f80bymye.jpg" alt=""/></p>
+
+<h3 id="toc_9">关键字</h3>
+
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fs3qapb1rnj30qw0f277f.jpg" alt=""/></p>
+
+<ul>
+<li>1.keyword：激活改Action的关键字</li>
+<li>2.是否需要参数：require-必须传入参数  optional-可选  NO argument-不需要参数</li>
+<li>3.action 标题</li>
+<li>4.action的副标题</li>
+<li>5.可以自定制的icon</li>
+</ul>
+
+<h3 id="toc_10">文件过滤器</h3>
+
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fs3qecoaf0j31060ogtc1.jpg" alt=""/></p>
+
+<ul>
+<li>1.keyword：激活改Action的关键字</li>
+<li>2.默认提示字符标题</li>
+<li>3.默认提示字符副标题</li>
+<li>4.文件类型 右下角+号可以添加文件类型</li>
+</ul>
+
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fs3qykwxjqj31060ogdis.jpg" alt=""/></p>
+
+<p>Search Scope 设置的是可搜索范围。需要手动将文件夹拖入条目范围中，即可。</p>
+
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fs3qzl6u7nj31060o6te8.jpg" alt=""/></p>
+
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fs3wm2d3mfj316u0ocjzc.jpg" alt=""/></p>
+
+<ul>
+<li>1.日期搜索范围设置  任意日期，今天，三天内，七天内，30天内，超过30天</li>
+<li>2.文件排序方式设置 名字</li>
+</ul>
+
+<h3 id="toc_11">语言过滤器</h3>
+
+<p>预言过滤  具体也不知道能干啥。</p>
+
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fs3r25at3ij30v00h8tbm.jpg" alt=""/></p>
+
+<h3 id="toc_12">List过滤器</h3>
+
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fs3r5fichuj31bs0u6gsx.jpg" alt=""/></p>
+
+<p>这就相当于 编程预言里面的 <code>switch case</code></p>
+
+<ul>
+<li>1.关键字</li>
+<li>2.模块标题</li>
+<li>3.模块的subtitle</li>
+<li>4.参数配置：require-必须传参 optional-可选   No argument-不需要参数</li>
+<li>5.该模块的icon设置</li>
+<li>6.list：输入关键字后会出现这个list </li>
+<li>7.list子模块title</li>
+<li>8.子模块的subtitle</li>
+<li>9.选中子模块后输出的参数</li>
+<li>10.list中的子模块排序方式   一种是一直保持固定排序；另一种是Alfred自己学习根据使用频率 进行排序</li>
+</ul>
+
+<h3 id="toc_13">Script filter 脚本过滤器</h3>
+
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fs3zcesy1gj317e0zmjwi.jpg" alt=""/></p>
+
+<h2 id="toc_14">Action 行为</h2>
+
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcly1fs0llhujngj30go0g840r.jpg" alt=""/></p>
+
+<h3 id="toc_15">打开文件</h3>
+
+<p>用某个APP打开指定文件。</p>
+
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fs3zldzgjzj30yw0rw778.jpg" alt=""/></p>
+
+<h3 id="toc_16">Reveal file in the finder 打开文件所在位置</h3>
+
+<h3 id="toc_17">browse in Alfred</h3>
+
+<h3 id="toc_18">Launch APPs</h3>
+
+<h3 id="toc_19">Default web search</h3>
+
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fs3zrfdl12j30ma0aidha.jpg" alt=""/></p>
+
+<h3 id="toc_20">open URL</h3>
+
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fs3zvl5nuwj30zk0didj1.jpg" alt=""/></p>
+
+<h3 id="toc_21">System Command</h3>
+
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fs3zz6vwjxj30q00judkl.jpg" alt=""/></p>
+
+<h3 id="toc_22">iTunes Command</h3>
+
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fs3zzs0mrnj30no0ig42v.jpg" alt=""/></p>
+
+<h3 id="toc_23">Terminal Command</h3>
+
+<p>通过终端APP 运行终端命令组件</p>
+
+<h3 id="toc_24">Run Script</h3>
+
+<p>运行脚本</p>
+
+<h3 id="toc_25">Run NSAppleScript</h3>
+
+<p>运行apple 脚本</p>
+
+<h2 id="toc_26">Utilities 实用工具</h2>
+
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1fs16kjx74kj30e60fojsx.jpg" alt=""/></p>
+
+<h3 id="toc_27">Arg and Vars</h3>
+
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fs403j1t5aj30ws0nqmzg.jpg" alt=""/></p>
+
+<h3 id="toc_28">JSON Config</h3>
+
+<p>通过输入的参数 自行组合成自己想要的json文本</p>
+
+<h3 id="toc_29">Junction  结点</h3>
+
+<p>这个只是处理复杂逻辑的节点。如果线条逻辑过多 错综复杂的时候 可以通过节点来处理。</p>
+
+<h3 id="toc_30">Filter</h3>
+
+<h3 id="toc_31">Delay</h3>
+
+<h3 id="toc_32">Transform</h3>
+
+<h3 id="toc_33">Replace</h3>
+
+<h3 id="toc_34">Hide Alfred</h3>
+
+<h3 id="toc_35">Debug</h3>
+
+<h2 id="toc_36">Outputs 输出</h2>
+
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcly1fs16lacns8j30h60eqtai.jpg" alt=""/></p>
+
+<h3 id="toc_37">Post Notification 发送本地通知</h3>
+
+<p>发送本地通知。Alfred 3 的本地推送不好用，一直没成功。</p>
+
+<h3 id="toc_38">Large Type 大文字显示</h3>
+
+<p>大文字显示 一些文本。</p>
+
+<h3 id="toc_39">Copy to Clipboard  copy文本到粘贴板</h3>
+
+<p>复制结果到粘贴板</p>
+
+<h3 id="toc_40">Write Text File 把text写入文件</h3>
+
+<p>将text文本写入文件</p>
+
+<h3 id="toc_41">Play Sound 播放声音</h3>
+
+<p>播放声音</p>
+
+<h3 id="toc_42">Dispath Key Combo 按键连击</h3>
+
+<h3 id="toc_43">Call External trigger 触发别的触发器</h3>
+
                         
                       </div>
                   </div>
@@ -258,245 +1299,10 @@ for (int i=0; i&lt;5; i++) {
                 <div class="read-more clearfix">
                   <div class="more-left left">
                   
-                    <span class="date">2018/5/3</span>
+                    <span class="date">2018/6/5</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15200726964422.html">
-                
-                  <h1>iOS Block 知识点拾遗</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<ol>
-<li><p>Block为什么要用copy</p>
-
-<ul>
-<li>block在创建的时候默认分配的内存是在栈上，而不是在堆上。这样的话其本身的作用域是属于创建时候的作用域，一旦在创建的作用域之外调用就会导致程序的崩溃。所以使用了copy将其拷贝到堆内存上。</li>
-<li>block创建在栈上，而block的代码中可能会用到本地的一些变量，只有将其拷贝到堆上，才能用这些变量</li>
-</ul></li>
-<li><p>Block为什么不用retain</p>
-
-<ul>
-<li>retain只是增加了一次引用计数，block的内存还是在栈上，并没有存在堆上，存在栈上的block可能随时被系统回收</li>
-</ul></li>
-<li><p>为什么进入block中的对象引用计数需要自动加1？</p>
-
-<ul>
-<li>Block执行的是回调，因此block并不知道其中的对象obj创建后会在什么时候被释放，为了不在block使用obj之前，对象已经被释放，block就retain了obj一次</li>
-</ul></li>
-<li><p>block和函数的关系</p>
-
-<ul>
-<li>Block的使用很<strong>像函数指针</strong>，不过与函数最大的不同是Block可以访问函数以外、词法作用域以内的外部变量的值。换句话说，Block不仅 实现函数的功能，还能<strong>携带函数的执行环境</strong>。</li>
-<li>函数指针 <code>void(*fun)(int)</code></li>
-<li>block <code>void(^fun)(int)</code></li>
-</ul></li>
-<li><p>block本质（对于block的理解）<a href="https://www.cnblogs.com/yoon/p/4953618.html">请查阅Block实现原理</a></p>
-
-<ul>
-<li>block实际上是: 指向结构体的指针</li>
-<li>编译器会将block的内部代码生成对应的函数</li>
-</ul></li>
-<li><p>对于基本数据类型，进入到block中会被当做常量处理。对象 retain 会一次</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15200726964422.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/3/3</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15235286649865.html">
-                
-                  <h1>音视频学习笔记 1</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">音视频概念</h2>
-
-<h3 id="toc_1">声音的物理性质</h3>
-
-<ul>
-<li>声波三要素：频率、振幅、波形</li>
-<li>人耳听到的频率范围 20Hz-20KHz</li>
-<li><p>声音在空气中的传播速度 340m/s、蒸馏水中1497m/s、铁棒5200m/s</p></li>
-<li><p>一般声音的采样频率为 44.1KHz---&gt; 一秒钟采样44100次，这样 20KHz的频率也能被数字化</p></li>
-<li><p>音频的裸数据格式 脉冲编码调制  PCM （Pluse Code Modulation）</p></li>
-<li><p>PCM 相关概念：量化格式、采样频率、声道数</p></li>
-</ul>
-
-<h3 id="toc_2">音频编码</h3>
-
-<p>音频压缩编码算法有：PCM、WAV、AAC、MP3、Ogg。</p>
-
-<ul>
-<li>WAV：音频质量好，大多数软件都支持，但是占用空间大；适合当做多媒体开发的中间文件，保存音乐、音效素材</li>
-<li>MP3：不错的压缩比，LAME编码中高码率文件。音质在128Kbit/s 以上表现不错，压缩比高，大多数软件都支持。适合高比特率下对兼容性有要求的音乐欣赏。</li>
-<li>AAC：包括LC-AAC、HE-AAC、HE-AAC v2,小于128Kbit/s表现优异。</li>
-</ul>
-
-<table>
-<thead>
-<tr>
-<th style="text-align: center">LC-AAC</th>
-<th style="text-align: center">HE-AAC</th>
-<th style="text-align: center">HE-AAC v2</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td style="text-align: center">中高码率&gt;80Kbit/s</td>
-<td style="text-align: center">中低码率&lt;=80Kbit/s</td>
-<td style="text-align: center">低码率&lt;48Kbit/s</td>
-</tr>
-</tbody>
-</table>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2018/4/12</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15233259445112.html">
-                
-                  <h1>疯狂iOS讲义笔记 1</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">多点触摸与 手势检测</h2>
-
-<h3 id="toc_1">响应者链</h3>
-
-<ul>
-<li>响应者链：第一响应者 ---&gt; 第一响应者的视图控制器 ---&gt; 父控制器（如果有的话）---&gt; UIWindow ---&gt; UIApplication ---&gt; 应用程序委托对象</li>
-<li>手势交互触发事件的过程，iOS系统遍历视图的时候 是 深度遍历 还是 广度遍历？</li>
-<li></li>
-</ul>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2018/4/10</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15226648731246.html">
-                
-                  <h1>每天学习一个shell技能（7）</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">文件包含 导入文件</h2>
-
-<p>测试文件  test1.sh</p>
-
-<pre><code>#!/bin/bash
-# author:菜鸟教程
-# url:www.runoob.com
-
-url=&quot;http://www.runoob.com&quot;
-</code></pre>
-
-<p>测试文件 test2.sh</p>
-
-<pre><code>#!/bin/bash
-# author:菜鸟教程
-# url:www.runoob.com
-
-#使用 . 号来引用test1.sh 文件
-. ./test1.sh
-
-# 或者使用以下包含文件代码
-# source ./test1.sh
-
-echo &quot;菜鸟教程官网地址：$url&quot;
-</code></pre>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15226648731246.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/4/2</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='shell.html'>shell</a></span>
+          					    <span class="posted-in"><a href='app.html'>MacAPP</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -519,7 +1325,7 @@ echo &quot;菜鸟教程官网地址：$url&quot;
                         
                         	<h2 id="toc_0">shell 终端打印</h2>
 
-<pre><code>```
+<pre><code class="language-text">```
 printf &quot;%-5s %-10s %-4s \n&quot; NO Name Mark
 printf &quot;%-5s %-10s %-4s \n&quot; 1 kael 100
 printf &quot;%-5s %-10s %-4s \n&quot; 2 linda 99
@@ -566,36 +1372,38 @@ NO    Name       Mark
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15226603064743.html">
+                <a class="clearlink" href="15226648731246.html">
                 
-                  <h1>每天学习一个shell技能（6）</h1>
+                  <h1>每天学习一个shell技能（7）</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2 id="toc_0">test</h2>
+                        	<h2 id="toc_0">文件包含 导入文件</h2>
 
-<h3 id="toc_1">test文件</h3>
+<p>测试文件  test1.sh</p>
 
-<pre><code>if test -e ./test.sh
-then
-    echo &#39;文件已存在!&#39;
-else
-    echo &#39;文件不存在!&#39;
-fi
+<pre><code class="language-text">#!/bin/bash
+# author:菜鸟教程
+# url:www.runoob.com
+
+url=&quot;http://www.runoob.com&quot;
 </code></pre>
 
-<ul>
-<li>-e fileName ： 如果文件存在则为真</li>
-<li>-r  fileName : 如果文件存在且可读则为真</li>
-<li>-w fileName : 如果文件存在且可写则为真</li>
-<li>-x fileName : 如果文件存在且可执行则为真</li>
-<li>-s fileName: 文件存在且至少有一个字符</li>
-<li>-d fileName : 文件存在且为目录</li>
-<li>-f fileName: 文件存在且为文件</li>
-<li>-c fileName:文件存在，且为字符型特殊文件</li>
-<li>-b fileName: 如果文件存在且为块特殊文件则为真</li>
-</ul>
+<p>测试文件 test2.sh</p>
+
+<pre><code class="language-text">#!/bin/bash
+# author:菜鸟教程
+# url:www.runoob.com
+
+#使用 . 号来引用test1.sh 文件
+. ./test1.sh
+
+# 或者使用以下包含文件代码
+# source ./test1.sh
+
+echo &quot;菜鸟教程官网地址：$url&quot;
+</code></pre>
 
 
                         
@@ -604,63 +1412,8 @@ fi
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15226603064743.html">Read more</a>&nbsp;&nbsp; 
+                   <a href="15226648731246.html">Read more</a>&nbsp;&nbsp; 
                     <span class="date">2018/4/2</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='shell.html'>shell</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15224936933861.html">
-                
-                  <h1>每天学习一个shell技能（5）</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">Shell echo命令</h2>
-
-<h3 id="toc_1">打印字符</h3>
-
-<pre><code>// 下面两行代码效果一致
-echo &quot;It is a test&quot;
-echo It is a test
-</code></pre>
-
-<h3 id="toc_2">打印转义字符</h3>
-
-<pre><code>echo &quot;\&quot;It is a test\&quot;&quot;
-// 引号也可以省略
-echo \&quot;It is a test\&quot;
-</code></pre>
-
-<p>打印结果：</p>
-
-<pre><code>&quot;It is a test&quot;
-
-&quot;It is a test&quot;
-</code></pre>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15224936933861.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/3/31</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='shell.html'>shell</a></span>
@@ -712,7 +1465,7 @@ echo \&quot;It is a test\&quot;
 
 
 
-
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/KaelLVLinda" title="Twitter">Twitter</a>
 <a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
 <a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
   <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
@@ -743,6 +1496,8 @@ echo \&quot;It is a test\&quot;
             <a href="vue.html"><strong>Vue</strong></a>
         
             <a href="shell.html"><strong>shell</strong></a>
+        
+            <a href="%E7%BD%91%E7%BB%9C.html"><strong>网络</strong></a>
          
         </p>
 
@@ -759,31 +1514,31 @@ echo \&quot;It is a test\&quot;
 	      
 		      
 			      <li class="post">
-			        <a href="15261167596297.html">OC 多线程之 GCD知识从基础到进阶 （1）</a>
+			        <a href="15523077857608.html">OC中枚举写法  以及 字符串枚举探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15257437237715.html">OC中的各种遍历</a>
+			        <a href="15522686353535.html">iOS 动画全解 (1)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15253400374602.html">多线程 之 NSThread</a>
+			        <a href="15501356584731.html">UITableView顶部空白的几种解决办法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15200726964422.html">iOS Block 知识点拾遗</a>
+			        <a href="15488351784332.html">Objective-C中的字符串类型枚举 探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15235286649865.html">音视频学习笔记 1</a>
+			        <a href="15409691048860.html">【Swift笔记】引用计数</a>
 			      </li>
 		     
 		  
@@ -858,7 +1613,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 

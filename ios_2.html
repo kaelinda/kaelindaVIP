@@ -122,6 +122,8 @@
             <li><a href="vue.html">Vue</a></li>
         
             <li><a href="shell.html">shell</a></li>
+        
+            <li><a href="%E7%BD%91%E7%BB%9C.html">网络</a></li>
          
 
       </ul>
@@ -144,37 +146,23 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="15130871696781.html">
+                <a class="clearlink" href="15253400374602.html">
                 
-                  <h1>Effective Objective-c 2.0 学习笔记</h1>
+                  <h1>多线程 之 NSThread</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>编写高质量iOS与OS X代码的52个有效方法</p>
+                        	<h2 id="toc_0">基本使用</h2>
 
-<h1 id="toc_0">第一章 熟悉Objective-C</h1>
+<h2 id="toc_1">基本知识点学习笔记</h2>
 
-<h2 id="toc_1">第1条 了解Objective-C语言的起源</h2>
-
-<ol>
-<li>笔记：</li>
-<li>OC是动态语言，使用<code>消息结构</code>(messaging structure),而非<code>函数调用</code>(function calling)。OC由消息语言的鼻祖smalltalk演化而来。</li>
-<li>区别：消息结构的语言，其运行时执行的代码由运行环境决定；函数调用的语言，则由编译器决定。</li>
-<li>OC中对象所占内存总是分配在<code>堆空间</code>(heap space)而不会在<code>栈空间</code>(stack)上</li>
-<li><p>OC中不带*的变量，有可能会使用<code>栈空间</code>，比如CGRect 结构体<br/>
-~~ <code><br/>
-~~ struct CGRect{<br/>
-~~     CGPoint point;<br/>
-~~     CGSize size;<br/>
-~~ };<br/>
-~~</code><br/>
-因为创建对象需要额外开销（分配&amp;释放堆内存），从效率上，结构体性能更好。</p></li>
-<li><p>要点</p></li>
-<li><p>Objective-c为C语言天减了面向对象特性，是其超集。Objective-C是使用动态绑定的消息结构，也就是说，在运行时才会检查对象类型。接收这一消息后，究竟该执行何种代码实现，有运行期环境决定而非编译器。</p></li>
-<li><p>理解C语言的核心概念有助于写好Objective-C程序，尤其是掌握内存模型与指针。</p></li>
-</ol>
-
+<ul>
+<li>新创建的线程放到了内存的<code>可调度线程池内</code></li>
+<li>线程关系：
+<img src="https://ws1.sinaimg.cn/large/006tKfTcly1fqyaf1gkuvj31gm0nmx2b.jpg" alt=""/></li>
+<li></li>
+</ul>
 
                         
                       </div>
@@ -182,8 +170,8 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15130871696781.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/12/12</span>
+                  
+                    <span class="date">2018/5/3</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
@@ -200,32 +188,53 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15130871866705.html">
+                <a class="clearlink" href="15235286649865.html">
                 
-                  <h1>当虹云直播SDK植入引导</h1>
+                  <h1>音视频学习笔记 1</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<hr/>
+                        	<h2 id="toc_0">音视频概念</h2>
 
-<h2 id="toc_0">一、导入静态库 libARCPlayerRecoder.a</h2>
+<h3 id="toc_1">声音的物理性质</h3>
 
-<h2 id="toc_1">二、导入framework</h2>
+<ul>
+<li>声波三要素：频率、振幅、波形</li>
+<li>人耳听到的频率范围 20Hz-20KHz</li>
+<li><p>声音在空气中的传播速度 340m/s、蒸馏水中1497m/s、铁棒5200m/s</p></li>
+<li><p>一般声音的采样频率为 44.1KHz---&gt; 一秒钟采样44100次，这样 20KHz的频率也能被数字化</p></li>
+<li><p>音频的裸数据格式 脉冲编码调制  PCM （Pluse Code Modulation）</p></li>
+<li><p>PCM 相关概念：量化格式、采样频率、声道数</p></li>
+</ul>
 
-<p>(img)</p>
+<h3 id="toc_2">音频编码</h3>
 
-<h2 id="toc_2">三、添加info.plist文件的授权选项 麦克风 摄像头权限授权申请</h2>
+<p>音频压缩编码算法有：PCM、WAV、AAC、MP3、Ogg。</p>
 
-<p>(img)</p>
+<ul>
+<li>WAV：音频质量好，大多数软件都支持，但是占用空间大；适合当做多媒体开发的中间文件，保存音乐、音效素材</li>
+<li>MP3：不错的压缩比，LAME编码中高码率文件。音质在128Kbit/s 以上表现不错，压缩比高，大多数软件都支持。适合高比特率下对兼容性有要求的音乐欣赏。</li>
+<li>AAC：包括LC-AAC、HE-AAC、HE-AAC v2,小于128Kbit/s表现优异。</li>
+</ul>
 
-<h2 id="toc_3">四、.m文件 中引用 C++方法的时候 需要变为.mm文件</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: center">LC-AAC</th>
+<th style="text-align: center">HE-AAC</th>
+<th style="text-align: center">HE-AAC v2</th>
+</tr>
+</thead>
 
-<h2 id="toc_4">五、变量类型转换</h2>
-
-<p>self 改为 (__bridge void *) self<br/>
-用  (__bridge void *)  进行类型的强制转换</p>
-
+<tbody>
+<tr>
+<td style="text-align: center">中高码率&gt;80Kbit/s</td>
+<td style="text-align: center">中低码率&lt;=80Kbit/s</td>
+<td style="text-align: center">低码率&lt;48Kbit/s</td>
+</tr>
+</tbody>
+</table>
 
                         
                       </div>
@@ -233,8 +242,8 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15130871866705.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/12/12</span>
+                  
+                    <span class="date">2018/4/12</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
@@ -251,45 +260,69 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15130872092436.html">
+                <a class="clearlink" href="15233259445112.html">
                 
-                  <h1>iOS打包上架素材准备概要说明</h1>
+                  <h1>疯狂iOS讲义笔记 1</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2 id="toc_0">开发者打包</h2>
+                        	<h2 id="toc_0">多点触摸与 手势检测</h2>
 
-<h3 id="toc_1">Xcode配置</h3>
-
-<p><em>Xcode8 旧标准</em></p>
+<h3 id="toc_1">响应者链</h3>
 
 <ul>
-<li><p>Xcode8 icon iPhone</p>
+<li>响应者链：第一响应者 ---&gt; 第一响应者的视图控制器 ---&gt; 父控制器（如果有的话）---&gt; UIWindow ---&gt; UIApplication ---&gt; 应用程序委托对象</li>
+<li>手势交互触发事件的过程，iOS系统遍历视图的时候 是 深度遍历 还是 广度遍历？</li>
+</ul>
+
+<p>事件的传递：是广度遍历<br/>
+事件的响应：深度遍历</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/4/10</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15222179789382.html">
+                
+                  <h1>iOS GCD&&多线程</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">基础篇</h2>
+
+<h3 id="toc_1">GCD用途</h3>
+
+<blockquote>
+<p>GCD 是 Grand Central Dispatch 的缩写。</p>
+</blockquote>
 
 <ul>
-<li><code>icon-29.png        29*29</code></li>
-<li><code>icon-29@2x.png     58*58</code></li>
-<li><code>icon-29@3x.png     87*87</code></li>
-<li><code>icon-40@2x.png     80*80</code></li>
-<li><code>icon-40@3x.png     120*120</code></li>
-<li><code>icon-57.png        57*57</code></li>
-<li><code>icon-57@2x.png     114*114</code></li>
-<li><code>iocn-60@2x.png     120*120</code></li>
-<li><code>icon-60@3x.png     180*180</code></li>
-<li><code>icon-20@2x.png     40*40</code></li>
-<li><code>icon-20@3x.png     60*60</code><br/></li>
-</ul></li>
-<li><p>Xcode8 LaunchImage：</p>
-
-<ul>
-<li><code>414*736 @3x    1242*2208</code></li>
-<li><code>736*414  @3x    2208*1242</code></li>
-<li><code>375*667 @2x    750*1334</code></li>
-<li><code>320*568 @2x    640*1136</code></li>
-<li><code>320*480 @2x    640*960</code></li>
-<li><code>320*480 @1x    320*480</code></li>
-</ul></li>
+<li>GCD 可用于多核的并行运算</li>
+<li>GCD 会自动利用更多的 CPU 内核（比如双核、四核）</li>
+<li>GCD 会自动管理线程的生命周期（创建线程、调度任务、销毁线程）</li>
+<li>程序员只需要告诉 GCD 想要执行什么任务，不需要编写任何线程管理代码</li>
 </ul>
 
 
@@ -299,8 +332,8 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15130872092436.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/12/12</span>
+                   <a href="15222179789382.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/3/28</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
@@ -317,25 +350,39 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15139059079620.html">
+                <a class="clearlink" href="15200726964422.html">
                 
-                  <h1>学习资源网址</h1>
+                  <h1>iOS Block 知识点拾遗</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2 id="toc_0">技术学习资源</h2>
-
-<h3 id="toc_1">sublime学习资源</h3>
-
+                        	<ol>
+<li><p>Block为什么要用copy</p>
 <ul>
-<li><a href="http://www.jianshu.com/p/aa30cc25c91b">Sublime 入门+进阶</a>：<code>http://www.jianshu.com/p/aa30cc25c91b</code></li>
-<li><a href="http://www.jeffjade.com/2015/12/15/2015-04-17-toss-sublime-text/">sublime全解</a>: <code>http://www.jeffjade.com/2015/12/15/2015-04-17-toss-sublime-text/</code></li>
-<li><a href="https://dribbble.com/">Sublime 图标下载</a>: <code>https://dribbble.com/</code></li>
-</ul>
-
-<h3 id="toc_2">MarkDown学习资源</h3>
-
+<li>block在创建的时候默认分配的内存是在栈上，而不是在堆上。这样的话其本身的作用域是属于创建时候的作用域，一旦在创建的作用域之外调用就会导致程序的崩溃。所以使用了copy将其拷贝到堆内存上。</li>
+<li>block创建在栈上，而block的代码中可能会用到本地的一些变量，在栈上可能随时会被系统释放掉，只有将其拷贝到堆上，才能一直保持Block的存在，并用这些外部变量</li>
+</ul></li>
+<li><p>Block为什么不用retain</p>
+<ul>
+<li>retain只是增加了一次引用计数，block的内存还是在栈上，并没有存在堆上，存在栈上的block可能随时被系统回收</li>
+</ul></li>
+<li><p>为什么进入block中的对象引用计数需要自动加1？</p>
+<ul>
+<li>Block执行的是回调，因此block并不知道其中的对象obj创建后会在什么时候被释放，为了不在block使用obj之前，对象已经被释放，block就retain了obj一次</li>
+</ul></li>
+<li><p>block和函数的关系</p>
+<ul>
+<li>Block的使用很<strong>像函数指针</strong>，不过与函数最大的不同是Block可以访问函数以外、词法作用域以内的外部变量的值。换句话说，Block不仅 实现函数的功能，还能<strong>携带函数的执行环境</strong>。</li>
+<li>函数指针 <code>void(*fun)(int)</code></li>
+<li>block <code>void(^fun)(int)</code></li>
+</ul></li>
+<li><p>block本质（对于block的理解）<a href="https://www.cnblogs.com/yoon/p/4953618.html">请查阅Block实现原理</a></p>
+<ul>
+<li>block实际上是: 指向结构体的指针</li>
+<li>编译器会将block的内部代码生成对应的函数</li>
+</ul></li>
+<li><p>对于基本数据类型，进入到block中会被当做常量处理。对象 retain 会一次</p>
 
                         
                       </div>
@@ -343,8 +390,767 @@
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15139059079620.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/12/22</span>
+                   <a href="15200726964422.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/3/3</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15200715202464.html">
+                
+                  <h1>iOS 离屏渲染</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">触发方式</h2>
+
+<p>设置以下方式会触发离屏渲染：</p>
+
+<ul>
+<li>shouldRasterize（光栅化）</li>
+<li>masks（遮罩）</li>
+<li>shadows（阴影）</li>
+<li>edge antialiasing（抗锯齿）</li>
+<li>group opacity（不透明）</li>
+<li>复杂形状设置圆角等</li>
+<li>渐变 </li>
+</ul>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/3/3</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15198022156700.html">
+                
+                  <h1>iOS 面试题总结</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">基础篇</h2>
+
+<h3 id="toc_1">内存管理 ：assign copy strong weak...</h3>
+
+<ul>
+<li>简述OC中内存管理机制,与retain配对使用的方法是dealloc还是release，为什么？</li>
+</ul>
+
+<blockquote>
+<p>管理机制：<br/>
+  使用了一种叫做 <strong>引用计数</strong> 的机制来管理内存中的对象。OC中每个对象都对应着他们自己的引用计数，引用计数可以理解为一个整数计数器，当使用alloc方法创建对象的时候，持有计数会自动设置为1。当你向一个对象发送retain消息 时，持有计数数值会增加1。相反，当你像一个对象发送release消息时，持有计数数值会减小1。当对象的持有计数变为0的时候，对象会释放自己所占用的内存</p>
+</blockquote>
+
+<ul>
+<li><p>修饰词的作用</p>
+<ul>
+<li>retain(引用计数加1)-&gt;release（引用计数减1）</li>
+<li>alloc（申请内存空间）-&gt;dealloc(释放内存空间)</li>
+<li>readwrite: 表示既有getter，也有setter   (默认)</li>
+<li>readonly: 表示只有getter，没有setter</li>
+<li>nonatomic:不考虑线程安全</li>
+<li>atomic:线程操作安全   （默认）</li>
+<li>retain: release旧的对象，将旧对象的值赋予输入对象，再提高输入对象的索引计数为1</li>
+<li>assign: 简单赋值，不更改索引计数    （默认）</li>
+<li>copy: 其实是建立了一个相同的对象,地址不同（retain：指针拷贝  copy：内容拷贝）</li>
+<li>strong:（ARC下的）和（MRC）retain一样    （默认）</li>
+<li>weak:（ARC下的）和（MRC）assign一样， weak当指向的内存释放掉后自动nil化，防止野指针</li>
+<li>unsafe_unretained 声明一个弱引用，但是不会自动nil化，也就是说，如果所指向的内存区域被释放了，这个指针就是一个野指针了。 autoreleasing 用来修饰一个函数的参数，这个参数会在函数返回的时候被自动释放。<br/>
+### .类变量的@protected ,@private,@public,@package，声明各有什么含义？</li>
+</ul></li>
+</ul>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/2/28</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15193944679783.html">
+                
+                  <h1>iOS 项目组件化</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">组件化需要解决的问题</h2>
+
+<ul>
+<li>APP 如何跳到任意指定界面（APP外部跳转，APP内部跳转）</li>
+<li>自家APP之间如何相互跳转 </li>
+<li>如何降低APP组件和APP界面之间的耦合度</li>
+<li>如何动态下发配置文件；iOS 安卓共用配置文件</li>
+<li>AOP统计界面跳转</li>
+<li>组件之间通信，组件和界面之间通信</li>
+</ul>
+
+<h2 id="toc_1">组件化步骤</h2>
+
+<ul>
+<li>拆分UI组件</li>
+<li>拆分业务组件</li>
+<li>组件管理</li>
+<li>组件通信</li>
+</ul>
+
+<h2 id="toc_2">组件化架构 &amp;&amp; 思路</h2>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/2/23</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15193931556096.html">
+                
+                  <h1>iOS APP性能优化方向分析</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">网络性能</h2>
+
+<ul>
+<li>减少不必要的网络请求</li>
+<li>server端数据查询算法优化</li>
+<li>DNS解析</li>
+</ul>
+
+<h2 id="toc_1">内存性能</h2>
+
+<ul>
+<li>各种循环引用 导致内存泄漏</li>
+<li>Core Animation 对象手动释放</li>
+<li>UIWebView 内存泄漏</li>
+</ul>
+
+<h2 id="toc_2">主线程阻塞</h2>
+
+<ul>
+<li>网络同步请求</li>
+<li>I/O操作</li>
+<li>大量运算</li>
+<li>解压、压缩<br/>
+...</li>
+</ul>
+
+<h2 id="toc_3">离屏渲染</h2>
+
+<p>离屏渲染：GPU在当前缓存区之外另外的去开辟空间进行渲染，同样的一帧图片 会被渲染两次甚至多次</p>
+
+<p>：uiview.layer.cornerRadius 系统方法切圆角---&gt;&gt;解决方案：Runtime + 画图</p>
+
+<h2 id="toc_4">图片处理</h2>
+
+<ul>
+<li>imageWithName：加载到缓存中可重复使用</li>
+<li>initWithContentsOfFile: 加载一次不会存到缓存中</li>
+</ul>
+
+<h2 id="toc_5">其他</h2>
+
+<ul>
+<li>加速启动</li>
+<li>避免日期格式的转换</li>
+</ul>
+
+<h3 id="toc_6">优化瀑布流中 网络图片 加载导致UI卡顿问题</h3>
+
+<blockquote>
+<p>1、异步下载图片<br/>
+2、异步加载图片成二进制 NSData  （<strong>这一步是关键</strong>） <br/>
+3、UIImageView 加载二进制形式的NSData</p>
+</blockquote>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/2/23</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15174544275720.html">
+                
+                  <h1>DLNA DMR</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">CGUpnpAvRenderer</h2>
+
+<pre><code class="language-text">#if !defined(_CG_CLINKCAV_MEDIARENDERER_H_)
+typedef void CgUpnpAvRenderer;
+#endif
+
+/**
+ * The CGUpnpAvRenderer class is a UPnP/AV media server class.
+ */
+@interface CGUpnpAvRenderer : CGUpnpDevice
+{
+    CgUpnpAvRenderer *cAvObject;
+}
+@property(readonly) CgUpnpAvRenderer *cAvObject;
+- (id)init;
+- (id)initWithCObject:(CgUpnpDevice *)cobj;
+- (BOOL)setAVTransportURI:(NSString *)aURI;
+- (BOOL)play;
+- (BOOL)stop;
+- (BOOL)pause;
+- (BOOL)next;
+- (BOOL)previous;
+- (BOOL)seek:(float)absTime;
+- (BOOL)isPlaying;
+/*
+- (BOOL)start
+- (BOOL)stop
+*/
+- (CGUpnpAVPositionInfo *)positionInfo;
+</code></pre>
+
+<h2 id="toc_1">CGUpnpDevice</h2>
+
+<pre><code class="language-text">/**
+ * The CGUpnpDevice class is a wrapper class for CgUpnpDevice of CyberLink for C.
+ */
+// 设备包装类
+@protocol CGUpnpDeviceDelegate &lt;NSObject&gt;
+@optional
+// 收到Action的协议方法
+- (BOOL)device:(CGUpnpDevice *)device service:(CGUpnpService *)service actionReceived:(CGUpnpAction *)action;
+@end
+
+/**
+ * The CGUpnpDevice class is a wrapper class for CgUpnpDevice of CyberLink for C.
+ */
+@interface CGUpnpDevice : NSObject 
+{
+    BOOL isCObjectCreated;
+}
+@property(assign) CgUpnpDevice *cObject;
+@property(assign) id&lt;CGUpnpDeviceDelegate&gt; delegate;
+/**
+ * Create a new UPnP device.
+ * 
+ * @return New instance if successfull; otherwise nil.
+ */
+ // 初始化方法 创建一个新的UPnP设备
+- (id) init;
+/**
+ * Create a new UPnP device with the C instance.
+ * 
+ * @return New instance if successfull; otherwise nil.
+ */
+ // 用一个设备初始化另一设备
+- (id) initWithCObject:(CgUpnpDevice *)cobj;
+/**
+ * Create a new UPnP device with the XML descriptioin.
+ * 
+ * @return New instance if successfull; otherwise nil.
+ */
+ // xml  创建设备
+- (id) initWithXMLDescription:(NSString *)xmlDesc;
+/**
+ * Parse the specified XML description.
+ * 
+ * @return YES if successfull; otherwise nui.
+ */
+- (BOOL) parseXMLDescription:(NSString *)xmlDesc;
+/**
+ * Get the friendly name of the device.
+ * 
+ * @return Friendly name.
+ */
+// 获取友好的名字
+- (NSString *)friendlyName;
+/**
+ * Get the device type of the device.
+ * 
+ * @return Device Type.
+ */
+ // 设备类型
+- (NSString *)deviceType;
+/**
+ * Get the UDN of the device.
+ * 
+ * @return UDN of the specified device.
+ */
+ // 获取设备的UDN
+- (NSString *)udn;
+/**
+ * Return a manufacture.
+ *
+ * @return Manufacture of the device.
+ */
+ // 制造商
+- (NSString *)manufacturer;
+
+/**
+ * Return a model number.
+ *
+ * @return Model number of the device.
+ */
+ // 返回模型数
+- (NSString *)modelNumber;
+
+/**
+ * Return a model name.
+ *
+ * @return Model name of the device.
+ */
+ // 返回模型名
+- (NSString *)modelName;
+
+/**
+ * Return a urlBase
+ *
+ * @return URLBase of the device.
+ */
+ // 返回设备的URLBase
+- (NSString *)urlBase;
+/**
+ * Return a descrition URL
+ *
+ * @return Descripton URL of the device.
+ */
+ // 返回设备URL描述
+- (NSString *)descriptionURL;
+/**
+ * Return a location URL
+ *
+ * @return Location URL of the device.
+ */
+ // 返回一个本地URL
+- (NSString *)locationURL;
+/**
+ * Set a device type of the device.
+ * 
+ * @param aType Device type to set.
+ */
+ // 设置设备类型
+-(void)setDeviceType:(NSString *)aType;
+/**
+ * Set a friendly name of the device.
+ * 
+ * @param aName Friendly name to set.
+ */
+ // 设置友好名称
+-(void)setFriendlyName:(NSString *)aName;
+/**
+ * Set a udn of the device.
+ * 
+ * @param aUdn UDN to set.
+ */
+-(void)setUdn:(NSString *)aUdn;
+/**
+ * Check whether the device type is the specified type.
+ *
+ * @param aType A type string of the device.
+ * 
+ * @return YES if the specified type is same as the device type; otherwise NO.
+ */
+- (BOOL)isDeviceType:(NSString *)aType;
+/**
+ * Check whether the device&#39;s UDN is the specified UDN.
+ *
+ * @param aUDN A UDN string of the device.
+ * 
+ * @return YES if the specified UDN is same as the device&#39; UDN; otherwise NO.
+ */
+- (BOOL)isUDN:(NSString *)aUDN;
+/**
+ * Check whether the device&#39;s friendly name is the specified name.
+ *
+ * @param aFriendlyName A friendly name string of the device.
+ * 
+ * @return YES if the specified friendly name is same as the device&#39; friendly name; otherwise NO.
+ */
+- (BOOL)isFriendlyName:(NSString *)aFriendlyName;
+/**
+ * Return a presentationURL
+ *
+ * @return presentationURL of the device.
+ */
+- (NSString *)presentationURL;
+/**
+ * Get all services in the device as a NSArray object. The array has the services as instances of CGUpnpService.
+ *
+ * @return NSArray of CGUpnpService.
+ */
+ // 返回设备CGUpnpService服务组
+- (NSArray *)services;
+/**
+ * Get a service in the device by the specified service ID.
+ *
+ * @param serviceId A service ID string of the service.
+ *
+ * @return The CGUpnpService if the specified service is found; otherwise nil.
+ */
+ // 根据seviceID 获取服务对象
+- (CGUpnpService *)getServiceForID:(NSString *)serviceId;
+/**
+ * Get a service in the device by the specified service type.
+ *
+ * @param serviceType A service type string of the service.
+ *
+ * @return The CGUpnpService if the specified service is found; otherwise nil.
+ */
+ // 根据类型获取服务对象 service
+- (CGUpnpService *)getServiceForType:(NSString *)serviceType;
+/**
+ * Get all icons in the device as a NSArray object. The array has the services as instances of CGUpnpIconIcon.
+ *
+ * @return NSArray of CGUpnpIcon.
+ */
+ // 获取所有图标
+- (NSArray *)icons;
+/**
+ * Start the device.
+ *
+ * @return YES if the device is started normally, otherwise NO.
+ */
+- (BOOL)start;
+/**
+ * Stop the device.
+ *
+ * @return YES if the device is started normally, otherwise NO.
+ */
+- (BOOL)stop;
+/**
+ * Check if the controll point is running.
+ *
+ * @return YES if the device is started normally, otherwise NO.
+ */
+ //检查控制点 DMC是否在运行
+- (BOOL)isRunning;
+/**
+ * Announce the device.
+ *
+ * @return YES if the device is started normally, otherwise NO.
+ */
+ // 广播这个设备
+- (BOOL)announce;
+/**
+ * Set a user data.
+ *
+ * @param aUserData A user data to set.
+ *
+ * @return The CGUpnpService if the specified service is found; otherwise nil.
+ */
+ // 设置用户数据
+- (void)setUserData:(void *)aUserData;
+/**
+ * Get a stored user data.
+ *
+ * @return A stored user data.
+ */
+ 获取已存储的用户数据
+- (void *)userData;
+/**
+ * Return a IP address.
+ *
+ * @return IP address of the device.
+ */
+ // 获取IP地址
+- (NSString *)ipaddress;
+/**
+ * Return a most smallest icon.
+ *
+ * @return Smallest Icon.
+ */
+ // 获取一个最小的 icon
+- (CGUpnpIcon *)smallestIcon;
+/**
+ * Return a most smallest icon with a specified mime type.
+ *
+ * @return Smallest Icon.
+ */
+ // 获取指定类型的icon
+- (CGUpnpIcon *)smallestIconWithMimeType:(NSString *)mimeType;
+/**
+ * Return a absolute url of the specified icon.
+ *
+ * @param anIcon Icon.
+ *
+ * @return Absolute url of the specified icon.
+ */
+ // 获取icon的绝对路径
+- (NSString *)absoluteIconUrl:(CGUpnpIcon *)anIcon;
+</code></pre>
+
+<h2 id="toc_2">CGUpnpStateVariable</h2>
+
+<pre><code class="language-text">#if !defined(_CG_UPNP_CSTATEVARIABLE_H_)
+typedef void CgUpnpStateVariable;
+#endif
+
+/**
+ * The CGUpnpStateVariable class is a wrapper class for CgUpnpStateVariable of CyberLink for C.
+ */
+@interface CGUpnpStateVariable : NSObject 
+{
+    CgUpnpStateVariable *cObject;
+}
+@property(readonly) CgUpnpStateVariable *cObject;
+- (id)initWithCObject:(CgUpnpStateVariable *)cobj;
+/**
+ * Get the name of the state variable.
+ * 
+ * @return The name.
+ */
+ // 状态名
+- (NSString *)name;
+/**
+ * Get the value of the state variable.
+ * 
+ * @return The value.
+ */
+ // 状态值
+- (NSString *)value;
+
+/**
+ * Get an array of the allowed values for the state variable
+ * 
+ * @return The array.
+ */
+ // 允许的所有状态值
+- (NSArray *)allowedValues;
+
+/**
+ * Checks whether value is allowed for this state variable
+ *
+ * @param value to be checked
+ *
+ * @return YES if true
+ */
+ // 检测状态值是否是被允许的
+- (BOOL)isAllowedValue:(NSString*)value;
+
+/**
+ * Send query
+ *
+ * @return YES if successfull; otherwise NO
+ */
+- (BOOL)query;
+/**
+ * Get a states code of the last query. 
+ *
+ * @return The status code
+ */
+- (NSInteger)statusCode;
+</code></pre>
+
+<h2 id="toc_3">CGUpnpIcon</h2>
+
+<pre><code class="language-text">/**
+ * The CGUpnpIcon class is a wrapper class for CgUpnpIcon of CyberLink for C.
+ */
+@interface CGUpnpIcon : NSObject
+{
+    CgUpnpIcon *cObject;
+#if defined(TARGET_OS_IPHONE)
+    NSString *resourceName;
+#endif
+}
+@property(readonly) CgUpnpIcon *cObject;
+#if defined(TARGET_OS_IPHONE)
+@property(readonly) NSString *resourceName;
+#endif
+- (id)initWithCObject:(CgUpnpIcon *)cobj;
+/**
+ * Get the url of the icon.
+ * 
+ * @return The url.
+ */
+- (NSString *)url;
+/**
+ * Get the url of the width.
+ * 
+ * @return The width.
+ */
+- (NSInteger)width;
+/**
+ * Get the height of the icon.
+ * 
+ * @return The height.
+ */
+- (NSInteger)height;
+/**
+ * Get the depth of the icon.
+ * 
+ * @return The depth.
+ */
+- (NSInteger)depth;
+#if defined(TARGET_OS_IPHONE)
+- (void)setResourceName:(NSString *) aResourceName;
+#endif
+</code></pre>
+
+<h2 id="toc_4">CGUpnpAVPositionInfo</h2>
+
+<pre><code class="language-text">@property(retain) CGUpnpAction *upnpAction;
+-(id)initWithAction:(CGUpnpAction *)aUpnpAction;
+-(float)trackDuration;
+-(float)absTime;
+-(float)relTime;
+@end
+
+@interface NSString(CGUPnPAV)
+// 总时长字符串
++(NSString *)stringWithDurationTime:(float)timeValue;
+// 总时长
+- (float)durationTime;
+</code></pre>
+
+<h2 id="toc_5">CGUpnpAction</h2>
+
+<pre><code class="language-text">@interface CGUpnpAction : NSObject 
+{
+    CgUpnpAction *cObject;
+}
+@property(readonly) CgUpnpAction *cObject;
+- (id)initWithCObject:(CgUpnpAction *)cobj;
+/**
+ * Get the name of the action.
+ * 行为名称
+ * @return The name.
+ */
+- (NSString *)name;
+/**
+ * Get all arguments in the action as a NSDictionary object.
+ * 获取所有行为对象中的参数
+ * @return NSDictionary of the arguments.
+ */
+- (NSDictionary *)arguments;
+/**
+ * Set a value of the specified argument from the action by the argument&#39;s name directly.
+ * 通过name给指定action设置参数
+ * @param value The value to set
+ * @param name The name of the argument to look for
+ * @return YES if successfull; otherwise NO
+ */
+- (BOOL)setArgumentValue:(NSString *)value forName:(NSString *)name;
+/**
+ * Get a value of the specified argument from the action by the argument&#39;s name directly.
+ * 通过action参数名 获取action参数值
+ * @param name The name of the argument to look for
+ * @return The target value if successfull; otherwise NULL
+ */
+- (NSString *)argumentValueForName:(NSString *)name;
+/**
+ * Send action
+ * 发送Action
+ * @return YES if successfull; otherwise NO
+ */
+- (BOOL)post;
+/**
+ * Send action
+ * 发送action 携带指定参数
+ * @param arguments Arguments to set
+ *
+ * @return YES if successfull; otherwise NO
+ */
+- (BOOL)postWithArguments:(NSDictionary *)arguments;
+/**
+ * Get a states code of the last post. 
+ * 获取最后POST的状态码
+ * @return The status code
+ */
+- (NSInteger)statusCode;
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/2/1</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
@@ -371,7 +1177,7 @@
 			  </div>
 			  <div class="large-6 columns">
 			<p class="text-right" style="padding-top:25px;">
-			
+			 <a href="ios_3.html">&raquo; Next Page</a> 
 			</p>
 			  </div>
 			</div>
@@ -396,7 +1202,7 @@
 
 
 
-
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/KaelLVLinda" title="Twitter">Twitter</a>
 <a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
 <a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
   <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
@@ -427,6 +1233,8 @@
             <a href="vue.html"><strong>Vue</strong></a>
         
             <a href="shell.html"><strong>shell</strong></a>
+        
+            <a href="%E7%BD%91%E7%BB%9C.html"><strong>网络</strong></a>
          
         </p>
 
@@ -443,31 +1251,31 @@
 	      
 		      
 			      <li class="post">
-			        <a href="15261167596297.html">OC 多线程之 GCD知识从基础到进阶 （1）</a>
+			        <a href="15523077857608.html">OC中枚举写法  以及 字符串枚举探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15257437237715.html">OC中的各种遍历</a>
+			        <a href="15522686353535.html">iOS 动画全解 (1)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15253400374602.html">多线程 之 NSThread</a>
+			        <a href="15501356584731.html">UITableView顶部空白的几种解决办法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15200726964422.html">iOS Block 知识点拾遗</a>
+			        <a href="15488351784332.html">Objective-C中的字符串类型枚举 探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15235286649865.html">音视频学习笔记 1</a>
+			        <a href="15409691048860.html">【Swift笔记】引用计数</a>
 			      </li>
 		     
 		  
@@ -542,7 +1350,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 

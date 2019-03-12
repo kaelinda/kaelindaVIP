@@ -122,6 +122,8 @@
             <li><a href="vue.html">Vue</a></li>
         
             <li><a href="shell.html">shell</a></li>
+        
+            <li><a href="%E7%BD%91%E7%BB%9C.html">网络</a></li>
          
 
       </ul>
@@ -185,24 +187,20 @@
 
 <ul>
 <li><p>任务：就是要执行的操作，要做的事情，要执行的代码块，比如GCD中Block代码块</p>
-
 <ul>
 <li><p>同步执行：</p>
-
 <ul>
 <li>会 <strong>等待</strong> 队列前面的任务完成后继续往下执行， </li>
 <li>只能在 <strong>当前线程</strong> 中执行，</li>
 <li>不具备 <strong>开辟新线程的能力</strong></li>
 </ul></li>
 <li><p>异步执行：</p>
-
 <ul>
 <li>不等待</li>
 <li>具备开辟新线程的能力，可以开辟线程执行任务，也可以不开辟新线程</li>
 </ul></li>
 </ul></li>
 <li><p>队列：一种特殊的线性表，采用 FIFO（先进先出）的原则</p>
-
 <ul>
 <li><p>串行队列：每次只有一个任务被执行。让任务一个接着一个地执行。（只开启一个线程，一个任务执行完毕后，再执行下一个任务）</p></li>
 <li><p>并发队列：可以让多个任务并发（同时）执行。（可以开启多个线程，并且同时执行任务）</p></li>
@@ -227,27 +225,21 @@
 
 <ul>
 <li><p>串行队列的创建方法</p>
-
-<pre><code>dispatch_queue_t queue = dispatch_queue_create(&quot;net.bujige.testQueue&quot;, DISPATCH_QUEUE_SERIAL);
+<pre><code class="language-text">dispatch_queue_t queue = dispatch_queue_create(&quot;net.bujige.testQueue&quot;, DISPATCH_QUEUE_SERIAL);
 </code></pre></li>
 <li><p>并发队列的创建方法</p>
-
-<pre><code>dispatch_queue_t queue = dispatch_queue_create(&quot;net.bujige.testQueue&quot;, DISPATCH_QUEUE_CONCURRENT);
+<pre><code class="language-text">dispatch_queue_t queue = dispatch_queue_create(&quot;net.bujige.testQueue&quot;, DISPATCH_QUEUE_CONCURRENT);
 </code></pre></li>
 <li><p>主队列的获取方法</p>
-
-<pre><code>dispatch_queue_t queue = dispatch_get_main_queue();
+<pre><code class="language-text">dispatch_queue_t queue = dispatch_get_main_queue();
 </code></pre>
-
 <p><strong>划重点： 所有放在主队列中的任务，都会放到主线程中执行!!!!!!!!</strong></p></li>
 <li><p>全局并发队列创建</p>
-
-<pre><code>/**
-* 默认并发队列
-* DISPATCH_QUEUE_PRIORITY_DEFAULT 默认优先级
-* 第二个参数没什么用（预留字段） 默认0
-*/
-
+<pre><code class="language-text">/**
+* 默认并发队列<br/>
+* DISPATCH_QUEUE_PRIORITY_DEFAULT 默认优先级<br/>
+* 第二个参数没什么用（预留字段） 默认0<br/>
+*/<br/>
 dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 </code></pre></li>
 </ul>
@@ -258,7 +250,7 @@ dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAU
 <li>同步执行任务创建方法</li>
 </ul>
 
-<pre><code>dispatch_sync(queue, ^{
+<pre><code class="language-text">dispatch_sync(queue, ^{
     // 这里放同步执行任务代码
 });
 </code></pre>
@@ -267,7 +259,7 @@ dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAU
 <li>异步执行任务创建方法</li>
 </ul>
 
-<pre><code>dispatch_async(queue, ^{
+<pre><code class="language-text">dispatch_async(queue, ^{
     // 这里放异步执行任务代码
 });
 </code></pre>
@@ -302,39 +294,33 @@ dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAU
 
 <ul>
 <li><p>同步 串行</p>
-
 <blockquote>
 <p>所有任务都是在当前线程（主线程）中执行的，并没有开启新的线程（同步执行不具备开启新线程的能力）。<br/>
 所有任务都在打印的syncConcurrent---begin和syncConcurrent---end之间执行（同步任务需要等待队列的任务执行结束）。<br/>
 任务是按顺序执行的（串行队列每次只有一个任务被执行，任务一个接一个按顺序执行）。</p>
 </blockquote></li>
 <li><p>同步 并发</p>
-
 <blockquote>
 <p>所有任务都是在当前线程（主线程）中执行的，没有开启新的线程（同步执行不具备开启新线程的能力）。<br/>
 所有任务都在打印的syncConcurrent---begin和syncConcurrent---end之间执行的（同步任务需要等待队列的任务执行结束）。<br/>
 任务按顺序执行的。按顺序执行的原因：虽然并发队列可以开启多个线程，并且同时执行多个任务。但是因为本身不能创建新线程，只有当前线程这一个线程（同步任务不具备开启新线程的能力），所以也就不存在并发。而且当前线程只有等待当前队列中正在执行的任务执行完毕之后，才能继续接着执行下面的操作（同步任务需要等待队列的任务执行结束）。所以任务只能一个接一个按顺序执行，不能同时被执行。</p>
 </blockquote></li>
 <li><p>异步 串行</p>
-
 <blockquote>
 <p>开启了一条新线程（异步执行具备开启新线程的能力，串行队列只开启一个线程）。<br/>
 所有任务是在打印的syncConcurrent---begin和syncConcurrent---end之后才开始执行的（异步执行不会做任何等待，可以继续执行任务）。<br/>
 任务是按顺序执行的（串行队列每次只有一个任务被执行，任务一个接一个按顺序执行）。</p>
 </blockquote></li>
 <li><p>异步 并发</p>
-
 <blockquote>
 <p>除了当前线程（主线程），系统又开启了3个线程，并且任务是交替/同时执行的。（异步执行具备开启新线程的能力。且并发队列可开启多个线程，同时执行多个任务）。<br/>
 所有任务是在打印的syncConcurrent---begin和syncConcurrent---end之后才执行的。说明当前线程没有等待，而是直接开启了新线程，在新线程中执行任务（异步执行不做等待，可以继续执行任务）。</p>
 </blockquote></li>
 <li><p>同步 主队列</p>
-
 <blockquote>
 <p>在不同线程中调用结果也是不一样，在主线程中调用会出现死锁，而在其他线程中则不会。</p>
 </blockquote></li>
 <li><p>异步 主队列</p>
-
 <blockquote>
 <p>所有任务都是在当前线程（主线程）中执行的，并没有开启新的线程（虽然异步执行具备开启线程的能力，但因为是主队列，所以所有任务都在主线程中）。<br/>
 所有任务是在打印的syncConcurrent---begin和syncConcurrent---end之后才开始执行的（异步执行不会做任何等待，可以继续执行任务）。<br/>
@@ -358,10 +344,9 @@ dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAU
 
 <ul>
 <li><p>延时函数：<code>dispatch_after</code></p>
-
-<pre><code>dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-    // 2.0秒后异步追加任务代码到主队列，并开始执行
-    NSLog(@&quot;after---%@&quot;,[NSThread currentThread]);  // 打印当前线程
+<pre><code class="language-text">dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    // 2.0秒后异步追加任务代码到主队列，并开始执行<br/>
+    NSLog(@&quot;after---%@&quot;,[NSThread currentThread]);  // 打印当前线程<br/>
 });
 </code></pre></li>
 </ul>
@@ -370,10 +355,9 @@ dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAU
 
 <ul>
 <li><p>一次性代码</p>
-
-<pre><code>static dispatch_once_t onceToken;
-dispatch_once(&amp;onceToken, ^{
-    // 只执行1次的代码(这里面默认是线程安全的)
+<pre><code class="language-text">static dispatch_once_t onceToken;
+dispatch_once(&amp;onceToken, ^{<br/>
+    // 只执行1次的代码(这里面默认是线程安全的)<br/>
 });
 </code></pre></li>
 </ul>
@@ -384,7 +368,7 @@ dispatch_once(&amp;onceToken, ^{
 <li>GCD 快速迭代 <code>dispatch_apply</code></li>
 </ul>
 
-<pre><code>dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+<pre><code class="language-text">dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     
     NSLog(@&quot;apply---begin&quot;);
     dispatch_apply(6, queue, ^(size_t index) {
@@ -398,7 +382,7 @@ dispatch_once(&amp;onceToken, ^{
 <li>队列组 <code>dispatch_group</code></li>
 </ul>
 
-<pre><code>dispatch_group_async
+<pre><code class="language-text">dispatch_group_async
 </code></pre>
 
 
@@ -410,16 +394,16 @@ dispatch_once(&amp;onceToken, ^{
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15223028228569.html" 
-          title="Previous Post: 每天学习一个shell技能 （1）">&laquo; 每天学习一个shell技能 （1）</a>
+          <a href="15233259445112.html" 
+          title="Previous Post: 疯狂iOS讲义笔记 1">&laquo; 疯狂iOS讲义笔记 1</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15193931556096.html" 
-          title="Next Post: iOS APP性能优化方向分析">iOS APP性能优化方向分析 &raquo;</a>
+          <a  href="15200726964422.html" 
+          title="Next Post: iOS Block 知识点拾遗">iOS Block 知识点拾遗 &raquo;</a>
       
       </p>
         </div>
@@ -457,7 +441,7 @@ dispatch_once(&amp;onceToken, ^{
 
 
 
-
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/KaelLVLinda" title="Twitter">Twitter</a>
 <a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
 <a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
   <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
@@ -488,6 +472,8 @@ dispatch_once(&amp;onceToken, ^{
             <a href="vue.html"><strong>Vue</strong></a>
         
             <a href="shell.html"><strong>shell</strong></a>
+        
+            <a href="%E7%BD%91%E7%BB%9C.html"><strong>网络</strong></a>
          
         </p>
 
@@ -504,31 +490,31 @@ dispatch_once(&amp;onceToken, ^{
 	      
 		      
 			      <li class="post">
-			        <a href="15261167596297.html">OC 多线程之 GCD知识从基础到进阶 （1）</a>
+			        <a href="15523077857608.html">OC中枚举写法  以及 字符串枚举探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15257437237715.html">OC中的各种遍历</a>
+			        <a href="15522686353535.html">iOS 动画全解 (1)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15253400374602.html">多线程 之 NSThread</a>
+			        <a href="15501356584731.html">UITableView顶部空白的几种解决办法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15200726964422.html">iOS Block 知识点拾遗</a>
+			        <a href="15488351784332.html">Objective-C中的字符串类型枚举 探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15235286649865.html">音视频学习笔记 1</a>
+			        <a href="15409691048860.html">【Swift笔记】引用计数</a>
 			      </li>
 		     
 		  
@@ -603,7 +589,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 

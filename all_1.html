@@ -122,6 +122,8 @@
             <li><a href="vue.html">Vue</a></li>
         
             <li><a href="shell.html">shell</a></li>
+        
+            <li><a href="%E7%BD%91%E7%BB%9C.html">网络</a></li>
          
 
       </ul>
@@ -144,6 +146,117 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
+                <a class="clearlink" href="15226603064743.html">
+                
+                  <h1>每天学习一个shell技能（6）</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">test</h2>
+
+<h3 id="toc_1">test文件</h3>
+
+<pre><code class="language-text">if test -e ./test.sh
+then
+    echo &#39;文件已存在!&#39;
+else
+    echo &#39;文件不存在!&#39;
+fi
+</code></pre>
+
+<ul>
+<li>-e fileName ： 如果文件存在则为真</li>
+<li>-r  fileName : 如果文件存在且可读则为真</li>
+<li>-w fileName : 如果文件存在且可写则为真</li>
+<li>-x fileName : 如果文件存在且可执行则为真</li>
+<li>-s fileName: 文件存在且至少有一个字符</li>
+<li>-d fileName : 文件存在且为目录</li>
+<li>-f fileName: 文件存在且为文件</li>
+<li>-c fileName:文件存在，且为字符型特殊文件</li>
+<li>-b fileName: 如果文件存在且为块特殊文件则为真</li>
+</ul>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15226603064743.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/4/2</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='shell.html'>shell</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15224936933861.html">
+                
+                  <h1>每天学习一个shell技能（5）</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">Shell echo命令</h2>
+
+<h3 id="toc_1">打印字符</h3>
+
+<pre><code class="language-text">// 下面两行代码效果一致
+echo &quot;It is a test&quot;
+echo It is a test
+</code></pre>
+
+<h3 id="toc_2">打印转义字符</h3>
+
+<pre><code class="language-text">echo &quot;\&quot;It is a test\&quot;&quot;
+// 引号也可以省略
+echo \&quot;It is a test\&quot;
+</code></pre>
+
+<p>打印结果：</p>
+
+<pre><code class="language-text">&quot;It is a test&quot;
+
+&quot;It is a test&quot;
+</code></pre>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15224936933861.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/3/31</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='shell.html'>shell</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
                 <a class="clearlink" href="15224613481161.html">
                 
                   <h1>每天学习一个shell技能（4）</h1>
@@ -155,7 +268,7 @@
 
 <p>基本使用：</p>
 
-<pre><code>#!/bin/bash
+<pre><code class="language-text">#!/bin/bash
 
 val=`expr 2 + 2`
 echo &quot;两数之和为 : $val&quot;
@@ -202,7 +315,7 @@ echo &quot;两数之和为 : $val&quot;
 
 <p>我们可以在脚本执行时，向脚本传递参数</p>
 
-<pre><code>// 终端运行 脚本，并传入参数
+<pre><code class="language-text">// 终端运行 脚本，并传入参数
 sh testBash.sh 0 1 2
 
 echo &quot;Shell 传递参数实例！&quot;
@@ -214,7 +327,7 @@ echo &quot;\$1 =&gt; $1&quot;
 
 <p>打印结果：</p>
 
-<pre><code>Shell 传递参数实例！
+<pre><code class="language-text">Shell 传递参数实例！
 $0 =&gt; testBash.sh
 $1 =&gt; 0
 </code></pre>
@@ -228,6 +341,47 @@ $1 =&gt; 0
                   <div class="more-left left">
                    <a href="15223750607281.html">Read more</a>&nbsp;&nbsp; 
                     <span class="date">2018/3/30</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='shell.html'>shell</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15223028228569.html">
+                
+                  <h1>每天学习一个shell技能 （1）</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">准备</h2>
+
+<p>bash 环境位置</p>
+
+<pre><code class="language-text">#!/bin/bash
+</code></pre>
+
+<p><code>#!</code> 一个约定的标记，它告诉系统这个脚本需要什么解释器来执行，即使用哪一种 Shell</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15223028228569.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/3/29</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='shell.html'>shell</a></span>
@@ -292,154 +446,345 @@ array_name(0)=value0
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15223028228569.html">
+                <a class="clearlink" href="15168925544178.html">
                 
-                  <h1>每天学习一个shell技能 （1）</h1>
+                  <h1>从零开始学习使用 vuex</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2 id="toc_0">准备</h2>
+                        	<blockquote>
+<p>本文是建立在，对vuex理论有一定理解的基础上写的。<br/>
+因为官方文档的写法是 针对 有一定的vue开发经验 和 JavaScript 有一定理解的开发者看的，对于小白级别的我来说，理解起来有一定困难。所以，唯一想我一向的小白想尽快上手vuex....</p>
+</blockquote>
 
-<p>bash 环境位置</p>
+<p><a href="https://vuex.vuejs.org/zh-cn/installation.html">详情请参考vuex官方文档</a></p>
 
-<pre><code>#!/bin/bash
+<h2 id="toc_0">安装</h2>
+
+<h3 id="toc_1">直接下载 CDN 安装</h3>
+
+<p>CDN 链接地址：<code>https://unpkg.com/vuex</code><br/>
+指定到固定版本：<code>https://unpkg.com/vuex@2.0.0</code></p>
+
+<pre><code class="language-text">&lt;script src=&quot;/path/to/vue.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/path/to/vuex.js&quot;&gt;&lt;/script&gt;
 </code></pre>
 
-<p><code>#!</code> 一个约定的标记，它告诉系统这个脚本需要什么解释器来执行，即使用哪一种 Shell</p>
+<h3 id="toc_2">npm 方式安装 （推荐！简单快捷，便于管理）</h3>
 
+<p><code>npm install -save vuex</code></p>
 
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15223028228569.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/3/29</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='shell.html'>shell</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
+<h3 id="toc_3">yar</h3>
 
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15222179789382.html">
-                
-                  <h1>iOS GCD&&多线程</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">基础篇</h2>
+<p><code>yarn add vuex</code></p>
 
-<h3 id="toc_1">GCD用途</h3>
+<h3 id="toc_4">自己构建</h3>
+
+<pre><code class="language-bash">git clone https://github.com/vuejs/vuex.git node_modules/vuex
+cd node_modules/vuex
+npm install
+npm run build
+</code></pre>
+
+<h2 id="toc_5">导入vue工程中使用</h2>
+
+<ul>
+<li>main.js 入口文件</li>
+</ul>
 
 <blockquote>
-<p>GCD 是 Grand Central Dispatch 的缩写。</p>
+<p>按照如下方式导入，工程就可以使用vuex的环境了</p>
 </blockquote>
 
-<ul>
-<li>GCD 可用于多核的并行运算</li>
-<li>GCD 会自动利用更多的 CPU 内核（比如双核、四核）</li>
-<li>GCD 会自动管理线程的生命周期（创建线程、调度任务、销毁线程）</li>
-<li>程序员只需要告诉 GCD 想要执行什么任务，不需要编写任何线程管理代码</li>
-</ul>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15222179789382.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/3/28</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15193931556096.html">
-                
-                  <h1>iOS APP性能优化方向分析</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">网络性能</h2>
-
-<ul>
-<li>减少不必要的网络请求</li>
-<li>server端数据查询算法优化</li>
-<li>DNS解析</li>
-</ul>
-
-<h2 id="toc_1">内存性能</h2>
-
-<ul>
-<li>各种循环引用 导致内存泄漏</li>
-<li>Core Animation 对象手动释放</li>
-<li>UIWebView 内存泄漏</li>
-</ul>
-
-<h2 id="toc_2">主线程阻塞</h2>
-
-<ul>
-<li>网络同步请求</li>
-<li>I/O操作</li>
-<li>大量运算</li>
-<li>解压、压缩
-...</li>
-</ul>
-
-<h2 id="toc_3">离屏渲染</h2>
-
-<p>离屏渲染：GPU在当前缓存区之外另外的去开辟空间进行渲染，同样的一帧图片 会被渲染两次甚至多次</p>
-
-<p>：uiview.layer.cornerRadius 系统方法切圆角---&gt;&gt;解决方案：Runtime + 画图</p>
-
-<h2 id="toc_4">图片处理</h2>
-
-<ul>
-<li>imageWithName：加载到缓存中可重复使用</li>
-<li>initWithContentsOfFile: 加载一次不会存到缓存中</li>
-</ul>
-
-<h2 id="toc_5">其他</h2>
-
-<ul>
-<li>加速启动</li>
-<li>避免日期格式的转换</li>
-</ul>
-
-<h3 id="toc_6">优化瀑布流中 网络图片 加载导致UI卡顿问题</h3>
+<pre><code class="language-javascript">// 导入vuex头文件
+import Vuex from &#39;vuex&#39;
+// 这里表示全局导入vuex
+Vue.use(Vuex)
+// 这里是我自定义的store文件 导出store对象
+import store from &#39;@/study/vuexStudy/store/store.js&#39;
+</code></pre>
 
 <blockquote>
-<p>1、异步下载图片<br/>
-2、异步加载图片成二进制 NSData  （<strong>这一步是关键</strong>） <br/>
-3、UIImageView 加载二进制形式的NSData</p>
+<p>入口组件<App/>中，绑定store</p>
 </blockquote>
+
+<pre><code class="language-text">new Vue({
+  el: &#39;#app&#39;,
+  template: &#39;&lt;App/&gt;&#39;,
+  components: { App },
+  store
+})
+</code></pre>
+
+<p>到这里 算是万里长征走了第一步。</p>
+
+<h3 id="toc_6">创建Store对象</h3>
+
+<h4 id="toc_7">store 的结构:</h4>
+
+<pre><code class="language-javascript">export const store = new Vuex.Store({
+
+  // ------state:状态值存储,这里可以存储n个状态的值
+  state: {count: &#39;1&#39;},
+  
+  // ------getter:store中定义的getters可以认为是store的计算属性
+  // getters接收state作为其第一个参数
+  getters: {
+    done (state) {
+      return state.count + 5
+    }
+  },
+  
+  // ------mutations:状态值的改变，操作状态值
+  // $store.commit(mutationsName, params)是更改状态值的唯一方法
+  mutations: {
+    increment (state) {
+      // 变更状态
+      state.count++
+    }
+  },
+
+  // ------actions:可以认为是包装了mutations的function 需要用 dispatch(actionName) 的方式去派发
+  actions: {
+    add (context) {
+      context.commit(&#39;increment&#39;)
+    },
+    addAsync (context) {
+      // 延时1秒
+      setTimeout(() =&gt; {
+        context.commit(&#39;increment&#39;)
+      }, 1000)
+    }
+  },
+  // store可以合并几个子store，以此来进行项目的模块化
+  modules: {
+    a: moduleA,
+    b: moduleB
+  }
+})
+</code></pre>
+
+<h4 id="toc_8">编辑定义store实体对象：</h4>
+
+<ul>
+<li>store.js文件中</li>
+</ul>
+
+<blockquote>
+<p>这里为了便于抽离 我们外部声明城对象实体后嵌入绑定到store</p>
+</blockquote>
+
+<ol>
+<li><p>创建一个store对象</p>
+<pre><code class="language-javascript">export default const store = new Vuex.Store({
+  state,//绑定之前创建的state对象到store中<br/>
+  mutations,<br/>
+  getters,<br/>
+  actions,<br/>
+  modules<br/>
+})
+</code></pre></li>
+<li><p>定义一个状态对象 <code>state</code>（实体）</p>
+<pre><code class="language-javascript">const state = {
+  count: 0,<br/>
+  state1: 1,<br/>
+  state2: 2,<br/>
+  state3: 3<br/>
+}
+</code></pre></li>
+<li><p>定义getters对象</p>
+<pre><code class="language-text">const getters = {
+  done (state) {<br/>
+    return state.count + 5<br/>
+  },<br/>
+  getState1: function (state) {<br/>
+    return state.state3<br/>
+  },<br/>
+  // ES6简写<br/>
+  getState2: state =&gt;  state.state2<br/>
+}
+</code></pre></li>
+<li><p>.vue 文件中直接获取state值</p>
+<p>首先导入辅助函数：</p>
+<pre><code class="language-text">import { 
+    mapState, <br/>
+    mapGetters, <br/>
+    mapMutations, <br/>
+    mapActions <br/>
+    } from &#39;vuex&#39;
+</code></pre>
+<ul>
+<li>第一种方式：绑定到组件属性中，直接获取 （一般不用这个，绑定到computed中是最合适的）<code>$store.state.count</code>并使用</li>
+</ul>
+<pre><code class="language-javascript">export default {
+    data() {<br/>
+        return {<br/>
+          testCount: this.$store.state.count<br/>
+        }<br/>
+    }<br/>
+}
+</code></pre>
+<ul>
+<li>第二种方式： 绑定到计算属性中（适合对store中的原始状态值进行一定处理的情况）</li>
+</ul>
+<pre><code class="language-javascript">export default {
+    data() {<br/>
+        return {<br/>
+          testCount: this.$store.state.count<br/>
+        }<br/>
+    },<br/>
+    computed:{<br/>
+        testComputedCount1: function () {<br/>
+            return this.$store.state.count + 22<br/>
+        }<br/>
+    }<br/>
+}
+</code></pre>
+<ul>
+<li>第三种方式：mapState辅助函数绑定状态state值到组件计算属性中</li>
+</ul>
+<pre><code class="language-javascript">export default {
+    data() {<br/>
+        return {<br/>
+          testCount: this.$store.state.count<br/>
+        }<br/>
+    },<br/>
+    computed:{<br/>
+        testComputedCount1: function () {<br/>
+            return this.$store.state.count + 22<br/>
+        },<br/>
+        ...mapState({<br/>
+            count: state =&gt; state.count,<br/>
+            mapState1: state =&gt; state.state1,<br/>
+            mapState2: state =&gt; state.state2<br/>
+        }),<br/>
+    }<br/>
+}
+</code></pre>
+<ul>
+<li>第四种方式：使用store中绑定的getters进行获取</li>
+</ul>
+<pre><code class="language-javascript">export default {
+    data() {<br/>
+        return {<br/>
+          testCount: this.$store.state.count<br/>
+        }<br/>
+    },<br/>
+    computed:{<br/>
+        testComputedCount1: function () {<br/>
+            return this.$store.state.count + 22<br/>
+        },<br/>
+        ...mapState({<br/>
+            count: state =&gt; state.count,<br/>
+            mapState1: state =&gt; state.state1,<br/>
+            mapState2: state =&gt; state.state2<br/>
+        }),<br/>
+        testComputedGettersCount2: funtion () {<br/>
+            return this.$store.getters.done<br/>
+        }<br/>
+    }<br/>
+}
+</code></pre>
+<ul>
+<li>第五种方式： 借助mapGetters辅助函数绑定getters到vue的计算属性中</li>
+</ul>
+<pre><code class="language-javascript">export default {
+    data() {<br/>
+        return {<br/>
+          testCount: this.$store.state.count<br/>
+        }<br/>
+    },<br/>
+    computed:{<br/>
+        testComputedCount1: function () {<br/>
+            return this.$store.state.count + 22<br/>
+        },<br/>
+        ...mapState({<br/>
+            count: state =&gt; state.count,<br/>
+            mapState1: state =&gt; state.state1,<br/>
+            mapState2: state =&gt; state.state2<br/>
+        }),<br/>
+        testComputedGettersCount2: funtion () {<br/>
+            return this.$store.getters.done<br/>
+        },<br/>
+        //直接绑定方法数组的方式<br/>
+        ...mapGetters([<br/>
+            &#39;getState1&#39;,<br/>
+            &#39;getState2&#39;,<br/>
+            &#39;getState3&#39;<br/>
+        ]),<br/>
+        //重命名对象绑定方式<br/>
+        ...mapGetters({<br/>
+          mapGetterState1: &#39;getState1&#39;,<br/>
+          mapGetterState3: &#39;getState3&#39;<br/>
+        }),<br/>
+    }<br/>
+}
+</code></pre></li>
+<li><p>触发动作行为改变状态值</p>
+<blockquote>
+<p>方式一：$store.commit(&#39;mutationsName&#39;)</p>
+<p>方式二：$store.dispatch(&#39;actionsName&#39;)    </p>
+</blockquote>
+<p>store.js文件中：</p>
+<ul>
+<li>初始化 mutations 和 actions (相当于是methods)</li>
+</ul>
+<pre><code class="language-text">const mutations = {
+    increment (state) {<br/>
+        // 变更状态<br/>
+        state.count = state.count * 5<br/>
+    }<br/>
+}
+</code></pre>
+<pre><code class="language-text">import {action4} from &#39;@/path/actions.js&#39;
+const actions = {<br/>
+    // 同步方法<br/>
+    add: function (context) {<br/>
+        context.commit(&#39;increment&#39;)<br/>
+    },<br/>
+    // 延时操作 用于网络请求啊啥的<br/>
+    addAsync (context) {<br/>
+        // 延时1秒<br/>
+        setTimeout(() =&gt; {<br/>
+            context.commit(&#39;increment&#39;)<br/>
+        }, 1000)<br/>
+    },<br/>
+    // 简写方式<br/>
+    action2 (context) {<br/>
+        context.commit(&#39;increment&#39;)<br/>
+    },<br/>
+    // 抽离到单独文件中，在导进封装好的变量来直接使用即可（导进来的目的是为了接收第一个参数：state），不绑定到store，需要手动传入store对象<br/>
+    action4: action4,<br/>
+}
+</code></pre></li>
+</ol>
+
+<ul>
+<li><p>绑定action 和 mutations 到 methods，然后 调用就行了</p>
+<pre><code class="language-text">export default {
+    methods: {<br/>
+        // 数组形式直接载入<br/>
+        ...mapActions([<br/>
+            &#39;add&#39;<br/>
+        ]),<br/>
+        // 重命名形式 <br/>
+        ...mapActions({<br/>
+            add: &#39;add&#39;,<br/>
+            addAsync: &#39;addAsync&#39;,<br/>
+            action4: &#39;action4&#39;<br/>
+        }),<br/>
+        // 同上<br/>
+        ...mapMutations([<br/>
+            &#39;increment&#39;<br/>
+        ]),<br/>
+        ...mapMutations({<br/>
+            incrementMutation: &#39;increment&#39;<br/>
+        })<br/>
+    }<br/>
+}
+</code></pre></li>
+</ul>
 
                         
                       </div>
@@ -448,10 +793,10 @@ array_name(0)=value0
                 <div class="read-more clearfix">
                   <div class="more-left left">
                   
-                    <span class="date">2018/2/23</span>
+                    <span class="date">2018/1/25</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          					    <span class="posted-in"><a href='vue.html'>Vue</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -465,26 +810,40 @@ array_name(0)=value0
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15200715202464.html">
+                <a class="clearlink" href="15151216159291.html">
                 
-                  <h1>iOS 离屏渲染</h1>
+                  <h1></h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2 id="toc_0">触发方式</h2>
+                        	<h1 id="toc_0">react-native-splash-screen 给安卓项目添加启动图</h1>
 
-<p>设置以下方式会触发离屏渲染：</p>
+<h2 id="toc_1">react-native-splash-screen 基本配置</h2>
 
 <ul>
-<li>shouldRasterize（光栅化）</li>
-<li>masks（遮罩）</li>
-<li>shadows（阴影）</li>
-<li>edge antialiasing（抗锯齿）</li>
-<li>group opacity（不透明）</li>
-<li>复杂形状设置圆角等</li>
-<li>渐变 </li>
+<li>安装插件：<code>npm install react-native-splash-screen --save</code></li>
+<li>关联项目：<code>react-native link react-native-splash-screen</code> or <code>rnpm link react-native-splash-screen</code></li>
 </ul>
+
+<blockquote>
+<p>link 之后，安卓项目中会自动添加头文件 以及部分代码，为保证项目顺利运行，还请确认下面代码是否已经完善。</p>
+</blockquote>
+
+<ul>
+<li><p>确保 <code>android/settings.gradle</code>文件夹已经有下面代码</p>
+<pre><code class="language-javascript">include &#39;:react-native-splash-screen&#39;   
+project(&#39;:react-native-splash-screen&#39;).projectDir = new File(rootProject.projectDir, &#39;../node_modules/react-native-splash-screen/android&#39;)
+</code></pre></li>
+<li><p>android/app/build.gradle 文件中 添加依赖 <code>react-native-splash-screen</code></p>
+<pre><code class="language-text">...
+dependencies {<br/>
+...<br/>
+compile project(&#39;:react-native-splash-screen&#39;)<br/>
+}
+</code></pre></li>
+</ul>
+
 
                         
                       </div>
@@ -492,11 +851,11 @@ array_name(0)=value0
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
-                    <span class="date">2018/3/3</span>
+                   <a href="15151216159291.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/1/5</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          					    <span class="posted-in"><a href='reactnative.html'>React-Native</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -510,45 +869,66 @@ array_name(0)=value0
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15198022156700.html">
+                <a class="clearlink" href="15139057022845.html">
                 
-                  <h1>iOS 面试题总结</h1>
+                  <h1>Rect-Native 之 Promise 深入浅出从入门到精通</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2 id="toc_0">基础篇</h2>
+                        	<h2 id="toc_0">概念理解</h2>
 
-<h3 id="toc_1">内存管理 ：assign copy strong weak...</h3>
-
-<ul>
-<li>简述OC中内存管理机制,与retain配对使用的方法是dealloc还是release，为什么？</li>
-</ul>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fhp9dw6vxpj307406ewek.jpg" alt="icon" title="React icon"/></p>
 
 <blockquote>
-<p>管理机制：<br/>
-  使用了一种叫做 <strong>引用计数</strong> 的机制来管理内存中的对象。OC中每个对象都对应着他们自己的引用计数，引用计数可以理解为一个整数计数器，当使用alloc方法创建对象的时候，持有计数会自动设置为1。当你向一个对象发送retain消息 时，持有计数数值会增加1。相反，当你像一个对象发送release消息时，持有计数数值会减小1。当对象的持有计数变为0的时候，对象会释放自己所占用的内存</p>
+<p>所谓Promise，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。从语法上说，Promise 是一个对象，从它可以获取异步操作的消息。</p>
 </blockquote>
 
-<ul>
-<li><p>修饰词的作用</p>
 
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15139057022845.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/12/22</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='reactnative.html'>React-Native</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15137645005542.html">
+                
+                  <h1>ES6 笔记（Array）</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">array</h2>
+
+<ol>
+<li><p>Array.from<br/>
+将类似数组的对象（array-like object）和可遍历（iterable）的对象 转换为数组。</p>
 <ul>
-<li>retain(引用计数加1)-&gt;release（引用计数减1）</li>
-<li>alloc（申请内存空间）-&gt;dealloc(释放内存空间)</li>
-<li>readwrite: 表示既有getter，也有setter   (默认)</li>
-<li>readonly: 表示只有getter，没有setter</li>
-<li>nonatomic:不考虑线程安全</li>
-<li>atomic:线程操作安全   （默认）</li>
-<li>retain: release旧的对象，将旧对象的值赋予输入对象，再提高输入对象的索引计数为1</li>
-<li>assign: 简单赋值，不更改索引计数    （默认）</li>
-<li>copy: 其实是建立了一个相同的对象,地址不同（retain：指针拷贝  copy：内容拷贝）</li>
-<li>strong:（ARC下的）和（MRC）retain一样    （默认）</li>
-<li>weak:（ARC下的）和（MRC）assign一样， weak当指向的内存释放掉后自动nil化，防止野指针</li>
-<li>unsafe_unretained 声明一个弱引用，但是不会自动nil化，也就是说，如果所指向的内存区域被释放了，这个指针就是一个野指针了。 autoreleasing 用来修饰一个函数的参数，这个参数会在函数返回的时候被自动释放。
-### .类变量的@protected ,@private,@public,@package，声明各有什么含义？</li>
+<li>类数组：有 length属性的对象</li>
+<li>可遍历：包含Set Map.</li>
 </ul></li>
-</ul>
+<li><p>Array.of<br/>
+该方法用于将一组值，转换为数组。</p></li>
+</ol>
+
 
                         
                       </div>
@@ -556,577 +936,11 @@ array_name(0)=value0
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
-                    <span class="date">2018/2/28</span>
+                   <a href="15137645005542.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/12/20</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15193944679783.html">
-                
-                  <h1>iOS 项目组件化</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">组件化需要解决的问题</h2>
-
-<ul>
-<li>APP 如何跳到任意指定界面（APP外部跳转，APP内部跳转）</li>
-<li>自家APP之间如何相互跳转 </li>
-<li>如何降低APP组件和APP界面之间的耦合度</li>
-<li>如何动态下发配置文件；iOS 安卓共用配置文件</li>
-<li>AOP统计界面跳转</li>
-<li>组件之间通信，组件和界面之间通信</li>
-</ul>
-
-<h2 id="toc_1">组件化步骤</h2>
-
-<ul>
-<li>拆分UI组件</li>
-<li>拆分业务组件</li>
-<li>组件管理</li>
-<li>组件通信</li>
-</ul>
-
-<h2 id="toc_2">组件化架构 &amp;&amp; 思路</h2>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2018/2/23</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15174544275720.html">
-                
-                  <h1>DLNA DMR</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">CGUpnpAvRenderer</h2>
-
-<pre><code>#if !defined(_CG_CLINKCAV_MEDIARENDERER_H_)
-typedef void CgUpnpAvRenderer;
-#endif
-
-/**
- * The CGUpnpAvRenderer class is a UPnP/AV media server class.
- */
-@interface CGUpnpAvRenderer : CGUpnpDevice
-{
-    CgUpnpAvRenderer *cAvObject;
-}
-@property(readonly) CgUpnpAvRenderer *cAvObject;
-- (id)init;
-- (id)initWithCObject:(CgUpnpDevice *)cobj;
-- (BOOL)setAVTransportURI:(NSString *)aURI;
-- (BOOL)play;
-- (BOOL)stop;
-- (BOOL)pause;
-- (BOOL)next;
-- (BOOL)previous;
-- (BOOL)seek:(float)absTime;
-- (BOOL)isPlaying;
-/*
-- (BOOL)start
-- (BOOL)stop
-*/
-- (CGUpnpAVPositionInfo *)positionInfo;
-</code></pre>
-
-<h2 id="toc_1">CGUpnpDevice</h2>
-
-<pre><code>/**
- * The CGUpnpDevice class is a wrapper class for CgUpnpDevice of CyberLink for C.
- */
-// 设备包装类
-@protocol CGUpnpDeviceDelegate &lt;NSObject&gt;
-@optional
-// 收到Action的协议方法
-- (BOOL)device:(CGUpnpDevice *)device service:(CGUpnpService *)service actionReceived:(CGUpnpAction *)action;
-@end
-
-/**
- * The CGUpnpDevice class is a wrapper class for CgUpnpDevice of CyberLink for C.
- */
-@interface CGUpnpDevice : NSObject 
-{
-    BOOL isCObjectCreated;
-}
-@property(assign) CgUpnpDevice *cObject;
-@property(assign) id&lt;CGUpnpDeviceDelegate&gt; delegate;
-/**
- * Create a new UPnP device.
- * 
- * @return New instance if successfull; otherwise nil.
- */
- // 初始化方法 创建一个新的UPnP设备
-- (id) init;
-/**
- * Create a new UPnP device with the C instance.
- * 
- * @return New instance if successfull; otherwise nil.
- */
- // 用一个设备初始化另一设备
-- (id) initWithCObject:(CgUpnpDevice *)cobj;
-/**
- * Create a new UPnP device with the XML descriptioin.
- * 
- * @return New instance if successfull; otherwise nil.
- */
- // xml  创建设备
-- (id) initWithXMLDescription:(NSString *)xmlDesc;
-/**
- * Parse the specified XML description.
- * 
- * @return YES if successfull; otherwise nui.
- */
-- (BOOL) parseXMLDescription:(NSString *)xmlDesc;
-/**
- * Get the friendly name of the device.
- * 
- * @return Friendly name.
- */
-// 获取友好的名字
-- (NSString *)friendlyName;
-/**
- * Get the device type of the device.
- * 
- * @return Device Type.
- */
- // 设备类型
-- (NSString *)deviceType;
-/**
- * Get the UDN of the device.
- * 
- * @return UDN of the specified device.
- */
- // 获取设备的UDN
-- (NSString *)udn;
-/**
- * Return a manufacture.
- *
- * @return Manufacture of the device.
- */
- // 制造商
-- (NSString *)manufacturer;
-
-/**
- * Return a model number.
- *
- * @return Model number of the device.
- */
- // 返回模型数
-- (NSString *)modelNumber;
-
-/**
- * Return a model name.
- *
- * @return Model name of the device.
- */
- // 返回模型名
-- (NSString *)modelName;
-
-/**
- * Return a urlBase
- *
- * @return URLBase of the device.
- */
- // 返回设备的URLBase
-- (NSString *)urlBase;
-/**
- * Return a descrition URL
- *
- * @return Descripton URL of the device.
- */
- // 返回设备URL描述
-- (NSString *)descriptionURL;
-/**
- * Return a location URL
- *
- * @return Location URL of the device.
- */
- // 返回一个本地URL
-- (NSString *)locationURL;
-/**
- * Set a device type of the device.
- * 
- * @param aType Device type to set.
- */
- // 设置设备类型
--(void)setDeviceType:(NSString *)aType;
-/**
- * Set a friendly name of the device.
- * 
- * @param aName Friendly name to set.
- */
- // 设置友好名称
--(void)setFriendlyName:(NSString *)aName;
-/**
- * Set a udn of the device.
- * 
- * @param aUdn UDN to set.
- */
--(void)setUdn:(NSString *)aUdn;
-/**
- * Check whether the device type is the specified type.
- *
- * @param aType A type string of the device.
- * 
- * @return YES if the specified type is same as the device type; otherwise NO.
- */
-- (BOOL)isDeviceType:(NSString *)aType;
-/**
- * Check whether the device&#39;s UDN is the specified UDN.
- *
- * @param aUDN A UDN string of the device.
- * 
- * @return YES if the specified UDN is same as the device&#39; UDN; otherwise NO.
- */
-- (BOOL)isUDN:(NSString *)aUDN;
-/**
- * Check whether the device&#39;s friendly name is the specified name.
- *
- * @param aFriendlyName A friendly name string of the device.
- * 
- * @return YES if the specified friendly name is same as the device&#39; friendly name; otherwise NO.
- */
-- (BOOL)isFriendlyName:(NSString *)aFriendlyName;
-/**
- * Return a presentationURL
- *
- * @return presentationURL of the device.
- */
-- (NSString *)presentationURL;
-/**
- * Get all services in the device as a NSArray object. The array has the services as instances of CGUpnpService.
- *
- * @return NSArray of CGUpnpService.
- */
- // 返回设备CGUpnpService服务组
-- (NSArray *)services;
-/**
- * Get a service in the device by the specified service ID.
- *
- * @param serviceId A service ID string of the service.
- *
- * @return The CGUpnpService if the specified service is found; otherwise nil.
- */
- // 根据seviceID 获取服务对象
-- (CGUpnpService *)getServiceForID:(NSString *)serviceId;
-/**
- * Get a service in the device by the specified service type.
- *
- * @param serviceType A service type string of the service.
- *
- * @return The CGUpnpService if the specified service is found; otherwise nil.
- */
- // 根据类型获取服务对象 service
-- (CGUpnpService *)getServiceForType:(NSString *)serviceType;
-/**
- * Get all icons in the device as a NSArray object. The array has the services as instances of CGUpnpIconIcon.
- *
- * @return NSArray of CGUpnpIcon.
- */
- // 获取所有图标
-- (NSArray *)icons;
-/**
- * Start the device.
- *
- * @return YES if the device is started normally, otherwise NO.
- */
-- (BOOL)start;
-/**
- * Stop the device.
- *
- * @return YES if the device is started normally, otherwise NO.
- */
-- (BOOL)stop;
-/**
- * Check if the controll point is running.
- *
- * @return YES if the device is started normally, otherwise NO.
- */
- //检查控制点 DMC是否在运行
-- (BOOL)isRunning;
-/**
- * Announce the device.
- *
- * @return YES if the device is started normally, otherwise NO.
- */
- // 广播这个设备
-- (BOOL)announce;
-/**
- * Set a user data.
- *
- * @param aUserData A user data to set.
- *
- * @return The CGUpnpService if the specified service is found; otherwise nil.
- */
- // 设置用户数据
-- (void)setUserData:(void *)aUserData;
-/**
- * Get a stored user data.
- *
- * @return A stored user data.
- */
- 获取已存储的用户数据
-- (void *)userData;
-/**
- * Return a IP address.
- *
- * @return IP address of the device.
- */
- // 获取IP地址
-- (NSString *)ipaddress;
-/**
- * Return a most smallest icon.
- *
- * @return Smallest Icon.
- */
- // 获取一个最小的 icon
-- (CGUpnpIcon *)smallestIcon;
-/**
- * Return a most smallest icon with a specified mime type.
- *
- * @return Smallest Icon.
- */
- // 获取指定类型的icon
-- (CGUpnpIcon *)smallestIconWithMimeType:(NSString *)mimeType;
-/**
- * Return a absolute url of the specified icon.
- *
- * @param anIcon Icon.
- *
- * @return Absolute url of the specified icon.
- */
- // 获取icon的绝对路径
-- (NSString *)absoluteIconUrl:(CGUpnpIcon *)anIcon;
-</code></pre>
-
-<h2 id="toc_2">CGUpnpStateVariable</h2>
-
-<pre><code>#if !defined(_CG_UPNP_CSTATEVARIABLE_H_)
-typedef void CgUpnpStateVariable;
-#endif
-
-/**
- * The CGUpnpStateVariable class is a wrapper class for CgUpnpStateVariable of CyberLink for C.
- */
-@interface CGUpnpStateVariable : NSObject 
-{
-    CgUpnpStateVariable *cObject;
-}
-@property(readonly) CgUpnpStateVariable *cObject;
-- (id)initWithCObject:(CgUpnpStateVariable *)cobj;
-/**
- * Get the name of the state variable.
- * 
- * @return The name.
- */
- // 状态名
-- (NSString *)name;
-/**
- * Get the value of the state variable.
- * 
- * @return The value.
- */
- // 状态值
-- (NSString *)value;
-
-/**
- * Get an array of the allowed values for the state variable
- * 
- * @return The array.
- */
- // 允许的所有状态值
-- (NSArray *)allowedValues;
-
-/**
- * Checks whether value is allowed for this state variable
- *
- * @param value to be checked
- *
- * @return YES if true
- */
- // 检测状态值是否是被允许的
-- (BOOL)isAllowedValue:(NSString*)value;
-
-/**
- * Send query
- *
- * @return YES if successfull; otherwise NO
- */
-- (BOOL)query;
-/**
- * Get a states code of the last query. 
- *
- * @return The status code
- */
-- (NSInteger)statusCode;
-</code></pre>
-
-<h2 id="toc_3">CGUpnpIcon</h2>
-
-<pre><code>/**
- * The CGUpnpIcon class is a wrapper class for CgUpnpIcon of CyberLink for C.
- */
-@interface CGUpnpIcon : NSObject
-{
-    CgUpnpIcon *cObject;
-#if defined(TARGET_OS_IPHONE)
-    NSString *resourceName;
-#endif
-}
-@property(readonly) CgUpnpIcon *cObject;
-#if defined(TARGET_OS_IPHONE)
-@property(readonly) NSString *resourceName;
-#endif
-- (id)initWithCObject:(CgUpnpIcon *)cobj;
-/**
- * Get the url of the icon.
- * 
- * @return The url.
- */
-- (NSString *)url;
-/**
- * Get the url of the width.
- * 
- * @return The width.
- */
-- (NSInteger)width;
-/**
- * Get the height of the icon.
- * 
- * @return The height.
- */
-- (NSInteger)height;
-/**
- * Get the depth of the icon.
- * 
- * @return The depth.
- */
-- (NSInteger)depth;
-#if defined(TARGET_OS_IPHONE)
-- (void)setResourceName:(NSString *) aResourceName;
-#endif
-</code></pre>
-
-<h2 id="toc_4">CGUpnpAVPositionInfo</h2>
-
-<pre><code>@property(retain) CGUpnpAction *upnpAction;
--(id)initWithAction:(CGUpnpAction *)aUpnpAction;
--(float)trackDuration;
--(float)absTime;
--(float)relTime;
-@end
-
-@interface NSString(CGUPnPAV)
-// 总时长字符串
-+(NSString *)stringWithDurationTime:(float)timeValue;
-// 总时长
-- (float)durationTime;
-</code></pre>
-
-<h2 id="toc_5">CGUpnpAction</h2>
-
-<pre><code>@interface CGUpnpAction : NSObject 
-{
-    CgUpnpAction *cObject;
-}
-@property(readonly) CgUpnpAction *cObject;
-- (id)initWithCObject:(CgUpnpAction *)cobj;
-/**
- * Get the name of the action.
- * 行为名称
- * @return The name.
- */
-- (NSString *)name;
-/**
- * Get all arguments in the action as a NSDictionary object.
- * 获取所有行为对象中的参数
- * @return NSDictionary of the arguments.
- */
-- (NSDictionary *)arguments;
-/**
- * Set a value of the specified argument from the action by the argument&#39;s name directly.
- * 通过name给指定action设置参数
- * @param value The value to set
- * @param name The name of the argument to look for
- * @return YES if successfull; otherwise NO
- */
-- (BOOL)setArgumentValue:(NSString *)value forName:(NSString *)name;
-/**
- * Get a value of the specified argument from the action by the argument&#39;s name directly.
- * 通过action参数名 获取action参数值
- * @param name The name of the argument to look for
- * @return The target value if successfull; otherwise NULL
- */
-- (NSString *)argumentValueForName:(NSString *)name;
-/**
- * Send action
- * 发送Action
- * @return YES if successfull; otherwise NO
- */
-- (BOOL)post;
-/**
- * Send action
- * 发送action 携带指定参数
- * @param arguments Arguments to set
- *
- * @return YES if successfull; otherwise NO
- */
-- (BOOL)postWithArguments:(NSDictionary *)arguments;
-/**
- * Get a states code of the last post. 
- * 获取最后POST的状态码
- * @return The status code
- */
-- (NSInteger)statusCode;
-</code></pre>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2018/2/1</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          					    <span class="posted-in"><a href='js.html'>JavaScript</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -1175,7 +989,7 @@ typedef void CgUpnpStateVariable;
 
 
 
-
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/KaelLVLinda" title="Twitter">Twitter</a>
 <a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
 <a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
   <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
@@ -1206,6 +1020,8 @@ typedef void CgUpnpStateVariable;
             <a href="vue.html"><strong>Vue</strong></a>
         
             <a href="shell.html"><strong>shell</strong></a>
+        
+            <a href="%E7%BD%91%E7%BB%9C.html"><strong>网络</strong></a>
          
         </p>
 
@@ -1222,31 +1038,31 @@ typedef void CgUpnpStateVariable;
 	      
 		      
 			      <li class="post">
-			        <a href="15261167596297.html">OC 多线程之 GCD知识从基础到进阶 （1）</a>
+			        <a href="15523077857608.html">OC中枚举写法  以及 字符串枚举探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15257437237715.html">OC中的各种遍历</a>
+			        <a href="15522686353535.html">iOS 动画全解 (1)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15253400374602.html">多线程 之 NSThread</a>
+			        <a href="15501356584731.html">UITableView顶部空白的几种解决办法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15200726964422.html">iOS Block 知识点拾遗</a>
+			        <a href="15488351784332.html">Objective-C中的字符串类型枚举 探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15235286649865.html">音视频学习笔记 1</a>
+			        <a href="15409691048860.html">【Swift笔记】引用计数</a>
 			      </li>
 		     
 		  
@@ -1321,7 +1137,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 

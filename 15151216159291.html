@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  react-native-splash-screen 给安卓项目添加启动图 - kaelinda
+   - kaelinda
   
   </title>
   
@@ -122,6 +122,8 @@
             <li><a href="vue.html">Vue</a></li>
         
             <li><a href="shell.html">shell</a></li>
+        
+            <li><a href="%E7%BD%91%E7%BB%9C.html">网络</a></li>
          
 
       </ul>
@@ -144,7 +146,7 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>react-native-splash-screen 给安卓项目添加启动图</h1>
+          <h1></h1>
      
         <div class="read-more clearfix">
           <span class="date">2018/1/5</span>
@@ -164,7 +166,9 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <h2 id="toc_0">react-native-splash-screen 基本配置</h2>
+      <h1 id="toc_0">react-native-splash-screen 给安卓项目添加启动图</h1>
+
+<h2 id="toc_1">react-native-splash-screen 基本配置</h2>
 
 <ul>
 <li>安装插件：<code>npm install react-native-splash-screen --save</code></li>
@@ -177,22 +181,25 @@
 
 <ul>
 <li><p>确保 <code>android/settings.gradle</code>文件夹已经有下面代码</p>
-
-<pre><code class="language-JavaScript">include &#39;:react-native-splash-screen&#39;   
+<pre><code class="language-javascript">include &#39;:react-native-splash-screen&#39;   
 project(&#39;:react-native-splash-screen&#39;).projectDir = new File(rootProject.projectDir, &#39;../node_modules/react-native-splash-screen/android&#39;)
 </code></pre></li>
 <li><p>android/app/build.gradle 文件中 添加依赖 <code>react-native-splash-screen</code></p>
-
-<pre><code>...
-dependencies {
-...
-compile project(&#39;:react-native-splash-screen&#39;)
+<pre><code class="language-text">...
+dependencies {<br/>
+...<br/>
+compile project(&#39;:react-native-splash-screen&#39;)<br/>
 }
 </code></pre></li>
-<li><p>更新 <code>MainApplication.java</code> 文件</p></li>
 </ul>
 
-<pre><code>// react-native-splash-screen &gt;= 0.3.1
+<span id="more"></span><!-- more -->
+
+<ul>
+<li>更新 <code>MainApplication.java</code> 文件</li>
+</ul>
+
+<pre><code class="language-text">// react-native-splash-screen &gt;= 0.3.1
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 // react-native-splash-screen &lt; 0.3.1
 import com.cboy.rn.splashscreen.SplashScreenReactPackage;
@@ -221,13 +228,13 @@ public class MainApplication extends Application implements ReactApplication {
 }
 </code></pre>
 
-<h2 id="toc_1">准备添加代码和文件配置</h2>
+<h2 id="toc_2">准备添加代码和文件配置</h2>
 
 <ul>
 <li><code>app/src/main/res/layout</code> 文件夹下 添加 <code>launch_screen.xml</code> 并copy如下代码：</li>
 </ul>
 
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+<pre><code class="language-text">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
     android:orientation=&quot;vertical&quot; android:layout_width=&quot;match_parent&quot;
     android:layout_height=&quot;match_parent&quot;
@@ -238,24 +245,22 @@ public class MainApplication extends Application implements ReactApplication {
 <ul>
 <li>创建文件夹 <code>drawable-xhdpi</code>、 <code>drawable-xxhdpi</code>（暂时先创建这两个就够了），将准备好的启动图 命名为 <code>launch_screen.png</code> 分别放入创建好的文件夹</li>
 <li><p>白屏问题，设置透明背景：<code>android/app/src/main/res/values/styles.xml</code> 文件夹下 添加 <code>&lt;item name=&quot;android:windowIsTranslucent&quot;&gt;true&lt;/item&gt;</code></p>
-
-<pre><code>&lt;resources&gt;
-&lt;!-- Base application theme. --&gt;
-&lt;style name=&quot;AppTheme&quot; parent=&quot;Theme.AppCompat.Light.NoActionBar&quot;&gt;
-    &lt;!-- Customize your theme here. --&gt;
-    &lt;!--设置透明背景--&gt;
-    &lt;item name=&quot;android:windowIsTranslucent&quot;&gt;true&lt;/item&gt;
-&lt;/style&gt;
+<pre><code class="language-text">&lt;resources&gt;
+&lt;!-- Base application theme. --&gt;<br/>
+&lt;style name=&quot;AppTheme&quot; parent=&quot;Theme.AppCompat.Light.NoActionBar&quot;&gt;<br/>
+    &lt;!-- Customize your theme here. --&gt;<br/>
+    &lt;!--设置透明背景--&gt;<br/>
+    &lt;item name=&quot;android:windowIsTranslucent&quot;&gt;true&lt;/item&gt;<br/>
+&lt;/style&gt;<br/>
 &lt;/resources&gt;
 </code></pre></li>
 <li><p><code>android/app/src/main/res/values/colors.xml</code> 文件夹下，添加如下：</p>
-
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt; &lt;resources&gt; &lt;color name=&quot;primary_dark&quot;&gt;#660B0B0B&lt;/color&gt; &lt;/resources&gt;
+<pre><code class="language-text">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt; &lt;resources&gt; &lt;color name=&quot;primary_dark&quot;&gt;#660B0B0B&lt;/color&gt; &lt;/resources&gt;
 </code></pre></li>
 <li><p>适当的时刻 隐藏启动图  可以是在视图挂载完毕，可以是网络请求结束之后</p></li>
 </ul>
 
-<pre><code>import SplashScreen from &#39;react-native-splash-screen&#39;
+<pre><code class="language-text">import SplashScreen from &#39;react-native-splash-screen&#39;
 componentDidMount() {
     SplashScreen.hide();
   }
@@ -270,16 +275,16 @@ componentDidMount() {
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15172908985351.html" 
-          title="Previous Post: iOS设备上实现DLNA功能 Platinum 篇">&laquo; iOS设备上实现DLNA功能 Platinum 篇</a>
+          <a href="15168925544178.html" 
+          title="Previous Post: 从零开始学习使用 vuex">&laquo; 从零开始学习使用 vuex</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15168925544178.html" 
-          title="Next Post: 从零开始学习使用 vuex">从零开始学习使用 vuex &raquo;</a>
+          <a  href="15139057022845.html" 
+          title="Next Post: Rect-Native 之 Promise 深入浅出从入门到精通">Rect-Native 之 Promise 深入浅出从入门到精通 &raquo;</a>
       
       </p>
         </div>
@@ -317,7 +322,7 @@ componentDidMount() {
 
 
 
-
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/KaelLVLinda" title="Twitter">Twitter</a>
 <a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
 <a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
   <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
@@ -348,6 +353,8 @@ componentDidMount() {
             <a href="vue.html"><strong>Vue</strong></a>
         
             <a href="shell.html"><strong>shell</strong></a>
+        
+            <a href="%E7%BD%91%E7%BB%9C.html"><strong>网络</strong></a>
          
         </p>
 
@@ -364,31 +371,31 @@ componentDidMount() {
 	      
 		      
 			      <li class="post">
-			        <a href="15261167596297.html">OC 多线程之 GCD知识从基础到进阶 （1）</a>
+			        <a href="15523077857608.html">OC中枚举写法  以及 字符串枚举探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15257437237715.html">OC中的各种遍历</a>
+			        <a href="15522686353535.html">iOS 动画全解 (1)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15253400374602.html">多线程 之 NSThread</a>
+			        <a href="15501356584731.html">UITableView顶部空白的几种解决办法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15200726964422.html">iOS Block 知识点拾遗</a>
+			        <a href="15488351784332.html">Objective-C中的字符串类型枚举 探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15235286649865.html">音视频学习笔记 1</a>
+			        <a href="15409691048860.html">【Swift笔记】引用计数</a>
 			      </li>
 		     
 		  
@@ -463,7 +470,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 

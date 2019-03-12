@@ -122,6 +122,8 @@
             <li><a href="vue.html">Vue</a></li>
         
             <li><a href="shell.html">shell</a></li>
+        
+            <li><a href="%E7%BD%91%E7%BB%9C.html">网络</a></li>
          
 
       </ul>
@@ -187,7 +189,7 @@
 
 <h2 id="toc_2">安装</h2>
 
-<pre><code>npm install react
+<pre><code class="language-text">npm install react
 npm install redux react-redux --save
 </code></pre>
 
@@ -206,106 +208,89 @@ npm install redux react-redux --save
 
 <ul>
 <li><p>step1 : <strong>安装依赖</strong> </p>
-
-<pre><code>npm install redux react-redux --save
+<pre><code class="language-text">npm install redux react-redux --save
 </code></pre></li>
 <li><p>step2 : 创建一个 AppProvider.js 并导出AppProvider组件 ：  <strong>AppProvider 作为APP的入口组件</strong></p>
-
-<pre><code>export default AppProvider;
+<pre><code class="language-text">export default AppProvider;
 </code></pre></li>
 <li><p>step3 : AppProvider.js 中导入头文件    </p>
-
-<pre><code>    import { Provider } from &#39;react-redux&#39;;    
+<pre><code class="language-text">    import { Provider } from &#39;react-redux&#39;;    
     import { createStore } from &#39;redux&#39;;
 </code></pre></li>
 <li><p>step4 : 准备AppProvider的包装数据：</p>
-
 <ul>
 <li><p>创建全局的store用于存储状态,并绑定<strong>reducer</strong></p>
-
-<pre><code>const store = createStore(AppReducer)
+<pre><code class="language-text">const store = createStore(AppReducer)
 </code></pre></li>
 <li><p>包装APPProvider：</p>
-
-<pre><code>const AppProvider = () =&gt; {
-    return (
-      //KR-1 包裹一层Provider   之后进入被包裹控件内部 进行关联处理
-        &lt;Provider store={store}&gt;
-            &lt;RootStack /&gt;
-        &lt;/Provider&gt;
-    )
+<pre><code class="language-text">const AppProvider = () =&gt; {
+    return (<br/>
+      //KR-1 包裹一层Provider   之后进入被包裹控件内部 进行关联处理<br/>
+        &lt;Provider store={store}&gt;<br/>
+            &lt;RootStack /&gt;<br/>
+        &lt;/Provider&gt;<br/>
+    )<br/>
 };
 </code></pre></li>
 <li><p>index.ios.js 文件中注册下 AppProvider对象</p>
-
-<pre><code>AppRegistry.registerComponent(&#39;XinLiFM&#39;, () =&gt; AppProvider);
+<pre><code class="language-text">AppRegistry.registerComponent(&#39;XinLiFM&#39;, () =&gt; AppProvider);
 </code></pre></li>
 </ul></li>
 <li><p>step5 : <strong>数据绑定</strong> 找到打算有 数据流传递 的对象 AppFind</p>
-
 <ul>
 <li><p>导入头文件：</p>
-
-<pre><code>import { connect } from &#39;react-redux&#39;;
+<pre><code class="language-text">import { connect } from &#39;react-redux&#39;;
 </code></pre></li>
 <li><p>绑定数据：</p>
-
-<pre><code>//用来获取更新后的数据   监听数据更新
-const mapStateToProps = (state,ownProps) =&gt; {
-    console.log(state);
-    return {
-        testShow: state.find.testShow,
-     }
-}
-
-//用来派发消息
-const mapDispatchToProps = (dispatch,ownProps) =&gt; ({
-  changeTabBar: (...args) =&gt; dispatch(showTabBar(...args)),
-});
-
-//用来进行数据流  和  控件的绑定关系
+<pre><code class="language-text">//用来获取更新后的数据   监听数据更新
+const mapStateToProps = (state,ownProps) =&gt; {<br/>
+    console.log(state);<br/>
+    return {<br/>
+        testShow: state.find.testShow,<br/>
+     }<br/>
+}<br/>
+//用来派发消息<br/>
+const mapDispatchToProps = (dispatch,ownProps) =&gt; ({<br/>
+  changeTabBar: (...args) =&gt; dispatch(showTabBar(...args)),<br/>
+});<br/>
+//用来进行数据流  和  控件的绑定关系<br/>
 export default connect(mapStateToProps,mapDispatchToProps)(AppFind)
-
 </code></pre></li>
 <li><p>派发消息：</p>
-
-<pre><code>this.props.changeTabBar(!this.props.testShow)
+<pre><code class="language-text">this.props.changeTabBar(!this.props.testShow)
 </code></pre></li>
 <li><p>消息处理：step4 中绑定的reducer文件中:</p>
-
-<pre><code>//1.导入头文件
-import { combineReducers } from &#39;redux&#39;;
-//2.创建初始化状态
-const initialState = { testShow: true};
-//3.逻辑处理
-const find = (state = initialState, action) =&gt; {
- switch (action.type) {
-        case &#39;findshowTabBar&#39;:{
-          return Object.assign({}, state, {
-                testShow: action.testShow
-            })
-        }
-        default:
-            return state;
-
-    }
-}
-//4.组合所有的逻辑块
-const AppReducer = combineReducers({
-    find,
-    //如果业务繁多这里可能还有别的模块
-});
-//5.导出
+<pre><code class="language-text">//1.导入头文件
+import { combineReducers } from &#39;redux&#39;;<br/>
+//2.创建初始化状态<br/>
+const initialState = { testShow: true};<br/>
+//3.逻辑处理<br/>
+const find = (state = initialState, action) =&gt; {<br/>
+ switch (action.type) {<br/>
+        case &#39;findshowTabBar&#39;:{<br/>
+          return Object.assign({}, state, {<br/>
+                testShow: action.testShow<br/>
+            })<br/>
+        }<br/>
+        default:<br/>
+            return state;<br/>
+    }<br/>
+}<br/>
+//4.组合所有的逻辑块<br/>
+const AppReducer = combineReducers({<br/>
+    find,<br/>
+    //如果业务繁多这里可能还有别的模块<br/>
+});<br/>
+//5.导出<br/>
 export default AppReducer;
 </code></pre></li>
 <li><p>获取更改状态值：</p>
-
-<pre><code>//因为上一步的绑定数据  就是将state的状态值 绑定到AppFind的props上，
-//所以取值的时候直接从this。props中取即可
-var {testShow,isShowTab,showTabBar} = this.props;
-&lt;Text 
-    style={{fontSize:17,color:testShow?&quot;red&quot;:&#39;rgb(39, 249, 110)&#39;}}&gt;
-    {testShow?&quot;我要显示某个东西&quot;:&quot;我要隐藏某个东西&quot;}
+<pre><code class="language-text">//因为上一步的绑定数据  就是将state的状态值 绑定到AppFind的props上，
+//所以取值的时候直接从this。props中取即可<br/>
+var {testShow,isShowTab,showTabBar} = this.props;<br/>
+&lt;Text <br/>
+    style={{fontSize:17,color:testShow?&quot;red&quot;:&#39;rgb(39, 249, 110)&#39;}}&gt;<br/>
+    {testShow?&quot;我要显示某个东西&quot;:&quot;我要隐藏某个东西&quot;}<br/>
 &lt;/Text&gt;
 </code></pre></li>
 </ul></li>
@@ -327,7 +312,7 @@ var {testShow,isShowTab,showTabBar} = this.props;
 <li>直接发送：</li>
 </ul>
 
-<pre><code>dispatch({type:&#39;action_name&#39;,index:2});
+<pre><code class="language-text">dispatch({type:&#39;action_name&#39;,index:2});
 
 const myAction = {
   type:&#39;action_name&#39;,
@@ -340,7 +325,7 @@ dispatch(myAction);
 <li>通过Action的创建函数发送：</li>
 </ul>
 
-<pre><code>//我们可以把所有的Action封装到一个固定文件 就想CSS文件那样 头文件导入的方式 去引用
+<pre><code class="language-text">//我们可以把所有的Action封装到一个固定文件 就想CSS文件那样 头文件导入的方式 去引用
 const actionFunc = (text) =&gt; {
   return {
     type: &#39;action_name&#39;,
@@ -356,7 +341,7 @@ dispatch(actionFunc(&#39;test&#39;));
 <li>绑定的Action创建函数</li>
 </ul>
 
-<pre><code>//基本action创建函数
+<pre><code class="language-text">//基本action创建函数
 const actionFunc = (text) =&gt; {
   return {
     type: &#39;action_name&#39;,
@@ -378,117 +363,95 @@ boundAction(&#39;test&#39;);
 
 <ul>
 <li><p>方法结构</p>
-
-<pre><code>(previouseState,action) =&gt; newState
+<pre><code class="language-text">(previouseState,action) =&gt; newState
 </code></pre>
-
 <p>给一个旧的state 和一个action 生成 一个新的 state。</p></li>
 <li><p>基本方法</p>
-
-<pre><code>const initialState = { testShow: true};
-
-const home = (state = initialState, action) =&gt; {
-  switch (action.type) {
-    case &#39;homeshowTabBar&#39;:{
-
-      console.log(&quot;homeshowTabBar：%s&quot;,action.testShow);
-
-    //合并状态值
-      return Object.assign({}, state, {
-        testShow: action.testShow;
-      })
-    }
-    default:
-    return state;
-
-  }
+<pre><code class="language-text">const initialState = { testShow: true};
+const home = (state = initialState, action) =&gt; {<br/>
+  switch (action.type) {<br/>
+    case &#39;homeshowTabBar&#39;:{<br/>
+      console.log(&quot;homeshowTabBar：%s&quot;,action.testShow);<br/>
+    //合并状态值<br/>
+      return Object.assign({}, state, {<br/>
+        testShow: action.testShow;<br/>
+      })<br/>
+    }<br/>
+    default:<br/>
+    return state;<br/>
+  }<br/>
 }   
 </code></pre>
-
 <p>合并state的时候下面的方法也是能达到相同效果的</p>
-
-<pre><code>{...state, ...newState} 
+<pre><code class="language-text">{...state, ...newState} 
 </code></pre></li>
 <li><p>拆分合并reducer</p>
-
-<pre><code>const home = (state = initialState, action) =&gt; {
-    switch (action.type) {
-        case &#39;homeshowTabBar&#39;:{
-            console.log(&quot;homeshowTabBar：%s&quot;,action.testShow);
-            return Object.assign({}, state, {
-                testShow: action.testShow
-            })
-        }
-        default:
-        return state;
-    }
-}
-
-const find = (state = initialState, action) =&gt; {
-    switch (action.type) {
-        case &#39;findshowTabBar&#39;:{
-            return Object.assign({}, state, {
-            testShow: action.testShow
-            })
-        }
-        default:
-        return state;
-
-    }
-}
-
-//合并
-const AppReducer = combineReducers({
-    nav,
-    home,
-    find,
-});
+<pre><code class="language-text">const home = (state = initialState, action) =&gt; {
+    switch (action.type) {<br/>
+        case &#39;homeshowTabBar&#39;:{<br/>
+            console.log(&quot;homeshowTabBar：%s&quot;,action.testShow);<br/>
+            return Object.assign({}, state, {<br/>
+                testShow: action.testShow<br/>
+            })<br/>
+        }<br/>
+        default:<br/>
+        return state;<br/>
+    }<br/>
+}<br/>
+const find = (state = initialState, action) =&gt; {<br/>
+    switch (action.type) {<br/>
+        case &#39;findshowTabBar&#39;:{<br/>
+            return Object.assign({}, state, {<br/>
+            testShow: action.testShow<br/>
+            })<br/>
+        }<br/>
+        default:<br/>
+        return state;<br/>
+    }<br/>
+}<br/>
+//合并<br/>
+const AppReducer = combineReducers({<br/>
+    nav,<br/>
+    home,<br/>
+    find,<br/>
+});<br/>
 export default AppReducer
 </code></pre>
-
 <p><strong>注意上面的写法和下面完全等价!!!</strong>：</p>
-
-<pre><code>const AppReducer = (state={}, action) =&gt; {
-    return {
-        home: home(state.home,action),
-        find: find(sate.find,action),
-    }
+<pre><code class="language-text">const AppReducer = (state={}, action) =&gt; {
+    return {<br/>
+        home: home(state.home,action),<br/>
+        find: find(sate.find,action),<br/>
+    }<br/>
 }
 </code></pre></li>
 <li><p>减少代码量 自动定义 reducerCreator</p>
-
-<pre><code>export const testCreator = myCreatorForReducer([], {
- [ActionTypes.ADD_TODO](state, action) {
- let text = action.text.trim();
- return [...state, text];
- }
-})
-
-const myCreatorForReducer = (initialState,handles) =&gt; {
-
-    return (state=initialState,action) =&gt; {
-        return handles[action.type](state,action);
-    }else {
-     return state;
-    }
-
+<pre><code class="language-text">export const testCreator = myCreatorForReducer([], {
+ [ActionTypes.ADD_TODO](state, action) {<br/>
+ let text = action.text.trim();<br/>
+ return [...state, text];<br/>
+ }<br/>
+})<br/>
+const myCreatorForReducer = (initialState,handles) =&gt; {<br/>
+    return (state=initialState,action) =&gt; {<br/>
+        return handles[action.type](state,action);<br/>
+    }else {<br/>
+     return state;<br/>
+    }<br/>
 }
 </code></pre>
-
 <p>设置不同的Key、调用不同的方法:</p>
-
-<pre><code>const reducer = combineReducers({
-    a: doSomethingWithA,
-    b: processB,
-    c: c
-})
-
-function reducer(state = {}, action) {
-    return {
-        a: doSomethingWithA(state.a, action),
-        b: processB(state.b, action),
-        c: c(state.c, action)
-    }
+<pre><code class="language-text">const reducer = combineReducers({
+    a: doSomethingWithA,<br/>
+    b: processB,<br/>
+    c: c<br/>
+})<br/>
+function reducer(state = {}, action) {<br/>
+    return {<br/>
+        a: doSomethingWithA(state.a, action),<br/>
+        b: processB(state.b, action),<br/>
+        c: c(state.c, action)<br/>
+    }<br/>
 }
 </code></pre></li>
 </ul>
@@ -503,7 +466,7 @@ function reducer(state = {}, action) {
 <li>通过 <code>subscribe(listener)</code> 返回的函数注销监听器。</li>
 </ul>
 
-<pre><code>import { createStore } from &#39;redux&#39;
+<pre><code class="language-text">import { createStore } from &#39;redux&#39;
 import todoApp from &#39;./reducers&#39;
 let store = createStore(todoApp)
 </code></pre>
@@ -535,16 +498,16 @@ let store = createStore(todoApp)
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15139059079620.html" 
-          title="Previous Post: 学习资源网址">&laquo; 学习资源网址</a>
+          <a href="15117133773045.html" 
+          title="Previous Post: 可选型 Optional">&laquo; 可选型 Optional</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15117133773045.html" 
-          title="Next Post: 可选型 Optional">可选型 Optional &raquo;</a>
+          <a  href="15115206889632.html" 
+          title="Next Post: Mac app 推荐">Mac app 推荐 &raquo;</a>
       
       </p>
         </div>
@@ -582,7 +545,7 @@ let store = createStore(todoApp)
 
 
 
-
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/KaelLVLinda" title="Twitter">Twitter</a>
 <a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
 <a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
   <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
@@ -613,6 +576,8 @@ let store = createStore(todoApp)
             <a href="vue.html"><strong>Vue</strong></a>
         
             <a href="shell.html"><strong>shell</strong></a>
+        
+            <a href="%E7%BD%91%E7%BB%9C.html"><strong>网络</strong></a>
          
         </p>
 
@@ -629,31 +594,31 @@ let store = createStore(todoApp)
 	      
 		      
 			      <li class="post">
-			        <a href="15261167596297.html">OC 多线程之 GCD知识从基础到进阶 （1）</a>
+			        <a href="15523077857608.html">OC中枚举写法  以及 字符串枚举探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15257437237715.html">OC中的各种遍历</a>
+			        <a href="15522686353535.html">iOS 动画全解 (1)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15253400374602.html">多线程 之 NSThread</a>
+			        <a href="15501356584731.html">UITableView顶部空白的几种解决办法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15200726964422.html">iOS Block 知识点拾遗</a>
+			        <a href="15488351784332.html">Objective-C中的字符串类型枚举 探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15235286649865.html">音视频学习笔记 1</a>
+			        <a href="15409691048860.html">【Swift笔记】引用计数</a>
 			      </li>
 		     
 		  
@@ -728,7 +693,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 

@@ -122,6 +122,8 @@
             <li><a href="vue.html">Vue</a></li>
         
             <li><a href="shell.html">shell</a></li>
+        
+            <li><a href="%E7%BD%91%E7%BB%9C.html">网络</a></li>
          
 
       </ul>
@@ -169,7 +171,7 @@
 <p>基本概念：</p>
 
 <ul>
-<li><p>GCD 全称 (Grand Center Dispatch),翻译成通俗中文“牛逼的中心调度机制”</p></li>
+<li><p>GCD 全称 (Grand Center Dispatch),翻译成通俗中文“牛B的中心调度机制”</p></li>
 <li><p>线程：执行任务调度的最小单位</p></li>
 <li><p>任务：就是一段代码，GCD中就是block中的内容。执行任务有两种方式：同步执行（sync）和异步执行（async）。两者的主要区别是：是否等待队列的任务执行结束，以及是否具备开启新线程的能力</p></li>
 <li><p>队列：用来存放任务的线性结构，采用 FIFO（先进先出）的原则。</p></li>
@@ -181,13 +183,11 @@
 
 <ul>
 <li>同步:
-
 <ul>
 <li>同步添加任务到指定的队列中，在添加的任务执行结束之前，会一直等待，直到队列里面的任务完成之后再继续执行后续任务。</li>
 <li>只能在当前线程中执行任务，不具备开启新线程的能力。<br/></li>
 </ul></li>
 <li><p>异步:</p>
-
 <ul>
 <li>异步添加任务到指定的队列中，它不会做任何等待，可以继续执行任务。</li>
 <li>可以在新的线程中执行任务，具备开启新线程的能力。</li>
@@ -195,32 +195,30 @@
 <li><p>串行队列： 队列中的任务 按添加顺序开始执行</p></li>
 <li><p>并发队列： 队列中的任务可同时开始执行，可以开辟多个线程</p></li>
 <li><p>主队列（等待主线程内的任务完成之后再利用主线程执行任务）</p></li>
-<li><p>全局并发队列</p></li>
+<li><p>全局并发队列：本质上就是一个apple默认的并发队列</p></li>
 </ul>
 
 <h2 id="toc_1">GCD 使用步骤</h2>
 
 <ul>
 <li><p>创建队列：</p>
-
-<pre><code>// 串行队列的创建方法
-dispatch_queue_t queue = dispatch_queue_create(&quot;net.bujige.testQueue&quot;, DISPATCH_QUEUE_SERIAL);
-// 并发队列的创建方法
-dispatch_queue_t queue = dispatch_queue_create(&quot;net.bujige.testQueue&quot;, DISPATCH_QUEUE_CONCURRENT);
-// 主队列的获取方法
-dispatch_queue_t queue = dispatch_get_main_queue();
-// 全局并发队列的获取方法
+<pre><code class="language-text">// 串行队列的创建方法
+dispatch_queue_t queue = dispatch_queue_create(&quot;net.bujige.testQueue&quot;, DISPATCH_QUEUE_SERIAL);<br/>
+// 并发队列的创建方法<br/>
+dispatch_queue_t queue = dispatch_queue_create(&quot;net.bujige.testQueue&quot;, DISPATCH_QUEUE_CONCURRENT);<br/>
+// 主队列的获取方法<br/>
+dispatch_queue_t queue = dispatch_get_main_queue();<br/>
+// 全局并发队列的获取方法<br/>
 dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 </code></pre></li>
 <li><p>创建任务：</p>
-
-<pre><code>// 同步执行任务创建方法
-dispatch_sync(queue, ^{
-    // 这里放同步执行任务代码
-});
-// 异步执行任务创建方法
-dispatch_async(queue, ^{
-    // 这里放异步执行任务代码
+<pre><code class="language-text">// 同步执行任务创建方法
+dispatch_sync(queue, ^{<br/>
+    // 这里放同步执行任务代码<br/>
+});<br/>
+// 异步执行任务创建方法<br/>
+dispatch_async(queue, ^{<br/>
+    // 这里放异步执行任务代码<br/>
 });
 </code></pre></li>
 </ul>
@@ -244,21 +242,18 @@ dispatch_async(queue, ^{
 <ul>
 <li><p>死锁：在<code>主线程</code>用<code>主队列</code>执行<code>同步任务</code>就会造成线程死锁。</p></li>
 <li><p>主队列中的任务一定是在主线程中执行的</p></li>
-<li><p>全局并发队列中的任务可以开辟新线程，但不一定会开辟</p></li>
+<li><p>全局并发队列中的任务可以开辟新线程，但不一定会去开辟</p></li>
 </ul>
 
 <h2 id="toc_3">GCD 线程间通信</h2>
 
-<pre><code>// GCD的线程间的通信 : 常用代码
+<pre><code class="language-text">// GCD的线程间的通信 : 常用代码
 - (void)GCDDemo
 {
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-
         NSLog(@&quot;正在努力下载... %@&quot;,[NSThread currentThread]);
-
         // 如果下载结束回到主线程更新UI
         dispatch_async(dispatch_get_main_queue(), ^{
-
             NSLog(@&quot;下载完成,正在更新UI... %@&quot;,[NSThread currentThread]);
         });
     });
@@ -272,7 +267,7 @@ dispatch_async(queue, ^{
 <p>对于栅栏方法的理解，我觉得下面的图片很形象：<br/>
 <img src="https://upload-images.jianshu.io/upload_images/1877784-4d6d77fafd3ad007.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt=""/></p>
 
-<pre><code>dispatch_queue_t queue = dispatch_queue_create(&quot;net.bujige.testQueue&quot;, DISPATCH_QUEUE_CONCURRENT);
+<pre><code class="language-text">dispatch_queue_t queue = dispatch_queue_create(&quot;net.bujige.testQueue&quot;, DISPATCH_QUEUE_CONCURRENT);
     
 dispatch_async(queue, ^{
     // 追加任务1
@@ -300,13 +295,17 @@ dispatch_async(queue, ^{
 
 </code></pre>
 
+<blockquote>
+<p>虽然是异步任务 栅栏也能把这两个任务给有先后顺序的隔离开来。</p>
+</blockquote>
+
 <h3 id="toc_6">GCD 延时执行方法：dispatch_after</h3>
 
 <blockquote>
 <p>这里需要注意的是，延迟的时间是指的 延迟将任务添加到队列中。所以这个时间并不是特别准确的</p>
 </blockquote>
 
-<pre><code>/**
+<pre><code class="language-text">/**
  * 延时执行方法 dispatch_after
  */
 - (void)after {
@@ -322,7 +321,7 @@ dispatch_async(queue, ^{
 
 <h3 id="toc_7">GCD 一次性代码（只执行一次）：dispatch_once</h3>
 
-<pre><code> static dispatch_once_t onceToken;
+<pre><code class="language-text"> static dispatch_once_t onceToken;
     dispatch_once(&amp;onceToken, ^{
         // 只执行1次的代码(这里面默认是线程安全的)
     });
@@ -330,7 +329,7 @@ dispatch_async(queue, ^{
 
 <h3 id="toc_8">GCD 快速迭代方法：dispatch_apply</h3>
 
-<pre><code>dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+<pre><code class="language-text">dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     
     NSLog(@&quot;apply---begin&quot;);
     dispatch_apply(6, queue, ^(size_t index) {
@@ -341,7 +340,7 @@ dispatch_async(queue, ^{
 
 <h3 id="toc_9">GCD 队列组：dispatch_group</h3>
 
-<pre><code>NSLog(@&quot;currentThread---%@&quot;,[NSThread currentThread]);  // 打印当前线程
+<pre><code class="language-text">NSLog(@&quot;currentThread---%@&quot;,[NSThread currentThread]);  // 打印当前线程
     NSLog(@&quot;group---begin&quot;);
     
     dispatch_group_t group =  dispatch_group_create();
@@ -374,7 +373,7 @@ dispatch_async(queue, ^{
 
 <h3 id="toc_10">GCD队列组监听：dispatch_group_notify</h3>
 
-<pre><code>    /*
+<pre><code class="language-text">    /*
      * 业务异步串行执行，用GCD实现的四种方式
      * 1、dispatch_group_notify(group, queue, ^{ });
      * 2、dispatch_group_async(group, backQueue, ^{ });
@@ -429,7 +428,7 @@ dispatch_async(queue, ^{
 
 <h3 id="toc_11">GCD中任务增删：dispatch_group_enter、dispatch_group_leave</h3>
 
-<pre><code>// 向任务组添加任务
+<pre><code class="language-text">// 向任务组添加任务
 dispatch_group_enter(group);
 // 将要添加的任务
 dispatch_async(queue, ^{
@@ -449,7 +448,7 @@ NSLog(@&quot;等待之后&quot;);
 
 <h3 id="toc_12">GCD信号量：dispatch_semaphore_t</h3>
 
-<pre><code>
+<pre><code class="language-text">
 -(void)semaphoreLockTest{
     
     dispatch_semaphore_t semaphoreLock = dispatch_semaphore_create(1);
@@ -490,7 +489,13 @@ NSLog(@&quot;等待之后&quot;);
 }
 </code></pre>
 
-<p>参考文章：</p>
+<h2 id="toc_13">线程锁</h2>
+
+<p><a href="https://www.jianshu.com/p/35dd92bcfe8c">iOS多线程-各种线程锁的简单介绍</a></p>
+
+<hr/>
+
+<p>本文参考文章：</p>
 
 <ul>
 <li><a href="https://www.jianshu.com/p/2d57c72016c6">iOS多线程：『GCD』详尽总结</a></li>
@@ -505,6 +510,9 @@ NSLog(@&quot;等待之后&quot;);
       <div class="row">
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15268827199184.html" 
+          title="Previous Post: NSURLRequest">&laquo; NSURLRequest</a>
       
         </p>
         </div>
@@ -550,7 +558,7 @@ NSLog(@&quot;等待之后&quot;);
 
 
 
-
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/KaelLVLinda" title="Twitter">Twitter</a>
 <a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
 <a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
   <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
@@ -581,6 +589,8 @@ NSLog(@&quot;等待之后&quot;);
             <a href="vue.html"><strong>Vue</strong></a>
         
             <a href="shell.html"><strong>shell</strong></a>
+        
+            <a href="%E7%BD%91%E7%BB%9C.html"><strong>网络</strong></a>
          
         </p>
 
@@ -597,31 +607,31 @@ NSLog(@&quot;等待之后&quot;);
 	      
 		      
 			      <li class="post">
-			        <a href="15261167596297.html">OC 多线程之 GCD知识从基础到进阶 （1）</a>
+			        <a href="15523077857608.html">OC中枚举写法  以及 字符串枚举探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15257437237715.html">OC中的各种遍历</a>
+			        <a href="15522686353535.html">iOS 动画全解 (1)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15253400374602.html">多线程 之 NSThread</a>
+			        <a href="15501356584731.html">UITableView顶部空白的几种解决办法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15200726964422.html">iOS Block 知识点拾遗</a>
+			        <a href="15488351784332.html">Objective-C中的字符串类型枚举 探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15235286649865.html">音视频学习笔记 1</a>
+			        <a href="15409691048860.html">【Swift笔记】引用计数</a>
 			      </li>
 		     
 		  
@@ -696,7 +706,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 

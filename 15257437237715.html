@@ -122,6 +122,8 @@
             <li><a href="vue.html">Vue</a></li>
         
             <li><a href="shell.html">shell</a></li>
+        
+            <li><a href="%E7%BD%91%E7%BB%9C.html">网络</a></li>
          
 
       </ul>
@@ -170,7 +172,7 @@
 
 <p>首先把数据源准备好：</p>
 
-<pre><code>_dataSource = [NSMutableArray array];
+<pre><code class="language-text">_dataSource = [NSMutableArray array];
 _dataDic = [NSMutableDictionary dictionary];
 for (int i=0; i&lt;5; i++) {
     [_dataSource addObject:@(i)];
@@ -184,14 +186,14 @@ for (int i=0; i&lt;5; i++) {
 
 <h3 id="toc_1">遍历数组</h3>
 
-<pre><code>for (int i = 0; i&lt;_dataSource.count; i++) {
+<pre><code class="language-text">for (int i = 0; i&lt;_dataSource.count; i++) {
     NSLog(@&quot;%@ --- thread:%@&quot;,[_dataSource objectAtIndex:i],[NSThread currentThread]);
 }
 </code></pre>
 
 <h3 id="toc_2">遍历字典</h3>
 
-<pre><code>// 取出字典中所有的key （无序的）
+<pre><code class="language-text">// 取出字典中所有的key （无序的）
 NSArray *keys = [_dataDic allKeys];
 
 for (int i = 0; i&lt;keys.count; i++) {
@@ -204,7 +206,7 @@ for (int i = 0; i&lt;keys.count; i++) {
 
 <p>这是打印结果</p>
 
-<pre><code>2018-05-09 15:01:23.119707+0800 OCProject[78848:4457173] 0 --- thread:&lt;NSThread: 0x604000263b40&gt;{number = 1, name = main}
+<pre><code class="language-text">2018-05-09 15:01:23.119707+0800 OCProject[78848:4457173] 0 --- thread:&lt;NSThread: 0x604000263b40&gt;{number = 1, name = main}
 2018-05-09 15:01:23.120003+0800 OCProject[78848:4457173] 1 --- thread:&lt;NSThread: 0x604000263b40&gt;{number = 1, name = main}
 2018-05-09 15:01:23.120262+0800 OCProject[78848:4457173] 2 --- thread:&lt;NSThread: 0x604000263b40&gt;{number = 1, name = main}
 2018-05-09 15:01:23.120473+0800 OCProject[78848:4457173] 3 --- thread:&lt;NSThread: 0x604000263b40&gt;{number = 1, name = main}
@@ -227,7 +229,7 @@ for (int i = 0; i&lt;keys.count; i++) {
 
 <h3 id="toc_5">遍历数组</h3>
 
-<pre><code>// 遍历数组
+<pre><code class="language-text">// 遍历数组
 for (NSNumber *obj in _dataSource) {
     NSLog(@&quot;%@ --- thread:%@&quot;,obj,[NSThread currentThread]);
 
@@ -236,7 +238,7 @@ for (NSNumber *obj in _dataSource) {
 
 <h3 id="toc_6">遍历字典</h3>
 
-<pre><code>// 遍历字典
+<pre><code class="language-text">// 遍历字典
 NSArray *keys = [_dataDic allKeys];
 for (NSString *key in keys) {
     NSString *value = [_dataDic objectForKey:key];
@@ -247,7 +249,7 @@ for (NSString *key in keys) {
 
 <p>打印结果：</p>
 
-<pre><code>2018-05-09 15:17:28.993429+0800 OCProject[79116:4479093] 0 --- thread:&lt;NSThread: 0x60400006c0c0&gt;{number = 1, name = main}
+<pre><code class="language-text">2018-05-09 15:17:28.993429+0800 OCProject[79116:4479093] 0 --- thread:&lt;NSThread: 0x60400006c0c0&gt;{number = 1, name = main}
 2018-05-09 15:17:28.993769+0800 OCProject[79116:4479093] 1 --- thread:&lt;NSThread: 0x60400006c0c0&gt;{number = 1, name = main}
 2018-05-09 15:17:28.993980+0800 OCProject[79116:4479093] 2 --- thread:&lt;NSThread: 0x60400006c0c0&gt;{number = 1, name = main}
 2018-05-09 15:17:28.994204+0800 OCProject[79116:4479093] 3 --- thread:&lt;NSThread: 0x60400006c0c0&gt;{number = 1, name = main}
@@ -267,7 +269,6 @@ for (NSString *key in keys) {
 
 <ul>
 <li>优点：
-
 <ul>
 <li>语法简洁</li>
 <li>效率高</li>
@@ -279,7 +280,7 @@ for (NSString *key in keys) {
 
 <h3 id="toc_9">遍历数组</h3>
 
-<pre><code>/*
+<pre><code class="language-text">/*
  * 正向枚举：objectEnumerator
  * 反向枚举：reverseObjectEnumerator
  */
@@ -292,7 +293,7 @@ while (obj=[enumetorArr nextObject]) {
 
 <h3 id="toc_10">遍历字典</h3>
 
-<pre><code>  NSEnumerator *enumtorValue = [_dataDic objectEnumerator];// Value枚举器 reverseObjectEnumerator反向顺序
+<pre><code class="language-text">  NSEnumerator *enumtorValue = [_dataDic objectEnumerator];// Value枚举器 reverseObjectEnumerator反向顺序
   NSEnumerator *enumtorKey = [_dataDic keyEnumerator];// key 枚举器
   id value;
   while (value=[enumtorDic nextObject]) {
@@ -302,7 +303,7 @@ while (obj=[enumetorArr nextObject]) {
 
 <p>打印结果：</p>
 
-<pre><code>2018-05-09 15:35:49.961318+0800 OCProject[79558:4515099] 0 --- thread:&lt;NSThread: 0x604000065300&gt;{number = 1, name = main}
+<pre><code class="language-text">2018-05-09 15:35:49.961318+0800 OCProject[79558:4515099] 0 --- thread:&lt;NSThread: 0x604000065300&gt;{number = 1, name = main}
 2018-05-09 15:35:49.961554+0800 OCProject[79558:4515099] 1 --- thread:&lt;NSThread: 0x604000065300&gt;{number = 1, name = main}
 2018-05-09 15:35:49.961666+0800 OCProject[79558:4515099] 2 --- thread:&lt;NSThread: 0x604000065300&gt;{number = 1, name = main}
 2018-05-09 15:35:49.961788+0800 OCProject[79558:4515099] 3 --- thread:&lt;NSThread: 0x604000065300&gt;{number = 1, name = main}
@@ -325,7 +326,7 @@ while (obj=[enumetorArr nextObject]) {
 
 <h3 id="toc_13">遍历数组</h3>
 
-<pre><code>// 按照顺序来的
+<pre><code class="language-text">// 按照顺序来的
 [_dataSource enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
     NSLog(@&quot;sort:0 %@ -- %lu --- %@ --- %@&quot;,obj,(unsigned long)idx,stop?@&quot;YES&quot;:@&quot;NO&quot;,[NSThread currentThread]);
 }];
@@ -343,7 +344,7 @@ while (obj=[enumetorArr nextObject]) {
 
 <p>打印结果：</p>
 
-<pre><code>2018-05-09 18:31:25.808197+0800 OCProject[923:284717] sort:0 0 -- 0 --- YES --- &lt;NSThread: 0x137e0bb50&gt;{number = 1, name = main}
+<pre><code class="language-text">2018-05-09 18:31:25.808197+0800 OCProject[923:284717] sort:0 0 -- 0 --- YES --- &lt;NSThread: 0x137e0bb50&gt;{number = 1, name = main}
 2018-05-09 18:31:25.808692+0800 OCProject[923:284717] sort:0 1 -- 1 --- YES --- &lt;NSThread: 0x137e0bb50&gt;{number = 1, name = main}
 2018-05-09 18:31:25.808975+0800 OCProject[923:284717] sort:0 2 -- 2 --- YES --- &lt;NSThread: 0x137e0bb50&gt;{number = 1, name = main}
 2018-05-09 18:31:25.809250+0800 OCProject[923:284717] sort:0 3 -- 3 --- YES --- &lt;NSThread: 0x137e0bb50&gt;{number = 1, name = main}
@@ -362,7 +363,7 @@ while (obj=[enumetorArr nextObject]) {
 
 <p>当我把数组内的元素个数增加到 10，请看前缀是<code>sort:1</code> 的打印结果如下：</p>
 
-<pre><code>2018-05-09 18:34:41.806499+0800 OCProject[928:286028] sort:1 0 -- 0 --- YES --- &lt;NSThread: 0x145e0bb50&gt;{number = 1, name = main}
+<pre><code class="language-text">2018-05-09 18:34:41.806499+0800 OCProject[928:286028] sort:1 0 -- 0 --- YES --- &lt;NSThread: 0x145e0bb50&gt;{number = 1, name = main}
 2018-05-09 18:34:41.806982+0800 OCProject[928:286068] sort:1 1 -- 1 --- YES --- &lt;NSThread: 0x145eb08d0&gt;{number = 3, name = (null)}
 2018-05-09 18:34:41.809488+0800 OCProject[928:286068] sort:1 3 -- 3 --- YES --- &lt;NSThread: 0x145eb08d0&gt;{number = 3, name = (null)}
 2018-05-09 18:34:41.809518+0800 OCProject[928:286028] sort:1 2 -- 2 --- YES --- &lt;NSThread: 0x145e0bb50&gt;{number = 1, name = main}
@@ -376,7 +377,7 @@ while (obj=[enumetorArr nextObject]) {
 
 <h3 id="toc_14">遍历字典</h3>
 
-<pre><code>// 主线程 无序
+<pre><code class="language-text">// 主线程 无序
 [_dataDic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
     NSLog(@&quot;key:%@ -- value:%@  --- %@&quot;,key,obj,[NSThread currentThread]);
 }];
@@ -390,7 +391,7 @@ while (obj=[enumetorArr nextObject]) {
 
 <p>打印结果：</p>
 
-<pre><code>2018-05-09 18:33:48.223268+0800 OCProject[926:285509] key:3 -- value:我是第3个Item  --- &lt;NSThread: 0x107e0b250&gt;{number = 1, name = main}
+<pre><code class="language-text">2018-05-09 18:33:48.223268+0800 OCProject[926:285509] key:3 -- value:我是第3个Item  --- &lt;NSThread: 0x107e0b250&gt;{number = 1, name = main}
 2018-05-09 18:33:48.224066+0800 OCProject[926:285509] key:1 -- value:我是第1个Item  --- &lt;NSThread: 0x107e0b250&gt;{number = 1, name = main}
 2018-05-09 18:33:48.225122+0800 OCProject[926:285509] key:4 -- value:我是第4个Item  --- &lt;NSThread: 0x107e0b250&gt;{number = 1, name = main}
 2018-05-09 18:33:48.226368+0800 OCProject[926:285509] key:2 -- value:我是第2个Item  --- &lt;NSThread: 0x107e0b250&gt;{number = 1, name = main}
@@ -406,13 +407,12 @@ while (obj=[enumetorArr nextObject]) {
 
 <ul>
 <li>优点：
-
 <ul>
 <li>遍历时可以直接从block中获得需要的所有信息，包括下标、值等。特别相对于字典而言，不需要做多余的编码即可同时获得key和value的值。</li>
 <li>能够直接修改block中key或者obj的类型为真实类型，可以省去类型转换的工作。</li>
 <li>可以通过NSEnumerationConcurrent枚举值开启并发迭代功能。</li>
 </ul></li>
-<li> 缺点：暂无
+<li> 缺点：暂无<br/>
 &gt; 说明：基于Block的遍历方式在实现反向遍历的时候也非常简单，使用enumerateObjectsWithOptions方法，传递NSEnumerationReverse作为参数即可，在处理遍历操作的时候推荐基于Block的遍历方式。</li>
 </ul>
 
@@ -420,7 +420,7 @@ while (obj=[enumetorArr nextObject]) {
 
 <h3 id="toc_17">遍历数组</h3>
 
-<pre><code>dispatch_queue_t queue =dispatch_queue_create(&quot;apply并行队列&quot;, DISPATCH_QUEUE_CONCURRENT);
+<pre><code class="language-text">dispatch_queue_t queue =dispatch_queue_create(&quot;apply并行队列&quot;, DISPATCH_QUEUE_CONCURRENT);
 dispatch_apply(_dataSource.count, queue, ^(size_t index) {
     NSLog(@&quot;%@----%@&quot;,self-&gt;_dataSource[index],[NSThread currentThread]);
 });
@@ -429,7 +429,7 @@ NSLog(@&quot;end1&quot;);
 
 <h3 id="toc_18">遍历字典</h3>
 
-<pre><code>NSArray *allkeys = [_dataDic allKeys];
+<pre><code class="language-text">NSArray *allkeys = [_dataDic allKeys];
 NSArray *allValue = [_dataDic allValues];
 dispatch_apply(_dataDic.count, queue, ^(size_t index) {
     NSString *key = [allkeys objectAtIndex:index];
@@ -439,7 +439,7 @@ dispatch_apply(_dataDic.count, queue, ^(size_t index) {
 
 <p>打印结果：</p>
 
-<pre><code>2018-05-09 19:24:03.875390+0800 OCProject[975:301673] 0----&lt;NSThread: 0x121e0ba50&gt;{number = 1, name = main}
+<pre><code class="language-text">2018-05-09 19:24:03.875390+0800 OCProject[975:301673] 0----&lt;NSThread: 0x121e0ba50&gt;{number = 1, name = main}
 2018-05-09 19:24:03.875913+0800 OCProject[975:301673] 2----&lt;NSThread: 0x121e0ba50&gt;{number = 1, name = main}
 2018-05-09 19:24:03.876194+0800 OCProject[975:301673] 3----&lt;NSThread: 0x121e0ba50&gt;{number = 1, name = main}
 2018-05-09 19:24:03.876445+0800 OCProject[975:301673] 4----&lt;NSThread: 0x121e0ba50&gt;{number = 1, name = main}
@@ -467,7 +467,6 @@ dispatch_apply(_dataDic.count, queue, ^(size_t index) {
 <ul>
 <li>优点：开启多条线程并发处理遍历任务，执行效率高。</li>
 <li>缺点：
-
 <ul>
 <li>对于字典和集合的处理需借助数组 </li>
 <li>无法实现反向遍历。</li>
@@ -530,7 +529,7 @@ dispatch_apply(_dataDic.count, queue, ^(size_t index) {
 
 
 
-
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/KaelLVLinda" title="Twitter">Twitter</a>
 <a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
 <a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
   <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
@@ -561,6 +560,8 @@ dispatch_apply(_dataDic.count, queue, ^(size_t index) {
             <a href="vue.html"><strong>Vue</strong></a>
         
             <a href="shell.html"><strong>shell</strong></a>
+        
+            <a href="%E7%BD%91%E7%BB%9C.html"><strong>网络</strong></a>
          
         </p>
 
@@ -577,31 +578,31 @@ dispatch_apply(_dataDic.count, queue, ^(size_t index) {
 	      
 		      
 			      <li class="post">
-			        <a href="15261167596297.html">OC 多线程之 GCD知识从基础到进阶 （1）</a>
+			        <a href="15523077857608.html">OC中枚举写法  以及 字符串枚举探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15257437237715.html">OC中的各种遍历</a>
+			        <a href="15522686353535.html">iOS 动画全解 (1)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15253400374602.html">多线程 之 NSThread</a>
+			        <a href="15501356584731.html">UITableView顶部空白的几种解决办法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15200726964422.html">iOS Block 知识点拾遗</a>
+			        <a href="15488351784332.html">Objective-C中的字符串类型枚举 探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15235286649865.html">音视频学习笔记 1</a>
+			        <a href="15409691048860.html">【Swift笔记】引用计数</a>
 			      </li>
 		     
 		  
@@ -676,7 +677,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 

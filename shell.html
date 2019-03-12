@@ -122,6 +122,8 @@
             <li><a href="vue.html">Vue</a></li>
         
             <li><a href="shell.html">shell</a></li>
+        
+            <li><a href="%E7%BD%91%E7%BB%9C.html">网络</a></li>
          
 
       </ul>
@@ -144,64 +146,6 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="15226648731246.html">
-                
-                  <h1>每天学习一个shell技能（7）</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">文件包含 导入文件</h2>
-
-<p>测试文件  test1.sh</p>
-
-<pre><code>#!/bin/bash
-# author:菜鸟教程
-# url:www.runoob.com
-
-url=&quot;http://www.runoob.com&quot;
-</code></pre>
-
-<p>测试文件 test2.sh</p>
-
-<pre><code>#!/bin/bash
-# author:菜鸟教程
-# url:www.runoob.com
-
-#使用 . 号来引用test1.sh 文件
-. ./test1.sh
-
-# 或者使用以下包含文件代码
-# source ./test1.sh
-
-echo &quot;菜鸟教程官网地址：$url&quot;
-</code></pre>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15226648731246.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/4/2</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='shell.html'>shell</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
                 <a class="clearlink" href="15232599795686.html">
                 
                   <h1>每天学习一个shell技能（8）</h1>
@@ -211,7 +155,7 @@ echo &quot;菜鸟教程官网地址：$url&quot;
                         
                         	<h2 id="toc_0">shell 终端打印</h2>
 
-<pre><code>```
+<pre><code class="language-text">```
 printf &quot;%-5s %-10s %-4s \n&quot; NO Name Mark
 printf &quot;%-5s %-10s %-4s \n&quot; 1 kael 100
 printf &quot;%-5s %-10s %-4s \n&quot; 2 linda 99
@@ -258,6 +202,64 @@ NO    Name       Mark
               </div><!-- article -->
         
 			<div class="article">
+                <a class="clearlink" href="15226648731246.html">
+                
+                  <h1>每天学习一个shell技能（7）</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">文件包含 导入文件</h2>
+
+<p>测试文件  test1.sh</p>
+
+<pre><code class="language-text">#!/bin/bash
+# author:菜鸟教程
+# url:www.runoob.com
+
+url=&quot;http://www.runoob.com&quot;
+</code></pre>
+
+<p>测试文件 test2.sh</p>
+
+<pre><code class="language-text">#!/bin/bash
+# author:菜鸟教程
+# url:www.runoob.com
+
+#使用 . 号来引用test1.sh 文件
+. ./test1.sh
+
+# 或者使用以下包含文件代码
+# source ./test1.sh
+
+echo &quot;菜鸟教程官网地址：$url&quot;
+</code></pre>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15226648731246.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/4/2</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='shell.html'>shell</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
                 <a class="clearlink" href="15226603064743.html">
                 
                   <h1>每天学习一个shell技能（6）</h1>
@@ -269,7 +271,7 @@ NO    Name       Mark
 
 <h3 id="toc_1">test文件</h3>
 
-<pre><code>if test -e ./test.sh
+<pre><code class="language-text">if test -e ./test.sh
 then
     echo &#39;文件已存在!&#39;
 else
@@ -325,21 +327,21 @@ fi
 
 <h3 id="toc_1">打印字符</h3>
 
-<pre><code>// 下面两行代码效果一致
+<pre><code class="language-text">// 下面两行代码效果一致
 echo &quot;It is a test&quot;
 echo It is a test
 </code></pre>
 
 <h3 id="toc_2">打印转义字符</h3>
 
-<pre><code>echo &quot;\&quot;It is a test\&quot;&quot;
+<pre><code class="language-text">echo &quot;\&quot;It is a test\&quot;&quot;
 // 引号也可以省略
 echo \&quot;It is a test\&quot;
 </code></pre>
 
 <p>打印结果：</p>
 
-<pre><code>&quot;It is a test&quot;
+<pre><code class="language-text">&quot;It is a test&quot;
 
 &quot;It is a test&quot;
 </code></pre>
@@ -380,7 +382,7 @@ echo \&quot;It is a test\&quot;
 
 <p>基本使用：</p>
 
-<pre><code>#!/bin/bash
+<pre><code class="language-text">#!/bin/bash
 
 val=`expr 2 + 2`
 echo &quot;两数之和为 : $val&quot;
@@ -427,7 +429,7 @@ echo &quot;两数之和为 : $val&quot;
 
 <p>我们可以在脚本执行时，向脚本传递参数</p>
 
-<pre><code>// 终端运行 脚本，并传入参数
+<pre><code class="language-text">// 终端运行 脚本，并传入参数
 sh testBash.sh 0 1 2
 
 echo &quot;Shell 传递参数实例！&quot;
@@ -439,7 +441,7 @@ echo &quot;\$1 =&gt; $1&quot;
 
 <p>打印结果：</p>
 
-<pre><code>Shell 传递参数实例！
+<pre><code class="language-text">Shell 传递参数实例！
 $0 =&gt; testBash.sh
 $1 =&gt; 0
 </code></pre>
@@ -453,6 +455,47 @@ $1 =&gt; 0
                   <div class="more-left left">
                    <a href="15223750607281.html">Read more</a>&nbsp;&nbsp; 
                     <span class="date">2018/3/30</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='shell.html'>shell</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15223028228569.html">
+                
+                  <h1>每天学习一个shell技能 （1）</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">准备</h2>
+
+<p>bash 环境位置</p>
+
+<pre><code class="language-text">#!/bin/bash
+</code></pre>
+
+<p><code>#!</code> 一个约定的标记，它告诉系统这个脚本需要什么解释器来执行，即使用哪一种 Shell</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15223028228569.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/3/29</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='shell.html'>shell</a></span>
@@ -516,47 +559,6 @@ array_name(0)=value0
                 </div>
               </div><!-- article -->
         
-			<div class="article">
-                <a class="clearlink" href="15223028228569.html">
-                
-                  <h1>每天学习一个shell技能 （1）</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">准备</h2>
-
-<p>bash 环境位置</p>
-
-<pre><code>#!/bin/bash
-</code></pre>
-
-<p><code>#!</code> 一个约定的标记，它告诉系统这个脚本需要什么解释器来执行，即使用哪一种 Shell</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15223028228569.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/3/29</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='shell.html'>shell</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
               
 
 
@@ -593,7 +595,7 @@ array_name(0)=value0
 
 
 
-
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/KaelLVLinda" title="Twitter">Twitter</a>
 <a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
 <a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
   <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
@@ -624,6 +626,8 @@ array_name(0)=value0
             <a href="vue.html"><strong>Vue</strong></a>
         
             <a href="shell.html"><strong>shell</strong></a>
+        
+            <a href="%E7%BD%91%E7%BB%9C.html"><strong>网络</strong></a>
          
         </p>
 
@@ -640,31 +644,31 @@ array_name(0)=value0
 	      
 		      
 			      <li class="post">
-			        <a href="15261167596297.html">OC 多线程之 GCD知识从基础到进阶 （1）</a>
+			        <a href="15523077857608.html">OC中枚举写法  以及 字符串枚举探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15257437237715.html">OC中的各种遍历</a>
+			        <a href="15522686353535.html">iOS 动画全解 (1)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15253400374602.html">多线程 之 NSThread</a>
+			        <a href="15501356584731.html">UITableView顶部空白的几种解决办法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15200726964422.html">iOS Block 知识点拾遗</a>
+			        <a href="15488351784332.html">Objective-C中的字符串类型枚举 探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15235286649865.html">音视频学习笔记 1</a>
+			        <a href="15409691048860.html">【Swift笔记】引用计数</a>
 			      </li>
 		     
 		  
@@ -739,7 +743,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 

@@ -122,6 +122,8 @@
             <li><a href="vue.html">Vue</a></li>
         
             <li><a href="shell.html">shell</a></li>
+        
+            <li><a href="%E7%BD%91%E7%BB%9C.html">网络</a></li>
          
 
       </ul>
@@ -144,41 +146,139 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="15126628432953.html">
+                <a class="clearlink" href="15397592871272.html">
                 
-                  <h1>iOS代码检测入坑记事</h1>
+                  <h1>iOS 竖屏NavigationController present 到只支持横屏的界面 版本解析</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2 id="toc_0">我接触的代码检测</h2>
+                        	<h2 id="toc_0">各版本对比</h2>
 
 <ul>
-<li>OCLint + xcpretty</li>
-<li>sonar</li>
-<li>infer</li>
+<li><p>iOS9 和 iOS10 差别就是返回时 导航会有自己动画<br/>
+<img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwb87gvzoxg30890gob2f.gif" alt="iOS9"/> <img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwb88tdp6hg30860gnx6t.gif" alt="iOS10"/> </p></li>
+<li><p>iOS11 和 iOS12 两者没什么区别， 但是跟之前版本变化很大 会有 20像素的导航条空白区域（真机上的现象是，vc.view上移20像素（iPhone X系列可能会是44像素非常明显））<br/>
+<img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwb89abhgbg30890gnnpk.gif" alt="iOS11"/> <img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwb8d01n7pg30840goe87.gif" alt="iOS12"/></p></li>
 </ul>
 
-<h3 id="toc_1">infer</h3>
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/10/17</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15395963175730.html">
+                
+                  <h1>iOS 转场动画 全解析</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">转场代理(Transition Delegate)：</h2>
+
+<pre><code class="language-text">&lt;UINavigationControllerDelegate&gt; //UINavigationController 的 delegate 属性遵守该协议。
+&lt;UITabBarControllerDelegate&gt; //UITabBarController 的 delegate 属性遵守该协议。
+&lt;UIViewControllerTransitioningDelegate&gt; //UIViewController 的 transitioningDelegate 属性遵守该协议。
+</code></pre>
+
+<h2 id="toc_1">动画控制器</h2>
+
+<p>负责添加视图以及执行动画；遵守<code>&lt;UIViewControllerAnimatedTransitioning&gt;</code>协议；</p>
+
+<h2 id="toc_2">交互控制</h2>
+
+<p>通过交互手段，通常是手势来驱动动画控制器实现的动画，使得用户能够控制整个过程；遵守<code>&lt;UIViewControllerInteractiveTransitioning&gt;</code>协议；系统已经打包好现成的类供我们使用。</p>
+
+<h2 id="toc_3">转场环境(Transition Context):</h2>
+
+<p>提供转场中需要的数据；遵守<code>&lt;UIViewControllerContextTransitioning&gt;</code>协议；由 UIKit 在转场开始前生成并提供给我们提交的动画控制器和交互控制器使用。</p>
+
+<h2 id="toc_4">转场协调器(Transition Coordinator)：</h2>
+
+<p>可在转场动画发生的同时并行执行其他的动画，其作用与其说协调不如说辅助，主要在 Modal 转场和交互转场取消时使用，其他时候很少用到；遵守<code>&lt;UIViewControllerTransitionCoordinator&gt;</code>协议；由 UIKit 在转场时生成，UIViewController 在 iOS 7 中新增了方法transitionCoordinator()返回一个遵守该协议的对象，且该方法只在该控制器处于转场过程中才返回一个此类对象，不参与转场时返回 nil。</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/10/15</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15374957318613.html">
+                
+                  <h1>iOS开发之 【奇巧淫技篇】</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">调试</h2>
 
 <ul>
-<li><p><a href="https://infer.liaohuqiu.net">infer官网 传送门</a></p>
+<li><a href="http://www.cocoachina.com/ios/20170609/19482.html">Xcode 9 以后可以无线调试</a></li>
+</ul>
 
-<p><em>具体使用</em></p>
+<h2 id="toc_1">Charlse篇</h2>
 
-<pre><code>infer -- xcodebuild -target &lt;target name&gt; -configuration &lt;build configuration&gt; -sdk iphonesimulator
+<ul>
+<li><a href="https://blog.csdn.net/lea__dongyang/article/details/73294751">Charles抓包HTTPS网络请求</a></li>
+<li><a href="https://www.cnblogs.com/dsxniubility/p/4621314.html">Charlse截取网络请求，搭建自己的数据服务</a></li>
+</ul>
+
+<h2 id="toc_2">iOS 系统NavigationBar StatusBar</h2>
+
+<ul>
+<li><p><a href="https://note.altair21.org/2016/12/22/iOS%E4%B8%AD%E9%9A%90%E8%97%8FStatus%20Bar%E8%80%8C%E4%B8%8D%E6%94%B9%E5%8F%98Navigation%20Bar%E9%AB%98%E5%BA%A6%E7%9A%84%E5%81%9A%E6%B3%95/">显示隐藏 statusBar 不改变NavigationBar高度</a></p>
+<pre><code class="language-text">// 隐藏 状态条
+[UIApplication sharedApplication].keyWindow.windowLevel = UIWindowLevelStatusBar + 1;<br/>
+// 显示 状态条<br/>
+[UIApplication sharedApplication].keyWindow.windowLevel = UIWindowLevelNormal;
 </code></pre></li>
 </ul>
 
-
                         
                       </div>
                   </div>
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15126628432953.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/12/8</span>
+                  
+                    <span class="date">2018/9/21</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
@@ -195,286 +295,157 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15129168744096.html">
+                <a class="clearlink" href="15359519661802.html">
                 
-                  <h1>关于iOS沙盒文件的那些事儿</h1>
+                  <h1>iOS CALayer动画</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2 id="toc_0">分类</h2>
+                        	<h2 id="toc_0">keyPath</h2>
 
-<ul>
-<li>Document： 除了基于NSUserdefaults的首选项设置之外,应用程序的数据，文件都存在该目录下</li>
-<li>Libary：基于NSUserDefaults的首选项参数保存在Liabry/prefrences目录下</li>
-<li>tmp:</li>
-</ul>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15129168744096.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/12/10</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15130871696781.html">
-                
-                  <h1>Effective Objective-c 2.0 学习笔记</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>编写高质量iOS与OS X代码的52个有效方法</p>
-
-<h1 id="toc_0">第一章 熟悉Objective-C</h1>
-
-<h2 id="toc_1">第1条 了解Objective-C语言的起源</h2>
-
-<ol>
-<li>笔记：</li>
-<li>OC是动态语言，使用<code>消息结构</code>(messaging structure),而非<code>函数调用</code>(function calling)。OC由消息语言的鼻祖smalltalk演化而来。</li>
-<li>区别：消息结构的语言，其运行时执行的代码由运行环境决定；函数调用的语言，则由编译器决定。</li>
-<li>OC中对象所占内存总是分配在<code>堆空间</code>(heap space)而不会在<code>栈空间</code>(stack)上</li>
-<li><p>OC中不带*的变量，有可能会使用<code>栈空间</code>，比如CGRect 结构体<br/>
-~~ <code><br/>
-~~ struct CGRect{<br/>
-~~     CGPoint point;<br/>
-~~     CGSize size;<br/>
-~~ };<br/>
-~~</code><br/>
-因为创建对象需要额外开销（分配&amp;释放堆内存），从效率上，结构体性能更好。</p></li>
-<li><p>要点</p></li>
-<li><p>Objective-c为C语言天减了面向对象特性，是其超集。Objective-C是使用动态绑定的消息结构，也就是说，在运行时才会检查对象类型。接收这一消息后，究竟该执行何种代码实现，有运行期环境决定而非编译器。</p></li>
-<li><p>理解C语言的核心概念有助于写好Objective-C程序，尤其是掌握内存模型与指针。</p></li>
-</ol>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15130871696781.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/12/12</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15130871866705.html">
-                
-                  <h1>当虹云直播SDK植入引导</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<hr/>
-
-<h2 id="toc_0">一、导入静态库 libARCPlayerRecoder.a</h2>
-
-<h2 id="toc_1">二、导入framework</h2>
-
-<p>(img)</p>
-
-<h2 id="toc_2">三、添加info.plist文件的授权选项 麦克风 摄像头权限授权申请</h2>
-
-<p>(img)</p>
-
-<h2 id="toc_3">四、.m文件 中引用 C++方法的时候 需要变为.mm文件</h2>
-
-<h2 id="toc_4">五、变量类型转换</h2>
-
-<p>self 改为 (__bridge void *) self<br/>
-用  (__bridge void *)  进行类型的强制转换</p>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15130871866705.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/12/12</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15130872092436.html">
-                
-                  <h1>iOS打包上架素材准备概要说明</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">开发者打包</h2>
-
-<h3 id="toc_1">Xcode配置</h3>
-
-<p><em>Xcode8 旧标准</em></p>
-
-<ul>
-<li><p>Xcode8 icon iPhone</p>
-
-<ul>
-<li><code>icon-29.png        29*29</code></li>
-<li><code>icon-29@2x.png     58*58</code></li>
-<li><code>icon-29@3x.png     87*87</code></li>
-<li><code>icon-40@2x.png     80*80</code></li>
-<li><code>icon-40@3x.png     120*120</code></li>
-<li><code>icon-57.png        57*57</code></li>
-<li><code>icon-57@2x.png     114*114</code></li>
-<li><code>iocn-60@2x.png     120*120</code></li>
-<li><code>icon-60@3x.png     180*180</code></li>
-<li><code>icon-20@2x.png     40*40</code></li>
-<li><code>icon-20@3x.png     60*60</code><br/></li>
-</ul></li>
-<li><p>Xcode8 LaunchImage：</p>
-
-<ul>
-<li><code>414*736 @3x    1242*2208</code></li>
-<li><code>736*414  @3x    2208*1242</code></li>
-<li><code>375*667 @2x    750*1334</code></li>
-<li><code>320*568 @2x    640*1136</code></li>
-<li><code>320*480 @2x    640*960</code></li>
-<li><code>320*480 @1x    320*480</code></li>
-</ul></li>
-</ul>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15130872092436.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/12/12</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15137621729153.html">
-                
-                  <h1>ES6笔记（解构赋值）</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">解构赋值</h2>
-
-<h3 id="toc_1">变量的解构：</h3>
-
-<ul>
-<li>解构赋值允许指定默认值。</li>
-<li>解构赋值必须保证赋值方  被赋值方类型一直  但Item允许有遗漏或者多出。</li>
-<li>默认值可以引用解构赋值的其他变量，但该变量必须已经声明</li>
-</ul>
-
-<pre><code>let [x = 1, y = x] = [];     // x=1; y=1
-let [x = y, y = 1] = [];     // ReferenceError
+<pre><code class="language-text">transform.scale = 比例轉換
+transform.scale.x = 宽的比例轉換
+transform.scale.y = 高的比例轉換
+transform.rotation.z = 平面圖的旋轉
+opacity = 透明度
+margin=边框间隔?
+zPosition = 平面图的位置
+backgroundColor = 背景色
+cornerRadius = layer的角度
+borderWidth = 边框宽度
+contents = 内容?
+bounds = 大小?
+contentsRect = 内容矩形
+frame = 位置
+hidden = 隐藏
+mask = 标记
+maskToBounds
+position = 位置
+shadowOffset = 阴影偏移?
+shadowColor = 阴影颜色
+shadowRadius = 阴影角度
 </code></pre>
 
+<h2 id="toc_1">CALayer</h2>
 
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15137621729153.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/12/20</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='js.html'>JavaScript</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
+<h2 id="toc_2">CoreAnimation</h2>
 
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15137645005542.html">
-                
-                  <h1>ES6 笔记（Array）</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">array</h2>
+<h2 id="toc_3">CAAnimation</h2>
 
-<ol>
-<li><p>Array.from<br/>
-将类似数组的对象（array-like object）和可遍历（iterable）的对象 转换为数组。</p>
+<h3 id="toc_4">基本属性说明</h3>
+
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>duration</td>
+<td>动画持续时间</td>
+</tr>
+<tr>
+<td>repeatCount</td>
+<td>重复次数，无限循环可以设置INFINITY(HUGE_VALF)或者MAXFLOAT</td>
+</tr>
+<tr>
+<td>repeatDuration</td>
+<td>重复时间</td>
+</tr>
+<tr>
+<td>removeOnCompletion</td>
+<td>默认为YES，代表动画执行完毕，从Layer上移除，图形会恢复到动画执行之前的状态。如果想要保持动画最终状态，那就设置为NO，并且fillMode = kCAFillModeForwards；</td>
+</tr>
+<tr>
+<td>fillMode</td>
+<td>当前视图在非active时段的状态比如 动画开始前 动画结束后</td>
+</tr>
+<tr>
+<td>beginTime</td>
+<td>可以用来延迟动画开始时间，让多个动画顺序执行</td>
+</tr>
+<tr>
+<td>timingFuction</td>
+<td>速度控制函数，控制动画运行的节奏</td>
+</tr>
+<tr>
+<td>deleget</td>
+<td>代理</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="toc_5">fillMode 说明</h3>
 
 <ul>
-<li>类数组：有 length属性的对象</li>
-<li>可遍历：包含Set Map.</li>
-</ul></li>
-<li><p>Array.of<br/>
-该方法用于将一组值，转换为数组。</p></li>
-</ol>
+<li><p><code>kCAFillModeRemoved</code> 这个是默认值，也就是说当动画开始前和动画结束后，动画对layer都没有影响，动画结束后，layer会恢复到之前的状态</p></li>
+<li><p><code>kCAFillModeForwards</code> 当动画结束后，layer会一直保持着动画最后的状态</p></li>
+<li><p><code>kCAFillModeBackwards</code> 在动画开始前，只需要将动画加入了一个layer，layer便立即进入动画的初始状态并等待动画开始。</p></li>
+<li><p><code>kCAFillModeBoth</code> 这个其实就是上面两个的合成.动画加入后开始之前，layer便处于动画初始状态，动画结束后layer保持动画最后的状态</p></li>
+</ul>
 
+<h3 id="toc_6">动画的暂停 和 恢复</h3>
+
+<pre><code class="language-text">#pragma - mark 暂停CALayer的动画
+-(void)pauseLayer:(CALayer*)layer
+{
+    CFTimeInterval pausedTime = [layer convertTime:CACurrentMediaTime() fromLayer:nil];
+
+    // 让CALayer的时间停止走动
+      layer.speed = 0.0;
+    // 让CALayer的时间停留在pausedTime这个时刻
+    layer.timeOffset = pausedTime;
+}
+
+#pragma - mark 恢复CALayer的动画
+-(void)resumeLayer:(CALayer*)layer
+{
+    CFTimeInterval pausedTime = layer.timeOffset;
+    // 1. 让CALayer的时间继续行走
+      layer.speed = 1.0;
+    // 2. 取消上次记录的停留时刻
+      layer.timeOffset = 0.0;
+    // 3. 取消上次设置的时间
+      layer.beginTime = 0.0;
+    // 4. 计算暂停的时间(这里也可以用CACurrentMediaTime()-pausedTime)
+    CFTimeInterval timeSincePause = [layer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
+    // 5. 设置相对于父坐标系的开始时间(往后退timeSincePause)
+      layer.beginTime = timeSincePause;
+}
+</code></pre>
+
+<h2 id="toc_7">CABasicAnimation</h2>
+
+<h2 id="toc_8">CAKeyframeAnimation 关键帧动画</h2>
+
+<h2 id="toc_9">CAAnimationGroup 动画组</h2>
+
+<h2 id="toc_10">贝塞尔曲线</h2>
+
+<h2 id="toc_11">弹性动画 CASpringAnimation</h2>
+
+<pre><code class="language-text">CASpringAnimation *springAnimation = [CASpringAnimation animationWithKeyPath:@&quot;transform.scale&quot;];
+springAnimation.damping = 7;// 阻尼系数(学过物理的都知道)
+springAnimation.stiffness = 100;// 刚度系数（形变后产生弹力的大小的系数。刚度系数越大，弹力越大）
+springAnimation.mass = 1;// 惯性系数 代表物体质量
+springAnimation.initialVelocity = 2.0;// 初始速度 0 初始速度与运动方向一致 负数，初始速度与运动方向不一致
+springAnimation.fromValue = @0;// 初始动画改变属性的值
+springAnimation.toValue = @1;// 最终动画改变属性的值
+springAnimation.duration = 2.0;// 动画时长「敲黑板，划重点！这个很重要」
+[self.layer addAnimation:springAnimation forKey:@&quot;springScale&quot;];
+</code></pre>
+
+<h2 id="toc_12">特殊的Layer实现特殊动画</h2>
+
+<h3 id="toc_13">CATransition</h3>
+
+<h3 id="toc_14">CAReplicatorLayer</h3>
+
+<h3 id="toc_15">CAEmitterLayer 粒子引擎</h3>
 
                         
                       </div>
@@ -482,11 +453,11 @@ let [x = y, y = 1] = [];     // ReferenceError
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15137645005542.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/12/20</span>
+                  
+                    <span class="date">2018/9/3</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='js.html'>JavaScript</a></span>
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -500,19 +471,178 @@ let [x = y, y = 1] = [];     // ReferenceError
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15139057022845.html">
+                <a class="clearlink" href="15344051783893.html">
                 
-                  <h1>Rect-Native 之 Promise 深入浅出从入门到精通</h1>
+                  <h1>iOS Category 和 Extention 的本质区别【面试必备】</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2 id="toc_0">概念理解</h2>
+                        	<p><a href="https://blog.csdn.net/lwq718691587/article/details/60964392">感谢这位博主的博客:由category为什么不能添加属性所想到的</a></p>
 
-<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fhp9dw6vxpj307406ewek.jpg" alt="icon" title="React icon"/></p>
+<h2 id="toc_0">为什么category 不能添加属性，而Extention能添加？</h2>
+
+<p>这个问题从几个方面来解释下：</p>
+
+<ul>
+<li><p>什么是OC中的属性？</p>
+<p>属性，是某个对象持有的特性。一般（注意这里的一般）都是在编译期编译的时候，对象持有的属性会决定对象的内存布局，编译期过后，在运行期，一般很少更改这个布局，因为运行期更改已经定好的布局，不仅会带来一系列的内存问题，而且内存开销会很大。</p>
+<p><strong>打个比方</strong>:就像是买房摇号有几千人排队呢，你后来的去插队，那么就会导致后面的人的位置发生变化，并且还会激起民愤！</p></li>
+<li><p>作用时期</p>
+<p>Extension 是在编译期决议（起作用）<br/>
+Category 是在 运行期决议（起作用）</p></li>
+<li><p>作用原理</p>
+<p>Extention是类的一部分，能决定类的内存布局，跟对象的生命周期一致，对象生成Extention添加的属性有效，对象释放，属性释放；<br/>
+Category并不是真正的类，他的作用是动态的给类添加方法，不改变类的内存布局。</p></li>
+</ul>
+
+<h3 id="toc_1">那么，现在再来看这个问题，是不是很好解释了呢</h3>
 
 <blockquote>
-<p>所谓Promise，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。从语法上说，Promise 是一个对象，从它可以获取异步操作的消息。</p>
+<p>因为Extention是在编译期期决议，那么他就能决定类对象的内存布局，就能正常的给类添加属性。<br/>
+而Category是在运行期决议的，动态的更改类，如果添加了属性，那就会更改内存布局；而内存布局是在编译期就定好了的，运行期更改内存布局会引发不必要的内存风险并且会有很大的内存开销。所以，苹果为了避免这种情况，禁止类别动态添加属性更改内存布局。</p>
+</blockquote>
+
+<h3 id="toc_2">但是，为什么 runtime 动态添加属性呢？</h3>
+
+<p>那是因为 runtime关联的属性，并不是在真正的属性的位置添加的，而是在 AssociationsManager 管理的一个静态区内存 AssociationsHashMap 来存储关联对象的。所有用runtime 动态关联的属性都存在这个全局的map里面。map的key就是关联的对象的内存地址，而这个map的value又是另外一个AssociationsHashMap，里面保存了关联对象的键值对。</p>
+
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fucjrrjsgvj312w0suq5z.jpg" alt="内存示意图"/></p>
+
+<h3 id="toc_3">那如何销毁RunTime关联的属性呢？</h3>
+
+<p>runtime的销毁对象函数objc_destructInstance里面会判断这个对象有没有关联对象，如果有，会调用_object_remove_assocations做关联对象的清理工作。</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/8/16</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15336319970231.html">
+                
+                  <h1>iOS开发必备 之 UITableView  优化</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<ul>
+<li>cell复用</li>
+<li>图片缓存</li>
+<li>图片圆角（离屏渲染）</li>
+<li>cell 高度计算（缓存）</li>
+<li>NSDateFormatter 优化</li>
+<li>reload方法按需加载（单独加载某个cell 某个section）</li>
+</ul>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/8/7</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15329136223185.html">
+                
+                  <h1>iOS 奇怪问题搜集栈</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">更改值的问题</h2>
+
+<h3 id="toc_1">问题1</h3>
+
+<blockquote>
+<p><strong>问题描述</strong>：某个类中用一个属性，或者成员变量去标记某个功能的开关，可当修改该属性时，setter方法里面值改过来了，但是使用的地方取值判断的时候，却是未修改时的值。</p>
+</blockquote>
+
+<ul>
+<li>原因1：block引用了基本类型，引用之前__block可解决</li>
+<li>原因2：可能是某各类持有当前对象未释放，然后又重新创建了新对象导致。解决方法：要么先释放再创建，要不重用旧的对象，不去重新创建。</li>
+<li>原因3：多处同时修改这个值，导致值被覆盖。</li>
+<li>原因4：低级错误！那很有可能是，还没传值的时候，先get这个值去使用，后传入的这个值！！！！！(有人经常犯这个错)</li>
+</ul>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15329136223185.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/7/30</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15324187632197.html">
+                
+                  <h1>iOS 架构模式学习笔记</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">设计模式</h2>
+
+<p>设计模式 和 编码技巧 、架构模式的区别：</p>
+
+<ul>
+<li><p>设计模式：特定场景下的最佳实践 如： MVC MVVM MVP。</p></li>
+<li><p>编码技巧：单例模式、工厂模式等</p></li>
+<li><p>架构模式：包括网络模块实现、数据存储模块实现、业务逻辑模块实现分离复用等</p></li>
+</ul>
+
+<blockquote>
+<p><strong>架构模式  &gt; 设计模式 &gt; 编码技巧</strong></p>
 </blockquote>
 
 
@@ -522,52 +652,8 @@ let [x = y, y = 1] = [];     // ReferenceError
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15139057022845.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/12/22</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='reactnative.html'>React-Native</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15139059079620.html">
-                
-                  <h1>学习资源网址</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">技术学习资源</h2>
-
-<h3 id="toc_1">sublime学习资源</h3>
-
-<ul>
-<li><a href="http://www.jianshu.com/p/aa30cc25c91b">Sublime 入门+进阶</a>：<code>http://www.jianshu.com/p/aa30cc25c91b</code></li>
-<li><a href="http://www.jeffjade.com/2015/12/15/2015-04-17-toss-sublime-text/">sublime全解</a>: <code>http://www.jeffjade.com/2015/12/15/2015-04-17-toss-sublime-text/</code></li>
-<li><a href="https://dribbble.com/">Sublime 图标下载</a>: <code>https://dribbble.com/</code></li>
-</ul>
-
-<h3 id="toc_2">MarkDown学习资源</h3>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15139059079620.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/12/22</span>
+                   <a href="15324187632197.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/7/24</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
@@ -584,31 +670,38 @@ let [x = y, y = 1] = [];     // ReferenceError
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15115315701641.html">
+                <a class="clearlink" href="15311162986405.html">
                 
-                  <h1>React Native 集成 Redux</h1>
+                  <h1>iOS tableView 滚动到指定行/段  以及遇到的bug 指南</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2 id="toc_0">课程介绍</h2>
+                        	<h2 id="toc_0">滚动方式</h2>
 
-<ul>
-<li>Flux/reFlux/Redux</li>
-<li><p>简单/单一状态树</p></li>
-<li><p>react 和 redux 数据流的关系</p></li>
-<li><p>JS、CSS、HTML</p></li>
-<li><p>JSX</p></li>
-<li><p>webpack 构建</p></li>
-</ul>
+<blockquote>
+<p>本篇中的bug会不定期更新的，有更好解决办法或者 有 新的Bug探讨的请加QQ:1290281526 私聊</p>
+</blockquote>
 
-<h2 id="toc_1">数据流</h2>
+<h3 id="toc_1">选中cell滚动到指定位置</h3>
 
-<ul>
-<li>MVC 状态复杂之后，action会触发事件 并且不可预测</li>
-<li>flux: state Tree will send data to view,but view can&#39;t send data to state-tree.</li>
-<li>Redux :  state 是包含在store中的</li>
-</ul>
+<p>很简单，一句话完事儿：</p>
+
+<pre><code class="language-text">/* 
+    最近选中的cell 滚动到  指定位置 ：
+    UITableViewScrollPositionNone, 
+    UITableViewScrollPositionTop, // 顶部
+    UITableViewScrollPositionMiddle, // 中间
+    UITableViewScrollPositionBottom// 底部
+*/
+[self.tableView scrollToNearestSelectedRowAtScrollPosition:UITableViewScrollPositionTop animated:YES];
+
+/** 滚动到顶部 */
+[self.tableView setScrollsToTop:YES];
+    
+/** 让指定区域滚动到可视区域，如果已经在可视区域 则该方法无效 */
+[self.tableView scrollRectToVisible:CGRectMake(0, 0, 100, 100) animated:YES];
+</code></pre>
 
 
                         
@@ -617,11 +710,46 @@ let [x = y, y = 1] = [];     // ReferenceError
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                   <a href="15115315701641.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2017/11/24</span>
+                   <a href="15311162986405.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/7/9</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='reactnative.html'>React-Native</a></span>
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15268827199184.html">
+                
+                  <h1>NSURLRequest</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<pre><code class="language-text">NSURL * url = [NSURL URLWithString:@&quot;http://127.0.0.1/demo.json&quot;];
+NSURLRequest * request = [NSURLRequest requestWithURL:url cachePolicy:0 timeoutInterval:15.0];
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/5/21</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -670,7 +798,7 @@ let [x = y, y = 1] = [];     // ReferenceError
 
 
 
-
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/KaelLVLinda" title="Twitter">Twitter</a>
 <a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
 <a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
   <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
@@ -701,6 +829,8 @@ let [x = y, y = 1] = [];     // ReferenceError
             <a href="vue.html"><strong>Vue</strong></a>
         
             <a href="shell.html"><strong>shell</strong></a>
+        
+            <a href="%E7%BD%91%E7%BB%9C.html"><strong>网络</strong></a>
          
         </p>
 
@@ -717,31 +847,31 @@ let [x = y, y = 1] = [];     // ReferenceError
 	      
 		      
 			      <li class="post">
-			        <a href="15261167596297.html">OC 多线程之 GCD知识从基础到进阶 （1）</a>
+			        <a href="15523077857608.html">OC中枚举写法  以及 字符串枚举探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15257437237715.html">OC中的各种遍历</a>
+			        <a href="15522686353535.html">iOS 动画全解 (1)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15253400374602.html">多线程 之 NSThread</a>
+			        <a href="15501356584731.html">UITableView顶部空白的几种解决办法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15200726964422.html">iOS Block 知识点拾遗</a>
+			        <a href="15488351784332.html">Objective-C中的字符串类型枚举 探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15235286649865.html">音视频学习笔记 1</a>
+			        <a href="15409691048860.html">【Swift笔记】引用计数</a>
 			      </li>
 		     
 		  
@@ -816,7 +946,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 

@@ -1,0 +1,654 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  Alfred workflow 教程 - kaelinda
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="kaelinda" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:kaelinda.top ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">最近更新</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">归档目录</a></li>
+        
+        <li id="ios.css"><a target="_self" href="ios.html">iOS</a></li>
+        
+        <li id="swift.css"><a target="_self" href="swift.html">Swift</a></li>
+        
+        <li id="reactnative.css"><a target="_self" href="reactnative.html">RN</a></li>
+        
+        <li id="js.css"><a target="_self" href="js.html">JS</a></li>
+        
+        <li id="shell.css"><a target="_self" href="shell.html">shell</a></li>
+        
+        <li id="coding.css"><a target="_self" href="coding.html">编程</a></li>
+        
+        <li id="live.css"><a target="_self" href="live.html">随笔</a></li>
+        
+        <li id="app.css"><a target="_blank" href="app.html">APP推荐</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; kaelinda</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="_self" href="index.html">最近更新</a></li>
+        
+        <li><a target="_self" href="archives.html">归档目录</a></li>
+        
+        <li><a target="_self" href="ios.html">iOS</a></li>
+        
+        <li><a target="_self" href="swift.html">Swift</a></li>
+        
+        <li><a target="_self" href="reactnative.html">RN</a></li>
+        
+        <li><a target="_self" href="js.html">JS</a></li>
+        
+        <li><a target="_self" href="shell.html">shell</a></li>
+        
+        <li><a target="_self" href="coding.html">编程</a></li>
+        
+        <li><a target="_self" href="live.html">随笔</a></li>
+        
+        <li><a target="_blank" href="app.html">APP推荐</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="reactnative.html">React-Native</a></li>
+        
+            <li><a href="ios.html">iOS</a></li>
+        
+            <li><a href="app.html">MacAPP</a></li>
+        
+            <li><a href="swift.html">Swift</a></li>
+        
+            <li><a href="js.html">JavaScript</a></li>
+        
+            <li><a href="vue.html">Vue</a></li>
+        
+            <li><a href="shell.html">shell</a></li>
+        
+            <li><a href="%E7%BD%91%E7%BB%9C.html">网络</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>Alfred workflow 教程</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2018/6/5</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='app.html'>MacAPP</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <h2 id="toc_0">简介</h2>
+
+<blockquote>
+<p>新创建一个空白的workflow<br/>
+<img src="https://ws1.sinaimg.cn/large/006tKfTcly1fs193q68k7j30we0kawh2.jpg" alt=""/><br/>
+<img src="https://ws3.sinaimg.cn/large/006tKfTcly1fs194xjqm9j30k804g0t0.jpg" alt=""/></p>
+
+<ul>
+<li>1.workflow 名字</li>
+<li>2.workflow功能描述</li>
+<li>3.Category：workflow的类别 工具  网络 或者别的分类</li>
+<li>4.唯一标识</li>
+<li>5.作者</li>
+<li>6.网站</li>
+</ul>
+
+<p>空白区，点击鼠标右键<br/>
+<img src="https://ws3.sinaimg.cn/large/006tKfTcly1fs0l0zl2crj307e0bydgg.jpg" alt=""/></p>
+
+<p>知识点：{query}   可以接收上个模块的输出参数<br/>
+如果是输出多个参数，那就是{var:var1,var:var2}</p>
+</blockquote>
+
+<h2 id="toc_1">Triggers 触发器</h2>
+
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1fs0ljq33rnj30g20c20ua.jpg" alt=""/></p>
+
+<h3 id="toc_2">Hotkey 热键触发</h3>
+
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1fs16vk8gidj30to0n4tc1.jpg" alt=""/><br/>
+<img src="https://ws2.sinaimg.cn/large/006tKfTcly1fs16yvki0ej30jy04qdgs.jpg" alt=""/><br/>
+<img src="https://ws1.sinaimg.cn/large/006tKfTcly1fs16zp561fj30my05yt9m.jpg" alt=""/></p>
+
+<ul>
+<li>Hotkey: 热键设置触发   选中后可以设置激活热键组合</li>
+<li><p>Action: 行为  </p>
+<ul>
+<li>Pass through to workflow</li>
+<li>Show Alfred</li>
+</ul>
+<blockquote>
+<p>当热键被按下时该怎么做。注意，如果你选择“show alfred”。即使连接成功，则不会从该处理器的输出中输出任何内容。</p>
+</blockquote></li>
+<li><p>Argument：</p>
+<ul>
+<li>none：什么都没有</li>
+<li>selection in macOS: 电脑中选中的内容</li>
+<li>MacOS Clipboard Content：电脑粘贴板内容</li>
+<li>Text： 输入文本</li>
+</ul></li>
+<li><p>prefix    ：前缀</p>
+<blockquote>
+<p>Argument是一个可选参数，如果输入的是文本那么会动态的添加prefix配置的前缀。</p>
+</blockquote></li>
+</ul>
+
+<h3 id="toc_3">Remote 远程触发</h3>
+
+<blockquote>
+<p>注意，这个触发器对象与远程对象是分离的。这里提供的图像和名称是建议默认的，并在使用中复制到Remote中。只要保持标识符的一致性，就可以删除和替换对象。</p>
+</blockquote>
+
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1fs17yod1hlj30vq0k20wk.jpg" alt=""/></p>
+
+<ul>
+<li>1.这是自定制的要触发的workflow 的 icon</li>
+<li>2.这是按钮上的button上的文字</li>
+<li>3.这个触发器内部使用的唯一标识符，通过远程标识要运行哪个触发器。</li>
+<li>4.触发器携带参数</li>
+<li>5.触发器携带参数前缀</li>
+<li>6.此触发器仅可用于添加到此工作流中的远程页面，而不能用于一般的远程页面。</li>
+</ul>
+
+<h3 id="toc_4">Snippet  片段触发</h3>
+
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fs3mx57k39j30qa0j4wh3.jpg" alt=""/></p>
+
+<ul>
+<li>1.关键字：</li>
+<li>关注APP的变量</li>
+<li></li>
+</ul>
+
+<h3 id="toc_5">External  扩展触发</h3>
+
+<p>触发该触发器后会执行一段Applescript 脚本</p>
+
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fs3pxvlwyvj30ui0futb2.jpg" alt=""/></p>
+
+<ul>
+<li>1.identifier : 触发ID</li>
+<li>2.简单脚本</li>
+</ul>
+
+<h3 id="toc_6">Connect Action</h3>
+
+<p>联系人Action，这个具体干什么笔者也没搞清楚。</p>
+
+<h3 id="toc_7">Fallback search</h3>
+
+<blockquote>
+<p>select the title and subtext you would like to use for this keyword based input.<br/>
+these represent the text you see in Alfred’s results when using the keyword.</p>
+</blockquote>
+
+<p>选择您希望用于这个基于关键字的输入的标题和字幕。这些代表在使用关键字时在Alfred的结果中看到的文本。</p>
+
+<h2 id="toc_8">Inputs 输入</h2>
+
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcly1fs0ll364vbj30f80bymye.jpg" alt=""/></p>
+
+<h3 id="toc_9">关键字</h3>
+
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fs3qapb1rnj30qw0f277f.jpg" alt=""/></p>
+
+<ul>
+<li>1.keyword：激活改Action的关键字</li>
+<li>2.是否需要参数：require-必须传入参数  optional-可选  NO argument-不需要参数</li>
+<li>3.action 标题</li>
+<li>4.action的副标题</li>
+<li>5.可以自定制的icon</li>
+</ul>
+
+<h3 id="toc_10">文件过滤器</h3>
+
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fs3qecoaf0j31060ogtc1.jpg" alt=""/></p>
+
+<ul>
+<li>1.keyword：激活改Action的关键字</li>
+<li>2.默认提示字符标题</li>
+<li>3.默认提示字符副标题</li>
+<li>4.文件类型 右下角+号可以添加文件类型</li>
+</ul>
+
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fs3qykwxjqj31060ogdis.jpg" alt=""/></p>
+
+<p>Search Scope 设置的是可搜索范围。需要手动将文件夹拖入条目范围中，即可。</p>
+
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fs3qzl6u7nj31060o6te8.jpg" alt=""/></p>
+
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fs3wm2d3mfj316u0ocjzc.jpg" alt=""/></p>
+
+<ul>
+<li>1.日期搜索范围设置  任意日期，今天，三天内，七天内，30天内，超过30天</li>
+<li>2.文件排序方式设置 名字</li>
+</ul>
+
+<h3 id="toc_11">语言过滤器</h3>
+
+<p>预言过滤  具体也不知道能干啥。</p>
+
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fs3r25at3ij30v00h8tbm.jpg" alt=""/></p>
+
+<h3 id="toc_12">List过滤器</h3>
+
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fs3r5fichuj31bs0u6gsx.jpg" alt=""/></p>
+
+<p>这就相当于 编程预言里面的 <code>switch case</code></p>
+
+<ul>
+<li>1.关键字</li>
+<li>2.模块标题</li>
+<li>3.模块的subtitle</li>
+<li>4.参数配置：require-必须传参 optional-可选   No argument-不需要参数</li>
+<li>5.该模块的icon设置</li>
+<li>6.list：输入关键字后会出现这个list </li>
+<li>7.list子模块title</li>
+<li>8.子模块的subtitle</li>
+<li>9.选中子模块后输出的参数</li>
+<li>10.list中的子模块排序方式   一种是一直保持固定排序；另一种是Alfred自己学习根据使用频率 进行排序</li>
+</ul>
+
+<h3 id="toc_13">Script filter 脚本过滤器</h3>
+
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fs3zcesy1gj317e0zmjwi.jpg" alt=""/></p>
+
+<h2 id="toc_14">Action 行为</h2>
+
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcly1fs0llhujngj30go0g840r.jpg" alt=""/></p>
+
+<h3 id="toc_15">打开文件</h3>
+
+<p>用某个APP打开指定文件。</p>
+
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fs3zldzgjzj30yw0rw778.jpg" alt=""/></p>
+
+<h3 id="toc_16">Reveal file in the finder 打开文件所在位置</h3>
+
+<h3 id="toc_17">browse in Alfred</h3>
+
+<h3 id="toc_18">Launch APPs</h3>
+
+<h3 id="toc_19">Default web search</h3>
+
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fs3zrfdl12j30ma0aidha.jpg" alt=""/></p>
+
+<h3 id="toc_20">open URL</h3>
+
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fs3zvl5nuwj30zk0didj1.jpg" alt=""/></p>
+
+<h3 id="toc_21">System Command</h3>
+
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fs3zz6vwjxj30q00judkl.jpg" alt=""/></p>
+
+<h3 id="toc_22">iTunes Command</h3>
+
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fs3zzs0mrnj30no0ig42v.jpg" alt=""/></p>
+
+<h3 id="toc_23">Terminal Command</h3>
+
+<p>通过终端APP 运行终端命令组件</p>
+
+<h3 id="toc_24">Run Script</h3>
+
+<p>运行脚本</p>
+
+<h3 id="toc_25">Run NSAppleScript</h3>
+
+<p>运行apple 脚本</p>
+
+<h2 id="toc_26">Utilities 实用工具</h2>
+
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1fs16kjx74kj30e60fojsx.jpg" alt=""/></p>
+
+<h3 id="toc_27">Arg and Vars</h3>
+
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fs403j1t5aj30ws0nqmzg.jpg" alt=""/></p>
+
+<h3 id="toc_28">JSON Config</h3>
+
+<p>通过输入的参数 自行组合成自己想要的json文本</p>
+
+<h3 id="toc_29">Junction  结点</h3>
+
+<p>这个只是处理复杂逻辑的节点。如果线条逻辑过多 错综复杂的时候 可以通过节点来处理。</p>
+
+<h3 id="toc_30">Filter</h3>
+
+<h3 id="toc_31">Delay</h3>
+
+<h3 id="toc_32">Transform</h3>
+
+<h3 id="toc_33">Replace</h3>
+
+<h3 id="toc_34">Hide Alfred</h3>
+
+<h3 id="toc_35">Debug</h3>
+
+<h2 id="toc_36">Outputs 输出</h2>
+
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcly1fs16lacns8j30h60eqtai.jpg" alt=""/></p>
+
+<h3 id="toc_37">Post Notification 发送本地通知</h3>
+
+<p>发送本地通知。Alfred 3 的本地推送不好用，一直没成功。</p>
+
+<h3 id="toc_38">Large Type 大文字显示</h3>
+
+<p>大文字显示 一些文本。</p>
+
+<h3 id="toc_39">Copy to Clipboard  copy文本到粘贴板</h3>
+
+<p>复制结果到粘贴板</p>
+
+<h3 id="toc_40">Write Text File 把text写入文件</h3>
+
+<p>将text文本写入文件</p>
+
+<h3 id="toc_41">Play Sound 播放声音</h3>
+
+<p>播放声音</p>
+
+<h3 id="toc_42">Dispath Key Combo 按键连击</h3>
+
+<h3 id="toc_43">Call External trigger 触发别的触发器</h3>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15341646765442.html" 
+          title="Previous Post: 网络是怎样连接的">&laquo; 网络是怎样连接的</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15232599795686.html" 
+          title="Next Post: 每天学习一个shell技能（8）">每天学习一个shell技能（8） &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fmpk9088gsj30sg0sgn33.jpg" /></div>
+            
+                <h1>kaelinda</h1>
+                <div class="site-des">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+                <div class="social">
+
+
+
+
+
+
+
+
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/KaelLVLinda" title="Twitter">Twitter</a>
+<a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="reactnative.html"><strong>React-Native</strong></a>
+        
+            <a href="ios.html"><strong>iOS</strong></a>
+        
+            <a href="app.html"><strong>MacAPP</strong></a>
+        
+            <a href="swift.html"><strong>Swift</strong></a>
+        
+            <a href="js.html"><strong>JavaScript</strong></a>
+        
+            <a href="vue.html"><strong>Vue</strong></a>
+        
+            <a href="shell.html"><strong>shell</strong></a>
+        
+            <a href="%E7%BD%91%E7%BB%9C.html"><strong>网络</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15523077857608.html">OC中枚举写法  以及 字符串枚举探索</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15522686353535.html">iOS 动画全解 (1)</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15501356584731.html">UITableView顶部空白的几种解决办法</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15488351784332.html">Objective-C中的字符串类型枚举 探索</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15409691048860.html">【Swift笔记】引用计数</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+
+  </body>
+</html>

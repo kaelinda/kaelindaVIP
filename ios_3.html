@@ -1,0 +1,1124 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  iOS - kaelinda
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="kaelinda" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:kaelinda.top ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">最近更新</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">归档目录</a></li>
+        
+        <li id="ios.css"><a target="_self" href="ios.html">iOS</a></li>
+        
+        <li id="swift.css"><a target="_self" href="swift.html">Swift</a></li>
+        
+        <li id="reactnative.css"><a target="_self" href="reactnative.html">RN</a></li>
+        
+        <li id="js.css"><a target="_self" href="js.html">JS</a></li>
+        
+        <li id="shell.css"><a target="_self" href="shell.html">shell</a></li>
+        
+        <li id="coding.css"><a target="_self" href="coding.html">编程</a></li>
+        
+        <li id="live.css"><a target="_self" href="live.html">随笔</a></li>
+        
+        <li id="app.css"><a target="_blank" href="app.html">APP推荐</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; kaelinda</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="_self" href="index.html">最近更新</a></li>
+        
+        <li><a target="_self" href="archives.html">归档目录</a></li>
+        
+        <li><a target="_self" href="ios.html">iOS</a></li>
+        
+        <li><a target="_self" href="swift.html">Swift</a></li>
+        
+        <li><a target="_self" href="reactnative.html">RN</a></li>
+        
+        <li><a target="_self" href="js.html">JS</a></li>
+        
+        <li><a target="_self" href="shell.html">shell</a></li>
+        
+        <li><a target="_self" href="coding.html">编程</a></li>
+        
+        <li><a target="_self" href="live.html">随笔</a></li>
+        
+        <li><a target="_blank" href="app.html">APP推荐</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="reactnative.html">React-Native</a></li>
+        
+            <li><a href="ios.html">iOS</a></li>
+        
+            <li><a href="app.html">MacAPP</a></li>
+        
+            <li><a href="swift.html">Swift</a></li>
+        
+            <li><a href="js.html">JavaScript</a></li>
+        
+            <li><a href="vue.html">Vue</a></li>
+        
+            <li><a href="shell.html">shell</a></li>
+        
+            <li><a href="%E7%BD%91%E7%BB%9C.html">网络</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+	$(function(){
+		$('#menu_item_index').addClass('is_active');
+	});
+</script>
+<div class="row">
+	<div class="large-8 medium-8 columns">
+		<div class="markdown-body home-categories">
+		
+			<div class="article">
+                <a class="clearlink" href="15173790393385.html">
+                
+                  <h1>DLNA DMC</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">CGUpnpControlPoint</h2>
+
+<pre><code class="language-text">
+#if !defined(_CG_UPNP_CCONTROLPOINT_H_)
+typedef void CgUpnpControlPoint;
+#endif
+
+@class CGUpnpDevice;
+@class CGUpnpControlPoint;
+
+@protocol CGUpnpControlPointDelegate &lt;NSObject&gt;
+@optional
+// deviceUdn 设备的UDID 设备添加，更新，移除，失效的协议方法
+- (void)controlPoint:(CGUpnpControlPoint *)controlPoint deviceAdded:(NSString *)deviceUdn;
+- (void)controlPoint:(CGUpnpControlPoint *)controlPoint deviceUpdated:(NSString *)deviceUdn;
+- (void)controlPoint:(CGUpnpControlPoint *)controlPoint deviceRemoved:(NSString *)deviceUdn;
+- (void)controlPoint:(CGUpnpControlPoint *)controlPoint deviceInvalid:(NSString *)deviceUdn;
+@end
+
+/**
+ * The CGUpnpControlPoint class is a wrapper class for CgUpnpControlPoint of CyberLink for C to 
+ * program using only Objective-C directly on MacOSX.
+ * Currently, the only basic methods are wrapped to control UPnP devices.
+ */
+@interface CGUpnpControlPoint : NSObject 
+{
+    CgUpnpControlPoint *cObject;
+}
+// 子控制点
+@property(readonly) CgUpnpControlPoint *cObject;
+// 代理对象
+@property(assign) id&lt;CGUpnpControlPointDelegate&gt; delegate;
+
+// get方法
+- (CgUpnpControlPoint *)cObject;
+/**
+ * Activate some background threads of the control point such as SSDP and 
+ * HTTP servers to listen messages and events of UPnP. You must call this 
+ * method before you can actually use a control point.
+ *
+ * @return TRUE if successful; otherwise FALSE
+ *
+ */
+ // 激活DMC的子线程 SSDP HTTP服务，去监听UPnP信息和时间
+ // 使用控制点之前必须要激活
+- (BOOL)start;
+/**
+ * Stop some background threads of the control point such as SSDP and 
+ * HTTP servers to listen messages and events of UPnP. 
+ *
+ * @return TRUE if successful; otherwise FALSE
+ *
+ */
+ // 停止后台线程 和 SSDP HTTP 服务
+- (BOOL)stop;
+/**
+ * Check if the controll point is running.
+ *
+ * @return YES if the device is started normally, otherwise NO.
+ */
+ // 检测DMC是否正在运行
+- (BOOL)isRunning;
+/**
+ * Send a M-SEARCH request to find for the all UPnP devices of UPnP in the network.
+ * The method waits for the specified MX time. Use setSsdpSearchMX:(NSInteger)aMX to change the time.
+ * The method is same as searchWithST() when the ST parameter is &quot;ssdp:all&quot;.
+ */
+ 
+ // 发送M-SEARCH 请求去发现局域网内所有的UPnP设备
+- (void)search;
+/**
+ * Send a M-SEARCH request to find for the specified UPnP devices by a ST parameter in the network.
+ * The method waits for the specified MX time. Use setSsdpSearchMX:(NSInteger)aMX to change the time.
+ *
+ * @param aST The Search Target parameter (ex. &quot;ssdp:all&quot;)
+ */
+- (void)searchWithST:(NSString *)aST;
+/**
+ * Set a MX parameter used for SSDP searches in seconds.
+ * The parameter is used to wait for M-SEARCH responses in search() and searchWithST:(NSString *)aST.
+ *
+ * @param aMX Time to wait
+ */
+- (void)setSsdpSearchMX:(NSInteger)aMX;
+/**
+ * Get a MX parameter used for SSDP searches in seconds.
+ * The parameter is used to wait for M-SEARCH responses in search() and searchWithST:(NSString *)aST.
+ *
+ * @return Time to wait
+ */
+// 等待时间
+- (NSInteger)ssdpSearchMX;
+/**
+ * Get all UPnP devices which the control point found as a NSArray object. The array has the devices as instances of CGUpnpDevice.
+ * @return NSArray of CGUpnpDevice.
+ */
+ // DMC发现的所有设备
+- (NSArray *)devices;
+/**
+ * Get a specified UPnP devices by the UDN.
+ * @return CGUpnpDevice when the specified device is found, otherwise nil.
+ */
+ // 通过UDN 获取指定的upnp设备
+- (CGUpnpDevice *)deviceForUDN:(NSString *)udn;
+</code></pre>
+
+<h2 id="toc_1">CGUpnpAvContentDirectory</h2>
+
+<pre><code class="language-text">/**
+ * The CGUpnpAvContentDirectory class has UPnP/AV objects of a media servers.
+ *
+ */
+@interface CGUpnpAvContentDirectory : NSObject
+{
+    CGUpnpAvContentManager *contentMgr;
+}
+- (CGUpnpAvContainer *)rootObject;
+- (CGUpnpAvObject *)objectForId:(NSString *)aObjectId;
+- (CGUpnpAvObject *)objectForTitlePath:(NSString *)aTitlePath;
+@end
+</code></pre>
+
+<h2 id="toc_2">CGUpnpAvContentManager</h2>
+
+<pre><code class="language-text">/**
+ * The CGUpnpAvContentDirectory class has UPnP/AV objects of a media servers.
+ *
+ */
+@interface CGUpnpAvContentManager : NSObject
+{
+    CGUpnpAvRoot *rootObj;
+}
+- (CGUpnpAvContainer *)rootObject;
+- (CGUpnpAvObject *)objectForId:(NSString *)aObjectId;
+- (CGUpnpAvObject *)objectForTitlePath:(NSString *)aTitlePath;
+</code></pre>
+
+<h2 id="toc_3">CGUpnpAvObject</h2>
+
+<pre><code class="language-text">
+/**
+ * The CGUpnpAvObject class is a wrapper class for CgUpnpAvObject of CyberLink for C.
+ */
+
+#define CGUPNPAV_OBJECT_MOVIE_FILEEXT @&quot;mov&quot;
+#define CGUPNPAV_OBJECT_SOUND_FILEEXT @&quot;snd&quot;
+#define CGUPNPAV_OBJECT_IMAGE_FILEEXT @&quot;img&quot;
+
+@interface CGUpnpAvObject : CGXmlNode 
+{
+    // 父类对象
+    CGUpnpAvObject *parent;
+}
+@property(retain) id userObject;
+#if defined(TARGET_OS_IPHONE)
+@property(retain) UIImage *thumbnailImage;
+#endif
+
+// xml字符串转成对象
++ (NSArray *)arrayWithXMLString:(NSString *)aXmlString;
+// 初始化方法
+- (id)init;
+#if  !defined(TARGET_OS_IPHONE)
+- (id)initWithXMLNode:(NSXMLElement *)aXmlNode;
+#else
+- (id)initWithXMLNode:(CgXmlNode *)aXmlNode;
+- (id)initWithMediaContent:(CgUpnpAvContent *)aMediaContent;
+#endif
+// 判断方法
+- (BOOL)isEqual:(id)anObject;
+- (BOOL)isContainer;
+- (BOOL)isItem;
+// 设置、获取父亲类
+- (void)setParent:(CGUpnpAvObject *)aParent;
+- (CGUpnpAvObject *)parent;
+// 祖先类对象
+- (CGUpnpAvObject *)ancestor;
+// 对象ID
+- (NSString *)objectId;
+// 子类对象个数
+- (NSUInteger)childCount;
+// 标题（文件名 不带后缀）
+- (NSString *)title;
+// upnp 类型
+- (NSString *)upnpClass;
+// 日期
+- (NSString *)date;
+// 相册URI
+- (NSString *)albumArtURI;
+// 设置对象ID、title等
+- (void)setObjectId:(NSString *)aValue;
+- (void)setTitle:(NSString *)aValue;
+- (void)setUpnpClass:(NSString *)aValue;
+// 是否包含某一资源对象
+- (BOOL)isObjectId:(NSString *)aObjectId;
+- (BOOL)isTitle:(NSString *)aTitle;
+- (BOOL)isUpnpClass:(NSString *)aUpnpClass;
+// 文件全名 （带后缀）
+- (NSString *)toFileNameString;
+// 艺术家 作者
+- (NSString *)artist;
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/1/31</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15173774932057.html">
+                
+                  <h1>DLNA DMS</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>上源码：</p>
+
+<pre><code class="language-text">#if defined(TARGET_OS_IPHONE)
+#import &lt;UIKit/UIKit.h&gt;
+#else
+#import &lt;Foundation/NSArray.h&gt;
+#import &lt;Foundation/NSString.h&gt;
+#endif
+
+#import &lt;CyberLink/UPnP.h&gt;
+
+@class CGUpnpAvContentDirectory;
+@class CGUpnpAvObject;
+@class CGUpnpAvContainer;
+@class CGUpnpAvServer;
+
+#if !defined(_CG_CLINKCAV_SERVER_H_)
+typedef void CgUpnpAvServer;
+#endif
+
+@protocol CGUpnpAvServerDelegate &lt;NSObject&gt;
+@optional
+- (void)upnpAvServer:(CGUpnpAvServer *)upnpAvServer browse:(CGUpnpAction *)browseAction avObject:(CGUpnpAvObject *)avObject;
+- (void)upnpAvServer:(CGUpnpAvServer *)upnpAvServer search:(CGUpnpAction *)searchAction avObject:(CGUpnpAvObject *)avObject;
+@end
+
+/**
+ * The CGUpnpAvServer class is a UPnP/AV media server class.
+ * 这个 CGUpnpAvServer 类是UPnP/AV 谜题资源服务类
+ */
+@interface CGUpnpAvServer : CGUpnpDevice
+{
+}
+
+@property(readonly) CGUpnpAvContentDirectory *contentDirectory;
+// DMS 可以持有子服务作为属性
+@property(readonly) CgUpnpAvServer *cAvObject;
+// 设置代理
+@property(assign) id&lt;CGUpnpAvServerDelegate&gt; delegate;
+
+#if defined(TARGET_OS_IPHONE)
+@property(retain) UIImage *thumbnailImage;
+#endif
+
+/*
+ * Create a new UPnP/AV server.
+ * 
+ * @return New instance if successfull; otherwise nil.
+ */
+- (id)init;
+/**
+ * Create a new UPnP/AV server with the C instance.
+ * 
+ * @return New instance if successfull; otherwise nil.
+ */
+- (id)initWithCObject:(CgUpnpDevice *)cobj;
+- (void)setUserObject:(id)aUserObj;
+- (id)userObject;
+// 浏览某一个CGUpnpAvObject 的ID 是否成功
+- (BOOL)browse:(NSString *)aObjectId browseFlag:(NSString *)aBrowseFlag options:(NSDictionary *)options;
+// 浏览二进制
+- (CGUpnpAvObject *)browseMetadata:(NSString *)aObjectId;
+// 所有子对象个数
+- (NSArray *)browseDirectChildren:(NSString *)aObjectId;
+// 获取指定个数的子对象
+- (NSArray *)browseDirectChildren:(NSString *)aObjectId requestedCount:(NSUInteger) aRequestedCount;
+// 获取指定个数的子对象
+- (NSArray *)browseDirectChildren:(NSString *)aObjectId requestedCount:(NSUInteger)aRequestedCount startingIndex:(NSUInteger)aStartingIndex;
+// 浏览行为
+- (CGUpnpAction *)browseAction;
+// 查找某个东西
+- (NSArray *)search:(NSString *)aSearchCriteria;
+// 同上
+- (NSArray *)searchByBrowse:(NSString *)aSearchCriteria;
+- (NSArray *)searchByBrowse:(NSString *)aSearchCriteria objectId:(NSString *)objectId;
+// 查找UPnPAction
+- (CGUpnpAction *)searchAction;
+// 跟对象 （对象可以持有别的对象作为属性）
+- (CGUpnpAvContainer *)rootObject;
+// 通过ID获取AVObject
+- (CGUpnpAvObject *)objectForId:(NSString *)aObjectId;
+// 通过titlePath 获取AVObject对象
+- (CGUpnpAvObject *)objectForTitlePath:(NSString *)aTitlePath;
+// 开始
+- (BOOL)start;
+// 停止
+- (BOOL)stop;
+// 锁定
+- (void)lock;
+// 解锁
+- (void)unlock;
+@end
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/1/31</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15172908985351.html">
+                
+                  <h1>iOS设备上实现DLNA功能 Platinum 篇</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">DLNA 相关</h2>
+
+<ul>
+<li>DLNA</li>
+<li>Miracast</li>
+<li>Airplay</li>
+</ul>
+
+<p>网络环境：同一个网关下，即同一个局域网的同一网段</p>
+
+<h3 id="toc_1">基本名词解释</h3>
+
+<ul>
+<li>DLNA全称： DIGITAL LIVING NETWORK ALLIANCE(数字生活网络联盟)</li>
+<li>宗旨： Enjoy your music, photos and videos, anywhere anytime</li>
+<li>协议： DLNA包含若干协议和标准，最重要的也是我们最常用的就是UPnP技术</li>
+<li>通用即插即用 (UPnP) 是一种用于 PC 机和智能设备（或仪器）的常见对等网络连接的体系结构，尤其是在家庭中。UPnP 以 Internet 标准和技术（例如 TCP/IP、HTTP 和 XML）为基础，使这样的设备彼此可自动连接和协同工作，从而使网络（尤其是家庭网络）对更多的人成为可能</li>
+</ul>
+
+<h3 id="toc_2">技术名词解释</h3>
+
+<ul>
+<li>DMC：控制点</li>
+<li>DMS：资源服务器</li>
+<li>DMR：渲染器</li>
+</ul>
+
+<h3 id="toc_3">发现设备</h3>
+
+<p>智能终端设备加入组网，搜索其他设备的基本流程。当一个新的DMC加入局域网，为了获取当前网段里有哪些智能设备，需要遵循<code>SSDP</code>向默认的多播IP和端口发送获取信息的请求。对于<code>DMC</code> 可以使用DLNA定义的 <code>搜索响应方式</code> 来发现设备，这会用到HTTP的扩展协议<code>M-SEARCH</code></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/1/30</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15145327105445.html">
+                
+                  <h1>佛祖镇楼 bug辟易</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<pre><code class="language-objectivec">//                            _ooOoo_
+//                           o8888888o
+//                           88&quot; . &quot;88
+//                           (| -_- |)
+//                            O\ = /O
+//                        ____/`---&#39;\____
+//                      .   &#39; \\| |// `.
+//                       / \\||| : |||// \
+//                     / _||||| -:- |||||- \
+//                       | | \\\ - /// | |
+//                     | \_| &#39;&#39;\---/&#39;&#39; | |
+//                      \ .-\__ `-` ___/-. /
+//                   ___`. .&#39; /--.--\ `. . __
+//                .&quot;&quot; &#39;&lt; `.___\_&lt;|&gt;_/___.&#39; &gt;&#39;&quot;&quot;.
+//               | | : `- \`.;`\ _ /`;.`/ - ` : | |
+//                 \ \ `-. \_ __\ /__ _/ .-` / /
+//         ======`-.____`-.___\_____/___.-`____.-&#39;======
+//                            `=---=&#39;
+//
+//         .............................................
+//                  佛祖镇楼                  BUG辟易
+//          佛曰:
+//                  写字楼里写字间，写字间里程序员；
+//                  程序人员写程序，又拿程序换酒钱。
+//                  酒醒只在网上坐，酒醉还来网下眠；
+//                  酒醉酒醒日复日，网上网下年复年。
+//                  但愿老死电脑间，不愿鞠躬老板前；
+//                  奔驰宝马贵者趣，公交自行程序员。
+//                  别人笑我忒疯癫，我笑自己命太贱；
+//                  不见满街漂亮妹，哪个归得程序员？
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2017/12/29</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15139059079620.html">
+                
+                  <h1>学习资源网址</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">技术学习资源</h2>
+
+<h3 id="toc_1">sublime学习资源</h3>
+
+<ul>
+<li><a href="http://www.jianshu.com/p/aa30cc25c91b">Sublime 入门+进阶</a>：<code>http://www.jianshu.com/p/aa30cc25c91b</code></li>
+<li><a href="http://www.jeffjade.com/2015/12/15/2015-04-17-toss-sublime-text/">sublime全解</a>: <code>http://www.jeffjade.com/2015/12/15/2015-04-17-toss-sublime-text/</code></li>
+<li><a href="https://dribbble.com/">Sublime 图标下载</a>: <code>https://dribbble.com/</code></li>
+</ul>
+
+<h3 id="toc_2">MarkDown学习资源</h3>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15139059079620.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/12/22</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15130872092436.html">
+                
+                  <h1>iOS打包上架素材准备概要说明</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">开发者打包</h2>
+
+<h3 id="toc_1">Xcode配置</h3>
+
+<p><em>Xcode8 旧标准</em></p>
+
+<ul>
+<li><p>Xcode8 icon iPhone</p>
+<ul>
+<li><code>icon-29.png        29*29</code></li>
+<li><code>icon-29@2x.png     58*58</code></li>
+<li><code>icon-29@3x.png     87*87</code></li>
+<li><code>icon-40@2x.png     80*80</code></li>
+<li><code>icon-40@3x.png     120*120</code></li>
+<li><code>icon-57.png        57*57</code></li>
+<li><code>icon-57@2x.png     114*114</code></li>
+<li><code>iocn-60@2x.png     120*120</code></li>
+<li><code>icon-60@3x.png     180*180</code></li>
+<li><code>icon-20@2x.png     40*40</code></li>
+<li><code>icon-20@3x.png     60*60</code><br/></li>
+</ul></li>
+<li><p>Xcode8 LaunchImage：</p>
+<ul>
+<li><code>414*736 @3x    1242*2208</code></li>
+<li><code>736*414  @3x    2208*1242</code></li>
+<li><code>375*667 @2x    750*1334</code></li>
+<li><code>320*568 @2x    640*1136</code></li>
+<li><code>320*480 @2x    640*960</code></li>
+<li><code>320*480 @1x    320*480</code></li>
+</ul></li>
+</ul>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15130872092436.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/12/12</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15130871866705.html">
+                
+                  <h1>当虹云直播SDK植入引导</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<hr/>
+
+<h2 id="toc_0">一、导入静态库 libARCPlayerRecoder.a</h2>
+
+<h2 id="toc_1">二、导入framework</h2>
+
+<p>(img)</p>
+
+<h2 id="toc_2">三、添加info.plist文件的授权选项 麦克风 摄像头权限授权申请</h2>
+
+<p>(img)</p>
+
+<h2 id="toc_3">四、.m文件 中引用 C++方法的时候 需要变为.mm文件</h2>
+
+<h2 id="toc_4">五、变量类型转换</h2>
+
+<p>self 改为 (__bridge void *) self<br/>
+用  (__bridge void *)  进行类型的强制转换</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15130871866705.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/12/12</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15130871696781.html">
+                
+                  <h1>Effective Objective-c 2.0 学习笔记</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>编写高质量iOS与OS X代码的52个有效方法</p>
+
+<h1 id="toc_0">第一章 熟悉Objective-C</h1>
+
+<h2 id="toc_1">第1条 了解Objective-C语言的起源</h2>
+
+<ol>
+<li>笔记：</li>
+<li>OC是动态语言，使用<code>消息结构</code>(messaging structure),而非<code>函数调用</code>(function calling)。OC由消息语言的鼻祖smalltalk演化而来。</li>
+<li>区别：消息结构的语言，其运行时执行的代码由运行环境决定；函数调用的语言，则由编译器决定。</li>
+<li>OC中对象所占内存总是分配在<code>堆空间</code>(heap space)而不会在<code>栈空间</code>(stack)上</li>
+<li><p>OC中不带*的变量，有可能会使用<code>栈空间</code>，比如CGRect 结构体</p>
+<pre><code class="language-text">struct CGRect{
+    CGPoint point;<br/>
+    CGSize size;<br/>
+};
+</code></pre>
+<p>因为创建对象需要额外开销（分配&amp;释放堆内存），从效率上，结构体性能更好。</p></li>
+<li><p>要点</p></li>
+<li><p>Objective-c为C语言天减了面向对象特性，是其超集。Objective-C是使用动态绑定的消息结构，也就是说，在运行时才会检查对象类型。接收这一消息后，究竟该执行何种代码实现，有运行期环境决定而非编译器。</p></li>
+<li><p>理解C语言的核心概念有助于写好Objective-C程序，尤其是掌握内存模型与指针。</p></li>
+</ol>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15130871696781.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/12/12</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15129168744096.html">
+                
+                  <h1>关于iOS沙盒文件的那些事儿</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">分类</h2>
+
+<ul>
+<li>Document： 除了基于NSUserdefaults的首选项设置之外,应用程序的数据，文件都存在该目录下</li>
+<li>Libary：基于NSUserDefaults的首选项参数保存在Liabry/prefrences目录下</li>
+<li>tmp:</li>
+</ul>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15129168744096.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/12/10</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15126628432953.html">
+                
+                  <h1>iOS代码检测入坑记事</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">我接触的代码检测</h2>
+
+<ul>
+<li>OCLint + xcpretty</li>
+<li>sonar</li>
+<li>infer</li>
+</ul>
+
+<h3 id="toc_1">infer</h3>
+
+<ul>
+<li><p><a href="https://infer.liaohuqiu.net">infer官网 传送门</a></p>
+<p><em>具体使用</em></p>
+<pre><code class="language-text">infer -- xcodebuild -target &lt;target name&gt; -configuration &lt;build configuration&gt; -sdk iphonesimulator
+</code></pre></li>
+</ul>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15126628432953.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/12/8</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+              
+
+
+			<div class="row">
+			  <div class="large-6 columns">
+			  <p class="text-left" style="padding-top:25px;">
+			   <a href="ios_2.html">&laquo; Prev Page</a>  
+			  </p>
+			  </div>
+			  <div class="large-6 columns">
+			<p class="text-right" style="padding-top:25px;">
+			 <a href="ios_4.html">&raquo; Next Page</a> 
+			</p>
+			  </div>
+			</div>
+		</div>
+	</div><!-- large 8 -->
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fmpk9088gsj30sg0sgn33.jpg" /></div>
+            
+                <h1>kaelinda</h1>
+                <div class="site-des">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+                <div class="social">
+
+
+
+
+
+
+
+
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/KaelLVLinda" title="Twitter">Twitter</a>
+<a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="reactnative.html"><strong>React-Native</strong></a>
+        
+            <a href="ios.html"><strong>iOS</strong></a>
+        
+            <a href="app.html"><strong>MacAPP</strong></a>
+        
+            <a href="swift.html"><strong>Swift</strong></a>
+        
+            <a href="js.html"><strong>JavaScript</strong></a>
+        
+            <a href="vue.html"><strong>Vue</strong></a>
+        
+            <a href="shell.html"><strong>shell</strong></a>
+        
+            <a href="%E7%BD%91%E7%BB%9C.html"><strong>网络</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15523077857608.html">OC中枚举写法  以及 字符串枚举探索</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15522686353535.html">iOS 动画全解 (1)</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15501356584731.html">UITableView顶部空白的几种解决办法</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15488351784332.html">Objective-C中的字符串类型枚举 探索</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15409691048860.html">【Swift笔记】引用计数</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+
+  </body>
+</html>

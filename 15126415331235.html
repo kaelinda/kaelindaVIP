@@ -122,6 +122,8 @@
             <li><a href="vue.html">Vue</a></li>
         
             <li><a href="shell.html">shell</a></li>
+        
+            <li><a href="%E7%BD%91%E7%BB%9C.html">网络</a></li>
          
 
       </ul>
@@ -176,15 +178,12 @@ NSString类型的文件路径转换为URL的时候，一定要用 <br/>
 
 <ul>
 <li><p>API : iOS8即可使用</p>
-
 <p><code>- (nullable WKNavigation *)loadRequest:(NSURLRequest *)request;</code>      </p></li>
 <li><p>用途：</p>
-
 <ul>
 <li>1：主要用来加载网络URL<br/></li>
 <li>2：也可以加载本地HTML文件（本文重点）</li>
 </ul>
-
 <span id="more"></span><!-- more --></li>
 </ul>
 
@@ -192,7 +191,6 @@ NSString类型的文件路径转换为URL的时候，一定要用 <br/>
 
 <ul>
 <li><p>API: URL:文件相对路径 readAccessURL：访问文件需要引用的文件的路径 一般都是比<code>URL</code>大一级或者更高几级</p>
-
 <p><code>- (nullable WKNavigation *)loadFileURL:(NSURL *)URL allowingReadAccessToURL:(NSURL *)readAccessURL API_AVAILABLE(macosx(10.11), ios(9.0));</code></p></li>
 <li><p>用途：主要用于加载本地文件（一般指相对路径）</p></li>
 </ul>
@@ -209,7 +207,6 @@ NSString类型的文件路径转换为URL的时候，一定要用 <br/>
 
 <ul>
 <li><p>API: 值得一提的是MIMETType,text/html、image/jpg、text/plain</p>
-
 <p><code>- (nullable WKNavigation *)loadData:(NSData *)data MIMEType:(NSString *)MIMEType characterEncodingName:(NSString *)characterEncodingName baseURL:(NSURL *)baseURL API_AVAILABLE(macosx(10.11), ios(9.0));</code></p></li>
 <li><p>用途：主要用于加载 二进制状态下的文件，主要包括HTML、Image、Text文本</p></li>
 </ul>
@@ -232,7 +229,7 @@ NSString类型的文件路径转换为URL的时候，一定要用 <br/>
 iOS8 WKWebView的加载本地文件的方式本文后面会有 <strong>详细方案</strong></p>
 </blockquote>
 
-<pre><code class="language-Objectiv-C">NSString *bundleStr = [[NSBundle mainBundle] pathForResource:@&quot;feedback&quot; ofType:@&quot;html&quot;];
+<pre><code class="language-objectiv-c">NSString *bundleStr = [[NSBundle mainBundle] pathForResource:@&quot;feedback&quot; ofType:@&quot;html&quot;];
     
 _feedbackUrl = [NSURL fileURLWithPath:bundleStr];
     
@@ -252,7 +249,7 @@ iOS9之后新增了 <code>loadFileURL</code> 等一系列加载本地文件的�
 <p>iOS9之后才出现这个加载方式</p>
 </blockquote>
 
-<pre><code class="language-Objectiv-C">NSString *bundleStr = [[NSBundle mainBundle] pathForResource:@&quot;feedback&quot; ofType:@&quot;html&quot;];
+<pre><code class="language-objectiv-c">NSString *bundleStr = [[NSBundle mainBundle] pathForResource:@&quot;feedback&quot; ofType:@&quot;html&quot;];
 _feedbackUrl = [NSURL fileURLWithPath:bundleStr];
 if (@available(iOS 9.0, *)) {
     [_webview loadFileURL:[NSURL fileURLWithPath:bundleStr] allowingReadAccessToURL:[NSURL fileURLWithPath:[NSBundle mainBundle].bundlePath]];
@@ -274,7 +271,7 @@ if (@available(iOS 9.0, *)) {
 
 <h4 id="toc_10">loadRequest 方式</h4>
 
-<pre><code class="language-Objectiv-C">NSString *filePath = [[NSBundle mainBundle] pathForResource:@&quot;feedback&quot; ofType:@&quot;html&quot; inDirectory:@&quot;FeedbackH5/pages&quot;];
+<pre><code class="language-objectiv-c">NSString *filePath = [[NSBundle mainBundle] pathForResource:@&quot;feedback&quot; ofType:@&quot;html&quot; inDirectory:@&quot;FeedbackH5/pages&quot;];
 NSURL *pathURL = [NSURL fileURLWithPath:filePath];
 if (@available(iOS 9.0, *)) {
     [_webview loadRequest:[NSURLRequest requestWithURL:pathURL]];
@@ -283,7 +280,7 @@ if (@available(iOS 9.0, *)) {
 
 <h4 id="toc_11">loadFileURL 方式加载</h4>
 
-<pre><code class="language-Objectiv-C">NSString *filePath = [[NSBundle mainBundle] pathForResource:@&quot;feedback&quot; ofType:@&quot;html&quot; inDirectory:@&quot;FeedbackH5/pages&quot;];
+<pre><code class="language-objectiv-c">NSString *filePath = [[NSBundle mainBundle] pathForResource:@&quot;feedback&quot; ofType:@&quot;html&quot; inDirectory:@&quot;FeedbackH5/pages&quot;];
     NSURL *pathURL = [NSURL fileURLWithPath:filePath];
     if (@available(iOS 9.0, *)) {
 //        [_webview loadRequest:[NSURLRequest requestWithURL:pathURL]];
@@ -306,7 +303,7 @@ if (@available(iOS 9.0, *)) {
 你还太天真！！！</p>
 </blockquote>
 
-<pre><code class="language-Objectiv-C">//项目中的文件夹路径
+<pre><code class="language-objectiv-c">//项目中的文件夹路径
 NSString *directoryPath = [KFileManger appSourceName:@&quot;FeedbackH5&quot; andType:@&quot;&quot;];
 
 //沙盒中的document路径
@@ -335,7 +332,7 @@ NSURL *docSourceURL = [NSURL fileURLWithPath:homePath];
 <p>亲爱的客观们，这才是iOS8系统下加载有相互引用关系的HTML、JS、CSS以及图片资源的正确方法(当前知道的唯一方法如有新的方式私信我哦~)！😊</p>
 </blockquote>
 
-<pre><code class="language-Objectiv-C">//项目中的文件夹路径
+<pre><code class="language-objectiv-c">//项目中的文件夹路径
 NSString *directoryPath = [KFileManger appSourceName:@&quot;FeedbackH5&quot; andType:@&quot;&quot;];
 
 //tmp缓存文件夹路径
@@ -372,16 +369,16 @@ NSURL *feedbackURL = [NSURL fileURLWithPath:tmpWWWFeedback];
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15137627946753.html" 
-          title="Previous Post: ES6 笔记（常量&&变量）">&laquo; ES6 笔记（常量&&变量）</a>
+          <a href="15126628432953.html" 
+          title="Previous Post: iOS代码检测入坑记事">&laquo; iOS代码检测入坑记事</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15126628432953.html" 
-          title="Next Post: iOS代码检测入坑记事">iOS代码检测入坑记事 &raquo;</a>
+          <a  href="15115332074317.html" 
+          title="Next Post: Xcode 代码块">Xcode 代码块 &raquo;</a>
       
       </p>
         </div>
@@ -419,7 +416,7 @@ NSURL *feedbackURL = [NSURL fileURLWithPath:tmpWWWFeedback];
 
 
 
-
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/KaelLVLinda" title="Twitter">Twitter</a>
 <a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
 <a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
   <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
@@ -450,6 +447,8 @@ NSURL *feedbackURL = [NSURL fileURLWithPath:tmpWWWFeedback];
             <a href="vue.html"><strong>Vue</strong></a>
         
             <a href="shell.html"><strong>shell</strong></a>
+        
+            <a href="%E7%BD%91%E7%BB%9C.html"><strong>网络</strong></a>
          
         </p>
 
@@ -466,31 +465,31 @@ NSURL *feedbackURL = [NSURL fileURLWithPath:tmpWWWFeedback];
 	      
 		      
 			      <li class="post">
-			        <a href="15261167596297.html">OC 多线程之 GCD知识从基础到进阶 （1）</a>
+			        <a href="15523077857608.html">OC中枚举写法  以及 字符串枚举探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15257437237715.html">OC中的各种遍历</a>
+			        <a href="15522686353535.html">iOS 动画全解 (1)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15253400374602.html">多线程 之 NSThread</a>
+			        <a href="15501356584731.html">UITableView顶部空白的几种解决办法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15200726964422.html">iOS Block 知识点拾遗</a>
+			        <a href="15488351784332.html">Objective-C中的字符串类型枚举 探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15235286649865.html">音视频学习笔记 1</a>
+			        <a href="15409691048860.html">【Swift笔记】引用计数</a>
 			      </li>
 		     
 		  
@@ -565,7 +564,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 

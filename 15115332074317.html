@@ -122,6 +122,8 @@
             <li><a href="vue.html">Vue</a></li>
         
             <li><a href="shell.html">shell</a></li>
+        
+            <li><a href="%E7%BD%91%E7%BB%9C.html">网络</a></li>
          
 
       </ul>
@@ -243,10 +245,10 @@
 <h2 id="toc_3">福利传送门</h2>
 
 <p>常用的：<br/>
-1.strong：<br/><br/>
-<code><br/>
-@property (nonatomic,strong) &lt;#Class#&gt; *&lt;#object#&gt;;<br/>
-</code></p>
+1.strong：  </p>
+
+<pre><code class="language-text">@property (nonatomic,strong) &lt;#Class#&gt; *&lt;#object#&gt;;
+</code></pre>
 
 <p>2.weak：<br/><br/>
 <code>@property (nonatomic,weak) &lt;#Class#&gt; *&lt;#object#&gt;;</code><br/><br/>
@@ -260,34 +262,37 @@
 <code>@property (nonatomic,copy) &lt;#Block#&gt; &lt;#block#&gt;;</code><br/><br/>
 7.mark：<br/><br/>
 <code>#pragma mark &lt;#mark#&gt;</code><br/><br/>
-8.ReUseCell：<br/>
-```static NSString rid=&lt;#rid#&gt;;  <br/>
- &lt;#Class#&gt; *cell=<a href="">tableView dequeueReusableCellWithIdentifier:rid</a>;  <br/>
- if(cell==nil){  </p>
+8.ReUseCell：</p>
 
-<p> cell=<a href="">[&lt;#Class#&gt; alloc</a> initWithStyle:UITableViewCellStyleDefault      reuseIdentifier:rid];  <br/>
- }  <br/>
- return cell;<br/>
-<code><br/>
-9.MainGCD：<br/>
-</code><br/>
-dispatch_async(dispatch_get_main_queue(), <sup>{  </sup><br/>
-&lt;#code#&gt;  <br/>
-  });<br/>
-<code><br/>
-10.AfterGCD：<br/>
-</code><br/>
- dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(&lt;#delayInSeconds#&gt; * NSEC_PER_SEC)), dispatch_get_main_queue(), <sup>{  </sup><br/>
-&lt;#code to be executed after a specified delay#&gt;  <br/>
-});<br/>
-<code><br/>
-11.OnceGCD：<br/>
-</code><br/>
- static dispatch_once_t onceToken;  <br/>
- dispatch_once(&amp;onceToken, <sup>{  </sup><br/>
-&lt;#code to be executed once#&gt;  <br/>
- });<br/>
-```</p>
+<pre><code class="language-static nsstring rid=&lt;#rid#&gt;;  "> \&lt;#Class#\&gt; *cell=[tableView dequeueReusableCellWithIdentifier:rid]();  
+ if(cell==nil){  
+
+ cell=[\[\&lt;#Class#\&gt; alloc]() initWithStyle:UITableViewCellStyleDefault      reuseIdentifier:rid];  
+ }  
+ return cell;
+</code></pre>
+
+<p>9.MainGCD：</p>
+
+<pre><code class="language-text">dispatch_async(dispatch_get_main_queue(), ^{  
+\&lt;#code#\&gt;  
+  });
+</code></pre>
+
+<p>10.AfterGCD：</p>
+
+<pre><code class="language-text"> dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(\&lt;#delayInSeconds#\&gt; * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{  
+\&lt;#code to be executed after a specified delay#\&gt;  
+});
+</code></pre>
+
+<p>11.OnceGCD：</p>
+
+<pre><code class="language-text"> static dispatch_once_t onceToken;  
+ dispatch_once(&amp;onceToken, ^{  
+\&lt;#code to be executed once#\&gt;  
+ });
+</code></pre>
 
 
     
@@ -298,16 +303,13 @@ dispatch_async(dispatch_get_main_queue(), <sup>{  </sup><br/>
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15115206889632.html" 
-          title="Previous Post: Mac app 推荐">&laquo; Mac app 推荐</a>
+          <a href="15126415331235.html" 
+          title="Previous Post: iOS WKWebView 本地HTML、JS、CSS文件加载详解">&laquo; iOS WKWebView 本地HTML、JS、CSS文件加载详解</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
-      
-          <a  href="15137627946753.html" 
-          title="Next Post: ES6 笔记（常量&&变量）">ES6 笔记（常量&&变量） &raquo;</a>
       
       </p>
         </div>
@@ -345,7 +347,7 @@ dispatch_async(dispatch_get_main_queue(), <sup>{  </sup><br/>
 
 
 
-
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/KaelLVLinda" title="Twitter">Twitter</a>
 <a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
 <a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
   <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
@@ -376,6 +378,8 @@ dispatch_async(dispatch_get_main_queue(), <sup>{  </sup><br/>
             <a href="vue.html"><strong>Vue</strong></a>
         
             <a href="shell.html"><strong>shell</strong></a>
+        
+            <a href="%E7%BD%91%E7%BB%9C.html"><strong>网络</strong></a>
          
         </p>
 
@@ -392,31 +396,31 @@ dispatch_async(dispatch_get_main_queue(), <sup>{  </sup><br/>
 	      
 		      
 			      <li class="post">
-			        <a href="15261167596297.html">OC 多线程之 GCD知识从基础到进阶 （1）</a>
+			        <a href="15523077857608.html">OC中枚举写法  以及 字符串枚举探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15257437237715.html">OC中的各种遍历</a>
+			        <a href="15522686353535.html">iOS 动画全解 (1)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15253400374602.html">多线程 之 NSThread</a>
+			        <a href="15501356584731.html">UITableView顶部空白的几种解决办法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15200726964422.html">iOS Block 知识点拾遗</a>
+			        <a href="15488351784332.html">Objective-C中的字符串类型枚举 探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15235286649865.html">音视频学习笔记 1</a>
+			        <a href="15409691048860.html">【Swift笔记】引用计数</a>
 			      </li>
 		     
 		  
@@ -491,7 +495,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 

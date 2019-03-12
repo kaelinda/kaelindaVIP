@@ -122,6 +122,8 @@
             <li><a href="vue.html">Vue</a></li>
         
             <li><a href="shell.html">shell</a></li>
+        
+            <li><a href="%E7%BD%91%E7%BB%9C.html">网络</a></li>
          
 
       </ul>
@@ -166,140 +168,117 @@
       <div class="article-content">
       <ol>
 <li><p>Block为什么要用copy</p>
-
 <ul>
 <li>block在创建的时候默认分配的内存是在栈上，而不是在堆上。这样的话其本身的作用域是属于创建时候的作用域，一旦在创建的作用域之外调用就会导致程序的崩溃。所以使用了copy将其拷贝到堆内存上。</li>
-<li>block创建在栈上，而block的代码中可能会用到本地的一些变量，只有将其拷贝到堆上，才能用这些变量</li>
+<li>block创建在栈上，而block的代码中可能会用到本地的一些变量，在栈上可能随时会被系统释放掉，只有将其拷贝到堆上，才能一直保持Block的存在，并用这些外部变量</li>
 </ul></li>
 <li><p>Block为什么不用retain</p>
-
 <ul>
 <li>retain只是增加了一次引用计数，block的内存还是在栈上，并没有存在堆上，存在栈上的block可能随时被系统回收</li>
 </ul></li>
 <li><p>为什么进入block中的对象引用计数需要自动加1？</p>
-
 <ul>
 <li>Block执行的是回调，因此block并不知道其中的对象obj创建后会在什么时候被释放，为了不在block使用obj之前，对象已经被释放，block就retain了obj一次</li>
 </ul></li>
 <li><p>block和函数的关系</p>
-
 <ul>
 <li>Block的使用很<strong>像函数指针</strong>，不过与函数最大的不同是Block可以访问函数以外、词法作用域以内的外部变量的值。换句话说，Block不仅 实现函数的功能，还能<strong>携带函数的执行环境</strong>。</li>
 <li>函数指针 <code>void(*fun)(int)</code></li>
 <li>block <code>void(^fun)(int)</code></li>
 </ul></li>
 <li><p>block本质（对于block的理解）<a href="https://www.cnblogs.com/yoon/p/4953618.html">请查阅Block实现原理</a></p>
-
 <ul>
 <li>block实际上是: 指向结构体的指针</li>
 <li>编译器会将block的内部代码生成对应的函数</li>
 </ul></li>
 <li><p>对于基本数据类型，进入到block中会被当做常量处理。对象 retain 会一次</p>
-
 <span id="more"></span><!-- more -->
-
-<pre><code>//如果需要在block中对num进行修改，需要加上关键字__block
-//(我们也可以用static关键字进行修饰)
-int  num1 = 10;
-void(^block1)() = ^{
-   NSLog(@&quot;num1 is %d&quot;,num1);
-};
-num1 = 20;
-block1(); //输出10
-
-//改进:使用block,使进入到block块中的变量不被当做常量来使用
-__block int  num2 = 10;
-void(^block2)() = ^{
- NSLog(@&quot;num2 is %d&quot;,num2);
-};
-num2 = 20;
+<pre><code class="language-text">//如果需要在block中对num进行修改，需要加上关键字__block
+//(我们也可以用static关键字进行修饰)<br/>
+int  num1 = 10;<br/>
+void(^block1)() = ^{<br/>
+   NSLog(@&quot;num1 is %d&quot;,num1);<br/>
+};<br/>
+num1 = 20;<br/>
+block1(); //输出10<br/>
+//改进:使用block,使进入到block块中的变量不被当做常量来使用<br/>
+__block int  num2 = 10;<br/>
+void(^block2)() = ^{<br/>
+ NSLog(@&quot;num2 is %d&quot;,num2);<br/>
+};<br/>
+num2 = 20;<br/>
 block2(); //输出20
 </code></pre></li>
 <li><p>Block中self的循环引用</p>
-
 <ul>
 <li>block默认创建在栈上，所以对要对其进行执行copy操作，将其拷贝到堆区，便于更好的操作对象。但是执行了copy操作之后，block中使用self，此对象会被retain一次（注意：block在堆区上时才会起到retain作用），会造成循环引用。</li>
 <li>解决方法：
-
 <ul>
 <li>在MRC下，使用__block修饰</li>
 <li>在ARC下，使用__unsafe_unretained\weak修饰</li>
 </ul></li>
 </ul></li>
 <li><p>Block 在内存中的分类</p>
-
 <ul>
 <li>全局block --&gt; GlobalBlock &lt;==&gt; 相当于全局变量, 系统会自动释放</li>
 <li>栈block --&gt; StackBlock &lt;==&gt; 相当于局部变量, 系统会自动释放</li>
 <li>堆block --&gt; MallocBlock &lt;==&gt; (需要手动释放内存)</li>
 </ul></li>
 <li><p>block类型区分方法</p>
-
 <ul>
 <li>如果block实现中没有访问任何&quot;外部&quot;变量(包括局部和全局), 该block为GlobalBlock</li>
 <li>如果block实现中访问了任何&quot;外部&quot;变量(包括局部和全局), 该block为StackBlock</li>
 <li>对StackBlock进行拷贝(copy/Block_copy), 该block为MallocBlock</li>
 </ul></li>
 <li><p>block内如何修改block外 的变量?</p>
-
-<pre><code> __block int a = 0;
-   void (^foo)(void) = ^{ 
-       a = 1; 
-   };
-   foo(); 
+<pre><code class="language-text"> __block int a = 0;
+   void (^foo)(void) = ^{ <br/>
+       a = 1; <br/>
+   };<br/>
+   foo(); <br/>
    //这里，a的值被修改为1
 </code></pre>
-
 <p>默认情况下，block内访问的变量是 copy  该变量到堆后的变量，而非变量本身。<br/>
 所以：<strong>读写操作对原变量不生效</strong></p>
-
 <blockquote>
 <p>我们知道：Block不允许修改外部变量的值，这里所说的外部变量的值，指的是栈中指针的内存地址。__block 所起到的作用就是只要观察到该变量被 block 所持有，就将“外部变量”在栈中的内存地址放到了堆中。进而在block内部也可以修改外部变量的值</p>
 </blockquote>
-
-<pre><code>__block int a = 0;
-   NSLog(@&quot;定义前：%p&quot;, &amp;a);         //栈区
-   void (^foo)(void) = ^{
-       a = 1;
-       NSLog(@&quot;block内部：%p&quot;, &amp;a);    //堆区
-   };
-   NSLog(@&quot;定义后：%p&quot;, &amp;a);         //堆区
+<pre><code class="language-text">__block int a = 0;
+   NSLog(@&quot;定义前：%p&quot;, &amp;a);         //栈区<br/>
+   void (^foo)(void) = ^{<br/>
+       a = 1;<br/>
+       NSLog(@&quot;block内部：%p&quot;, &amp;a);    //堆区<br/>
+   };<br/>
+   NSLog(@&quot;定义后：%p&quot;, &amp;a);         //堆区<br/>
    foo();
 </code></pre>
-
 <p>打印输出：</p>
-
-<pre><code>2016-05-17 02:03:33.559 LeanCloudChatKit-iOS[1505:713679] 定义前：0x16fda86f8
-2016-05-17 02:03:33.559 LeanCloudChatKit-iOS[1505:713679] 定义后：0x155b22fc8
+<pre><code class="language-text">2016-05-17 02:03:33.559 LeanCloudChatKit-iOS[1505:713679] 定义前：0x16fda86f8
+2016-05-17 02:03:33.559 LeanCloudChatKit-iOS[1505:713679] 定义后：0x155b22fc8<br/>
 2016-05-17 02:03:33.559 LeanCloudChatKit-iOS[1505:713679] block内部： 0x155b22fc8
 </code></pre></li>
 <li><p>block个人理解</p>
-
-<pre><code>NSMutableString *kName = [NSMutableString stringWithString:@&quot;kael&quot;];
-__block NSMutableString *myname = kName;
-NSLog(@&quot;block 前%p&quot;,&amp;myname);
-
-void (^foo)(void) = ^(){
-    NSLog(@&quot;block 中1：%p&quot;,&amp;myname);
-    myname = [NSMutableString stringWithString:@&quot;kaelinda&quot;];
-    NSLog(@&quot;block 中2：%p&quot;,&amp;myname);
-};
-
-foo();
-NSLog(@&quot;block 后%p&quot;,&amp;myname);
-
-/**
- * __block 修饰之前
- * 外部变量的内存地址是存到了栈
- * block 是在堆内，不清楚栈内的变量是否已经被释放，所以连引用的准确性都是问题，更谈不上是修改了
- * 所以，block 不允许修改栈中的变量（或者栈中指针的内存地址）
- */
-
-/**
- * __block 修饰之后
- * 初始化的时候，内存地址在栈内（因为并不确定block内是否会用到），
- * 当检测到block内引用到了该对象，不管block有没有被调用，都会 从栈内 copy 内存地址到 堆内，
- * 再操作的时候 操作的是堆内的内存地址
+<pre><code class="language-text">NSMutableString *kName = [NSMutableString stringWithString:@&quot;kael&quot;];
+__block NSMutableString *myname = kName;<br/>
+NSLog(@&quot;block 前%p&quot;,&amp;myname);<br/>
+void (^foo)(void) = ^(){<br/>
+    NSLog(@&quot;block 中1：%p&quot;,&amp;myname);<br/>
+    myname = [NSMutableString stringWithString:@&quot;kaelinda&quot;];<br/>
+    NSLog(@&quot;block 中2：%p&quot;,&amp;myname);<br/>
+};<br/>
+foo();<br/>
+NSLog(@&quot;block 后%p&quot;,&amp;myname);<br/>
+/**<br/>
+ * __block 修饰之前<br/>
+ * 外部变量的内存地址是存到了栈<br/>
+ * block 是在堆内，不清楚栈内的变量是否已经被释放，所以连引用的准确性都是问题，更谈不上是修改了<br/>
+ * 所以，block 不允许修改栈中的变量（或者栈中指针的内存地址）<br/>
+ */<br/>
+/**<br/>
+ * __block 修饰之后<br/>
+ * 初始化的时候，内存地址在栈内（因为并不确定block内是否会用到），<br/>
+ * 当检测到block内引用到了该对象，不管block有没有被调用，都会 从栈内 copy 内存地址到 堆内，<br/>
+ * 再操作的时候 操作的是堆内的内存地址<br/>
  */
 </code></pre></li>
 </ol>
@@ -313,16 +292,16 @@ NSLog(@&quot;block 后%p&quot;,&amp;myname);
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15253400374602.html" 
-          title="Previous Post: 多线程 之 NSThread">&laquo; 多线程 之 NSThread</a>
+          <a href="15222179789382.html" 
+          title="Previous Post: iOS GCD&&多线程">&laquo; iOS GCD&&多线程</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15235286649865.html" 
-          title="Next Post: 音视频学习笔记 1">音视频学习笔记 1 &raquo;</a>
+          <a  href="15200715202464.html" 
+          title="Next Post: iOS 离屏渲染">iOS 离屏渲染 &raquo;</a>
       
       </p>
         </div>
@@ -360,7 +339,7 @@ NSLog(@&quot;block 后%p&quot;,&amp;myname);
 
 
 
-
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/KaelLVLinda" title="Twitter">Twitter</a>
 <a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
 <a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
   <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
@@ -391,6 +370,8 @@ NSLog(@&quot;block 后%p&quot;,&amp;myname);
             <a href="vue.html"><strong>Vue</strong></a>
         
             <a href="shell.html"><strong>shell</strong></a>
+        
+            <a href="%E7%BD%91%E7%BB%9C.html"><strong>网络</strong></a>
          
         </p>
 
@@ -407,31 +388,31 @@ NSLog(@&quot;block 后%p&quot;,&amp;myname);
 	      
 		      
 			      <li class="post">
-			        <a href="15261167596297.html">OC 多线程之 GCD知识从基础到进阶 （1）</a>
+			        <a href="15523077857608.html">OC中枚举写法  以及 字符串枚举探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15257437237715.html">OC中的各种遍历</a>
+			        <a href="15522686353535.html">iOS 动画全解 (1)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15253400374602.html">多线程 之 NSThread</a>
+			        <a href="15501356584731.html">UITableView顶部空白的几种解决办法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15200726964422.html">iOS Block 知识点拾遗</a>
+			        <a href="15488351784332.html">Objective-C中的字符串类型枚举 探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15235286649865.html">音视频学习笔记 1</a>
+			        <a href="15409691048860.html">【Swift笔记】引用计数</a>
 			      </li>
 		     
 		  
@@ -506,7 +487,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 

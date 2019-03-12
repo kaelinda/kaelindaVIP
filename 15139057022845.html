@@ -122,6 +122,8 @@
             <li><a href="vue.html">Vue</a></li>
         
             <li><a href="shell.html">shell</a></li>
+        
+            <li><a href="%E7%BD%91%E7%BB%9C.html">网络</a></li>
          
 
       </ul>
@@ -195,7 +197,7 @@
 
 <h2 id="toc_4">Promise 基本用法</h2>
 
-<pre><code class="language-JavaScript">var promise = new Promise(function(resolve, reject) {
+<pre><code class="language-javascript">var promise = new Promise(function(resolve, reject) {
   // ... some code
 
   if (/* 异步操作成功 */){
@@ -207,78 +209,84 @@
 </code></pre>
 
 <p>Promise对象接受一个参数，这个参数是一个函数体。<br/>
-这个函数有两个参数：一个是resolve，一个是reject。这两个参数是Promise自动提供，不需要使用者传值。<br/>
-* resolve函数的作用是，将Promise对象的状态从“未完成”变为“成功”（即从 Pending 变为 Resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去<br/>
-* reject函数的作用是，将Promise对象的状态从“未完成”变为“失败”（即从 Pending 变为 Rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去。<br/>
-  Promise实例生成后，可以用then分别指定Resolved和Rejected的回调函数。<br/>
-<code>JavaScript<br/>
+这个函数有两个参数：一个是resolve，一个是reject。这两个参数是Promise自动提供，不需要使用者传值。</p>
+
+<ul>
+<li>resolve函数的作用是，将Promise对象的状态从“未完成”变为“成功”（即从 Pending 变为 Resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去</li>
+<li>reject函数的作用是，将Promise对象的状态从“未完成”变为“失败”（即从 Pending 变为 Rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去。<br/>
+Promise实例生成后，可以用then分别指定Resolved和Rejected的回调函数。
+<code>JavaScript
 promise.then(function(value) {<br/>
-  // success<br/>
+// success<br/>
 }, function(error) {<br/>
-  // failure<br/>
-});<br/>
-</code><br/>
-then方法会接受两个参数：<br/>
-* 第一个函数，Promise状态变更为Resolved时调用。<br/>
-* 第二个函数，Promise状态变为Rejected时调用。可选的，可以不提供。</p>
+// failure<br/>
+});
+</code>
+then方法会接受两个参数：</li>
+<li>第一个函数，Promise状态变更为Resolved时调用。</li>
+<li>第二个函数，Promise状态变为Rejected时调用。可选的，可以不提供。</li>
+</ul>
 
-<p>下面是异步加载图片的例子：<br/>
-```JavaScript<br/>
-function loadImageAsync(url) {<br/>
-  return new Promise(function(resolve, reject) {<br/>
-    var image = new Image();</p>
+<p>下面是异步加载图片的例子：</p>
 
-<pre><code>image.onload = function() {
-  resolve(image);
-};
+<pre><code class="language-javascript">function loadImageAsync(url) {
+  return new Promise(function(resolve, reject) {
+    var image = new Image();
 
-image.onerror = function() {
-  reject(new Error(&#39;Could not load image at &#39; + url));
-};
+    image.onload = function() {
+      resolve(image);
+    };
 
-image.src = url;
+    image.onerror = function() {
+      reject(new Error(&#39;Could not load image at &#39; + url));
+    };
+
+    image.src = url;
+  });
+}
 </code></pre>
 
-<p>});<br/>
-}<br/>
-<code><br/>
-下面是Promise实现的Ajax操作的例子：<br/>
-</code>JavaScript<br/>
-var getJSON = function(url) {<br/>
-  var promise = new Promise(function(resolve, reject){<br/>
-    var client = new XMLHttpRequest();<br/>
-    client.open(&quot;GET&quot;, url);<br/>
-    client.onreadystatechange = handler;<br/>
-    client.responseType = &quot;json&quot;;<br/>
-    client.setRequestHeader(&quot;Accept&quot;, &quot;application/json&quot;);<br/>
-    client.send();<br/>
-    function handler() {<br/>
-      if (this.readyState !== 4) {<br/>
-        return;<br/>
-      }<br/>
-      if (this.status === 200) {<br/>
-        resolve(this.response);<br/>
-      } else {<br/>
-        reject(new Error(this.statusText));<br/>
-      }<br/>
-    };<br/>
-  });</p>
+<p>下面是Promise实现的Ajax操作的例子：</p>
 
-<p>return promise;<br/>
-};</p>
+<pre><code class="language-javascript">var getJSON = function(url) {
+  var promise = new Promise(function(resolve, reject){
+    var client = new XMLHttpRequest();
+    client.open(&quot;GET&quot;, url);
+    client.onreadystatechange = handler;
+    client.responseType = &quot;json&quot;;
+    client.setRequestHeader(&quot;Accept&quot;, &quot;application/json&quot;);
+    client.send();
+    function handler() {
+      if (this.readyState !== 4) {
+        return;
+      }
+      if (this.status === 200) {
+        resolve(this.response);
+      } else {
+        reject(new Error(this.statusText));
+      }
+    };
+  });
 
-<p>getJSON(&quot;/posts.json&quot;).then(function(json) {<br/>
-  console.log(&#39;Contents: &#39; + json);<br/>
-}, function(error) {<br/>
-  console.error(&#39;出错了&#39;, error);<br/>
-});<br/>
-```<br/>
-<strong>注意：在getJSON内部，resolve函数和reject函数调用时，都带有参数！！</strong><br/><br/>
-    如果调用resolve函数和reject函数时带有参数，那么它们的参数会被传递给回调函数。<br/>
-* reject函数的参数通常是Error对象的实例，表示抛出的错误<br/>
-* resolve函数的参数除了正常的值以外，还可能是另一个 Promise 实例，表示异步操作的结果有可能是一个值，也有可能是另一个异步操作</p>
+  return promise;
+};
 
-<pre><code class="language-JavaScript">var p1 = new Promise(function (resolve, reject) {
+getJSON(&quot;/posts.json&quot;).then(function(json) {
+  console.log(&#39;Contents: &#39; + json);
+}, function(error) {
+  console.error(&#39;出错了&#39;, error);
+});
+</code></pre>
+
+<p><strong>注意：在getJSON内部，resolve函数和reject函数调用时，都带有参数！！</strong><br/><br/>
+    如果调用resolve函数和reject函数时带有参数，那么它们的参数会被传递给回调函数。</p>
+
+<ul>
+<li>reject函数的参数通常是Error对象的实例，表示抛出的错误</li>
+<li>resolve函数的参数除了正常的值以外，还可能是另一个 Promise 实例，表示异步操作的结果有可能是一个值，也有可能是另一个异步操作</li>
+</ul>
+
+<pre><code class="language-javascript">var p1 = new Promise(function (resolve, reject) {
   // ...
 });
 
@@ -291,20 +299,20 @@ var p2 = new Promise(function (resolve, reject) {
 <p>上面👆，<code>p1</code>、<code>p2</code> 都是Promise，但是<code>p2</code>的resolve把<code>p1</code>作为返回值参数传出去了，即一个异步操作的返回结果是另一个异步操作。（类似于iOS开发中的自动布局库 <code>Masonry</code>,可以无限点语法取到对象）。<br/><br/>
 <strong>注意：此时，p1的状态会传递p2.如果p1是Pending状态,那么p2会等待p1的结果。如果p1是Reject或者Resolve状态，那么p2的回调函数将会立即执行。</strong></p>
 
-<p><strong>再看:</strong><br/>
-```JavaScript<br/>
-var p1 = new Promise(function (resolve, reject) {<br/>
-  setTimeout(() =&gt; reject(new Error(&#39;fail&#39;)), 3000)<br/>
-})</p>
+<p><strong>再看:</strong></p>
 
-<p>var p2 = new Promise(function (resolve, reject) {<br/>
-  setTimeout(() =&gt; resolve(p1), 1000)<br/>
-})</p>
+<pre><code class="language-javascript">var p1 = new Promise(function (resolve, reject) {
+  setTimeout(() =&gt; reject(new Error(&#39;fail&#39;)), 3000)
+})
 
-<p>p2.then(result =&gt; console.log(result))<br/>
-  .catch(error =&gt; console.log(error))<br/>
-// Error: fail<br/>
-```</p>
+var p2 = new Promise(function (resolve, reject) {
+  setTimeout(() =&gt; resolve(p1), 1000)
+})
+
+p2.then(result =&gt; console.log(result))
+  .catch(error =&gt; console.log(error))
+// Error: fail
+</code></pre>
 
 <ol>
 <li><code>p1</code>会在3秒后抛出error。<br/></li>
@@ -320,7 +328,7 @@ var p1 = new Promise(function (resolve, reject) {<br/>
 作用：为Promise对象添加状态改变时的回调函数。第一个是Resolved，第二个是Rejected。<br/>
 then方法返回的是一个新的Promise对象，不是之前的实例。因此 then方法后面还可以再写一个then方法,即链式调用。</p>
 
-<pre><code class="language-JavaScript">getJSON(&quot;/posts.json&quot;).then(function(json) {
+<pre><code class="language-javascript">getJSON(&quot;/posts.json&quot;).then(function(json) {
   return json.post;
 }).then(function(post) {
   // ...
@@ -329,7 +337,7 @@ then方法返回的是一个新的Promise对象，不是之前的实例。因此
 
 <p>第一个回调函数完成以后，会将返回结果作为参数，传入第二个回调函数。</p>
 
-<pre><code class="language-JavaScript">getJSON(&quot;/post/1.json&quot;).then(function(post) {
+<pre><code class="language-javascript">getJSON(&quot;/post/1.json&quot;).then(function(post) {
   return getJSON(post.commentURL);
 }).then(function funcA(comments) {
   console.log(&quot;Resolved: &quot;, comments);
@@ -341,29 +349,29 @@ then方法返回的是一个新的Promise对象，不是之前的实例。因此
 <p>第一个then函数返回的是一个新的Promise对象。于是才能继续调用then方法。<br/>
 第二个then方法指定的回调函数，就会等待这个Promise对象状态发生变化，resolv会调用funcA,reject会调用funcB.</p>
 
-<p>下面👇是箭头函数的实现，会更简洁：<br/>
-<code>JavaScript<br/>
-getJSON(&quot;/post/1.json&quot;).then(<br/>
-  post =&gt; getJSON(post.commentURL)<br/>
-).then(<br/>
-  comments =&gt; console.log(&quot;Resolved: &quot;, comments),<br/>
-  err =&gt; console.log(&quot;Rejected: &quot;, err)<br/>
-);<br/>
-</code></p>
+<p>下面👇是箭头函数的实现，会更简洁：</p>
+
+<pre><code class="language-javascript">getJSON(&quot;/post/1.json&quot;).then(
+  post =&gt; getJSON(post.commentURL)
+).then(
+  comments =&gt; console.log(&quot;Resolved: &quot;, comments),
+  err =&gt; console.log(&quot;Rejected: &quot;, err)
+);
+</code></pre>
 
 <h2 id="toc_6">4. Promise.prototype.catch()</h2>
 
 <h3 id="toc_7">Promise.prototype.catch方法是.then(null, rejection)的别名，用于指定发生错误时的回调函数</h3>
 
-<p><strong>Promise.prototype.catch方法是.then(null, rejection)的别名，用于指定发生错误时的回调函数.</strong><br/><br/>
-<code>JavaScript<br/>
-getJSON(&#39;/posts.json&#39;).then(function(posts) {<br/>
-  // ...<br/>
-}).catch(function(error) {<br/>
-  // 处理 getJSON 和 前一个回调函数运行时发生的错误<br/>
-  console.log(&#39;发生错误！&#39;, error);<br/>
-});<br/>
-</code></p>
+<p><strong>Promise.prototype.catch方法是.then(null, rejection)的别名，用于指定发生错误时的回调函数.</strong>    </p>
+
+<pre><code class="language-javascript">getJSON(&#39;/posts.json&#39;).then(function(posts) {
+  // ...
+}).catch(function(error) {
+  // 处理 getJSON 和 前一个回调函数运行时发生的错误
+  console.log(&#39;发生错误！&#39;, error);
+});
+</code></pre>
 
 <p>getJSON()方法返回的是一个Promise对象。如果resolv，会调用then方法；如果reject则会调用catch方法。</p>
 
@@ -371,7 +379,7 @@ getJSON(&#39;/posts.json&#39;).then(function(posts) {<br/>
 
 <p><strong>另外，then方法指定的回调函数，如果运行中抛出错误，也会被catch方法捕获</strong>   </p>
 
-<pre><code class="language-JavaScript">p.then((val) =&gt; console.log(&#39;fulfilled:&#39;, val))
+<pre><code class="language-javascript">p.then((val) =&gt; console.log(&#39;fulfilled:&#39;, val))
   .catch((err) =&gt; console.log(&#39;rejected&#39;, err));
 
 // 等同于
@@ -379,7 +387,7 @@ p.then((val) =&gt; console.log(&#39;fulfilled:&#39;, val))
   .then(null, (err) =&gt; console.log(&quot;rejected:&quot;, err));
 </code></pre>
 
-<pre><code>var promise = new Promise(function(resolve, reject) {
+<pre><code class="language-text">var promise = new Promise(function(resolve, reject) {
   throw new Error(&#39;test&#39;);
 });
 promise.catch(function(error) {
@@ -393,34 +401,34 @@ Promise对象catch方法能捕获跑出的error。</p>
 
 <h3 id="toc_9">reject方法等同于抛出错误</h3>
 
-<p>上面的写法跟下面的两种写法是一样的：<br/>
-```<br/>
-// 写法一<br/>
-var promise = new Promise(function(resolve, reject) {<br/>
-  try {<br/>
-    throw new Error(&#39;test&#39;);<br/>
-  } catch(e) {<br/>
-    reject(e);<br/>
-  }<br/>
-});<br/>
-promise.catch(function(error) {<br/>
-  console.log(error);<br/>
-});</p>
+<p>上面的写法跟下面的两种写法是一样的：</p>
 
-<p>// 写法二<br/>
-var promise = new Promise(function(resolve, reject) {<br/>
-  reject(new Error(&#39;test&#39;));<br/>
-});<br/>
-promise.catch(function(error) {<br/>
-  console.log(error);<br/>
-});<br/>
-```</p>
+<pre><code class="language-text">// 写法一
+var promise = new Promise(function(resolve, reject) {
+  try {
+    throw new Error(&#39;test&#39;);
+  } catch(e) {
+    reject(e);
+  }
+});
+promise.catch(function(error) {
+  console.log(error);
+});
+
+// 写法二
+var promise = new Promise(function(resolve, reject) {
+  reject(new Error(&#39;test&#39;));
+});
+promise.catch(function(error) {
+  console.log(error);
+});
+</code></pre>
 
 <p><strong>由此可见：reject方法等同于抛出错误。</strong></p>
 
 <h3 id="toc_10">resolve之后在抛出错误，catch是捕获不到的不到的。</h3>
 
-<pre><code>var promise = new Promise(function(resolve, reject) {
+<pre><code class="language-text">var promise = new Promise(function(resolve, reject) {
   resolve(&#39;ok&#39;);
   throw new Error(&#39;test&#39;);
 });
@@ -440,7 +448,7 @@ promise
 <p>举个栗子：就像是Y染色体上受环境触发的遗传疾病，会不断的遗传给男性后代，任意一个男性都会被特殊的环境触发。</p>
 </blockquote>
 
-<pre><code>getJSON(&#39;/post/1.json&#39;).then(function(post) {
+<pre><code class="language-text">getJSON(&#39;/post/1.json&#39;).then(function(post) {
   return getJSON(post.commentURL);
 }).then(function(comments) {
   // some code
@@ -457,7 +465,7 @@ promise
 
 <p>如果没有使用catch方法指定错误处理的回调函数，Promise对象抛出的错误不会传递到外层代码，即不会有任何反应，这一点上跟传统的try/catch代码块不同的。</p>
 
-<pre><code>process.on(&#39;unhandledRejection&#39;, function (err, p) {
+<pre><code class="language-text">process.on(&#39;unhandledRejection&#39;, function (err, p) {
   console.error(err.stack)
 });
 </code></pre>
@@ -471,7 +479,7 @@ promise
 
 <h3 id="toc_13">catch方法中也能抛出错误</h3>
 
-<pre><code>var someAsyncThing = function() {
+<pre><code class="language-text">var someAsyncThing = function() {
   return new Promise(function(resolve, reject) {
     // 下面一行会报错，因为x没有声明
     resolve(x + 2);
@@ -496,19 +504,22 @@ someAsyncThing().then(function() {
 
 <p><strong>Promise.all方法用于将多个 Promise 实例，包装成一个新的 Promise 实例。</strong></p>
 
-<pre><code>var p = Promise.all([p1, p2, p3]);
+<pre><code class="language-text">var p = Promise.all([p1, p2, p3]);
 </code></pre>
 
 <p>Promise.all方法接受一个数组作为参数，p1、p2、p3都是 Promise 实例，如果不是，就会先调用下面讲到的Promise.resolve方法，将参数转为 Promise 实例，再进一步处理。<br/>
 （Promise.all方法的参数可以不是数组，但必须具有 Iterator 接口，且返回的每个成员都是 Promise 实例。）</p>
 
-<p>p的状态由p1、p2、p3决定，分成两种情况:<br/>
-* 只有p1、p2、p3的状态都变成fulfilled，p的状态才会变成fulfilled，此时p1、p2、p3的返回值组成一个数组，传递给p的回调函数<br/>
-* 只要p1、p2、p3之中有一个被rejected，p的状态就变成rejected，此时第一个被reject的实例的返回值，会传递给p的回调函数</p>
+<p>p的状态由p1、p2、p3决定，分成两种情况:</p>
+
+<ul>
+<li>只有p1、p2、p3的状态都变成fulfilled，p的状态才会变成fulfilled，此时p1、p2、p3的返回值组成一个数组，传递给p的回调函数</li>
+<li>只要p1、p2、p3之中有一个被rejected，p的状态就变成rejected，此时第一个被reject的实例的返回值，会传递给p的回调函数</li>
+</ul>
 
 <p><strong>注意，如果作为参数的 Promise 实例，自己定义了catch方法，那么它一旦被rejected，并不会触发Promise.all()的catch方法。</strong></p>
 
-<pre><code>const p1 = new Promise((resolve, reject) =&gt; {
+<pre><code class="language-text">const p1 = new Promise((resolve, reject) =&gt; {
   resolve(&#39;hello&#39;);
 })
 .then(result =&gt; result)
@@ -533,21 +544,22 @@ p2没有自己的catch方法，所以会调用Promise.all()的catch方法。</p>
 
 <h2 id="toc_15">6. Promise.race()</h2>
 
-<p>Promise.race方法同样是将多个Promise实例，包装成一个新的Promise实例。<br/>
-<code><br/>
-var p = Promise.race([p1, p2, p3]);<br/>
-</code><br/>
-p1/p2/p3中只要有一个率先改变状态，p的状态就会随着改变。那个率先改变状态的实例的返回值，就会传递给p的回调函数。<br/>
-<code><br/>
-const p = Promise.race([<br/>
-  fetch(&#39;/resource-that-may-take-a-while&#39;),<br/>
-  new Promise(function (resolve, reject) {<br/>
-    setTimeout(() =&gt; reject(new Error(&#39;request timeout&#39;)), 5000)<br/>
-  })<br/>
-]);<br/>
-p.then(response =&gt; console.log(response));<br/>
-p.catch(error =&gt; console.log(error));<br/>
-</code></p>
+<p>Promise.race方法同样是将多个Promise实例，包装成一个新的Promise实例。</p>
+
+<pre><code class="language-text">var p = Promise.race([p1, p2, p3]);
+</code></pre>
+
+<p>p1/p2/p3中只要有一个率先改变状态，p的状态就会随着改变。那个率先改变状态的实例的返回值，就会传递给p的回调函数。</p>
+
+<pre><code class="language-text">const p = Promise.race([
+  fetch(&#39;/resource-that-may-take-a-while&#39;),
+  new Promise(function (resolve, reject) {
+    setTimeout(() =&gt; reject(new Error(&#39;request timeout&#39;)), 5000)
+  })
+]);
+p.then(response =&gt; console.log(response));
+p.catch(error =&gt; console.log(error));
+</code></pre>
 
 <p>5秒内无法返回请求结果，变量p的状态就会变为reject。这也算是竞速的一种应用场景。</p>
 
@@ -555,23 +567,26 @@ p.catch(error =&gt; console.log(error));<br/>
 
 <p>有时需要将现有对象转为Promise对象，Promise.resolve方法就起到这个作用.</p>
 
-<pre><code>var jsPromise = Promise.resolve($.ajax(&#39;/whatever.json&#39;));
+<pre><code class="language-text">var jsPromise = Promise.resolve($.ajax(&#39;/whatever.json&#39;));
 </code></pre>
 
-<p>等价于下面的说法：<br/>
-<code><br/>
-Promise.resolve(&#39;foo&#39;)<br/>
-// 等价于<br/>
-new Promise(resolve =&gt; resolve(&#39;foo&#39;))<br/>
-</code></p>
+<p>等价于下面的说法：</p>
+
+<pre><code class="language-text">Promise.resolve(&#39;foo&#39;)
+// 等价于
+new Promise(resolve =&gt; resolve(&#39;foo&#39;))
+</code></pre>
 
 <p>Promise 的第一个参数是一个箭头函数，函数的传入参数是resolve（函数），函数体就是调用传入的函数resolve，resolve调用的时候，也需要一个参数，此时这个参数就是咱们需要转变成Promise对象的那个参数。</p>
 
-<p>Promise.resolve的参数有四种情况：<br/>
-1. 参数是一个Promise实例<br/>
-2. 参数是一个thenable对象（有then方法的实例）<br/>
-3. 参数是不具备then方法d的对象应该<br/>
-4. 不带参数，返回一个Resolved的返回状态。</p>
+<p>Promise.resolve的参数有四种情况：</p>
+
+<ol>
+<li>参数是一个Promise实例</li>
+<li>参数是一个thenable对象（有then方法的实例）</li>
+<li>参数是不具备then方法d的对象应该</li>
+<li>不带参数，返回一个Resolved的返回状态。</li>
+</ol>
 
 <h2 id="toc_17">8、Promise.reject()   同上</h2>
 
@@ -579,47 +594,54 @@ new Promise(resolve =&gt; resolve(&#39;foo&#39;))<br/>
 
 <h3 id="toc_19">done()</h3>
 
-<p>Promise的错误并不会冒泡到全局，所以我们可以提供一个done方法总是处于会吊链的尾端。<br/>
-<code><br/>
-asyncFunc()<br/>
-  .then(f1)<br/>
-  .catch(r1)<br/>
-  .then(f2)<br/>
-  .done();<br/>
-</code></p>
+<p>Promise的错误并不会冒泡到全局，所以我们可以提供一个done方法总是处于会吊链的尾端。</p>
 
-<p>done方法的使用，可以像then方法那样用，提供Fulfilled和Rejected状态的回调函数，也可以不提供任何参数。但不管怎样，done都会捕捉到任何可能出现的错误，并向全局抛出.</p>
+<pre><code class="language-text">asyncFunc()
+  .then(f1)
+  .catch(r1)
+  .then(f2)
+  .done();
+  ```
+  
+done方法的使用，可以像then方法那样用，提供Fulfilled和Rejected状态的回调函数，也可以不提供任何参数。但不管怎样，done都会捕捉到任何可能出现的错误，并向全局抛出.
 
-<h3 id="toc_20">finally()</h3>
+### finally()
+finally方法用于指定不管Promise对象最后状态如何，都会执行的操作。它与done方法的最大区别，它接受一个普通的回调函数作为参数，该函数不管怎样都必须执行。
 
-<p>finally方法用于指定不管Promise对象最后状态如何，都会执行的操作。它与done方法的最大区别，它接受一个普通的回调函数作为参数，该函数不管怎样都必须执行。</p>
-
-<pre><code>Promise.prototype.finally = function (callback) {
-  let P = this.constructor;
-  return this.then(
-    value  =&gt; P.resolve(callback()).then(() =&gt; value),
-    reason =&gt; P.resolve(callback()).then(() =&gt; { throw reason })
-  );
-};
 </code></pre>
 
-<h3 id="toc_21">Promis.try()</h3>
+<p>Promise.prototype.finally = function (callback) {<br/>
+  let P = this.constructor;<br/>
+  return this.then(<br/>
+    value  =&gt; P.resolve(callback()).then(() =&gt; value),<br/>
+    reason =&gt; P.resolve(callback()).then(() =&gt; { throw reason })<br/>
+  );<br/>
+};</p>
 
-<pre><code>try {
-  database.users.get({id: userId})
-  .then(...)
-  .catch(...)
-} catch (e) {
-  // ...
-}
+<pre><code class="language-text">
+### Promis.try()
+
 </code></pre>
 
-<pre><code>Promise.try(database.users.get({id: userId}))
-  .then(...)
-  .catch(...)
+<p>try {<br/>
+  database.users.get({id: userId})<br/>
+  .then(...)<br/>
+  .catch(...)<br/>
+} catch (e) {<br/>
+  // ...<br/>
+}</p>
+
+<pre><code class="language-text">
 </code></pre>
 
-<p>Promise.try就是模拟try代码块，就像promise.catch模拟的是catch代码块.</p>
+<p>Promise.try(database.users.get({id: userId}))<br/>
+  .then(...)<br/>
+  .catch(...)</p>
+
+<pre><code class="language-text">
+Promise.try就是模拟try代码块，就像promise.catch模拟的是catch代码块.
+
+</code></pre>
 
 
     
@@ -630,16 +652,16 @@ asyncFunc()<br/>
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15137645005542.html" 
-          title="Previous Post: ES6 笔记（Array）">&laquo; ES6 笔记（Array）</a>
+          <a href="15151216159291.html" 
+          title="Previous Post: ">&laquo; </a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15139059079620.html" 
-          title="Next Post: 学习资源网址">学习资源网址 &raquo;</a>
+          <a  href="15137645005542.html" 
+          title="Next Post: ES6 笔记（Array）">ES6 笔记（Array） &raquo;</a>
       
       </p>
         </div>
@@ -677,7 +699,7 @@ asyncFunc()<br/>
 
 
 
-
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/KaelLVLinda" title="Twitter">Twitter</a>
 <a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
 <a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
   <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
@@ -708,6 +730,8 @@ asyncFunc()<br/>
             <a href="vue.html"><strong>Vue</strong></a>
         
             <a href="shell.html"><strong>shell</strong></a>
+        
+            <a href="%E7%BD%91%E7%BB%9C.html"><strong>网络</strong></a>
          
         </p>
 
@@ -724,31 +748,31 @@ asyncFunc()<br/>
 	      
 		      
 			      <li class="post">
-			        <a href="15261167596297.html">OC 多线程之 GCD知识从基础到进阶 （1）</a>
+			        <a href="15523077857608.html">OC中枚举写法  以及 字符串枚举探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15257437237715.html">OC中的各种遍历</a>
+			        <a href="15522686353535.html">iOS 动画全解 (1)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15253400374602.html">多线程 之 NSThread</a>
+			        <a href="15501356584731.html">UITableView顶部空白的几种解决办法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15200726964422.html">iOS Block 知识点拾遗</a>
+			        <a href="15488351784332.html">Objective-C中的字符串类型枚举 探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15235286649865.html">音视频学习笔记 1</a>
+			        <a href="15409691048860.html">【Swift笔记】引用计数</a>
 			      </li>
 		     
 		  
@@ -823,7 +847,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 

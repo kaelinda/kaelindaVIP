@@ -122,6 +122,8 @@
             <li><a href="vue.html">Vue</a></li>
         
             <li><a href="shell.html">shell</a></li>
+        
+            <li><a href="%E7%BD%91%E7%BB%9C.html">网络</a></li>
          
 
       </ul>
@@ -175,14 +177,13 @@
 <li>OC是动态语言，使用<code>消息结构</code>(messaging structure),而非<code>函数调用</code>(function calling)。OC由消息语言的鼻祖smalltalk演化而来。</li>
 <li>区别：消息结构的语言，其运行时执行的代码由运行环境决定；函数调用的语言，则由编译器决定。</li>
 <li>OC中对象所占内存总是分配在<code>堆空间</code>(heap space)而不会在<code>栈空间</code>(stack)上</li>
-<li><p>OC中不带*的变量，有可能会使用<code>栈空间</code>，比如CGRect 结构体<br/>
-~~ <code><br/>
-~~ struct CGRect{<br/>
-~~     CGPoint point;<br/>
-~~     CGSize size;<br/>
-~~ };<br/>
-~~</code><br/>
-因为创建对象需要额外开销（分配&amp;释放堆内存），从效率上，结构体性能更好。</p></li>
+<li><p>OC中不带*的变量，有可能会使用<code>栈空间</code>，比如CGRect 结构体</p>
+<pre><code class="language-text">struct CGRect{
+    CGPoint point;<br/>
+    CGSize size;<br/>
+};
+</code></pre>
+<p>因为创建对象需要额外开销（分配&amp;释放堆内存），从效率上，结构体性能更好。</p></li>
 <li><p>要点</p></li>
 <li><p>Objective-c为C语言天减了面向对象特性，是其超集。Objective-C是使用动态绑定的消息结构，也就是说，在运行时才会检查对象类型。接收这一消息后，究竟该执行何种代码实现，有运行期环境决定而非编译器。</p></li>
 <li><p>理解C语言的核心概念有助于写好Objective-C程序，尤其是掌握内存模型与指针。</p></li>
@@ -203,19 +204,17 @@
 
 <h2 id="toc_3">第3条 多用字面量语法，少用与之等价的方法</h2>
 
-<p>~~ <code><br/>
-~~ //字面量语法<br/>
-~~ NSString *str1 = @&quot;Kael&quot;;<br/>
-~~ <br/>
-~~ //传统方式<br/>
-~~ NSString *str2 = [[NSString alloc] initWithFormat: @&quot;Kael&quot;];<br/>
-~~</code></p>
+<pre><code class="language-text"> //字面量语法
+ NSString *str1 = @&quot;Kael&quot;;
+ 
+ //传统方式
+ NSString *str2 = [[NSString alloc] initWithFormat: @&quot;Kael&quot;];
+</code></pre>
 
 <ol>
 <li>笔记：</li>
 <li>字面量语法（literal syntax）能极大的缩短代码长度，使其更易读。</li>
 <li><p>字面数值 传统方式：<code>NSNumber *someNumber = [NSNumber numberWithInt:1]</code></p>
-
 <ol>
 <li><code>NSNumber *intNumber = @1</code></li>
 <li><code>NSNumber *floatNumbser = @0.125f</code></li>
@@ -227,14 +226,12 @@
 
 <ul>
 <li>字面量数组 传统方式：<code>NSArray *animals = [NSArray arrayWithObjects:@&quot;cat&quot;,@&quot;dog&quot;,@&quot;mouse&quot;,nil];</code>
-
 <ul>
 <li><code>NSArray *animals = @[@&quot;cat&quot;,@&quot;dog&quot;,@&quot;mouse&quot;];</code></li>
 <li><code>NSString *dog = animals[1];</code></li>
 <li><code>replaceObjectAtIndex:index</code> -&gt; <code>mutableArray[1] = @&quot;dog&quot;;</code></li>
 </ul></li>
 <li><p>字面量字典 传统方式：<code>NSDictionary *personData = [NSDictionary dictionaryWithObjectsAndkeys:@&quot;kael&quot;,@&quot;name&quot;,@&quot;age&quot;,@&quot;18&quot;,nil];</code></p>
-
 <ul>
 <li><code>NSDictionary *personData = @{@&quot;name&quot;:@&quot;kael&quot;,@&quot;age&quot;:@&quot;18&quot;}</code></li>
 <li><code>NSString *name = personData[@&quot;name&quot;];</code></li>
@@ -244,7 +241,6 @@
 
 <ol>
 <li>要点：
-
 <ol>
 <li>字面量语法创建 字符串、数值、数组、字典 比常规方法更加简明扼要。</li>
 <li>应该通过取下标方式来取 字典、数组 中的值。</li>
@@ -256,14 +252,12 @@
 
 <ol>
 <li><p>笔记：</p>
-
 <ol>
 <li>宏定义等用于处理命令 是在编译器 编译期间 将定义的 字符替换，所以这样的缺点是 不能很好的从宏定义上读出常量的类型信息。</li>
 <li><code>static const NSTimeInterval kAnimationinDuration = 0.3;</code></li>
 <li><code>extern NSString *const EOCString;</code>比如 通知等需要有一个外部可见的变量作为 <strong>通知名</strong></li>
 </ol></li>
 <li><p>要点：</p>
-
 <ol>
 <li>不要用预处理指令定义常量。这样定义出来的常量不含类型信息，编译器编译期间，已经把这些值写死了，如果有人对常量改动，编译器也不会产生警告信息；</li>
 <li>在实现文件中(.m文件)使用<code>static const</code>来定义只在编译单元可见(只在.m文件中可见，不暴露给外部使用)的常量。因此常量不在全局符号表中，命名上不需要在名称上加前缀。</li>
@@ -275,7 +269,6 @@
 
 <ol>
 <li>笔记：
-
 <ol>
 <li><code>instancetype</code>仅仅用作Objective-C方法的返回类型</li>
 <li><code>instancetype</code>有类型检测，更安全
@@ -296,16 +289,14 @@
 
 <ol>
 <li><p>笔记：</p>
-
 <ol>
-<li>nil、Nil、NULL的区别：
-nil：指向oc中对象的空指针，针对对象。
-Nil：指向oc中类的空指针，针对类。
-NULL：指向其他类型的空指针，如一个c类型的内存指针，基本数据类型为空，基本类型。
+<li>nil、Nil、NULL的区别：<br/>
+nil：指向oc中对象的空指针，针对对象。<br/>
+Nil：指向oc中类的空指针，针对类。<br/>
+NULL：指向其他类型的空指针，如一个c类型的内存指针，基本数据类型为空，基本类型。<br/>
 NSNull：在集合对象中，表示空值的对象。</li>
 </ol></li>
 <li><p>要点：</p>
-
 <ol>
 <li>空指针（NULL）指的是没有存储任何内存地址的指针；野指针，是指向“垃圾内存”（不可用内存）的指针。</li>
 <li>利用野指针发消息是很危险的，会报错。也就是说，一个对象被回收了，就不要再去操作它，不要尝试给它发消息。</li>
@@ -313,26 +304,25 @@ NSNull：在集合对象中，表示空值的对象。</li>
 </ol></li>
 </ol>
 
-<h2 id="toc_8">清楚长两字符串和一般字符串的区别</h2>
+<h2 id="toc_8">清楚常量字符串和一般字符串的区别</h2>
 
-<p>~~ <code><br/>
-~~ NSString *string1 = @&quot;hello&quot;;<br/>
-~~ NSString *string2 = @&quot;hello&quot;<br/>
-~~ if (strng1 == string2){<br/>
-~~     NSLog(@&quot;They are same address&quot;);<br/>
-~~ };<br/>
-~~ <br/>
-~~ NSString *string3 = [NSString alloc];<br/>
-~~ nsstring *string4 = [string3 initWithString:string1];<br/>
-~~ if (string3!=string4){<br/>
-~~     NSLog(@&quot;string3 is not same to string4&quot;);<br/>
-~~ }<br/>
-~~ <br/>
-~~ if (string1 == string4){<br/>
-~~     NSLog(@&quot;string1 is same to string4&quot;);<br/>
-~~ }<br/>
-~~ <br/>
-~~</code></p>
+<pre><code class="language-text"> NSString *string1 = @&quot;hello&quot;;
+ NSString *string2 = @&quot;hello&quot;
+ if (strng1 == string2){
+     NSLog(@&quot;They are same address&quot;);
+ };
+ 
+ NSString *string3 = [NSString alloc];
+ nsstring *string4 = [string3 initWithString:string1];
+ if (string3!=string4){
+     NSLog(@&quot;string3 is not same to string4&quot;);
+ }
+ 
+ if (string1 == string4){
+     NSLog(@&quot;string1 is same to string4&quot;);
+ }
+ 
+</code></pre>
 
 <ul>
 <li>由于编译器的优化，相同内容的常量字符串的地址是完全相同的。</li>
@@ -350,7 +340,6 @@ NSNull：在集合对象中，表示空值的对象。</li>
 
 <ul>
 <li><p>NS_ENUM与NS_OPTIONS区别：</p>
-
 <ul>
 <li>NS_ENUM枚举项的值为NSInteger，NS_OPTIONS枚举项的值为NSUInteger；</li>
 <li>NS_ENUM定义通用枚举，NS_OPTIONS定义位移枚举</li>
@@ -373,19 +362,21 @@ NSNull：在集合对象中，表示空值的对象。</li>
 
 <ol>
 <li><p>笔记：</p>
-
 <ul>
 <li>属性(property) = 成员变量 + getter + setter</li>
 <li>创建属性后，编译器会自动生成setter、getter属性</li>
 </ul>
-
-<p>属性特质：<br/>
-&#39;&#39; 1. 原子性：nonatomic 线程不安全；atomic 原子性，通过线程锁定等保证其原子性；<br/>
-&#39;&#39; 2. 读/写权限：readwrite———可读可写（setter、getter）;readonly———只读。<br/>
-&#39;&#39; 3. 内存管理语义：assign（弱引用）、weak（弱引用）、strong(强引用)、copy(强引用)、unsafe_unretained(针对于对象的 类似于assign)<br/>
-&#39;&#39; 4. 方法名：<br/>
-&#39;&#39;   - <code>getter=&lt;name&gt;</code> --&gt; 指定“获取方法”的方法名  @property （nonatomic,getter=isOn）BOOL on;<br/>
-&#39;&#39;   - <code>seeter=&lt;name&gt;</code> --&gt; 指定设置方法的方法名 @property （nonatomic,getter=isOn,seeter=setBaseModelName）BOOL on;</p></li>
+<p>属性特质：</p>
+<ol>
+<li>原子性：nonatomic 线程不安全；atomic 原子性，通过线程锁定等保证其原子性；</li>
+<li>读/写权限：readwrite———可读可写（setter、getter）;readonly———只读。</li>
+<li>内存管理语义：assign（弱引用）、weak（弱引用）、strong(强引用)、copy(强引用)、unsafe_unretained(针对于对象的 类似于assign)</li>
+<li>方法名：
+<ul>
+<li><code>getter=&lt;name&gt;</code> --&gt; 指定“获取方法”的方法名  @property （nonatomic,getter=isOn）BOOL on;</li>
+<li><code>seeter=&lt;name&gt;</code> --&gt; 指定设置方法的方法名 @property （nonatomic,getter=isOn,seeter=setBaseModelName）BOOL on;</li>
+</ul></li>
+</ol></li>
 </ol>
 
 <h2 id="toc_12">第7条 在对象内部尽量直接访问实例变量</h2>
@@ -399,27 +390,33 @@ NSNull：在集合对象中，表示空值的对象。</li>
 
 <p>折中：设置变量时走setter方法；获取变量值时直接访问实例变量；</p>
 
-<p>注意：<br/>
-* 初始化方法(或者 dealloc)中设置属性值的时候，应该直接访问实例变量，因为子类可能会<code>覆写</code>该方法;<br/>
-* 惰性初始化来配置数据，这时候需要通过属性来读取数据。</p>
+<p>注意：</p>
+
+<ul>
+<li>初始化方法(或者 dealloc)中设置属性值的时候，应该直接访问实例变量，因为子类可能会<code>覆写</code>该方法;</li>
+<li>惰性初始化来配置数据，这时候需要通过属性来读取数据。</li>
+</ul>
 
 <h2 id="toc_13">第8条 理解“对象等同性”这一概念</h2>
 
 <ol>
-<li>笔记：
+<li>笔记：<br/>
 对象等同性比较：</li>
 <li><code>==</code>比较的是指针本身</li>
 <li><code>isEqual:</code>方法比较的是指针指向的内存地址</li>
 </ol>
 
-<p>NSobject协议中有两个判断等同性的关键方法：<br/>
-~~ <code><br/>
-~~ -(BOOL)isEqual:(id)object;<br/>
-~~ -(NSUInteger)hash;<br/>
-~~</code><br/>
-2. 要点：<br/>
-2. 相同的对象必须具有相同的哈希码；<br/>
-3. 拥有相同哈希码的对象不一定相同；</p>
+<p>NSobject协议中有两个判断等同性的关键方法：</p>
+
+<pre><code class="language-text"> -(BOOL)isEqual:(id)object;
+ -(NSUInteger)hash;
+</code></pre>
+
+<ol>
+<li>要点：</li>
+<li>相同的对象必须具有相同的哈希码；</li>
+<li>拥有相同哈希码的对象不一定相同；</li>
+</ol>
 
 <h2 id="toc_14">第9条 以“类族模式”隐藏实现细节</h2>
 
@@ -430,7 +427,6 @@ NSNull：在集合对象中，表示空值的对象。</li>
 <li>子类都应当继承自类族中的抽象基类。</li>
 <li>子类应该定义自己的数据存储方式。</li>
 <li><p>子类应当覆写超类文档中指明需要覆写的方法。</p>
-
 <p>2.要点:</p></li>
 <li><p>类族模式可以把实现细节隐藏在一套简单的公共接口后面。</p></li>
 <li><p>系统框架中经常使用类族。</p></li>
@@ -472,16 +468,16 @@ NSNull：在集合对象中，表示空值的对象。</li>
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15129168744096.html" 
-          title="Previous Post: 关于iOS沙盒文件的那些事儿">&laquo; 关于iOS沙盒文件的那些事儿</a>
+          <a href="15130871866705.html" 
+          title="Previous Post: 当虹云直播SDK植入引导">&laquo; 当虹云直播SDK植入引导</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15130871866705.html" 
-          title="Next Post: 当虹云直播SDK植入引导">当虹云直播SDK植入引导 &raquo;</a>
+          <a  href="15129168744096.html" 
+          title="Next Post: 关于iOS沙盒文件的那些事儿">关于iOS沙盒文件的那些事儿 &raquo;</a>
       
       </p>
         </div>
@@ -519,7 +515,7 @@ NSNull：在集合对象中，表示空值的对象。</li>
 
 
 
-
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/KaelLVLinda" title="Twitter">Twitter</a>
 <a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
 <a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
   <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
@@ -550,6 +546,8 @@ NSNull：在集合对象中，表示空值的对象。</li>
             <a href="vue.html"><strong>Vue</strong></a>
         
             <a href="shell.html"><strong>shell</strong></a>
+        
+            <a href="%E7%BD%91%E7%BB%9C.html"><strong>网络</strong></a>
          
         </p>
 
@@ -566,31 +564,31 @@ NSNull：在集合对象中，表示空值的对象。</li>
 	      
 		      
 			      <li class="post">
-			        <a href="15261167596297.html">OC 多线程之 GCD知识从基础到进阶 （1）</a>
+			        <a href="15523077857608.html">OC中枚举写法  以及 字符串枚举探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15257437237715.html">OC中的各种遍历</a>
+			        <a href="15522686353535.html">iOS 动画全解 (1)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15253400374602.html">多线程 之 NSThread</a>
+			        <a href="15501356584731.html">UITableView顶部空白的几种解决办法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15200726964422.html">iOS Block 知识点拾遗</a>
+			        <a href="15488351784332.html">Objective-C中的字符串类型枚举 探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15235286649865.html">音视频学习笔记 1</a>
+			        <a href="15409691048860.html">【Swift笔记】引用计数</a>
 			      </li>
 		     
 		  
@@ -665,7 +663,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 

@@ -122,6 +122,8 @@
             <li><a href="vue.html">Vue</a></li>
         
             <li><a href="shell.html">shell</a></li>
+        
+            <li><a href="%E7%BD%91%E7%BB%9C.html">网络</a></li>
          
 
       </ul>
@@ -178,7 +180,7 @@
 
 <h3 id="toc_2">强制解包</h3>
 
-<pre><code>if sexy != nil {
+<pre><code class="language-text">if sexy != nil {
     print(&quot;i am a \(String(describing: sexy))&quot;)
 }else{
     print(&quot;none&quot;)
@@ -189,7 +191,7 @@
 
 <h3 id="toc_3">官方推荐解包方式</h3>
 
-<pre><code>if let ksex = sexy {
+<pre><code class="language-text">if let ksex = sexy {
     print(&quot;i am a \(ksex)&quot;)
 }else{
     print(&quot;none&quot;)
@@ -198,13 +200,13 @@
 
 <h3 id="toc_4">隐式解包 定义时候后面跟着！就可以隐式解包</h3>
 
-<pre><code>var sexy2 : String!
+<pre><code class="language-text">var sexy2 : String!
 var sexy3 : String = sexy2 ?? &quot;boy&quot;//使用的时候不需要进行解包 并且可以通过 ?? 给变量赋一个默认值
 </code></pre>
 
 <h3 id="toc_5">使用Optional的变量 首先要解包</h3>
 
-<pre><code>if...else
+<pre><code class="language-text">if...else
 guard ... else{}
 </code></pre>
 
@@ -217,16 +219,16 @@ guard ... else{}
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15115315701641.html" 
-          title="Previous Post: React Native 集成 Redux">&laquo; React Native 集成 Redux</a>
+          <a href="15137621729153.html" 
+          title="Previous Post: ES6笔记（解构赋值）">&laquo; ES6笔记（解构赋值）</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="14948260667614.html" 
-          title="Next Post: SectionListView">SectionListView &raquo;</a>
+          <a  href="15115315701641.html" 
+          title="Next Post: React Native 集成 Redux">React Native 集成 Redux &raquo;</a>
       
       </p>
         </div>
@@ -264,7 +266,7 @@ guard ... else{}
 
 
 
-
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/KaelLVLinda" title="Twitter">Twitter</a>
 <a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
 <a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
   <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
@@ -295,6 +297,8 @@ guard ... else{}
             <a href="vue.html"><strong>Vue</strong></a>
         
             <a href="shell.html"><strong>shell</strong></a>
+        
+            <a href="%E7%BD%91%E7%BB%9C.html"><strong>网络</strong></a>
          
         </p>
 
@@ -311,31 +315,31 @@ guard ... else{}
 	      
 		      
 			      <li class="post">
-			        <a href="15261167596297.html">OC 多线程之 GCD知识从基础到进阶 （1）</a>
+			        <a href="15523077857608.html">OC中枚举写法  以及 字符串枚举探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15257437237715.html">OC中的各种遍历</a>
+			        <a href="15522686353535.html">iOS 动画全解 (1)</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15253400374602.html">多线程 之 NSThread</a>
+			        <a href="15501356584731.html">UITableView顶部空白的几种解决办法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15200726964422.html">iOS Block 知识点拾遗</a>
+			        <a href="15488351784332.html">Objective-C中的字符串类型枚举 探索</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15235286649865.html">音视频学习笔记 1</a>
+			        <a href="15409691048860.html">【Swift笔记】引用计数</a>
 			      </li>
 		     
 		  
@@ -410,7 +414,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 

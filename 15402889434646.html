@@ -1,0 +1,789 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  Swift中类（Class）和 结构体（Struct） - kaelinda
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="kaelinda" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:kaelinda.top ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">最近更新</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">归档目录</a></li>
+        
+        <li id="ios.css"><a target="_self" href="ios.html">iOS</a></li>
+        
+        <li id="swift.css"><a target="_self" href="swift.html">Swift</a></li>
+        
+        <li id="reactnative.css"><a target="_self" href="reactnative.html">RN</a></li>
+        
+        <li id="js.css"><a target="_self" href="js.html">JS</a></li>
+        
+        <li id="shell.css"><a target="_self" href="shell.html">shell</a></li>
+        
+        <li id="coding.css"><a target="_self" href="coding.html">编程</a></li>
+        
+        <li id="live.css"><a target="_self" href="live.html">随笔</a></li>
+        
+        <li id="app.css"><a target="_blank" href="app.html">APP推荐</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; kaelinda</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="_self" href="index.html">最近更新</a></li>
+        
+        <li><a target="_self" href="archives.html">归档目录</a></li>
+        
+        <li><a target="_self" href="ios.html">iOS</a></li>
+        
+        <li><a target="_self" href="swift.html">Swift</a></li>
+        
+        <li><a target="_self" href="reactnative.html">RN</a></li>
+        
+        <li><a target="_self" href="js.html">JS</a></li>
+        
+        <li><a target="_self" href="shell.html">shell</a></li>
+        
+        <li><a target="_self" href="coding.html">编程</a></li>
+        
+        <li><a target="_self" href="live.html">随笔</a></li>
+        
+        <li><a target="_blank" href="app.html">APP推荐</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="reactnative.html">React-Native</a></li>
+        
+            <li><a href="ios.html">iOS</a></li>
+        
+            <li><a href="app.html">MacAPP</a></li>
+        
+            <li><a href="swift.html">Swift</a></li>
+        
+            <li><a href="js.html">JavaScript</a></li>
+        
+            <li><a href="vue.html">Vue</a></li>
+        
+            <li><a href="shell.html">shell</a></li>
+        
+            <li><a href="%E7%BD%91%E7%BB%9C.html">网络</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>Swift中类（Class）和 结构体（Struct）</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2018/10/23</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='swift.html'>Swift</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <h2 id="toc_0">分析</h2>
+
+<p>共同点：</p>
+
+<ul>
+<li>定义属性用于存储值</li>
+<li>定义方法用于提供功能</li>
+<li>定义下标操作使得可以通过下标语法来访问实例所包含的值</li>
+<li>定义构造器用于生成初始化值</li>
+<li>通过扩展以增加默认实现的功能</li>
+<li>实现协议以提供某种标准功能</li>
+</ul>
+
+<p>与结构体相比，类还有如下的附加功能：</p>
+
+<ul>
+<li>继承允许一个类继承另一个类的特征</li>
+<li>类型转换允许在运行时检查和解释一个类实例的类型</li>
+<li>析构器允许一个类实例释放任何其所被分配的资源</li>
+<li>引用计数允许对一个类的多次引用（对象引用）结构体总是通过被复制的方式在代码中传递，不使用引用计数。</li>
+</ul>
+
+<h2 id="toc_1">逐一对比</h2>
+
+<h3 id="toc_2">定义</h3>
+
+<pre><code class="language-text">//: ### 定义
+class StudentClass{ }
+struct StudebtStruct{ }
+</code></pre>
+
+<h3 id="toc_3">定义存储属性</h3>
+
+<pre><code class="language-text">//: &gt; 类中定义的存储属性，如果不是可选类型，需要进行初始化；结构体则默认带有初始化方法
+class StudentC01{
+    var name: String!
+}
+struct StudebtS01{
+    var name: String!
+}
+</code></pre>
+
+<h3 id="toc_4">定义属性函数function</h3>
+
+<p>关于@objc 请参考 <a href="https://blog.csdn.net/qq_35612929/article/details/79563110">Swift 4.0学习之：@objc的使用</a></p>
+
+<pre><code class="language-text">//: ### 定义属性函数function
+//: &gt; 类中可以使用 static 和 class两种修饰符；但是结构体中只能使用static修饰
+class StudentC02{
+    static var des:String = &quot;学生的类&quot;
+    var name:String!
+    @objc class func objc_describe()-&gt;String{
+        return des
+    }
+    class func class_describe()-&gt;String{
+        return des
+    }
+    static func static_describe()-&gt;String{
+        return des
+    }
+}
+struct StudentS02{
+    static var des:String = &quot;学生的结构体&quot;
+    var name:String!
+    static func describe()-&gt;String{
+        return &quot;这是一个定义学生的类&quot;
+    }
+}
+</code></pre>
+
+<h3 id="toc_5">扩展下标</h3>
+
+<pre><code class="language-text">//: ### 扩展下标
+//: &gt; *subscript*
+class StudentC003{
+    var names:[String] = [&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;]
+    subscript (index:Int)-&gt;String?{
+        get{
+            if names.count &lt;= index{
+                return nil
+            }
+            return names[index]
+        }
+    }
+}
+struct StudentS003{
+    var names:[String] = [&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;]
+    subscript (index:Int)-&gt;String?{
+        get{
+            if names.count &lt;= index{
+                return nil
+            }
+            return names[index]
+        }
+    }
+}
+let sc003 = StudentC003()
+sc003[1]// 2
+let ss003 = StudentS003()
+ss003[1]// 2
+</code></pre>
+
+<h3 id="toc_6">初始化</h3>
+
+<pre><code class="language-text">//: ### 初始化
+//: &gt; 结构体自带初始化方法（可以不写初始化方法）;
+//: &gt; 类必须手写init方法，否则报错；
+class StudentC004{
+    var name:String
+    init(name:String) {
+        self.name = name
+    }
+}
+struct StudentS004 {
+    var name:String
+    
+}
+let studentc004 = StudentC004(name: &quot;行走在北方&quot;)
+let students004 = StudentS004(name: &quot;行走在北方&quot;)
+</code></pre>
+
+<h3 id="toc_7">扩展功能 Extention</h3>
+
+<pre><code class="language-text">//: ### 扩展功能 Extention
+extension StudentC004{
+    func discribe() -&gt; String {
+        return &quot;student class:&quot;+self.name
+    }
+}
+extension StudentS004{
+    func discribe() -&gt; String {
+        return &quot;student struct:&quot; + self.name
+    }
+}
+</code></pre>
+
+<h3 id="toc_8">实现协议 protocol</h3>
+
+<pre><code class="language-text">//: ### 实现协议 protocol
+//: * 定义协议
+protocol Capacity {
+    func draw()//协议方法
+}
+//: * 实现协议方法
+class StudentC05:Capacity{
+    internal func draw() {
+        
+    }
+    var name:String
+    init(name:String) {
+        self.name = name
+    }
+}
+struct StudentS05:Capacity{
+    internal func draw() {
+        
+    }
+    var name:String
+}
+</code></pre>
+
+<h3 id="toc_9">mutating 关键字的使用</h3>
+
+<p>科普下:</p>
+
+<ul>
+<li><p>枚举和结构体都是值类型，Swift默认值类型的对象方法不能修改属性值,但是如果一定要修改 那就在函数前面添加mutating关键字</p></li>
+<li><p>计算属性setter方法中不需要更改属性值的时候，不需要添加mutating关键字;</p></li>
+<li><p>计算属性setter方法中更改属性值的时候，必须要添加mutating关键字</p></li>
+</ul>
+
+<pre><code class="language-text">protocol Action{
+    var myY:Int{
+        mutating get
+    }
+}
+struct Point {
+    var x:Int
+    var y:Int
+    mutating func modifyX(x: Int){
+        self.x = x
+    }
+    var myY:Int{
+        mutating get {//getter方法前面添加mutating关键字
+            self.y = self.y*2
+            return y
+        }
+    }
+}
+class ActionClass {
+    var name:String?
+    init(name:String) {
+        self.name = name
+    }
+    var myName:String? {
+        get {// class 是对象类型 可以直接修改
+            self.name = &quot;666 -&gt; :&quot; + self.name!
+            return self.name
+        }
+    }
+    
+}
+let actionclass = ActionClass(name: &quot;NB&quot;)
+</code></pre>
+
+<h2 id="toc_10">判断两个对象地址是否相同（验证 引用类型 和 值类型）</h2>
+
+<pre><code class="language-text">//: ### 判断两个对象地址是否相同
+//: &gt; 类是引用类型；结构体是值类型；结构体不能通过=== 、！==类判断比较
+//: &gt;
+class StudentC07{
+    var name: String
+    init(name:String) {
+        self.name = name
+    }
+}
+
+let studentc071 = StudentC07(name: &quot;原始名字&quot;)
+var studentc072 = studentc071
+studentc071.name = &quot;新名字&quot;
+print(&quot;student071:\(studentc071.name)\nstudent072:\(studentc072.name)&quot;)
+if studentc071 === studentc072 {
+    print(&quot;类是引用类型，最终指向同一块内存&quot;)
+}
+struct StudentS07{
+    var name: String
+    init(name:String) {
+        self.name = name
+    }
+}
+let students071 = StudentS07(name: &quot;结构体：原始名字&quot;)
+var students072 = students071
+students072.name = &quot;结构体：新名字&quot;
+print(&quot;students071:\(students071.name)\nstudents072\(students072.name)&quot;)
+</code></pre>
+
+<h3 id="toc_11">deinit 释放资源</h3>
+
+<p><a href="https://www.jianshu.com/p/9e725362eeb1">Swift中的deinit方法</a></p>
+
+<pre><code class="language-text">//: ### deinit 释放资源
+//: &gt; 类有deinit方法；结构体中没有deinit方法。
+class StudentC08{
+    var name: String
+    init(name:String) {
+        self.name = name
+    }
+    deinit {
+        //这里释放资源
+    }
+}
+</code></pre>
+
+<h3 id="toc_12">lazy：延迟属性（懒加载）</h3>
+
+<p>class 有延迟属性；struct没有延迟属性</p>
+
+<pre><code class="language-text">//: &gt; 延迟存储属性是指当第一次被调用的时候才会计算其初始值的属性。在属性声明前使用 lazy 来标示一个延迟存储属性
+class Importor{
+    var fileName = &quot;data.txt&quot;
+}
+class DataManager{
+    lazy var importor = Importor()
+    var Data = [String]()
+}
+</code></pre>
+
+<h3 id="toc_13">继承</h3>
+
+<pre><code class="language-text">//: ### 继承
+//: &gt; 类能继承；结构体不能继承。
+class Person{
+    var name:String
+    init(name:String) {
+        self.name = name
+    }
+}
+class Student06: Person {
+    var score : Float
+    init(name: String, score: Float){
+        self.score = score//先给父类中没有的属性赋值，再调用父类init方法
+        super.init(name: name)
+    }
+}   
+</code></pre>
+
+<ul>
+<li><p>继承之后 可重写父类方法/属性</p>
+<ol>
+<li><p>重写计算属性：只能增加功能不能减少功能——&gt;父类中有setter getter,那么子类重写计算属性 setter getter都必须要有。父类中只有setter  子类中可以在重写setter的同时增加getter</p></li>
+<li><p>final 关键字可以让属性不被重写 或者 继承</p></li>
+</ol></li>
+</ul>
+
+<pre><code class="language-text">//: * 重写计算属性
+//: * 重写对象方法
+//: * 重写类方法
+//: * 重写初始化方法
+//: * 重写存储属性
+
+//: _父类_
+class Person{
+    //存储属性
+    var name:String = &quot;person&quot;
+    //计算属性
+    var rename:String{
+        return self.name
+    }
+    //初始化方法
+    init(_ name:String) {
+        self.name = name
+    }
+    //对象方法
+    func describe() -&gt; String {
+        return self.name
+    }
+    //类方法
+    class func describeClass()-&gt;String{
+        return &quot;这是一个描述人的类&quot;
+    }
+}
+//: _子类_
+class Man: Person {
+    //重写存储属性
+    override var name: String{
+        didSet{
+            print(&quot;man 对象中 name 的原始值：\(self.name)&quot;)
+            self.name = &quot;man:&quot;+self.name
+        }
+    }
+    var score : Double
+    //重写setter getter
+    override var rename: String{
+        set{
+            self.name = &quot;man:&quot;+newValue
+        }
+        get{
+            return &quot;_&quot;+self.name
+        }
+    }
+    //重写初始化方法
+    override init(_ name: String) {
+        self.score = 0.0
+        super.init(name)
+    }
+    //重写对象方法
+    override func describe() -&gt; String {
+        return self.name + &quot;_score:\(self.score)&quot;
+    }
+    // 重写类方法
+    override class func describeClass() -&gt; String {
+        return &quot;我是描述男人的类&quot;
+    }
+}
+var man00 = Man(&quot;kael&quot;)
+print(man00.name)
+</code></pre>
+
+<h3 id="toc_14">class 的类型检测</h3>
+
+<ol>
+<li>首先在自己的初始化方法中先给自己的属性初始化</li>
+<li>然后调用父类的初始化</li>
+<li>最后修改父类的属性</li>
+</ol>
+
+<pre><code class="language-text">//: ### 类型检测  is  as?
+var person01 = Person(&quot;person01&quot;)
+var man01 = Man(&quot;man01&quot;)
+
+if person01 is Person {
+    print(&quot;person01：我是Person&quot;)
+}else{
+    print(&quot;person01：我不是Person&quot;)
+}
+if person01 is Man {
+    print(&quot;person01：我是Man&quot;)
+}else{
+    print(&quot;person01：我不是Man&quot;)
+}
+if man01 is Person {
+    print(&quot;man01：我是Person&quot;)
+}else{
+    print(&quot;man01：我不是Person&quot;)
+}
+if man01 is Man {
+    print(&quot;man01：我是Man&quot;)
+}else{
+    print(&quot;man01：我不是Man&quot;)
+}
+
+if let p = person01 as? Person {
+    print(&quot;person01 是 Person&quot;)
+}
+if let p = person01 as? Man{
+    print(&quot;person01 是Man&quot;)
+}else{
+    print(&quot;person01 不是Man&quot;)
+}
+if let p = man01 as? Person {
+    print(&quot;man01 是 Person&quot;)
+}
+if let p = man01 as? Man{
+    print(&quot;man01 是Man&quot;)
+}else{
+    print(&quot;man01 不是Man&quot;)
+}
+
+
+</code></pre>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15409691048860.html" 
+          title="Previous Post: 【Swift笔记】引用计数">&laquo; 【Swift笔记】引用计数</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15341646765442.html" 
+          title="Next Post: 网络是怎样连接的">网络是怎样连接的 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fmpk9088gsj30sg0sgn33.jpg" /></div>
+            
+                <h1>kaelinda</h1>
+                <div class="site-des">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+                <div class="social">
+
+
+
+
+
+
+
+
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/KaelLVLinda" title="Twitter">Twitter</a>
+<a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="reactnative.html"><strong>React-Native</strong></a>
+        
+            <a href="ios.html"><strong>iOS</strong></a>
+        
+            <a href="app.html"><strong>MacAPP</strong></a>
+        
+            <a href="swift.html"><strong>Swift</strong></a>
+        
+            <a href="js.html"><strong>JavaScript</strong></a>
+        
+            <a href="vue.html"><strong>Vue</strong></a>
+        
+            <a href="shell.html"><strong>shell</strong></a>
+        
+            <a href="%E7%BD%91%E7%BB%9C.html"><strong>网络</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15523077857608.html">OC中枚举写法  以及 字符串枚举探索</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15522686353535.html">iOS 动画全解 (1)</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15501356584731.html">UITableView顶部空白的几种解决办法</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15488351784332.html">Objective-C中的字符串类型枚举 探索</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15409691048860.html">【Swift笔记】引用计数</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+
+  </body>
+</html>
