@@ -146,49 +146,6 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="15261167596297.html">
-                
-                  <h1>OC 多线程之 GCD知识从基础到进阶 （1）</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<h2 id="toc_0">概念认知</h2>
-
-<p>基本概念：</p>
-
-<ul>
-<li><p>GCD 全称 (Grand Center Dispatch),翻译成通俗中文“牛B的中心调度机制”</p></li>
-<li><p>线程：执行任务调度的最小单位</p></li>
-<li><p>任务：就是一段代码，GCD中就是block中的内容。执行任务有两种方式：同步执行（sync）和异步执行（async）。两者的主要区别是：是否等待队列的任务执行结束，以及是否具备开启新线程的能力</p></li>
-<li><p>队列：用来存放任务的线性结构，采用 FIFO（先进先出）的原则。</p></li>
-</ul>
-
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                   <a href="15261167596297.html">Read more</a>&nbsp;&nbsp; 
-                    <span class="date">2018/5/12</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
                 <a class="clearlink" href="15257437237715.html">
                 
                   <h1>OC中的各种遍历</h1>
@@ -657,6 +614,91 @@ for (int i=0; i&lt;5; i++) {
                 </div>
               </div><!-- article -->
         
+			<div class="article">
+                <a class="clearlink" href="15193931556096.html">
+                
+                  <h1>iOS APP性能优化方向分析</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">网络性能</h2>
+
+<ul>
+<li>减少不必要的网络请求</li>
+<li>server端数据查询算法优化</li>
+<li>DNS解析</li>
+</ul>
+
+<h2 id="toc_1">内存性能</h2>
+
+<ul>
+<li>各种循环引用 导致内存泄漏</li>
+<li>Core Animation 对象手动释放</li>
+<li>UIWebView 内存泄漏</li>
+</ul>
+
+<h2 id="toc_2">主线程阻塞</h2>
+
+<ul>
+<li>网络同步请求</li>
+<li>I/O操作</li>
+<li>大量运算</li>
+<li>解压、压缩<br/>
+...</li>
+</ul>
+
+<h2 id="toc_3">离屏渲染</h2>
+
+<p>离屏渲染：GPU在当前缓存区之外另外的去开辟空间进行渲染，同样的一帧图片 会被渲染两次甚至多次</p>
+
+<p>：uiview.layer.cornerRadius 系统方法切圆角---&gt;&gt;解决方案：Runtime + 画图</p>
+
+<h2 id="toc_4">图片处理</h2>
+
+<ul>
+<li>imageWithName：加载到缓存中可重复使用</li>
+<li>initWithContentsOfFile: 加载一次不会存到缓存中</li>
+</ul>
+
+<h2 id="toc_5">其他</h2>
+
+<ul>
+<li>加速启动</li>
+<li>避免日期格式的转换</li>
+</ul>
+
+<h3 id="toc_6">优化瀑布流中 网络图片 加载导致UI卡顿问题</h3>
+
+<blockquote>
+<p>1、异步下载图片<br/>
+2、异步加载图片成二进制 NSData  （<strong>这一步是关键</strong>） <br/>
+3、UIImageView 加载二进制形式的NSData</p>
+</blockquote>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2018/2/23</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
               
 
 
@@ -760,13 +802,13 @@ for (int i=0; i&lt;5; i++) {
 		  
 		      
 			      <li class="post">
-			        <a href="15488351784332.html">Objective-C中的字符串类型枚举 探索</a>
+			        <a href="15409691048860.html">【Swift笔记】引用计数</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15409691048860.html">【Swift笔记】引用计数</a>
+			        <a href="15402889434646.html">Swift中类（Class）和 结构体（Struct）</a>
 			      </li>
 		     
 		  

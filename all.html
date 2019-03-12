@@ -183,88 +183,6 @@
 
 </code></pre>
 
-<h2 id="toc_4">字符串类型枚举实现方式探索</h2>
-
-<h3 id="toc_5">基于普通枚举，定义C方法实现</h3>
-
-<pre><code class="language-text">// 先定义一个常见的枚举
-typedef NS_ENUM(NSUInteger, KLType) {
-    KLTypeRed = 1,
-    KLTypeGreen = 2,
-    KLTypeOrange = 3,
-};
-// 定义一个C方法，C方法就是通过枚举值匹配字符串
-NSString *KLTypeString(KLType status) {
-    switch (status) {
-        case KLTypeRed:
-            return @&quot;红色&quot;;
-        case KLTypeGreen:
-            return @&quot;绿色&quot;;
-        case KLTypeOrange:
-            return @&quot;橘色&quot;;
-        default:
-            return @&quot;&quot;;
-    }
-}
-</code></pre>
-
-<h3 id="toc_6">基于普通枚举，定义C数组，设置 枚举值为 index</h3>
-
-<pre><code class="language-text">// 先定义一个常见的枚举
-typedef NS_ENUM(NSUInteger, KLType) {
-    KLTypeRed = 1,
-    KLTypeGreen = 2,
-    KLTypeOrange = 3,
-};
-// 这个是 Map NSString * 类型的数组
-NSString *KLTypeStringMap[] = {
-    [KLTypeRed] = @&quot;红色&quot;,
-    [KLTypeGreen] = @&quot;绿色&quot;,
-    [KLTypeOrange] = @&quot;橘色&quot;
-};
-
-
-// 使用：
-KLTypeStringMap[KLTypeRed];// 枚举值
-</code></pre>
-
-<h3 id="toc_7">日常做法 宏定义</h3>
-
-<pre><code class="language-text">#define static NSString * const KLTypeStringRed = @&quot;红色&quot;;
-#define static NSString * const KLTypeStringGreen = @&quot;绿色&quot;;
-#define static NSString * const KLTypeStringOrange = @&quot;橘色&quot;;
-</code></pre>
-
-<h3 id="toc_8">定义一种新的数据类型</h3>
-
-<pre><code class="language-text">// 定义一个新的类型 是 NSSting * 类型 类型名字叫 KLTypeStr
-typedef NSString *KLTypeStr NS_STRING_ENUM;
-
-static KLTypeStr const KLTypeStringRed = @&quot;红色&quot;;
-static KLTypeStr const KLTypeStringGreen = @&quot;绿色&quot;;
-static KLTypeStr const KLTypeStringOrange = @&quot;橘色&quot;;
-</code></pre>
-
-<h3 id="toc_9">Apple官方的做法</h3>
-
-<pre><code class="language-text">.h 文件中 -------------
-typedef NSString *KLTypeStr NS_STRING_ENUM;
-
-FOUNDATION_EXPORT KLTypeStr const KLTypeStringRed;
-FOUNDATION_EXPORT KLTypeStr const KLTypeStringGreen;
-FOUNDATION_EXPORT KLTypeStr const KLTypeStringOrange;
-
-.m 文件中 --------------
-NSString * const KLTypeStringRed = @&quot;红色&quot;;
-NSString * const KLTypeStringGreen = @&quot;绿色&quot;;
-NSString * const KLTypeStringOrange = @&quot;橘色&quot;; 
-
-</code></pre>
-
-<blockquote>
-<p>比较的时候 <code>StringEnum1 == StringEnum2</code> 直接比较的是内存地址，效率会更高。<br/>
-相比会产生过多二进制文件的宏定义方式,假如宏定义比较多,建议用FOUNDATION_EXPORT。</p>
-</blockquote>
 
                         
                       </div>
@@ -272,7 +190,7 @@ NSString * const KLTypeStringOrange = @&quot;橘色&quot;;
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="15523077857608.html">Read more</a>&nbsp;&nbsp; 
                     <span class="date">2019/3/11</span>
                     <span>posted in&nbsp;</span> 
           				  
@@ -309,25 +227,6 @@ NSString * const KLTypeStringOrange = @&quot;橘色&quot;;
 <code>Core Animation</code> 其实是一个令人误解的命名。你可能认为它只是用来做动画的，但实际上它是从一个叫做<code>Layer Kit</code>这么一个不怎么和动画有关的名字演变而来，所以做动画这只是<code>Core Animation</code>特性的冰山一角。 <code>Core Animation</code>是一个复合引擎，它的职责就是尽可能快地组合屏幕上不同的可视内容，这个内容是被分解成独立的图层，存储在一个叫做图层树的体系之中。于是这个树形成了<code>UIKit</code>以及在iOS应用程序当中你所能在屏幕上 看见的一切的基础。</p></li>
 </ul>
 
-<h2 id="toc_1">CALayer 和 UIView</h2>
-
-<h3 id="toc_2">CALayer</h3>
-
-<p><code>CALayer</code> 类在概念上和 <code>UIView</code> 类似，同样也是一些被层级关系树管理的矩形块，同样也可以包含一些内 容(像图片，文本或者背景色)，管理子图层的位置。它们有一些方法和属性用来做动画和变换。和 最 大的不同是<code>CALayer</code>不处理用户的交互。</p>
-
-<h3 id="toc_3">平行的层级关系</h3>
-
-<p>每一个<code>UIView</code>都有一个<code>CALayer</code>实例的图层属性，也就是所谓的<code>backing layer</code>，视图的职责就是创建并管理这个图层，以确保当子视图在层级关系中添加或者被移除的时候，他们关联的图层也同样对应在层级关系树当中有相同的操作。(可以理解为 UIViewController  和 VC.view的关系，只不过VC是UIView的管理调度者,UIView 是 CALayer的管理调度者)</p>
-
-<h3 id="toc_4">CALayer的能力</h3>
-
-<ul>
-<li>阴影，圆角，带颜色的边框 • 3D变换</li>
-<li>非矩形范围</li>
-<li>透明遮罩</li>
-<li><p>多级非线性动画</p></li>
-<li><p>contents属性</p></li>
-</ul>
 
                         
                       </div>
@@ -335,7 +234,7 @@ NSString * const KLTypeStringOrange = @&quot;橘色&quot;;
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="15522686353535.html">Read more</a>&nbsp;&nbsp; 
                     <span class="date">2019/3/11</span>
                     <span>posted in&nbsp;</span> 
           				  
@@ -361,73 +260,25 @@ NSString * const KLTypeStringOrange = @&quot;橘色&quot;;
                       <div class="a-content-text">
                         
                         	<ul>
-<li><p>一、iOS7在Controller中增加了<code>automaticallyAdjustsScrollViewInsets</code>这个属性，当设置为YES时（默认YES），如果视图里面存在唯一一个UIScrollView或其子类View，那么它会自动设置相应的内边距，这样可以让scroll占据整个视图，又不会让导航栏遮盖。但是这个属性在iOS11之后被遗弃了，新增了一个<code>contentInsetAdjustmentBehavior</code>属性：</p>
-<pre><code class="language-text">if (@available(iOS 11.0, *)) {        
+<li>一、iOS7在Controller中增加了<code>automaticallyAdjustsScrollViewInsets</code>这个属性，当设置为YES时（默认YES），如果视图里面存在唯一一个UIScrollView或其子类View，那么它会自动设置相应的内边距，这样可以让scroll占据整个视图，又不会让导航栏遮盖。但是这个属性在iOS11之后被遗弃了，新增了一个<code>contentInsetAdjustmentBehavior</code>属性：
+<code>
+if (@available(iOS 11.0, *)) {        <br/>
     self.tableview.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;    <br/>
 }else {<br/>
     self.automaticallyAdjustsScrollViewInsets = NO;<br/>
 }
-</code></pre></li>
-<li><p>二、UINavigationBar的透明度设置<code>self.navigationController.navigationBar.translucent = NO;</code><br/>
-当这个属性设为NO时，tableview会在上方留出64.f的高度给navigationbar</p></li>
-<li><p>三、tableView  </p>
-<p>section的Header/Footer高度设置如果这个Header/Footer的height设置为0时，系统会认为你没有设置，从而给一个默认40的高度；若不需要显示这两个view，将他们的height设置一个无限小的数字即可，常用：CGFLOAT_MIN。</p>
-<pre><code class="language-text">- (CGFloat)tableView:(UITableView*)tableView heightForHeaderInSection:(NSInteger)section{    
-    return CGFLOAT_MIN;<br/>
-}
-</code></pre></li>
-<li><p>四、tableHeaderView、tableFooterView高度设置以下操作会导致tableView顶部空白：</p>
-<pre><code class="language-text">self.tableView.tableHeaderView = nil; 
-self.tableView.tableHeaderView = [[UIView alloc] init]; <br/>
-self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectZero]; 
-</code></pre>
-<p>同理，tableFooterView也是如此。footer和header只要设置了任意一个都会使两个地方都出现空白。应这样设置：</p>
-<pre><code class="language-text">self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, CGFLOAT_MIN)]; 
-self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, CGFLOAT_MIN)];
-</code></pre></li>
+</code></li>
 </ul>
 
+
                         
                       </div>
                   </div>
                 </a>
                 <div class="read-more clearfix">
                   <div class="more-left left">
-                  
+                   <a href="15501356584731.html">Read more</a>&nbsp;&nbsp; 
                     <span class="date">2019/2/14</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15488351784332.html">
-                
-                  <h1>Objective-C中的字符串类型枚举 探索</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<p>实际开发中的iOSer会发现，有些情况我们需要字符串类型的枚举值。但是OC偏偏没有提供这种类型。Swift语言或者Java这些语言都有，于是我就有些不甘心了。经过一番探索，尝试了以下几种情况。</p>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2019/1/30</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='ios.html'>iOS</a></span>
@@ -1429,6 +1280,62 @@ echo &quot;菜鸟教程官网地址：$url&quot;
                 </div>
               </div><!-- article -->
         
+			<div class="article">
+                <a class="clearlink" href="15226603064743.html">
+                
+                  <h1>每天学习一个shell技能（6）</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">test</h2>
+
+<h3 id="toc_1">test文件</h3>
+
+<pre><code class="language-text">if test -e ./test.sh
+then
+    echo &#39;文件已存在!&#39;
+else
+    echo &#39;文件不存在!&#39;
+fi
+</code></pre>
+
+<ul>
+<li>-e fileName ： 如果文件存在则为真</li>
+<li>-r  fileName : 如果文件存在且可读则为真</li>
+<li>-w fileName : 如果文件存在且可写则为真</li>
+<li>-x fileName : 如果文件存在且可执行则为真</li>
+<li>-s fileName: 文件存在且至少有一个字符</li>
+<li>-d fileName : 文件存在且为目录</li>
+<li>-f fileName: 文件存在且为文件</li>
+<li>-c fileName:文件存在，且为字符型特殊文件</li>
+<li>-b fileName: 如果文件存在且为块特殊文件则为真</li>
+</ul>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15226603064743.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/4/2</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='shell.html'>shell</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
               
 
 
@@ -1532,13 +1439,13 @@ echo &quot;菜鸟教程官网地址：$url&quot;
 		  
 		      
 			      <li class="post">
-			        <a href="15488351784332.html">Objective-C中的字符串类型枚举 探索</a>
+			        <a href="15409691048860.html">【Swift笔记】引用计数</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15409691048860.html">【Swift笔记】引用计数</a>
+			        <a href="15402889434646.html">Swift中类（Class）和 结构体（Struct）</a>
 			      </li>
 		     
 		  
