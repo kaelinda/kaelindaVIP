@@ -1,203 +1,104 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html lang="zh-cn">
   <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
     <title>
+        
+      Rect-Native 之 Promise 深入浅出从入门到精通 - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="Kaelinda" />
     
-  Rect-Native 之 Promise 深入浅出从入门到精通 - kaelinda
-  
-  </title>
-  
-  
-  <link href="atom.xml" rel="alternate" title="kaelinda" type="application/atom+xml">
-    <link rel="stylesheet" href="asset/css/foundation.min.css" />
-    <link rel="stylesheet" href="asset/css/docs.css" />
-    <script src="asset/js/vendor/modernizr.js"></script>
-    <script src="asset/js/vendor/jquery.js"></script>
-  <script src="asset/highlightjs/highlight.pack.js"></script>
-  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script>hljs.initHighlightingOnLoad();</script>
-<script type="text/javascript">
-  function before_search(){
-    var searchVal = 'site:kaelinda.top ' + document.getElementById('search_input').value;
-    document.getElementById('search_q').value = searchVal;
-    return true;
-  }
-</script>
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/15139057022845.html" />
+      <meta property="og:title" content="Rect-Native 之 Promise 深入浅出从入门到精通" />
+      
+        <meta property="og:description" content="Rect-Native 中针对 Promise的理解和探索" />
+        <meta name="description" content="Rect-Native 中针对 Promise的理解和探索" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   </head>
-  <body class="antialiased hide-extras">
-    
-    <div class="marketing off-canvas-wrap" data-offcanvas>
-      <div class="inner-wrap">
-
-
-<nav class="top-bar docs-bar hide-for-small" data-topbar>
-
-
-  <section class="top-bar-section">
-  <div class="row">
-      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
-        <ul id="main-menu" class="left">
-        
-        <li id=""><a target="_self" href="index.html">最近更新</a></li>
-        
-        <li id=""><a target="_self" href="archives.html">归档目录</a></li>
-        
-        <li id="ios.css"><a target="_self" href="ios.html">iOS</a></li>
-        
-        <li id="swift.css"><a target="_self" href="swift.html">Swift</a></li>
-        
-        <li id="reactnative.css"><a target="_self" href="reactnative.html">RN</a></li>
-        
-        <li id="js.css"><a target="_self" href="js.html">JS</a></li>
-        
-        <li id="shell.css"><a target="_self" href="shell.html">shell</a></li>
-        
-        <li id="coding.css"><a target="_self" href="coding.html">编程</a></li>
-        
-        <li id="live.css"><a target="_self" href="live.html">随笔</a></li>
-        
-        <li id="app.css"><a target="_blank" href="app.html">APP推荐</a></li>
-        
-        </ul>
-
-        <ul class="right" id="search-wrap">
-          <li>
-<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
-    <input type="hidden" id="search_q" name="q" value="" />
-    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
-</form>
-</li>
-          </ul>
-      </div></div>
-  </div>
-  </section>
-
-</nav>
-
-        <nav class="tab-bar show-for-small">
-  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
-    <span> &nbsp; kaelinda</span>
-  </a>
-</nav>
-
-<aside class="left-off-canvas-menu">
-      <ul class="off-canvas-list">
-        
-        <li><a target="_self" href="index.html">最近更新</a></li>
-        
-        <li><a target="_self" href="archives.html">归档目录</a></li>
-        
-        <li><a target="_self" href="ios.html">iOS</a></li>
-        
-        <li><a target="_self" href="swift.html">Swift</a></li>
-        
-        <li><a target="_self" href="reactnative.html">RN</a></li>
-        
-        <li><a target="_self" href="js.html">JS</a></li>
-        
-        <li><a target="_self" href="shell.html">shell</a></li>
-        
-        <li><a target="_self" href="coding.html">编程</a></li>
-        
-        <li><a target="_self" href="live.html">随笔</a></li>
-        
-        <li><a target="_blank" href="app.html">APP推荐</a></li>
-        
-
-    <li><label>Categories</label></li>
-
-        
-            <li><a href="reactnative.html">React-Native</a></li>
-        
-            <li><a href="ios.html">iOS</a></li>
-        
-            <li><a href="app.html">MacAPP</a></li>
-        
-            <li><a href="swift.html">Swift</a></li>
-        
-            <li><a href="js.html">JavaScript</a></li>
-        
-            <li><a href="vue.html">Vue</a></li>
-        
-            <li><a href="shell.html">shell</a></li>
-        
-            <li><a href="%E7%BD%91%E7%BB%9C.html">网络</a></li>
-         
-
-      </ul>
-    </aside>
-
-<a class="exit-off-canvas" href="#"></a>
-
-
-        <section id="main-content" role="main" class="scroll-container">
-        
-       
-
- <script type="text/javascript">
-  $(function(){
-    $('#menu_item_index').addClass('is_active');
-  });
-</script>
-<div class="row">
-  <div class="large-8 medium-8 columns">
-      <div class="markdown-body article-wrap">
-       <div class="article">
-          
-          <h1>Rect-Native 之 Promise 深入浅出从入门到精通</h1>
-     
-        <div class="read-more clearfix">
-          <span class="date">2017/12/22</span>
-
-          <span>posted in&nbsp;</span> 
-          
-              <span class="posted-in"><a href='reactnative.html'>React-Native</a></span>
-           
-         
-          <span class="comments">
-            
-
-            
-          </span>
-
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
         </div>
-      </div><!-- article -->
-
-      <div class="article-content">
-      <h2 id="toc_0">概念理解</h2>
-
-<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fhp9dw6vxpj307406ewek.jpg" alt="icon" title="React icon"/></p>
-
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2017-12-22T09:21:42+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="15139057022845.html">Rect-Native 之 Promise 深入浅出从入门到精通</a></div>
+              <div class="subtitle">Rect-Native 中针对 Promise的理解和探索</div>
+              <div class="meta"><span class="time">$[timeformat('2017-12-22T09:21:42+08:00')]</span><br><span class="tags"></span></div>
+              <div class="body">
+                  <h2><a id="%E6%A6%82%E5%BF%B5%E7%90%86%E8%A7%A3" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>概念理解</h2>
+<p><figure><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fhp9dw6vxpj307406ewek.jpg" alt="icon" title="React icon" /><figcaption>icon<figcaption></figure></p>
 <blockquote>
 <p>所谓Promise，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。从语法上说，Promise 是一个对象，从它可以获取异步操作的消息。</p>
 </blockquote>
-
 <span id="more"></span><!-- more -->
-
-<h3 id="toc_1">Promise 状态</h3>
-
+<h3><a id="promise%E7%8A%B6%E6%80%81" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Promise 状态</h3>
 <ul>
 <li>Pending 进行中</li>
 <li>Resolved 已完成 又称Fulfilled</li>
 <li>Rejected 已失败</li>
 </ul>
-
-<h3 id="toc_2">Promise 特点</h3>
-
+<h3><a id="promise%E7%89%B9%E7%82%B9" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Promise 特点</h3>
 <ul>
 <li>对象的状态不受外部因素影响。Promise对象代表的是一个异步操作，只有异步操作的结果能决定Promise的状态，任何其他操作都不能决定其状态。</li>
 <li>一旦Promise有了结果状态就不会再变。<code>Pending==&gt;Resolved</code>,或者<code>Pending==&gt;Rejected</code></li>
 </ul>
-
-<h3 id="toc_3">Promise 缺点</h3>
-
+<h3><a id="promise%E7%BC%BA%E7%82%B9" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Promise 缺点</h3>
 <p>Promise的缺点是：一旦建立就会立即执行，无法中途取消。</p>
-
-<h2 id="toc_4">Promise 基本用法</h2>
-
-<pre><code class="language-javascript">var promise = new Promise(function(resolve, reject) {
+<h2><a id="promise%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Promise 基本用法</h2>
+<pre><code class="language-JavaScript">var promise = new Promise(function(resolve, reject) {
   // ... some code
 
   if (/* 异步操作成功 */){
@@ -207,29 +108,26 @@
   }
 });
 </code></pre>
-
-<p>Promise对象接受一个参数，这个参数是一个函数体。<br/>
+<p>Promise对象接受一个参数，这个参数是一个函数体。
 这个函数有两个参数：一个是resolve，一个是reject。这两个参数是Promise自动提供，不需要使用者传值。</p>
-
 <ul>
 <li>resolve函数的作用是，将Promise对象的状态从“未完成”变为“成功”（即从 Pending 变为 Resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去</li>
-<li>reject函数的作用是，将Promise对象的状态从“未完成”变为“失败”（即从 Pending 变为 Rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去。<br/>
-Promise实例生成后，可以用then分别指定Resolved和Rejected的回调函数。
-<code>JavaScript
-promise.then(function(value) {<br/>
-// success<br/>
-}, function(error) {<br/>
-// failure<br/>
+<li>reject函数的作用是，将Promise对象的状态从“未完成”变为“失败”（即从 Pending 变为 Rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去。
+Promise实例生成后，可以用then分别指定Resolved和Rejected的回调函数。</li>
+</ul>
+<pre><code class="language-JavaScript">promise.then(function(value) {
+  // success
+}, function(error) {
+  // failure
 });
-</code>
-then方法会接受两个参数：</li>
+</code></pre>
+<p>then方法会接受两个参数：</p>
+<ul>
 <li>第一个函数，Promise状态变更为Resolved时调用。</li>
 <li>第二个函数，Promise状态变为Rejected时调用。可选的，可以不提供。</li>
 </ul>
-
 <p>下面是异步加载图片的例子：</p>
-
-<pre><code class="language-javascript">function loadImageAsync(url) {
+<pre><code class="language-JavaScript">function loadImageAsync(url) {
   return new Promise(function(resolve, reject) {
     var image = new Image();
 
@@ -238,17 +136,15 @@ then方法会接受两个参数：</li>
     };
 
     image.onerror = function() {
-      reject(new Error(&#39;Could not load image at &#39; + url));
+      reject(new Error('Could not load image at ' + url));
     };
 
     image.src = url;
   });
 }
 </code></pre>
-
 <p>下面是Promise实现的Ajax操作的例子：</p>
-
-<pre><code class="language-javascript">var getJSON = function(url) {
+<pre><code class="language-JavaScript">var getJSON = function(url) {
   var promise = new Promise(function(resolve, reject){
     var client = new XMLHttpRequest();
     client.open(&quot;GET&quot;, url);
@@ -272,21 +168,18 @@ then方法会接受两个参数：</li>
 };
 
 getJSON(&quot;/posts.json&quot;).then(function(json) {
-  console.log(&#39;Contents: &#39; + json);
+  console.log('Contents: ' + json);
 }, function(error) {
-  console.error(&#39;出错了&#39;, error);
+  console.error('出错了', error);
 });
 </code></pre>
-
-<p><strong>注意：在getJSON内部，resolve函数和reject函数调用时，都带有参数！！</strong><br/><br/>
-    如果调用resolve函数和reject函数时带有参数，那么它们的参数会被传递给回调函数。</p>
-
+<p><strong>注意：在getJSON内部，resolve函数和reject函数调用时，都带有参数！！</strong><br />
+如果调用resolve函数和reject函数时带有参数，那么它们的参数会被传递给回调函数。</p>
 <ul>
 <li>reject函数的参数通常是Error对象的实例，表示抛出的错误</li>
 <li>resolve函数的参数除了正常的值以外，还可能是另一个 Promise 实例，表示异步操作的结果有可能是一个值，也有可能是另一个异步操作</li>
 </ul>
-
-<pre><code class="language-javascript">var p1 = new Promise(function (resolve, reject) {
+<pre><code class="language-JavaScript">var p1 = new Promise(function (resolve, reject) {
   // ...
 });
 
@@ -295,14 +188,11 @@ var p2 = new Promise(function (resolve, reject) {
   resolve(p1);
 })
 </code></pre>
-
-<p>上面👆，<code>p1</code>、<code>p2</code> 都是Promise，但是<code>p2</code>的resolve把<code>p1</code>作为返回值参数传出去了，即一个异步操作的返回结果是另一个异步操作。（类似于iOS开发中的自动布局库 <code>Masonry</code>,可以无限点语法取到对象）。<br/><br/>
+<p>上面👆，<code>p1</code>、<code>p2</code> 都是Promise，但是<code>p2</code>的resolve把<code>p1</code>作为返回值参数传出去了，即一个异步操作的返回结果是另一个异步操作。（类似于iOS开发中的自动布局库 <code>Masonry</code>,可以无限点语法取到对象）。<br />
 <strong>注意：此时，p1的状态会传递p2.如果p1是Pending状态,那么p2会等待p1的结果。如果p1是Reject或者Resolve状态，那么p2的回调函数将会立即执行。</strong></p>
-
 <p><strong>再看:</strong></p>
-
-<pre><code class="language-javascript">var p1 = new Promise(function (resolve, reject) {
-  setTimeout(() =&gt; reject(new Error(&#39;fail&#39;)), 3000)
+<pre><code class="language-JavaScript">var p1 = new Promise(function (resolve, reject) {
+  setTimeout(() =&gt; reject(new Error('fail')), 3000)
 })
 
 var p2 = new Promise(function (resolve, reject) {
@@ -313,31 +203,25 @@ p2.then(result =&gt; console.log(result))
   .catch(error =&gt; console.log(error))
 // Error: fail
 </code></pre>
-
 <ol>
-<li><code>p1</code>会在3秒后抛出error。<br/></li>
-<li><code>p2</code>会在1秒后改变状态。Resolv的返回值是<code>p1</code>.<br/></li>
-<li>由于<code>p2</code>的返回值是一个Promise，导致<code>p2</code>自己的状态无效了，此时<code>p2</code>的状态取决于<code>p1</code>.<br/></li>
-<li>所以，后面的then语句，都变成针对p1的了。<br/></li>
-<li>又过了<code>2秒</code>，<code>p1</code>变为<code>reject</code>，导致触发<code>catch</code>方法。<br/></li>
+<li><code>p1</code>会在3秒后抛出error。</li>
+<li><code>p2</code>会在1秒后改变状态。Resolv的返回值是<code>p1</code>.</li>
+<li>由于<code>p2</code>的返回值是一个Promise，导致<code>p2</code>自己的状态无效了，此时<code>p2</code>的状态取决于<code>p1</code>.</li>
+<li>所以，后面的then语句，都变成针对p1的了。</li>
+<li>又过了<code>2秒</code>，<code>p1</code>变为<code>reject</code>，导致触发<code>catch</code>方法。</li>
 </ol>
-
-<h2 id="toc_5">3. Promise.prototype.then()</h2>
-
-<p><strong>then方法是定义在原型对象Promise.prototype上的。</strong><br/>
-作用：为Promise对象添加状态改变时的回调函数。第一个是Resolved，第二个是Rejected。<br/>
+<h2><a id="3-promise-prototype-then" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Promise.prototype.then()</h2>
+<p><strong>then方法是定义在原型对象Promise.prototype上的。</strong>
+作用：为Promise对象添加状态改变时的回调函数。第一个是Resolved，第二个是Rejected。
 then方法返回的是一个新的Promise对象，不是之前的实例。因此 then方法后面还可以再写一个then方法,即链式调用。</p>
-
-<pre><code class="language-javascript">getJSON(&quot;/posts.json&quot;).then(function(json) {
+<pre><code class="language-JavaScript">getJSON(&quot;/posts.json&quot;).then(function(json) {
   return json.post;
 }).then(function(post) {
   // ...
 });
 </code></pre>
-
 <p>第一个回调函数完成以后，会将返回结果作为参数，传入第二个回调函数。</p>
-
-<pre><code class="language-javascript">getJSON(&quot;/post/1.json&quot;).then(function(post) {
+<pre><code class="language-JavaScript">getJSON(&quot;/post/1.json&quot;).then(function(post) {
   return getJSON(post.commentURL);
 }).then(function funcA(comments) {
   console.log(&quot;Resolved: &quot;, comments);
@@ -345,68 +229,52 @@ then方法返回的是一个新的Promise对象，不是之前的实例。因此
   console.log(&quot;Rejected: &quot;, err);
 });
 </code></pre>
-
-<p>第一个then函数返回的是一个新的Promise对象。于是才能继续调用then方法。<br/>
+<p>第一个then函数返回的是一个新的Promise对象。于是才能继续调用then方法。
 第二个then方法指定的回调函数，就会等待这个Promise对象状态发生变化，resolv会调用funcA,reject会调用funcB.</p>
-
 <p>下面👇是箭头函数的实现，会更简洁：</p>
-
-<pre><code class="language-javascript">getJSON(&quot;/post/1.json&quot;).then(
+<pre><code class="language-JavaScript">getJSON(&quot;/post/1.json&quot;).then(
   post =&gt; getJSON(post.commentURL)
 ).then(
   comments =&gt; console.log(&quot;Resolved: &quot;, comments),
   err =&gt; console.log(&quot;Rejected: &quot;, err)
 );
 </code></pre>
-
-<h2 id="toc_6">4. Promise.prototype.catch()</h2>
-
-<h3 id="toc_7">Promise.prototype.catch方法是.then(null, rejection)的别名，用于指定发生错误时的回调函数</h3>
-
-<p><strong>Promise.prototype.catch方法是.then(null, rejection)的别名，用于指定发生错误时的回调函数.</strong>    </p>
-
-<pre><code class="language-javascript">getJSON(&#39;/posts.json&#39;).then(function(posts) {
+<h2><a id="4-promise-prototype-catch" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. Promise.prototype.catch()</h2>
+<h3><a id="promise-prototype-catch%E6%96%B9%E6%B3%95%E6%98%AF-then-null-rejection%E7%9A%84%E5%88%AB%E5%90%8D%EF%BC%8C%E7%94%A8%E4%BA%8E%E6%8C%87%E5%AE%9A%E5%8F%91%E7%94%9F%E9%94%99%E8%AF%AF%E6%97%B6%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Promise.prototype.catch方法是.then(null, rejection)的别名，用于指定发生错误时的回调函数</h3>
+<p><strong>Promise.prototype.catch方法是.then(null, rejection)的别名，用于指定发生错误时的回调函数.</strong></p>
+<pre><code class="language-JavaScript">getJSON('/posts.json').then(function(posts) {
   // ...
 }).catch(function(error) {
   // 处理 getJSON 和 前一个回调函数运行时发生的错误
-  console.log(&#39;发生错误！&#39;, error);
+  console.log('发生错误！', error);
 });
 </code></pre>
-
 <p>getJSON()方法返回的是一个Promise对象。如果resolv，会调用then方法；如果reject则会调用catch方法。</p>
-
-<h3 id="toc_8">then方法指定的回调函数，如果运行中抛出错误，也会被catch方法捕获</h3>
-
-<p><strong>另外，then方法指定的回调函数，如果运行中抛出错误，也会被catch方法捕获</strong>   </p>
-
-<pre><code class="language-javascript">p.then((val) =&gt; console.log(&#39;fulfilled:&#39;, val))
-  .catch((err) =&gt; console.log(&#39;rejected&#39;, err));
+<h3><a id="then%E6%96%B9%E6%B3%95%E6%8C%87%E5%AE%9A%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%EF%BC%8C%E5%A6%82%E6%9E%9C%E8%BF%90%E8%A1%8C%E4%B8%AD%E6%8A%9B%E5%87%BA%E9%94%99%E8%AF%AF%EF%BC%8C%E4%B9%9F%E4%BC%9A%E8%A2%ABcatch%E6%96%B9%E6%B3%95%E6%8D%95%E8%8E%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>then方法指定的回调函数，如果运行中抛出错误，也会被catch方法捕获</h3>
+<p><strong>另外，then方法指定的回调函数，如果运行中抛出错误，也会被catch方法捕获</strong></p>
+<pre><code class="language-JavaScript">p.then((val) =&gt; console.log('fulfilled:', val))
+  .catch((err) =&gt; console.log('rejected', err));
 
 // 等同于
-p.then((val) =&gt; console.log(&#39;fulfilled:&#39;, val))
+p.then((val) =&gt; console.log('fulfilled:', val))
   .then(null, (err) =&gt; console.log(&quot;rejected:&quot;, err));
 </code></pre>
-
-<pre><code class="language-text">var promise = new Promise(function(resolve, reject) {
-  throw new Error(&#39;test&#39;);
+<pre><code class="language-plain_text">var promise = new Promise(function(resolve, reject) {
+  throw new Error('test');
 });
 promise.catch(function(error) {
   console.log(error);
 });
 // Error: test
 </code></pre>
-
-<p>Promise对象Resolved，但是Resolved指定的方法跑出错误。<br/>
+<p>Promise对象Resolved，但是Resolved指定的方法跑出错误。
 Promise对象catch方法能捕获跑出的error。</p>
-
-<h3 id="toc_9">reject方法等同于抛出错误</h3>
-
+<h3><a id="reject%E6%96%B9%E6%B3%95%E7%AD%89%E5%90%8C%E4%BA%8E%E6%8A%9B%E5%87%BA%E9%94%99%E8%AF%AF" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>reject方法等同于抛出错误</h3>
 <p>上面的写法跟下面的两种写法是一样的：</p>
-
-<pre><code class="language-text">// 写法一
+<pre><code class="language-plain_text">// 写法一
 var promise = new Promise(function(resolve, reject) {
   try {
-    throw new Error(&#39;test&#39;);
+    throw new Error('test');
   } catch(e) {
     reject(e);
   }
@@ -417,38 +285,30 @@ promise.catch(function(error) {
 
 // 写法二
 var promise = new Promise(function(resolve, reject) {
-  reject(new Error(&#39;test&#39;));
+  reject(new Error('test'));
 });
 promise.catch(function(error) {
   console.log(error);
 });
 </code></pre>
-
 <p><strong>由此可见：reject方法等同于抛出错误。</strong></p>
-
-<h3 id="toc_10">resolve之后在抛出错误，catch是捕获不到的不到的。</h3>
-
-<pre><code class="language-text">var promise = new Promise(function(resolve, reject) {
-  resolve(&#39;ok&#39;);
-  throw new Error(&#39;test&#39;);
+<h3><a id="resolve%E4%B9%8B%E5%90%8E%E5%9C%A8%E6%8A%9B%E5%87%BA%E9%94%99%E8%AF%AF%EF%BC%8Ccatch%E6%98%AF%E6%8D%95%E8%8E%B7%E4%B8%8D%E5%88%B0%E7%9A%84%E4%B8%8D%E5%88%B0%E7%9A%84%E3%80%82" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>resolve之后在抛出错误，catch是捕获不到的不到的。</h3>
+<pre><code class="language-plain_text">var promise = new Promise(function(resolve, reject) {
+  resolve('ok');
+  throw new Error('test');
 });
 promise
   .then(function(value) { console.log(value) })
   .catch(function(error) { console.log(error) });
 // ok
 </code></pre>
-
 <p><strong>resolve之后在抛出错误，catch是捕获不到的不到的。</strong></p>
-
-<h3 id="toc_11">Promise 对象的错误具有“冒泡”性质</h3>
-
+<h3><a id="promise%E5%AF%B9%E8%B1%A1%E7%9A%84%E9%94%99%E8%AF%AF%E5%85%B7%E6%9C%89%E2%80%9C%E5%86%92%E6%B3%A1%E2%80%9D%E6%80%A7%E8%B4%A8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Promise 对象的错误具有“冒泡”性质</h3>
 <p><strong>Promise 对象的错误具有“冒泡”性质,会一直向后传递，直到被捕获为止 ------ 错误总是会被下一个catch语句捕获</strong></p>
-
 <blockquote>
 <p>举个栗子：就像是Y染色体上受环境触发的遗传疾病，会不断的遗传给男性后代，任意一个男性都会被特殊的环境触发。</p>
 </blockquote>
-
-<pre><code class="language-text">getJSON(&#39;/post/1.json&#39;).then(function(post) {
+<pre><code class="language-plain_text">getJSON('/post/1.json').then(function(post) {
   return getJSON(post.commentURL);
 }).then(function(comments) {
   // some code
@@ -456,30 +316,21 @@ promise
   // 处理前面三个Promise产生的错误
 });
 </code></pre>
-
 <p>上述代码中有三个Promise，第一个由getJSON产生，后两个由then产生。他们之中的任何一个抛出错误，都会被catch捕获。</p>
-
 <p>一般来讲，尽量不要定义Promise的reject状态的回调函数，最好总是使用catch函数，因为catch函数不仅能捕获到reject状态，还能捕获到resolve状态指定方法下抛出的异常。</p>
-
-<h3 id="toc_12">Promise对象抛出的错误不会传递到外层代码</h3>
-
+<h3><a id="promise%E5%AF%B9%E8%B1%A1%E6%8A%9B%E5%87%BA%E7%9A%84%E9%94%99%E8%AF%AF%E4%B8%8D%E4%BC%9A%E4%BC%A0%E9%80%92%E5%88%B0%E5%A4%96%E5%B1%82%E4%BB%A3%E7%A0%81" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Promise对象抛出的错误不会传递到外层代码</h3>
 <p>如果没有使用catch方法指定错误处理的回调函数，Promise对象抛出的错误不会传递到外层代码，即不会有任何反应，这一点上跟传统的try/catch代码块不同的。</p>
-
-<pre><code class="language-text">process.on(&#39;unhandledRejection&#39;, function (err, p) {
+<pre><code class="language-plain_text">process.on('unhandledRejection', function (err, p) {
   console.error(err.stack)
 });
 </code></pre>
-
-<p>时间的监听函数‘unhandledRejection’,有两个参数：<br/>
-第一个是错误对象<br/>
+<p>时间的监听函数‘unhandledRejection’,有两个参数：
+第一个是错误对象
 第二个是报错的Promise实例</p>
-
-<p>catch方法返回的也是一个Promise实例，所以后面还是可以无限的调用then方法。<br/>
+<p>catch方法返回的也是一个Promise实例，所以后面还是可以无限的调用then方法。
 如果catch函数在几个then中间，二执行过程中都没有reject状态，那么会跳过这个中间的catch方法。</p>
-
-<h3 id="toc_13">catch方法中也能抛出错误</h3>
-
-<pre><code class="language-text">var someAsyncThing = function() {
+<h3><a id="catch%E6%96%B9%E6%B3%95%E4%B8%AD%E4%B9%9F%E8%83%BD%E6%8A%9B%E5%87%BA%E9%94%99%E8%AF%AF" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>catch方法中也能抛出错误</h3>
+<pre><code class="language-plain_text">var someAsyncThing = function() {
   return new Promise(function(resolve, reject) {
     // 下面一行会报错，因为x没有声明
     resolve(x + 2);
@@ -489,44 +340,35 @@ promise
 someAsyncThing().then(function() {
   return someOtherAsyncThing();
 }).catch(function(error) {
-  console.log(&#39;oh no&#39;, error);
+  console.log('oh no', error);
   // 下面一行会报错，因为y没有声明
   y + 2;
 }).then(function() {
-  console.log(&#39;carry on&#39;);
+  console.log('carry on');
 });
 // oh no [ReferenceError: x is not defined]
 </code></pre>
-
 <p>如上：catch方法指定的函数依旧是可以抛出Error的，但是因为后面没有继续跟进catch方法，所以并没有被捕获。</p>
-
-<h2 id="toc_14">5. Promise.all()</h2>
-
+<h2><a id="5-promise-all" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>5. Promise.all()</h2>
 <p><strong>Promise.all方法用于将多个 Promise 实例，包装成一个新的 Promise 实例。</strong></p>
-
-<pre><code class="language-text">var p = Promise.all([p1, p2, p3]);
+<pre><code class="language-plain_text">var p = Promise.all([p1, p2, p3]);
 </code></pre>
-
-<p>Promise.all方法接受一个数组作为参数，p1、p2、p3都是 Promise 实例，如果不是，就会先调用下面讲到的Promise.resolve方法，将参数转为 Promise 实例，再进一步处理。<br/>
+<p>Promise.all方法接受一个数组作为参数，p1、p2、p3都是 Promise 实例，如果不是，就会先调用下面讲到的Promise.resolve方法，将参数转为 Promise 实例，再进一步处理。
 （Promise.all方法的参数可以不是数组，但必须具有 Iterator 接口，且返回的每个成员都是 Promise 实例。）</p>
-
 <p>p的状态由p1、p2、p3决定，分成两种情况:</p>
-
 <ul>
 <li>只有p1、p2、p3的状态都变成fulfilled，p的状态才会变成fulfilled，此时p1、p2、p3的返回值组成一个数组，传递给p的回调函数</li>
 <li>只要p1、p2、p3之中有一个被rejected，p的状态就变成rejected，此时第一个被reject的实例的返回值，会传递给p的回调函数</li>
 </ul>
-
 <p><strong>注意，如果作为参数的 Promise 实例，自己定义了catch方法，那么它一旦被rejected，并不会触发Promise.all()的catch方法。</strong></p>
-
-<pre><code class="language-text">const p1 = new Promise((resolve, reject) =&gt; {
-  resolve(&#39;hello&#39;);
+<pre><code class="language-plain_text">const p1 = new Promise((resolve, reject) =&gt; {
+  resolve('hello');
 })
 .then(result =&gt; result)
 .catch(e =&gt; e);
 
 const p2 = new Promise((resolve, reject) =&gt; {
-  throw new Error(&#39;报错了&#39;);
+  throw new Error('报错了');
 })
 .then(result =&gt; result)
 .catch(e =&gt; e);
@@ -536,320 +378,129 @@ Promise.all([p1, p2])
 .catch(e =&gt; console.log(e));
 // [&quot;hello&quot;, Error: 报错了]
 </code></pre>
-
-<p>p1会resolved，p2首先会rejected.<br/>
-p2有自己的catch方法，并且执行了，那么就会返回一个新的Promise，并且这个Promise的状态会变成Resolved。<br/>
-所以：Promise.all()的catch方法并不能捕获到这个error。<br/>
+<p>p1会resolved，p2首先会rejected.
+p2有自己的catch方法，并且执行了，那么就会返回一个新的Promise，并且这个Promise的状态会变成Resolved。
+所以：Promise.all()的catch方法并不能捕获到这个error。
 p2没有自己的catch方法，所以会调用Promise.all()的catch方法。</p>
-
-<h2 id="toc_15">6. Promise.race()</h2>
-
+<h2><a id="6-promise-race" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>6. Promise.race()</h2>
 <p>Promise.race方法同样是将多个Promise实例，包装成一个新的Promise实例。</p>
-
-<pre><code class="language-text">var p = Promise.race([p1, p2, p3]);
+<pre><code class="language-plain_text">var p = Promise.race([p1, p2, p3]);
 </code></pre>
-
 <p>p1/p2/p3中只要有一个率先改变状态，p的状态就会随着改变。那个率先改变状态的实例的返回值，就会传递给p的回调函数。</p>
-
-<pre><code class="language-text">const p = Promise.race([
-  fetch(&#39;/resource-that-may-take-a-while&#39;),
+<pre><code class="language-plain_text">const p = Promise.race([
+  fetch('/resource-that-may-take-a-while'),
   new Promise(function (resolve, reject) {
-    setTimeout(() =&gt; reject(new Error(&#39;request timeout&#39;)), 5000)
+    setTimeout(() =&gt; reject(new Error('request timeout')), 5000)
   })
 ]);
 p.then(response =&gt; console.log(response));
 p.catch(error =&gt; console.log(error));
 </code></pre>
-
 <p>5秒内无法返回请求结果，变量p的状态就会变为reject。这也算是竞速的一种应用场景。</p>
-
-<h2 id="toc_16">7. Promise.resolve()</h2>
-
+<h2><a id="7-promise-resolve" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>7. Promise.resolve()</h2>
 <p>有时需要将现有对象转为Promise对象，Promise.resolve方法就起到这个作用.</p>
-
-<pre><code class="language-text">var jsPromise = Promise.resolve($.ajax(&#39;/whatever.json&#39;));
+<pre><code class="language-plain_text">var jsPromise = Promise.resolve($.ajax('/whatever.json'));
 </code></pre>
-
 <p>等价于下面的说法：</p>
-
-<pre><code class="language-text">Promise.resolve(&#39;foo&#39;)
+<pre><code class="language-plain_text">Promise.resolve('foo')
 // 等价于
-new Promise(resolve =&gt; resolve(&#39;foo&#39;))
+new Promise(resolve =&gt; resolve('foo'))
 </code></pre>
-
 <p>Promise 的第一个参数是一个箭头函数，函数的传入参数是resolve（函数），函数体就是调用传入的函数resolve，resolve调用的时候，也需要一个参数，此时这个参数就是咱们需要转变成Promise对象的那个参数。</p>
-
 <p>Promise.resolve的参数有四种情况：</p>
-
 <ol>
 <li>参数是一个Promise实例</li>
 <li>参数是一个thenable对象（有then方法的实例）</li>
 <li>参数是不具备then方法d的对象应该</li>
 <li>不带参数，返回一个Resolved的返回状态。</li>
 </ol>
-
-<h2 id="toc_17">8、Promise.reject()   同上</h2>
-
-<h2 id="toc_18">9、两个常用附加方法</h2>
-
-<h3 id="toc_19">done()</h3>
-
+<h2><a id="8%E3%80%81promise-reject%E5%90%8C%E4%B8%8A" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>8、Promise.reject()   同上</h2>
+<h2><a id="9%E3%80%81%E4%B8%A4%E4%B8%AA%E5%B8%B8%E7%94%A8%E9%99%84%E5%8A%A0%E6%96%B9%E6%B3%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>9、两个常用附加方法</h2>
+<h3><a id="done" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>done()</h3>
 <p>Promise的错误并不会冒泡到全局，所以我们可以提供一个done方法总是处于会吊链的尾端。</p>
-
-<pre><code class="language-text">asyncFunc()
+<pre><code class="language-plain_text">asyncFunc()
   .then(f1)
   .catch(r1)
   .then(f2)
   .done();
-  ```
-  
-done方法的使用，可以像then方法那样用，提供Fulfilled和Rejected状态的回调函数，也可以不提供任何参数。但不管怎样，done都会捕捉到任何可能出现的错误，并向全局抛出.
-
-### finally()
-finally方法用于指定不管Promise对象最后状态如何，都会执行的操作。它与done方法的最大区别，它接受一个普通的回调函数作为参数，该函数不管怎样都必须执行。
-
 </code></pre>
-
-<p>Promise.prototype.finally = function (callback) {<br/>
-  let P = this.constructor;<br/>
-  return this.then(<br/>
-    value  =&gt; P.resolve(callback()).then(() =&gt; value),<br/>
-    reason =&gt; P.resolve(callback()).then(() =&gt; { throw reason })<br/>
-  );<br/>
-};</p>
-
-<pre><code class="language-text">
-### Promis.try()
-
+<p>done方法的使用，可以像then方法那样用，提供Fulfilled和Rejected状态的回调函数，也可以不提供任何参数。但不管怎样，done都会捕捉到任何可能出现的错误，并向全局抛出.</p>
+<h3><a id="finally" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>finally()</h3>
+<p>finally方法用于指定不管Promise对象最后状态如何，都会执行的操作。它与done方法的最大区别，它接受一个普通的回调函数作为参数，该函数不管怎样都必须执行。</p>
+<pre><code class="language-plain_text">Promise.prototype.finally = function (callback) {
+  let P = this.constructor;
+  return this.then(
+    value  =&gt; P.resolve(callback()).then(() =&gt; value),
+    reason =&gt; P.resolve(callback()).then(() =&gt; { throw reason })
+  );
+};
 </code></pre>
-
-<p>try {<br/>
-  database.users.get({id: userId})<br/>
-  .then(...)<br/>
-  .catch(...)<br/>
-} catch (e) {<br/>
-  // ...<br/>
-}</p>
-
-<pre><code class="language-text">
+<h3><a id="promis-try" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Promis.try()</h3>
+<pre><code class="language-plain_text">try {
+  database.users.get({id: userId})
+  .then(...)
+  .catch(...)
+} catch (e) {
+  // ...
+}
 </code></pre>
-
-<p>Promise.try(database.users.get({id: userId}))<br/>
-  .then(...)<br/>
-  .catch(...)</p>
-
-<pre><code class="language-text">
-Promise.try就是模拟try代码块，就像promise.catch模拟的是catch代码块.
-
+<pre><code class="language-plain_text">Promise.try(database.users.get({id: userId}))
+  .then(...)
+  .catch(...)
 </code></pre>
+<p>Promise.try就是模拟try代码块，就像promise.catch模拟的是catch代码块.</p>
 
-
-    
-
-      </div>
-
-      <div class="row">
-        <div class="large-6 columns">
-        <p class="text-left" style="padding:15px 0px;">
-      
-          <a href="15151216159291.html" 
-          title="Previous Post: ">&laquo; </a>
-      
-        </p>
-        </div>
-        <div class="large-6 columns">
-      <p class="text-right" style="padding:15px 0px;">
-      
-          <a  href="15137645005542.html" 
-          title="Next Post: ES6 笔记（Array）">ES6 笔记（Array） &raquo;</a>
-      
-      </p>
-        </div>
-      </div>
-      <div class="comments-wrap">
-        <div class="share-comments">
-          
-
-          
-
-          
-        </div>
-      </div>
-    </div><!-- article-wrap -->
-  </div><!-- large 8 -->
-
-
-
-
- <div class="large-4 medium-4 columns">
-  <div class="hide-for-small">
-    <div id="sidebar" class="sidebar">
-          <div id="site-info" class="site-info">
-            
-                <div class="site-a-logo"><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fmpk9088gsj30sg0sgn33.jpg" /></div>
-            
-                <h1>kaelinda</h1>
-                <div class="site-des">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
-                <div class="social">
-
-
-
-
-
-
-
-
-<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/KaelLVLinda" title="Twitter">Twitter</a>
-<a target="_blank" class="github" target="_blank" href="https://github.com/Kaelzzs" title="GitHub">GitHub</a>
-<a target="_blank" class="email" href="mailto:zhouzuosong_kael@163.com" title="Email">Email</a>
-  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
-                
-              	 </div>
-          	</div>
-
-             
-
-              <div id="site-categories" class="side-item ">
-                <div class="side-header">
-                  <h2>Categories</h2>
-                </div>
-                <div class="side-content">
-
-      	<p class="cat-list">
-        
-            <a href="reactnative.html"><strong>React-Native</strong></a>
-        
-            <a href="ios.html"><strong>iOS</strong></a>
-        
-            <a href="app.html"><strong>MacAPP</strong></a>
-        
-            <a href="swift.html"><strong>Swift</strong></a>
-        
-            <a href="js.html"><strong>JavaScript</strong></a>
-        
-            <a href="vue.html"><strong>Vue</strong></a>
-        
-            <a href="shell.html"><strong>shell</strong></a>
-        
-            <a href="%E7%BD%91%E7%BB%9C.html"><strong>网络</strong></a>
-         
-        </p>
-
-
-                </div>
               </div>
-
-              <div id="site-categories" class="side-item">
-                <div class="side-header">
-                  <h2>Recent Posts</h2>
-                </div>
-                <div class="side-content">
-                <ul class="posts-list">
-	      
-		      
-			      <li class="post">
-			        <a href="15523077857608.html">OC中枚举写法  以及 字符串枚举探索</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15522686353535.html">iOS 动画全解 (1)</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15501356584731.html">UITableView顶部空白的几种解决办法</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15409691048860.html">【Swift笔记】引用计数</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15402889434646.html">Swift中类（Class）和 结构体（Struct）</a>
-			      </li>
-		     
-		  
-		      
-		  
-		      
-		  
-		      
-		  
-		      
-		  
-		      
-		  
-		      
-		  
-		      
-		  
-		      
-		  
-		      
-		  
-		      
-		  
-		      
-		  
-		      
-		  
-		      
-		  
-		      
-		  
-		      
-		   
-		  		</ul>
-                </div>
-              </div>
-        </div><!-- sidebar -->
-      </div><!-- hide for small -->
-</div><!-- large 4 -->
-
-</div><!-- row -->
-
- <div class="page-bottom clearfix">
-  <div class="row">
-   <p class="copyright">Copyright &copy; 2015
-Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
-Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
-  </div>
-</div>
-
-        </section>
+            </div>
+            
+            
+          </div>
+        </div>
       </div>
     </div>
-
-  
-    
-
-    <script src="asset/js/foundation.min.js"></script>
-    <script>
-      $(document).foundation();
-      function fixSidebarHeight(){
-        var w1 = $('.markdown-body').height();
-          var w2 = $('#sidebar').height();
-          if (w1 > w2) { $('#sidebar').height(w1); };
-      }
-      $(function(){
-        fixSidebarHeight();
-      })
-      $(window).load(function(){
-          fixSidebarHeight();
-      });
-     
-    </script>
-
-    
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
-
-
-  </body>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
 </html>
