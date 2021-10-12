@@ -85,7 +85,10 @@
   let tags = new Vue({
     el: '#tags',
     data: {
-      descriptions: JSON.parse('')
+      descriptions: JSON.parse('{
+  "标签名称1": "标签说明",
+  "标签名称2": "标签说明"
+}')
     },
     delimiters: ['${', '}']
   })

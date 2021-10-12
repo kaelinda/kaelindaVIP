@@ -63,209 +63,22 @@
           <div class="col-md-10 main">
             <div class="row">
               <div class="col-md-10 post">
-                <div class="headline"><a href="15173790393385.html">DLNA DMC</a></div>
-                <div class="subtitle">DLNA DMC</div>
-                <div class="meta"><span class="time">$[timeformat('2018-01-31T14:10:39+08:00')]</span></div>
+                <div class="headline"><a href="15139059079620.html">学习资源网址</a></div>
+                <div class="subtitle">学习资源网址</div>
+                <div class="meta"><span class="time">$[timeformat('2017-12-22T09:25:07+08:00')]</span></div>
                 <div class="body">
-                    <h2><a id="cgupnpcontrolpoint" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>CGUpnpControlPoint</h2>
-<pre><code class="language-plain_text">
-#if !defined(_CG_UPNP_CCONTROLPOINT_H_)
-typedef void CgUpnpControlPoint;
-#endif
-
-@class CGUpnpDevice;
-@class CGUpnpControlPoint;
-
-@protocol CGUpnpControlPointDelegate &lt;NSObject&gt;
-@optional
-// deviceUdn 设备的UDID 设备添加，更新，移除，失效的协议方法
-- (void)controlPoint:(CGUpnpControlPoint *)controlPoint deviceAdded:(NSString *)deviceUdn;
-- (void)controlPoint:(CGUpnpControlPoint *)controlPoint deviceUpdated:(NSString *)deviceUdn;
-- (void)controlPoint:(CGUpnpControlPoint *)controlPoint deviceRemoved:(NSString *)deviceUdn;
-- (void)controlPoint:(CGUpnpControlPoint *)controlPoint deviceInvalid:(NSString *)deviceUdn;
-@end
-
-/**
- * The CGUpnpControlPoint class is a wrapper class for CgUpnpControlPoint of CyberLink for C to 
- * program using only Objective-C directly on MacOSX.
- * Currently, the only basic methods are wrapped to control UPnP devices.
- */
-@interface CGUpnpControlPoint : NSObject 
-{
-	CgUpnpControlPoint *cObject;
-}
-// 子控制点
-@property(readonly) CgUpnpControlPoint *cObject;
-// 代理对象
-@property(assign) id&lt;CGUpnpControlPointDelegate&gt; delegate;
-
-// get方法
-- (CgUpnpControlPoint *)cObject;
-/**
- * Activate some background threads of the control point such as SSDP and 
- * HTTP servers to listen messages and events of UPnP. You must call this 
- * method before you can actually use a control point.
- *
- * @return TRUE if successful; otherwise FALSE
- *
- */
- // 激活DMC的子线程 SSDP HTTP服务，去监听UPnP信息和时间
- // 使用控制点之前必须要激活
-- (BOOL)start;
-/**
- * Stop some background threads of the control point such as SSDP and 
- * HTTP servers to listen messages and events of UPnP. 
- *
- * @return TRUE if successful; otherwise FALSE
- *
- */
- // 停止后台线程 和 SSDP HTTP 服务
-- (BOOL)stop;
-/**
- * Check if the controll point is running.
- *
- * @return YES if the device is started normally, otherwise NO.
- */
- // 检测DMC是否正在运行
-- (BOOL)isRunning;
-/**
- * Send a M-SEARCH request to find for the all UPnP devices of UPnP in the network.
- * The method waits for the specified MX time. Use setSsdpSearchMX:(NSInteger)aMX to change the time.
- * The method is same as searchWithST() when the ST parameter is &quot;ssdp:all&quot;.
- */
- 
- // 发送M-SEARCH 请求去发现局域网内所有的UPnP设备
-- (void)search;
-/**
- * Send a M-SEARCH request to find for the specified UPnP devices by a ST parameter in the network.
- * The method waits for the specified MX time. Use setSsdpSearchMX:(NSInteger)aMX to change the time.
- *
- * @param aST The Search Target parameter (ex. &quot;ssdp:all&quot;)
- */
-- (void)searchWithST:(NSString *)aST;
-/**
- * Set a MX parameter used for SSDP searches in seconds.
- * The parameter is used to wait for M-SEARCH responses in search() and searchWithST:(NSString *)aST.
- *
- * @param aMX Time to wait
- */
-- (void)setSsdpSearchMX:(NSInteger)aMX;
-/**
- * Get a MX parameter used for SSDP searches in seconds.
- * The parameter is used to wait for M-SEARCH responses in search() and searchWithST:(NSString *)aST.
- *
- * @return Time to wait
- */
-// 等待时间
-- (NSInteger)ssdpSearchMX;
-/**
- * Get all UPnP devices which the control point found as a NSArray object. The array has the devices as instances of CGUpnpDevice.
- * @return NSArray of CGUpnpDevice.
- */
- // DMC发现的所有设备
-- (NSArray *)devices;
-/**
- * Get a specified UPnP devices by the UDN.
- * @return CGUpnpDevice when the specified device is found, otherwise nil.
- */
- // 通过UDN 获取指定的upnp设备
-- (CGUpnpDevice *)deviceForUDN:(NSString *)udn;
-</code></pre>
-<h2><a id="cgupnpavcontentdirectory" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>CGUpnpAvContentDirectory</h2>
-<pre><code class="language-plain_text">/**
- * The CGUpnpAvContentDirectory class has UPnP/AV objects of a media servers.
- *
- */
-@interface CGUpnpAvContentDirectory : NSObject
-{
-	CGUpnpAvContentManager *contentMgr;
-}
-- (CGUpnpAvContainer *)rootObject;
-- (CGUpnpAvObject *)objectForId:(NSString *)aObjectId;
-- (CGUpnpAvObject *)objectForTitlePath:(NSString *)aTitlePath;
-@end
-</code></pre>
-<h2><a id="cgupnpavcontentmanager" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>CGUpnpAvContentManager</h2>
-<pre><code class="language-plain_text">/**
- * The CGUpnpAvContentDirectory class has UPnP/AV objects of a media servers.
- *
- */
-@interface CGUpnpAvContentManager : NSObject
-{
-	CGUpnpAvRoot *rootObj;
-}
-- (CGUpnpAvContainer *)rootObject;
-- (CGUpnpAvObject *)objectForId:(NSString *)aObjectId;
-- (CGUpnpAvObject *)objectForTitlePath:(NSString *)aTitlePath;
-</code></pre>
-<h2><a id="cgupnpavobject" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>CGUpnpAvObject</h2>
-<pre><code class="language-plain_text">
-/**
- * The CGUpnpAvObject class is a wrapper class for CgUpnpAvObject of CyberLink for C.
- */
-
-#define CGUPNPAV_OBJECT_MOVIE_FILEEXT @&quot;mov&quot;
-#define CGUPNPAV_OBJECT_SOUND_FILEEXT @&quot;snd&quot;
-#define CGUPNPAV_OBJECT_IMAGE_FILEEXT @&quot;img&quot;
-
-@interface CGUpnpAvObject : CGXmlNode 
-{
-    // 父类对象
-	CGUpnpAvObject *parent;
-}
-@property(retain) id userObject;
-#if defined(TARGET_OS_IPHONE)
-@property(retain) UIImage *thumbnailImage;
-#endif
-
-// xml字符串转成对象
-+ (NSArray *)arrayWithXMLString:(NSString *)aXmlString;
-// 初始化方法
-- (id)init;
-#if  !defined(TARGET_OS_IPHONE)
-- (id)initWithXMLNode:(NSXMLElement *)aXmlNode;
-#else
-- (id)initWithXMLNode:(CgXmlNode *)aXmlNode;
-- (id)initWithMediaContent:(CgUpnpAvContent *)aMediaContent;
-#endif
-// 判断方法
-- (BOOL)isEqual:(id)anObject;
-- (BOOL)isContainer;
-- (BOOL)isItem;
-// 设置、获取父亲类
-- (void)setParent:(CGUpnpAvObject *)aParent;
-- (CGUpnpAvObject *)parent;
-// 祖先类对象
-- (CGUpnpAvObject *)ancestor;
-// 对象ID
-- (NSString *)objectId;
-// 子类对象个数
-- (NSUInteger)childCount;
-// 标题（文件名 不带后缀）
-- (NSString *)title;
-// upnp 类型
-- (NSString *)upnpClass;
-// 日期
-- (NSString *)date;
-// 相册URI
-- (NSString *)albumArtURI;
-// 设置对象ID、title等
-- (void)setObjectId:(NSString *)aValue;
-- (void)setTitle:(NSString *)aValue;
-- (void)setUpnpClass:(NSString *)aValue;
-// 是否包含某一资源对象
-- (BOOL)isObjectId:(NSString *)aObjectId;
-- (BOOL)isTitle:(NSString *)aTitle;
-- (BOOL)isUpnpClass:(NSString *)aUpnpClass;
-// 文件全名 （带后缀）
-- (NSString *)toFileNameString;
-// 艺术家 作者
-- (NSString *)artist;
-</code></pre>
+                    <h2><a id="%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>技术学习资源</h2>
+<h3><a id="sublime%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>sublime学习资源</h3>
+<ul>
+<li><a href="http://www.jianshu.com/p/aa30cc25c91b">Sublime 入门+进阶</a>：<code>http://www.jianshu.com/p/aa30cc25c91b</code></li>
+<li><a href="http://www.jeffjade.com/2015/12/15/2015-04-17-toss-sublime-text/">sublime全解</a>: <code>http://www.jeffjade.com/2015/12/15/2015-04-17-toss-sublime-text/</code></li>
+<li><a href="https://dribbble.com/">Sublime 图标下载</a>: <code>https://dribbble.com/</code></li>
+</ul>
+<h3><a id="markdown%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>MarkDown学习资源</h3>
 
                 </div>
                 <div class="bottom">
-                  <a href="15173790393385.html" class="continue float-right">
+                  <a href="15139059079620.html" class="continue float-right">
                     继续阅读
                   </a>
                 </div>
@@ -275,62 +88,6 @@ typedef void CgUpnpControlPoint;
         </div>
       </div>
       <div class="otherposts row">
-    
-  
-    
-        <div class="col-md-6">
-          <a href="15173774932057.html" class="item">
-            <div class="article normal">
-              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
-              <div class="articleinfo">
-                <div class="headline">DLNA DMS</div>
-                <div class="subtitle">DLNA DMS</div>
-              </div>
-            </div>
-          </a>
-        </div>
-    
-  
-    
-        <div class="col-md-6">
-          <a href="15172908985351.html" class="item">
-            <div class="article normal">
-              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
-              <div class="articleinfo">
-                <div class="headline">iOS设备上实现DLNA功能 Platinum 篇</div>
-                <div class="subtitle">iOS设备上实现DLNA功能 Platinum 篇</div>
-              </div>
-            </div>
-          </a>
-        </div>
-    
-  
-    
-        <div class="col-md-6">
-          <a href="15145327105445.html" class="item">
-            <div class="article normal">
-              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
-              <div class="articleinfo">
-                <div class="headline">佛祖镇楼 bug辟易</div>
-                <div class="subtitle">佛祖镇楼 bug辟易</div>
-              </div>
-            </div>
-          </a>
-        </div>
-    
-  
-    
-        <div class="col-md-6">
-          <a href="15139059079620.html" class="item">
-            <div class="article normal">
-              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
-              <div class="articleinfo">
-                <div class="headline">学习资源网址</div>
-                <div class="subtitle">学习资源网址</div>
-              </div>
-            </div>
-          </a>
-        </div>
     
   
     
@@ -402,12 +159,26 @@ typedef void CgUpnpControlPoint;
           </a>
         </div>
     
+  
+    
+        <div class="col-md-6">
+          <a href="15115332074317.html" class="item">
+            <div class="article normal">
+              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+              <div class="articleinfo">
+                <div class="headline">Xcode 代码块</div>
+                <div class="subtitle">Xcode 代码块</div>
+              </div>
+            </div>
+          </a>
+        </div>
+    
    
   </div>
   <div class="pagenavi">
     <div class="item"><a href="all_8.html">更新文章</a></div>
     <div class="item"> · </div>
-    <div class="item"><a href="all_10.html">旧有文章</a></div>
+    <div class="item">已是最旧一页</div>
   </div>
  </div>
  <script>

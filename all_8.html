@@ -63,30 +63,51 @@
           <div class="col-md-10 main">
             <div class="row">
               <div class="col-md-10 post">
-                <div class="headline"><a href="15261167596297.html">OC 多线程之 GCD知识从基础到进阶 （1）</a></div>
-                <div class="subtitle">OC 多线程之 GCD知识从基础到进阶 （1）</div>
-                <div class="meta"><span class="time">$[timeformat('2018-05-12T17:19:19+08:00')]</span></div>
+                <div class="headline"><a href="15200726964422.html">iOS Block 知识点拾遗</a></div>
+                <div class="subtitle">iOS Block 知识点拾遗</div>
+                <div class="meta"><span class="time">$[timeformat('2018-03-03T18:24:56+08:00')]</span></div>
                 <div class="body">
-                    <h2><a id="%E6%A6%82%E5%BF%B5%E8%AE%A4%E7%9F%A5" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>概念认知</h2>
-<p>基本概念：</p>
+                    <ol>
+<li>
+<p>Block为什么要用copy</p>
 <ul>
-<li>
-<p>GCD 全称 (Grand Center Dispatch),翻译成通俗中文“牛B的中心调度机制”</p>
-</li>
-<li>
-<p>线程：执行任务调度的最小单位</p>
-</li>
-<li>
-<p>任务：就是一段代码，GCD中就是block中的内容。执行任务有两种方式：同步执行（sync）和异步执行（async）。两者的主要区别是：是否等待队列的任务执行结束，以及是否具备开启新线程的能力</p>
-</li>
-<li>
-<p>队列：用来存放任务的线性结构，采用 FIFO（先进先出）的原则。</p>
-</li>
+<li>block在创建的时候默认分配的内存是在栈上，而不是在堆上。这样的话其本身的作用域是属于创建时候的作用域，一旦在创建的作用域之外调用就会导致程序的崩溃。所以使用了copy将其拷贝到堆内存上。</li>
+<li>block创建在栈上，而block的代码中可能会用到本地的一些变量，在栈上可能随时会被系统释放掉，只有将其拷贝到堆上，才能一直保持Block的存在，并用这些外部变量</li>
 </ul>
-
+</li>
+<li>
+<p>Block为什么不用retain</p>
+<ul>
+<li>retain只是增加了一次引用计数，block的内存还是在栈上，并没有存在堆上，存在栈上的block可能随时被系统回收</li>
+</ul>
+</li>
+<li>
+<p>为什么进入block中的对象引用计数需要自动加1？</p>
+<ul>
+<li>Block执行的是回调，因此block并不知道其中的对象obj创建后会在什么时候被释放，为了不在block使用obj之前，对象已经被释放，block就retain了obj一次</li>
+</ul>
+</li>
+<li>
+<p>block和函数的关系</p>
+<ul>
+<li>Block的使用很<strong>像函数指针</strong>，不过与函数最大的不同是Block可以访问函数以外、词法作用域以内的外部变量的值。换句话说，Block不仅 实现函数的功能，还能<strong>携带函数的执行环境</strong>。</li>
+<li>函数指针 <code>void(*fun)(int)</code></li>
+<li>block <code>void(^fun)(int)</code></li>
+</ul>
+</li>
+<li>
+<p>block本质（对于block的理解）<a href="https://www.cnblogs.com/yoon/p/4953618.html">请查阅Block实现原理</a></p>
+<ul>
+<li>block实际上是: 指向结构体的指针</li>
+<li>编译器会将block的内部代码生成对应的函数</li>
+</ul>
+</li>
+<li>
+<p>对于基本数据类型，进入到block中会被当做常量处理。对象 retain 会一次</p>
+ 
                 </div>
                 <div class="bottom">
-                  <a href="15261167596297.html" class="continue float-right">
+                  <a href="15200726964422.html" class="continue float-right">
                     继续阅读
                   </a>
                 </div>
@@ -96,62 +117,6 @@
         </div>
       </div>
       <div class="otherposts row">
-    
-  
-    
-        <div class="col-md-6">
-          <a href="15257437237715.html" class="item">
-            <div class="article normal">
-              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
-              <div class="articleinfo">
-                <div class="headline">OC中的各种遍历</div>
-                <div class="subtitle">OC中的各种遍历</div>
-              </div>
-            </div>
-          </a>
-        </div>
-    
-  
-    
-        <div class="col-md-6">
-          <a href="15253400374602.html" class="item">
-            <div class="article normal">
-              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
-              <div class="articleinfo">
-                <div class="headline">多线程 之 NSThread</div>
-                <div class="subtitle">多线程 之 NSThread</div>
-              </div>
-            </div>
-          </a>
-        </div>
-    
-  
-    
-        <div class="col-md-6">
-          <a href="15222179789382.html" class="item">
-            <div class="article normal">
-              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
-              <div class="articleinfo">
-                <div class="headline">iOS GCD&&多线程</div>
-                <div class="subtitle">iOS GCD&&多线程 </div>
-              </div>
-            </div>
-          </a>
-        </div>
-    
-  
-    
-        <div class="col-md-6">
-          <a href="15200726964422.html" class="item">
-            <div class="article normal">
-              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
-              <div class="articleinfo">
-                <div class="headline">iOS Block 知识点拾遗</div>
-                <div class="subtitle">iOS Block 知识点拾遗</div>
-              </div>
-            </div>
-          </a>
-        </div>
     
   
     
@@ -218,6 +183,62 @@
               <div class="articleinfo">
                 <div class="headline">DLNA DMR</div>
                 <div class="subtitle">DLNA DMR</div>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+  
+    
+        <div class="col-md-6">
+          <a href="15173790393385.html" class="item">
+            <div class="article normal">
+              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+              <div class="articleinfo">
+                <div class="headline">DLNA DMC</div>
+                <div class="subtitle">DLNA DMC</div>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+  
+    
+        <div class="col-md-6">
+          <a href="15173774932057.html" class="item">
+            <div class="article normal">
+              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+              <div class="articleinfo">
+                <div class="headline">DLNA DMS</div>
+                <div class="subtitle">DLNA DMS</div>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+  
+    
+        <div class="col-md-6">
+          <a href="15172908985351.html" class="item">
+            <div class="article normal">
+              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+              <div class="articleinfo">
+                <div class="headline">iOS设备上实现DLNA功能 Platinum 篇</div>
+                <div class="subtitle">iOS设备上实现DLNA功能 Platinum 篇</div>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+  
+    
+        <div class="col-md-6">
+          <a href="15145327105445.html" class="item">
+            <div class="article normal">
+              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+              <div class="articleinfo">
+                <div class="headline">佛祖镇楼 bug辟易</div>
+                <div class="subtitle">佛祖镇楼 bug辟易</div>
               </div>
             </div>
           </a>

@@ -63,71 +63,145 @@
           <div class="col-md-10 main">
             <div class="row">
               <div class="col-md-10 post">
-                <div class="headline"><a href="15450161964215.html">【精选】Mac 手动清理磁盘教程</a></div>
-                <div class="subtitle">【精选】Mac 手动内存清理教程</div>
-                <div class="meta"><span class="time">$[timeformat('2018-12-17T11:09:56+08:00')]</span></div>
+                <div class="headline"><a href="15359519661802.html">iOS CALayer动画</a></div>
+                <div class="subtitle">iOS CALayer动画</div>
+                <div class="meta"><span class="time">$[timeformat('2018-09-03T13:19:26+08:00')]</span></div>
                 <div class="body">
-                    <h2><a id="%E4%B8%80%E3%80%81%E6%9F%A5%E7%9C%8B%E5%86%85%E5%AD%98%E5%8D%A0%E7%94%A8%E6%83%85%E5%86%B5" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>一、查看内存占用情况</h2>
-<p><figure><img src="http://upload-images.jianshu.io/upload_images/412206-4734b7ee4a571010.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image" /><figcaption>image<figcaption></figure></p>
-<h2><a id="%E4%BA%8C%E3%80%81%E7%AE%A1%E7%90%86%E5%86%85%E5%AD%98" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>二、管理内存</h2>
-<p><figure><img src="http://upload-images.jianshu.io/upload_images/412206-fe84152bd070aca0.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image" /><figcaption>image<figcaption></figure></p>
-<h3><a id="1%E3%80%81%E5%BA%9F%E7%BA%B8%E7%AF%93" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1、废纸篓</h3>
-<p>清理非废纸篓的道理我就不废话了吧。</p>
-<h3><a id="2%E3%80%81%E6%B8%85%E7%90%86%E6%96%87%E7%A8%BF" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2、清理文稿</h3>
-<p>按照大小排序 清理文件 优先清理大文件</p>
-<p><figure><img src="http://upload-images.jianshu.io/upload_images/412206-a28b01c486d51b60.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image" /><figcaption>image<figcaption></figure></p>
-<p>如果你是小白，清理玩这些也就差不多了。
-如果你是开发者（Coder），那请您继续：</p>
-<h2><a id="%E4%B8%89%E3%80%81%E6%B8%85%E7%90%86%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD%E7%9A%84%E5%9E%83%E5%9C%BE%E6%96%87%E4%BB%B6" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>三、清理隐藏文件夹 中的垃圾文件</h2>
-<h3><a id="1%E3%80%81%E3%80%90%E6%98%BE%E7%A4%BA%E3%80%91or%E3%80%90%E9%9A%90%E8%97%8F%E3%80%91%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6%E5%A4%B9" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1、【显示】or【隐藏】  隐藏文件夹</h3>
-<ul>
-<li>显示隐藏文件：</li>
-</ul>
-<pre><code class="language-plain_text">defaults write com.apple.finder AppleShowAllFiles -boolean true ; killall Finder
+                    <h2><a id="keypath" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>keyPath</h2>
+<pre><code class="language-plain_text">transform.scale = 比例轉換
+transform.scale.x = 宽的比例轉換
+transform.scale.y = 高的比例轉換
+transform.rotation.z = 平面圖的旋轉
+opacity = 透明度
+margin=边框间隔?
+zPosition = 平面图的位置
+backgroundColor = 背景色
+cornerRadius = layer的角度
+borderWidth = 边框宽度
+contents = 内容?
+bounds = 大小?
+contentsRect = 内容矩形
+frame = 位置
+hidden = 隐藏
+mask = 标记
+maskToBounds
+position = 位置
+shadowOffset = 阴影偏移?
+shadowColor = 阴影颜色
+shadowRadius = 阴影角度
 </code></pre>
+<h2><a id="calayer" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>CALayer</h2>
+<h2><a id="coreanimation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>CoreAnimation</h2>
+<h2><a id="caanimation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>CAAnimation</h2>
+<h3><a id="%E5%9F%BA%E6%9C%AC%E5%B1%9E%E6%80%A7%E8%AF%B4%E6%98%8E" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>基本属性说明</h3>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>duration</td>
+<td>动画持续时间</td>
+</tr>
+<tr>
+<td>repeatCount</td>
+<td>重复次数，无限循环可以设置INFINITY(HUGE_VALF)或者MAXFLOAT</td>
+</tr>
+<tr>
+<td>repeatDuration</td>
+<td>重复时间</td>
+</tr>
+<tr>
+<td>removeOnCompletion</td>
+<td>默认为YES，代表动画执行完毕，从Layer上移除，图形会恢复到动画执行之前的状态。如果想要保持动画最终状态，那就设置为NO，并且fillMode = kCAFillModeForwards；</td>
+</tr>
+<tr>
+<td>fillMode</td>
+<td>当前视图在非active时段的状态比如 动画开始前 动画结束后</td>
+</tr>
+<tr>
+<td>beginTime</td>
+<td>可以用来延迟动画开始时间，让多个动画顺序执行</td>
+</tr>
+<tr>
+<td>timingFuction</td>
+<td>速度控制函数，控制动画运行的节奏</td>
+</tr>
+<tr>
+<td>deleget</td>
+<td>代理</td>
+</tr>
+</tbody>
+</table>
+<h3><a id="fillmode%E8%AF%B4%E6%98%8E" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>fillMode 说明</h3>
 <ul>
-<li>隐藏 隐性文件：</li>
+<li>
+<p><code>kCAFillModeRemoved</code> 这个是默认值，也就是说当动画开始前和动画结束后，动画对layer都没有影响，动画结束后，layer会恢复到之前的状态</p>
+</li>
+<li>
+<p><code>kCAFillModeForwards</code> 当动画结束后，layer会一直保持着动画最后的状态</p>
+</li>
+<li>
+<p><code>kCAFillModeBackwards</code> 在动画开始前，只需要将动画加入了一个layer，layer便立即进入动画的初始状态并等待动画开始。</p>
+</li>
+<li>
+<p><code>kCAFillModeBoth</code> 这个其实就是上面两个的合成.动画加入后开始之前，layer便处于动画初始状态，动画结束后layer保持动画最后的状态</p>
+</li>
 </ul>
-<pre><code class="language-plain_text">defaults write com.apple.finder AppleShowAllFiles -boolean false ; killall Finder
+<h3><a id="%E5%8A%A8%E7%94%BB%E7%9A%84%E6%9A%82%E5%81%9C%E5%92%8C%E6%81%A2%E5%A4%8D" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>动画的暂停 和 恢复</h3>
+<pre><code class="language-plain_text">#pragma - mark 暂停CALayer的动画
+-(void)pauseLayer:(CALayer*)layer
+{
+    CFTimeInterval pausedTime = [layer convertTime:CACurrentMediaTime() fromLayer:nil];
+
+    // 让CALayer的时间停止走动
+      layer.speed = 0.0;
+    // 让CALayer的时间停留在pausedTime这个时刻
+    layer.timeOffset = pausedTime;
+}
+
+#pragma - mark 恢复CALayer的动画
+-(void)resumeLayer:(CALayer*)layer
+{
+    CFTimeInterval pausedTime = layer.timeOffset;
+    // 1. 让CALayer的时间继续行走
+      layer.speed = 1.0;
+    // 2. 取消上次记录的停留时刻
+      layer.timeOffset = 0.0;
+    // 3. 取消上次设置的时间
+      layer.beginTime = 0.0;
+    // 4. 计算暂停的时间(这里也可以用CACurrentMediaTime()-pausedTime)
+    CFTimeInterval timeSincePause = [layer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
+    // 5. 设置相对于父坐标系的开始时间(往后退timeSincePause)
+      layer.beginTime = timeSincePause;
+}
 </code></pre>
-<h3><a id="2%E3%80%81%E8%B6%85%E7%BA%A7%E7%94%A8%E6%88%B7%E7%9A%84%E6%96%87%E4%BB%B6%E6%B8%85%E7%90%86" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2、超级用户的文件清理</h3>
-<h4><a id="%E5%8B%BE%E9%80%89%E2%98%91%EF%B8%8F%E6%98%BE%E7%A4%BA%E4%BE%A7%E8%BE%B9%E6%A0%8F%E4%B8%8A%E7%9A%84%E7%A3%81%E7%9B%98%E3%80%90%E7%A1%AC%E7%9B%98%E3%80%91" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>勾选☑️显示侧边栏上的磁盘 【硬盘】</h4>
-<p><figure><img src="http://upload-images.jianshu.io/upload_images/412206-d0d31f21c6f6a87a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image" /><figcaption>image<figcaption></figure></p>
-<h4><a id="%E6%B8%85%E7%90%86%E5%B7%B2%E5%8D%B8%E8%BD%BDapp%E7%95%99%E4%B8%8B%E7%9A%84%E7%97%95%E8%BF%B9" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>清理已卸载APP留下的痕迹</h4>
-<p>这里需要注意的是，确定已卸载的，没用到的APP痕迹清理掉，不要清理多了，否则会导致部分APP失效。
-比如：我想清理掉所有Adobe系列的APP 以及缓存。
-<figure><img src="http://upload-images.jianshu.io/upload_images/412206-9cac391a841fff2f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image" /><figcaption>image<figcaption></figure></p>
-<h3><a id="1%E3%80%81mac%E5%BD%93%E5%89%8D%E7%94%A8%E6%88%B7%E7%8E%AF%E5%A2%83%E6%B8%85%E7%90%86" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1、Mac 当前用户环境清理</h3>
-<p>Finder 侧边栏找到你的当前账户：
-<figure><img src="http://upload-images.jianshu.io/upload_images/412206-9e82f8b508a2fa1f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image" /><figcaption>image<figcaption></figure></p>
-<p>如果你是安卓开发者、或者混合开发者，请看这里：</p>
-<p><figure><img src="http://upload-images.jianshu.io/upload_images/412206-a76ad6d57a292aaf.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="安卓SDK" /><figcaption>安卓SDK<figcaption></figure></p>
-<p><figure><img src="http://upload-images.jianshu.io/upload_images/412206-51d793f73aa7f519.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="安卓SDK buildTool 版本支持" /><figcaption>安卓SDK buildTool 版本支持<figcaption></figure></p>
-<p>SDK根据自己开发项目选择下载（如果你磁盘够用，那你可以随便下）。</p>
-<p>如果你是iOS开发者请看下一条：</p>
-<h3><a id="2%E3%80%81ios%E5%BC%80%E5%8F%91%E8%80%85%E6%B8%85%E7%90%86%E5%86%85%E5%AE%B9" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2、iOS开发者清理内容</h3>
-<p><code>/Libary(资源库)/Developer</code>   文件夹下</p>
-<h4><a id="%E6%B8%85%E7%90%86%E6%A8%A1%E6%8B%9F%E5%99%A8%E4%B8%8A%E9%9D%A2%E5%AE%89%E8%A3%85app%E7%9A%84%E7%BC%93%E5%AD%98%E6%96%87%E4%BB%B6" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>清理模拟器上面安装APP的缓存文件</h4>
-<p><figure><img src="http://upload-images.jianshu.io/upload_images/412206-e72cb97e3e14504c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="模拟器上APP的缓存文件 沙盒路径" /><figcaption>模拟器上APP的缓存文件 沙盒路径<figcaption></figure></p>
-<h4><a id="%E6%B8%85%E7%90%86%E6%89%93%E5%8C%85%E6%96%87%E4%BB%B6%E7%BC%93%E5%AD%98" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>清理打包文件缓存</h4>
-<p><figure><img src="http://upload-images.jianshu.io/upload_images/412206-a5ba95c90daab824.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Archive 打包发布APP 的临时文件" /><figcaption>Archive 打包发布APP 的临时文件<figcaption></figure></p>
-<h4><a id="%E6%B8%85%E7%90%86%E6%94%AF%E6%8C%81%E8%AE%BE%E5%A4%87%E7%B3%BB%E7%BB%9F%E7%89%88%E6%9C%AC" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>清理支持设备系统版本</h4>
-<p><figure><img src="http://upload-images.jianshu.io/upload_images/412206-6df62dc27ca8e1dd.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="支持的模拟器的系统版本 老版本的可以删除掉了" /><figcaption>支持的模拟器的系统版本 老版本的可以删除掉了<figcaption></figure></p>
-<h4><a id="%E6%B8%85%E7%90%86%E8%80%81%E7%89%88%E6%9C%ACxcode%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6%E9%81%97%E7%95%99" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>清理老版本Xcode安装插件遗留</h4>
-<p><figure><img src="http://upload-images.jianshu.io/upload_images/412206-d1a2332e70a3eef6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="只有Xcode老用户才会有这个吧" /><figcaption>只有Xcode老用户才会有这个吧<figcaption></figure></p>
-<h4><a id="%E6%B8%85%E7%90%86%E9%82%A3%E4%BA%9B%E5%8F%AA%E5%AE%89%E8%A3%85%E5%9C%A8%E5%BD%93%E5%89%8D%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E4%B8%8B%E7%9A%84app%E7%BC%93%E5%AD%98" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>清理那些只安装在当前用户权限下的APP缓存</h4>
-<p>在这里，通过APP的boundleID 大概的能推断出哪些是你自己可清理的APP缓存吧？</p>
-<p><figure><img src="http://upload-images.jianshu.io/upload_images/412206-24de398150dfa0e4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="/资源库/Application Script" /><figcaption>/资源库/Application Script<figcaption></figure></p>
-<p>清理 Application Support:
-这里根据自己情况看看哪些是自己不再需要的APP，遗留下来的垃圾文件，有选择性的清理下。</p>
-<p><figure><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fy9owaimynj30de0c3wgg.jpg" alt="/资源库/Application Support" /><figcaption>/资源库/Application Support<figcaption></figure></p>
-<h4><a id="%E6%B8%85%E7%90%86%E7%8E%AF%E5%A2%83%E7%BC%93%E5%AD%98%EF%BC%88%E6%AF%94%E5%A6%82jenkins%EF%BC%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>清理环境缓存 （比如Jenkins）</h4>
-<p>如果你不想再使用Jenkins环境了（你可能还会有别的环境），那么这里可以清理掉了：
-<figure><img src="http://upload-images.jianshu.io/upload_images/412206-fac3ca55a37edcd3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image" /><figcaption>image<figcaption></figure></p>
+<h2><a id="cabasicanimation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>CABasicAnimation</h2>
+<h2><a id="cakeyframeanimation%E5%85%B3%E9%94%AE%E5%B8%A7%E5%8A%A8%E7%94%BB" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>CAKeyframeAnimation 关键帧动画</h2>
+<h2><a id="caanimationgroup%E5%8A%A8%E7%94%BB%E7%BB%84" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>CAAnimationGroup 动画组</h2>
+<h2><a id="%E8%B4%9D%E5%A1%9E%E5%B0%94%E6%9B%B2%E7%BA%BF" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>贝塞尔曲线</h2>
+<h2><a id="%E5%BC%B9%E6%80%A7%E5%8A%A8%E7%94%BBcaspringanimation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>弹性动画 CASpringAnimation</h2>
+<pre><code class="language-plain_text">CASpringAnimation *springAnimation = [CASpringAnimation animationWithKeyPath:@&quot;transform.scale&quot;];
+springAnimation.damping = 7;// 阻尼系数(学过物理的都知道)
+springAnimation.stiffness = 100;// 刚度系数（形变后产生弹力的大小的系数。刚度系数越大，弹力越大）
+springAnimation.mass = 1;// 惯性系数 代表物体质量
+springAnimation.initialVelocity = 2.0;// 初始速度 0 初始速度与运动方向一致 负数，初始速度与运动方向不一致
+springAnimation.fromValue = @0;// 初始动画改变属性的值
+springAnimation.toValue = @1;// 最终动画改变属性的值
+springAnimation.duration = 2.0;// 动画时长「敲黑板，划重点！这个很重要」
+[self.layer addAnimation:springAnimation forKey:@&quot;springScale&quot;];
+</code></pre>
+<h2><a id="%E7%89%B9%E6%AE%8A%E7%9A%84layer%E5%AE%9E%E7%8E%B0%E7%89%B9%E6%AE%8A%E5%8A%A8%E7%94%BB" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>特殊的Layer实现特殊动画</h2>
+<h3><a id="catransition" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>CATransition</h3>
+<h3><a id="careplicatorlayer" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>CAReplicatorLayer</h3>
+<h3><a id="caemitterlayer%E7%B2%92%E5%AD%90%E5%BC%95%E6%93%8E" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>CAEmitterLayer 粒子引擎</h3>
 
                 </div>
                 <div class="bottom">
-                  <a href="15450161964215.html" class="continue float-right">
+                  <a href="15359519661802.html" class="continue float-right">
                     继续阅读
                   </a>
                 </div>
@@ -137,62 +211,6 @@
         </div>
       </div>
       <div class="otherposts row">
-    
-  
-    
-        <div class="col-md-6">
-          <a href="15397592871272.html" class="item">
-            <div class="article normal">
-              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
-              <div class="articleinfo">
-                <div class="headline">iOS 竖屏NavigationController present 到只支持横屏的界面 版本解析</div>
-                <div class="subtitle">iOS 竖屏NavigationController present 到只支持横屏的界面 版本解析</div>
-              </div>
-            </div>
-          </a>
-        </div>
-    
-  
-    
-        <div class="col-md-6">
-          <a href="15395963175730.html" class="item">
-            <div class="article normal">
-              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
-              <div class="articleinfo">
-                <div class="headline">iOS 转场动画 全解析</div>
-                <div class="subtitle">iOS 转场动画 全解析</div>
-              </div>
-            </div>
-          </a>
-        </div>
-    
-  
-    
-        <div class="col-md-6">
-          <a href="15374957318613.html" class="item">
-            <div class="article normal">
-              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
-              <div class="articleinfo">
-                <div class="headline">iOS开发之 【奇巧淫技篇】</div>
-                <div class="subtitle">iOS开发之 【奇巧淫技篇】</div>
-              </div>
-            </div>
-          </a>
-        </div>
-    
-  
-    
-        <div class="col-md-6">
-          <a href="15359519661802.html" class="item">
-            <div class="article normal">
-              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
-              <div class="articleinfo">
-                <div class="headline">iOS CALayer动画</div>
-                <div class="subtitle">iOS CALayer动画</div>
-              </div>
-            </div>
-          </a>
-        </div>
     
   
     
@@ -259,6 +277,62 @@
               <div class="articleinfo">
                 <div class="headline">iOS tableView 滚动到指定行/段  以及遇到的bug 指南</div>
                 <div class="subtitle">iOS tableView 滚动到指定行/段  以及遇到的bug 指南</div>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+  
+    
+        <div class="col-md-6">
+          <a href="15261167596297.html" class="item">
+            <div class="article normal">
+              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+              <div class="articleinfo">
+                <div class="headline">OC 多线程之 GCD知识从基础到进阶 （1）</div>
+                <div class="subtitle">OC 多线程之 GCD知识从基础到进阶 （1）</div>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+  
+    
+        <div class="col-md-6">
+          <a href="15257437237715.html" class="item">
+            <div class="article normal">
+              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+              <div class="articleinfo">
+                <div class="headline">OC中的各种遍历</div>
+                <div class="subtitle">OC中的各种遍历</div>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+  
+    
+        <div class="col-md-6">
+          <a href="15253400374602.html" class="item">
+            <div class="article normal">
+              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+              <div class="articleinfo">
+                <div class="headline">多线程 之 NSThread</div>
+                <div class="subtitle">多线程 之 NSThread</div>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+  
+    
+        <div class="col-md-6">
+          <a href="15222179789382.html" class="item">
+            <div class="article normal">
+              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+              <div class="articleinfo">
+                <div class="headline">iOS GCD&&多线程</div>
+                <div class="subtitle">iOS GCD&&多线程 </div>
               </div>
             </div>
           </a>
