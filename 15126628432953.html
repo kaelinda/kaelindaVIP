@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      iOS代码检测入坑记事 - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="代码检测, iOS, Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/15126628432953.html" />
+      <meta property="og:title" content="iOS代码检测入坑记事" />
+      
+        <meta property="og:description" content="iOS代码检测入坑记事" />
+        <meta name="description" content="iOS代码检测入坑记事" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2017-12-08T00:07:23+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="15126628432953.html">iOS代码检测入坑记事</a></div>
+              <div class="subtitle">iOS代码检测入坑记事</div>
+              <div class="meta"><span class="time">$[timeformat('2017-12-08T00:07:23+08:00')]</span><br><span class="tags"><a href="tag_%E4%BB%A3%E7%A0%81%E6%A3%80%E6%B5%8B.html">#代码检测</a><a href="tag_iOS.html">#iOS</a></span></div>
+              <div class="body">
+                  <h2><a id="%E6%88%91%E6%8E%A5%E8%A7%A6%E7%9A%84%E4%BB%A3%E7%A0%81%E6%A3%80%E6%B5%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>我接触的代码检测</h2>
+<ul>
+<li>OCLint + xcpretty</li>
+<li>sonar</li>
+<li>infer</li>
+</ul>
+<h3><a id="infer" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>infer</h3>
+<ul>
+<li><a href="https://infer.liaohuqiu.net">infer官网 传送门</a></li>
+</ul>
+<p><em>具体使用</em></p>
+<pre><code class="language-plain_text">infer -- xcodebuild -target &lt;target name&gt; -configuration &lt;build configuration&gt; -sdk iphonesimulator
+</code></pre>
+<span id="more"></span><!-- more -->
+<p><em>例如：</em></p>
+<pre><code class="language-plain_text">#分析之前先把之前的build缓存清理下
+xcodebuild -workspace HIGHTONG_Public.xcworkspace -scheme HIGHTONG_Jktv -configuration Debug -sdk iphoneos11.0
+
+#根据自己醒目名字使用infer 命令进行分析
+infer -- xcodebuild -workspace HIGHTONG_Public.xcworkspace -scheme HIGHTONG_Jktv -configuration Debug -sdk iphoneos11.0
+</code></pre>
+<p><em>infer的优势</em></p>
+<ul>
+<li>安装过程简洁，不需要过多的配置（前提是电脑之前安装过Homebrow）</li>
+<li>使用方便，只需要一行命令</li>
+</ul>
+<h3><a id="sonar" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>sonar</h3>
+<p>Sonar 是一个用于代码质量管理的开放平台。通过插件机制，Sonar 可以集成不同的测试工具，代码分析工具，以及持续集成工具。相比于Jenkins ，sonar更关注代码的变化，通过量化的方式度量代码变化。</p>
+<p>如果不需要持续集成，sonar只需要两个配置文件就可以进行代码的静态检测。</p>
+<ul>
+<li>安装： <code>brew install sonar</code></li>
+<li>配置文件修改 <code>run-sonar.sh</code> <code>sonar-project.properties</code></li>
+<li>执行run-sonar.sh脚本，检测代码</li>
+</ul>
+<p><em>资源下载</em></p>
+<pre><code class="language-plain_text">* [run-sonar.sh](https://raw.githubusercontent.com/octo-technology/sonar-objective-c/master/src/main/shell/run-sonar.sh)
+
+* [sonar-project.properties](https://raw.githubusercontent.com/octo-technology/sonar-objective-c/master/sample/sonar-project.properties)
+</code></pre>
+<p><em>参考资源</em></p>
+<pre><code class="language-plain_text">* [IOS-Sonar代码质量监控](http://www.jianshu.com/p/f58e89573d33)
+
+* [[实践]Sonar Xcode8兼容](https://my.oschina.net/ChenTF/blog/806565)
+
+* [iOS Sonar集成流程详解](http://www.jianshu.com/p/74bee59fef1c)
+
+* [基于Sonar的iOS代码质量检测系统](http://www.jianshu.com/p/6b61783b9a38)
+
+* [IOS测试之sonar检查ios代码质量](http://blog.csdn.net/itfootball/article/details/45058591)
+</code></pre>
+<h3><a id="oclint-xcpretty" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>OCLint + xcpretty</h3>
+<ul>
+<li>安装xcpretty</li>
+</ul>
+<pre><code class="language-plain_text">sudo gem install xcpretty
+</code></pre>
+<ul>
+<li>安装OCLint
+<pre><code class="language-plain_text">brew tap oclint/formulae
+
+brew install oclint
+</code></pre>
+</li>
+<li>根目录下 运行脚本：</li>
+</ul>
+<pre><code class="language-plain_text">#清理
+xcodebuild clean
+#生成JSON文件 用于分析
+xcodebuild  -workspace demo.xcworkspace -scheme demo -configuration Debug \
+| tee xcodebuild.log \
+| xcpretty -r json-compilation-database -o compile_commands.json
+#OCLint 分析（根据一定规则进行分析）
+oclint-json-compilation-database -v \
+-e Pods \
+-e MGLivenessDetection \
+-e MGBaseKit \
+-e MGIDCard \
+oclint_args -- -report-type html -o oclintReport.html \
+-disable-rule ObjCAssignIvarOutsideAccessors \
+-disable-rule ShortVariableName \
+-rc=MINIMUM_CASES_IN_SWITCH=3 \
+-rc=CYCLOMATIC_COMPLEXITY=10 \
+-rc=LONG_CLASS=700 \
+-rc=LONG_LINE=200 \
+-rc=NCSS_METHOD=40 \
+-rc=NESTED_BLOCK_DEPTH=5 \
+-rc=TOO_MANY_FIELDS=20 \
+-rc=TOO_MANY_METHODS=30 \
+-rc=TOO_MANY_PARAMETERS=6
+# oclint_args -- -report-type xcode \
+</code></pre>
+<p>高级用法，代码检测规则：</p>
+<ul>
+<li><a href="http://www.jianshu.com/p/4f505e92d557">iOS使用OCLint做静态代码分析</a></li>
+<li><a href="http://www.cocoachina.com/ios/20170928/20669.html">让XCode自动CodeReview你的代码-OCLint使用</a></li>
+<li><a href="https://blog.yourtion.com/static-code-analysis-ios-using-oclint.html">iOS静态代码扫描</a>  <a href="https://blog.yourtion.com/static-code-analysis-ios-using-oclint.html">原文链接</a></li>
+</ul>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

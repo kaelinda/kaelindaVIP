@@ -63,51 +63,81 @@
           <div class="col-md-10 main">
             <div class="row">
               <div class="col-md-10 post">
-                <div class="headline"><a href="15341646765442.html">网络是怎样连接的</a></div>
-                <div class="subtitle">网络是怎样连接的--读书笔记</div>
-                <div class="meta"><span class="time">$[timeformat('2018-08-13T20:51:16+08:00')]</span></div>
+                <div class="headline"><a href="16340038102685.html">音视频学习笔记 1</a></div>
+                <div class="subtitle">我要学音视频！</div>
+                <div class="meta"><span class="time">$[timeformat('2021-10-12T09:56:50+08:00')]</span></div>
                 <div class="body">
-                    <h2><a id="%E7%94%9F%E6%88%90http%E8%AF%B7%E6%B1%82%E4%BF%A1%E6%81%AF" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>生成HTTP请求信息</h2>
-<p>URL种类：<code>http:</code> <code>ftp:</code> <code>file:</code> <code>mailto:</code> <code>news:</code></p>
-<p>URL组成：协议 + 用户名(可省略) + 密码(省略) + 服务器域名 + 端口号(可省略) + 文件路径名</p>
-<p><figure><img src="https://ws2.sinaimg.cn/large/0069RVTdly1fu8d5d2w7jj313e19atf8.jpg" alt="" /></figure></p>
-<h3><a id="%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>网络请求</h3>
-<p><figure><img src="https://ws1.sinaimg.cn/large/0069RVTdly1fu8fexsc00j313a10ewp6.jpg" alt="" /></figure></p>
-<h3><a id="http" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>HTTP</h3>
+                    <h2><a id="%E9%9F%B3%E8%A7%86%E9%A2%91%E6%A6%82%E5%BF%B5" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>音视频概念</h2>
+<h3><a id="%E5%A3%B0%E9%9F%B3%E7%9A%84%E7%89%A9%E7%90%86%E6%80%A7%E8%B4%A8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>声音的物理性质</h3>
 <ul>
-<li><code>URI</code>：Uniform Resource Identifier，统一资源标识符</li>
-<li><code>CGI</code>：对 Web 服务器程序调用其他程序的规则所做的定义就是 CGI</li>
-</ul>
-<h3><a id="dns%E6%9C%8D%E5%8A%A1%E5%99%A8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>DNS服务器</h3>
-<p>DNS查询服务包含下面三部分：</p>
+<li>
+<p>声波三要素：频率、振幅、波形</p>
+</li>
+<li>
+<p>人耳听到的频率范围 20Hz-20KHz</p>
+</li>
+<li>
+<p>声音在空气中的传播速度 340m/s、蒸馏水中1497m/s、铁棒5200m/s</p>
+</li>
+<li>
+<p>一般声音的采样频率为 44.1KHz---&gt; 一秒钟采样44100次，这样 超过人耳听到的最大频率--20KHz的频率也能被数字化</p>
+</li>
+<li>
+<p>音频的裸数据格式 脉冲编码调制  PCM （Pluse Code Modulation）</p>
+</li>
+<li>
+<p>PCM 相关概念：</p>
 <ul>
-<li><code>域名</code>：服务器、邮件服务器(邮件地址中 @ 后面的部分)的名称</li>
-<li><code>Class</code>：在最早设计 DNS 方案时，DNS 在互联网以外的其他网络中的应用也被考虑到了，而 Class 就是用来识别网络的信息。不过，如今除了互联网并没有其他的网络了，因此 Class 的值永远是代表互联网的 IN</li>
-<li><code>记录类型</code>:表示域名对应何种类型的记录。例如，当类型为 A 时，表示域名 对应的是 IP 地址;当类型为 MX 时，表示域名对应的是邮件服务 器。对于不同的记录类型，服务器向客户端返回的信息也会不同</li>
+<li>量化格式(sampleFormate):有的地方称作 <strong>位深度</strong>，这个描述的是一个采样的大小，一般为2字节</li>
+<li>采样频率(sampleRate)：一般为44.1kHz</li>
+<li>声道数(channel):声道数通常为 2 声道</li>
 </ul>
-<p><figure><img src="https://ws2.sinaimg.cn/large/0069RVTdly1fubcsxb3lzj318812ualm.jpg" alt="DNS服务器的基本工作" /><figcaption>DNS服务器的基本工作<figcaption></figure></p>
-<p><strong>敲黑板，划重点！！！</strong></p>
+</li>
+</ul>
+<!--more-->
 <blockquote>
-<p>上级 DNS 服务器保管着所有下级 DNS 服务器的信息，所以我们可以从根域开始一路往下顺藤摸瓜找到任意 一个域的 DNS 服务器；
-根域的 DNS 服务器信息保存在互联网中所有的 DNS 服务器中，任何 DNS 服务器就都可 以找到并访问根域 DNS 服务器了。</p>
+<p>一般CD的音质描述：量化格式为16比特（2字节），采样频率44100Hz,声道数2。</p>
 </blockquote>
-<p>协议栈传输数据：</p>
-<ol>
-<li>服务器一方创建套接字，等待客户端向该套接字连接管道 (创建套接字阶段)</li>
-<li>客户端创建一个套接字，然后从该套接字伸出管道去连接服务端的套接字 (创建套接字阶段 、连接套接字阶段)</li>
-<li>客户端套接字 和 服务端套接字建立连接以后就可以传输网络数据了（数字信息 digital data）(通信阶段)</li>
-<li>断开通道、删除套接字 (断开阶段)</li>
-</ol>
-<p><figure><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fup9h6snmhj316s0zg7ah.jpg" alt="" /></figure></p>
+<p>声音格式我们可以用<strong>数据比特率</strong>来描述其大小：每秒占用空间大小。</p>
+<blockquote>
+<p>44100 * 16 * 2 = 1378.125kbps</p>
+</blockquote>
+<p>一分钟里这种音质的CD占据多大存储空间？</p>
+<blockquote>
+<p>1378.125 * 60 / 8 / 1024 = 10.09MB</p>
+</blockquote>
+<p>量化格式如果更精确，每一个采样所携带的信息就越多，占用的存储空间就会越大，能描述的声音细节就越精细。</p>
 <ul>
-<li>描述符:应用程序用来识别套接字的机制</li>
-<li>IP 地址和端口号:客户端和服务器之间用来识别对方套接字的机制
-<figure><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fupfvmg5jwj31j40x60xr.jpg" alt="" /></figure></li>
+<li>分贝：是描述声音强度的单位。</li>
 </ul>
+<h3><a id="%E9%9F%B3%E9%A2%91%E7%BC%96%E7%A0%81" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>音频编码</h3>
+<p>音频压缩编码的指标：压缩比，通常小于1，否则就没有压缩的必要了。</p>
+<p>音频压缩编码算法有：PCM、WAV、AAC、MP3、Ogg。</p>
+<ul>
+<li>WAV：音频质量好，大多数软件都支持，但是占用空间大；适合当做多媒体开发的中间文件，保存音乐、音效素材</li>
+<li>MP3：不错的压缩比，LAME编码中高码率文件。音质在128Kbit/s 以上表现不错，压缩比高，大多数软件都支持。适合高比特率下对兼容性有要求的音乐欣赏。</li>
+<li>AAC：包括LC-AAC、HE-AAC、HE-AAC v2,小于128Kbit/s表现优异。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: center">LC-AAC</th>
+<th style="text-align: center">HE-AAC</th>
+<th style="text-align: center">HE-AAC v2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center">中高码率&gt;80Kbit/s</td>
+<td style="text-align: center">中低码率&lt;=80Kbit/s</td>
+<td style="text-align: center">低码率&lt;48Kbit/s</td>
+</tr>
+</tbody>
+</table>
 
                 </div>
                 <div class="bottom">
-                  <a href="15341646765442.html" class="continue float-right">
+                  <a href="16340038102685.html" class="continue float-right">
                     继续阅读
                   </a>
                 </div>
@@ -121,11 +151,11 @@
   
     
         <div class="col-md-6">
-          <a href="15168925544178.html" class="item">
+          <a href="16336595298050.html" class="item">
             <div class="article normal">
               <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
               <div class="articleinfo">
-                <div class="headline">从零开始学习使用 vuex</div>
+                <div class="headline">Alfred 修改内置Terminal为Iterm2</div>
                 
               </div>
             </div>
@@ -135,13 +165,12 @@
   
     
         <div class="col-md-6">
-          <a href="15151216159291.html" class="item">
+          <a href="16325811812741.html" class="item">
             <div class="article normal">
               <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
               <div class="articleinfo">
-                <div class="headline">给安卓项目添加启动图</div>
-                <div class="subtitle">给安卓项目添加启动图
-</div>
+                <div class="headline">Python环境安装</div>
+                
               </div>
             </div>
           </a>
@@ -150,12 +179,12 @@
   
     
         <div class="col-md-6">
-          <a href="15139057022845.html" class="item">
+          <a href="15409691048860.html" class="item">
             <div class="article normal">
               <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
               <div class="articleinfo">
-                <div class="headline">Rect-Native 之 Promise 深入浅出从入门到精通</div>
-                <div class="subtitle">Rect-Native 中针对 Promise的理解和探索</div>
+                <div class="headline">【Swift笔记】引用计数</div>
+                
               </div>
             </div>
           </a>
@@ -164,12 +193,12 @@
   
     
         <div class="col-md-6">
-          <a href="15137645005542.html" class="item">
+          <a href="15402889434646.html" class="item">
             <div class="article normal">
               <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
               <div class="articleinfo">
-                <div class="headline">ES6 笔记（Array）</div>
-                <div class="subtitle">ES6中针对Array的理解和探索</div>
+                <div class="headline">Swift中类（Class）和 结构体（Struct）</div>
+                
               </div>
             </div>
           </a>
@@ -178,12 +207,12 @@
   
     
         <div class="col-md-6">
-          <a href="15137627946753.html" class="item">
+          <a href="15341646765442.html" class="item">
             <div class="article normal">
               <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
               <div class="articleinfo">
-                <div class="headline">ES6 笔记（常量&&变量）</div>
-                <div class="subtitle">ES6中常量和变量笔记</div>
+                <div class="headline">网络是怎样连接的</div>
+                <div class="subtitle">网络是怎样连接的--读书笔记</div>
               </div>
             </div>
           </a>
@@ -192,12 +221,12 @@
   
     
         <div class="col-md-6">
-          <a href="15137621729153.html" class="item">
+          <a href="15282021908171.html" class="item">
             <div class="article normal">
               <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
               <div class="articleinfo">
-                <div class="headline">ES6笔记（解构赋值）</div>
-                <div class="subtitle">ES6-解构赋值</div>
+                <div class="headline">Alfred workflow 教程</div>
+                <div class="subtitle">Alfred workflow 教程</div>
               </div>
             </div>
           </a>
@@ -206,12 +235,12 @@
   
     
         <div class="col-md-6">
-          <a href="15115315701641.html" class="item">
+          <a href="15232599795686.html" class="item">
             <div class="article normal">
               <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
               <div class="articleinfo">
-                <div class="headline">React Native 集成 Redux</div>
-                <div class="subtitle">React Native 集成 Redux</div>
+                <div class="headline">每天学习一个shell技能（8）</div>
+                
               </div>
             </div>
           </a>
@@ -220,12 +249,26 @@
   
     
         <div class="col-md-6">
-          <a href="14948260667614.html" class="item">
+          <a href="15226648731246.html" class="item">
             <div class="article normal">
               <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
               <div class="articleinfo">
-                <div class="headline">SectionListView</div>
-                <div class="subtitle">RN中SectionListView组件的使用说明</div>
+                <div class="headline">每天学习一个shell技能（7）</div>
+                
+              </div>
+            </div>
+          </a>
+        </div>
+    
+  
+    
+        <div class="col-md-6">
+          <a href="15226603064743.html" class="item">
+            <div class="article normal">
+              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+              <div class="articleinfo">
+                <div class="headline">每天学习一个shell技能（6）</div>
+                
               </div>
             </div>
           </a>
@@ -236,7 +279,7 @@
   <div class="pagenavi">
     <div class="item">已是最新一页</div>
     <div class="item"> · </div>
-    <div class="item">已是最旧一页</div>
+    <div class="item"><a href="all_1.html">旧有文章</a></div>
   </div>
  </div>
  <script>

@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      UIVisualEffectView iOS8以后的毛玻璃效果实现 - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/16336625003411.html" />
+      <meta property="og:title" content="UIVisualEffectView iOS8以后的毛玻璃效果实现" />
+      
+        <meta property="og:description" content="UIVisualEffectView iOS8以后的毛玻璃效果实现" />
+        <meta name="description" content="UIVisualEffectView iOS8以后的毛玻璃效果实现" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2021-10-08T11:08:20+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="16336625003411.html">UIVisualEffectView iOS8以后的毛玻璃效果实现</a></div>
+              <div class="subtitle">UIVisualEffectView iOS8以后的毛玻璃效果实现</div>
+              <div class="meta"><span class="time">$[timeformat('2021-10-08T11:08:20+08:00')]</span><br><span class="tags"></span></div>
+              <div class="body">
+                  <h2><a id="%E5%85%88%E7%9C%8B%E4%B8%80%E4%B8%8B%E7%AE%80%E5%8D%95%E7%9A%84%E4%BD%BF%E7%94%A8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>先看一下简单的使用</h2>
+<pre><code class="language-plain_text">
+// 创建一个特效对象
+UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+
+// 创建一个毛玻璃视图
+UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+blurView.clipsToBounds = YES;
+blurView.layer.borderColor = [[UIColor blackColor] colorWithAlphaComponent:0.4f].CGColor;
+blurView.layer.borderWidth = 1.0;
+blurView.layer.cornerRadius = 6.0;
+
+// label
+UILabel *label = [[UILabel alloc] init];
+label.textColor = [UIColor colorWithWhite:0.4f alpha:1.0f];
+
+// add the label to effect view
+[blurView.contentView addSubview:label];
+</code></pre>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      OC基础知识总结 一 - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/16336626477924.html" />
+      <meta property="og:title" content="OC基础知识总结 一" />
+      
+        <meta property="og:description" content="OC基础知识总结 一" />
+        <meta name="description" content="OC基础知识总结 一" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2021-10-08T11:10:47+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="16336626477924.html">OC基础知识总结 一</a></div>
+              <div class="subtitle">OC基础知识总结 一</div>
+              <div class="meta"><span class="time">$[timeformat('2021-10-08T11:10:47+08:00')]</span><br><span class="tags"></span></div>
+              <div class="body">
+                  <h1><a id="%E4%B8%80%E3%80%81nsobject%E5%AF%B9%E8%B1%A1" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>一、 NSobject对象</h1>
+<ol>
+<li><code>NSobject</code>的本质类型是基于c,c++的<code>结构体</code>形式</li>
+<li>系统分配了16个字节NSobject对象（通过malloc_size函数获得），但是内部只使用8个字节的空间(64bit环境下，通过class_getInstanceSize函数获得)，class_getInstanceSize创建类需要的大小，malloc_size实际分配的大小</li>
+<li>Objective-C中的对象，简称OC对象，主要可以分为3种：instance对象（实例对象）、class对象（类对象）、meta-class对象（元类对象）</li>
+<li>instance的isa指向class：当调用对象方法时，通过instance的isa找到class，最后找到对象方法的实现进行调用
+class的isa指向meta-class：当调用类方法时，通过class的isa找到meta-class，最后找到类方法的实现进行调用：meta-class对象的isa指向基类的meta-class对象<br />
+class的superclass指向父类的class：如果没有父类，superclass指针为nil
+meta-class的superclass指向父类的meta-class：基类的meta-class的superclass指向基类的class
+instance调用对象方法的轨迹：isa找到class，方法不存在，就通过superclass找父类
+class调用类方法的轨迹：isa找meta-class，方法不存在，就通过superclass找父类
+<figure><img src="https://ws1.sinaimg.cn/large/006tKfTcly1g1od3zosiej30la096my6.jpg" alt="" /></figure></li>
+<li>struct objc_class的结构
+<figure><img src="https://ws4.sinaimg.cn/large/006tKfTcly1g1od4jatf6j30n20aqabv.jpg" alt="" /></figure></li>
+</ol>
+<h1><a id="%E4%BA%8C%E3%80%81kvo" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>二、 KVO</h1>
+<ol>
+<li>KVO的全称是Key-Value Observing，俗称“键值监听”，可以用于监听某个对象属性值的改变</li>
+<li>为啥会被修改属性值会被监听到，本质是对象指向类的对象变化(runtime动态生成的)，isa指向了NSnotifying_...然后去找Foundtion框架的_NSSet...ValueAndNotify函数
+<figure><img src="https://ws2.sinaimg.cn/large/006tKfTcly1g1plgvu9w8j30n20b4wfu.jpg" alt="" /></figure></li>
+<li>_NSSet*ValueAndNotify的内部实现
+willChangeValueForKey:
+父类原来的setter
+didChangeValueForKey:内部会调用observer的observeValueForKeyPath:ofObject:change:context:方法</li>
+</ol>
+<h1><a id="%E4%B8%89%E3%80%81kvc" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>三、 KVC</h1>
+<ol>
+<li>KVC的全称是Key-Value Coding，俗称“键值编码”，可以----通过一个key来访问某个属性</li>
+<li>常见的API有：</li>
+</ol>
+<ul>
+<li>(void)setValue:(id)value forKeyPath:(NSString *)keyPath;</li>
+<li>(void)setValue:(id)value forKey:(NSString *)key;</li>
+<li>(id)valueForKeyPath:(NSString *)keyPath;</li>
+<li>(id)valueForKey:(NSString *)key;</li>
+</ul>
+<ol start="3">
+<li>setValue—会触发kvo,按照setKey:、_setKey查找，没有找到的话，继续查找accessInstanceVariablesDirectly，_key、_isKey、key、isKey查找成员变量，若没查到，报异常。
+getValue— 按照getKey:、key、isKey、_key查找，没有找到的话，继续查找accessInstanceVariablesDirectly，_key、_isKey、key、isKey查找成员变量，若没查到，报异常。</li>
+</ol>
+<h1><a id="%E5%9B%9B%E3%80%81category" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>四、 Category</h1>
+<ol>
+<li>Category类方法均被存储在同一个类中，元类方法也被存储在自己的元类方法中。Category底层结构是struct category_t,里面有分类的对象方法、类方法、属性、协议信息。</li>
+<li>分类是运行时，会把数据合并到类信息中
+类扩展是编译时数据已包含在类中（把.h中的文件放到.m中）</li>
+<li>+load
++load会在runtime加载类、分类时调用，在程序运行过程中只调用一次
++load的调用顺序：先调用类再调用分类，调用的先后顺序按照编译的先后顺序（先编译，后调用）, 调用子类的+load之前会先调用父类的+load</li>
+<li>Initialize
+initialize会在类第一次接受消息后调用，initialize是通过objc_msgSend进行调用，如果子类没有实现initialize，会调用父类（父类可能被调用多次）
+(先初始化父类，再初始化子类，每个类只会初始化1次)
+如果分类实现了+initialize，就覆盖本身的+initialize调用。
+一般先调用父类，再调用子类。</li>
+<li>默认情况下，因为分类底层结构的限制，不能添加成员变量到分类中。但可以通过关联对象来间接实现,  关联对象提供了以下API:
+添加关联对象
+void objc_setAssociatedObject(id object, const void * key,
+id value, objc_AssociationPolicy policy)
+获得关联对象
+id objc_getAssociatedObject(id object, const void * key)
+移除所有的关联对象
+void objc_removeAssociatedObjects(id object)</li>
+<li>关联对象原理
+关联对象可以理解为间接的添加成员变量
+设置关联对象：void objc_setAssociatedObject(id object, const void * key, id value, objc_AssociationPolicy policy)
+关联对象主要有AssociationsManager、AssociationsHashMap（object）、AssociationsMap（key）、ObjectAssociation(uintptr_t _policy、id _value)
+<figure><img src="https://ws4.sinaimg.cn/large/006tKfTcly1g1plhnzlxgj30n20ckac4.jpg" alt="" /></figure></li>
+</ol>
+<h1><a id="%E4%BA%94%E3%80%81block" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>五、 Block</h1>
+<ol>
+<li>block是oc对象，有isa指针。_ <em>NSGlobalBlock</em> _ : _ _NSGlobalBlock : NSBlock : NSobject
+block是封装了函数调用以及函数调用环境的OC对象</li>
+<li>内存分配形式：
+<figure><img src="https://ws3.sinaimg.cn/large/006tKfTcly1g1pli0hnc5j30a406e0sv.jpg" alt="" /></figure></li>
+</ol>
+<p><figure><img src="https://ws3.sinaimg.cn/large/006tKfTcly1g1pliejayzj30is04g3z6.jpg" alt="" /></figure></p>
+<ol start="3">
+<li>
+<p>在ARC环境下，编译器会根据情况自动将栈上的block复制到堆上，比如以下情况</p>
+<ul>
+<li>
+<p>block作为函数返回值时</p>
+</li>
+<li>
+<p>将block赋值给__strong指针时</p>
+</li>
+<li>
+<p>block作为Cocoa API中方法名含有usingBlock的方法参数时</p>
+</li>
+<li>
+<p>block作为GCD API的方法参数时</p>
+</li>
+<li>
+<p>ARC下block属性的建议写法</p>
+<pre><code class="language-plain_text">@property (strong, nonatomic) void (^block)(void);
+@property (copy, nonatomic) void (^block)(void);
+</code></pre>
+<ul>
+<li>MRC下block属性的建议写法</li>
+</ul>
+<p><code>@property (copy, nonatomic) void (^block)(void);</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>当block内部访问了对象类型的auto变量时，如果block是在栈上，将不会对auto变量产生强引用
+如果block被拷贝到堆上
+会调用block内部的copy函数  copy函数内部会调用_Block_object_assign函数
+_Block_object_assign函数会根据auto变量的修饰符（__strong、__weak、__unsafe_unretained）做出相应的操作，形成强引用（retain）或者弱引用</p>
+</li>
+</ol>
+<p>如果block从堆上移除
+会调用block内部的dispose函数  dispose函数内部会调用_Block_object_dispose函数
+_Block_object_dispose函数会自动释放引用的auto变量（release）
+5.  __block修饰符</p>
+<p><figure><img src="https://ws3.sinaimg.cn/large/006tKfTcly1g1pliu119rj30kq09wmyf.jpg" alt="" /></figure></p>
+<ol start="6">
+<li>循环引用：对象引用block, block 又引用对象。
+解决循环引用问题：用__weak、__unsafe_unretained解决
+用__block解决（必须要调用block）</li>
+</ol>
+<p><figure><img src="https://ws4.sinaimg.cn/large/006tKfTcly1g1pljgas1tj309c02c74a.jpg" alt="" /></figure>
+<figure><img src="https://ws3.sinaimg.cn/large/006tKfTcly1g1pljk0e85j309802c0sq.jpg" alt="" /></figure>
+<figure><img src="https://ws3.sinaimg.cn/large/006tKfTcly1g1pljo4z02j309c02mq30.jpg" alt="" /></figure>
+<figure><img src="https://ws2.sinaimg.cn/large/006tKfTcly1g1pljrw723j308402mq2t.jpg" alt="" /></figure></p>
+<p>六、 Runtime</p>
+<ol>
+<li>oc的消息机制
+OC中的方法调用其实都是转成了objc_msgSend函数的调用，给receiver（方法调用者）发送了一条消息（selector方法名）
+objc_msgSend底层有3大阶段：消息发送（当前类、父类中查找）、动态方法解析、消息转发</li>
+<li>Runtime
+OC是一门动态性比较强的编程语言，允许很多操作推迟到程序运行时再进行
+OC的动态性就是由Runtime来支撑和实现的，Runtime是一套C语言的API，封装了很多动态性相关的函数
+平时编写的OC代码，底层都是转换成了Runtime API进行调用</li>
+<li>Runtime具体应用
+利用关联对象（AssociatedObject）给分类添加属性
+遍历类的所有成员变量（修改textfield的占位文字颜色、字典转模型、自动归档解档）
+交换方法实现（交换系统的方法）
+利用消息转发机制解决方法找不到的异常问题</li>
+<li>isa指针
+要想学习Runtime，首先要了解它底层的一些常用数据结构，比如isa指针
+在arm64架构之前，isa就是一个普通的指针，存储着Class、Meta-Class对象的内存地址
+从arm64架构开始，对isa进行了优化，变成了一个共用体（union）结构，还使用位域来存储更多的信息</li>
+</ol>
+<p><figure><img src="https://ws1.sinaimg.cn/large/006tKfTcly1g1plkymo21j309a07mdg9.jpg" alt="" /></figure></p>
+<p>Nonpointer：0，代表普通的指针，存储着Class、Meta-Class对象的内存地址，1，代表优化过，使用位域存储更多的信息
+has_assoc：是否有设置过关联对象，如果没有，释放时会更快
+has_cxx_dtor：是否有C++的析构函数（.cxx_destruct），如果没有，释放时会更快
+shiftcls：存储着Class、Meta-Class对象的内存地址信息
+magic：用于在调试时分辨对象是否未完成初始化
+weakly_referenced：是否有被弱引用指向过，如果没有，释放时会更快
+deallocating：对象是否正在释放
+extra_rc：里面存储的值是引用计数器减1
+has_sidetable_rc：引用计数器是否过大无法存储在isa中，如果为1，那么引用计数会存储在一个叫SideTable的类的属性中
+5． 消息发送</p>
+<p><figure><img src="https://ws4.sinaimg.cn/large/006tKfTcly1g1pllnz478j30n20aign7.jpg" alt="" /></figure></p>
+<ol start="6">
+<li>动态方法解析</li>
+</ol>
+<p><figure><img src="https://ws1.sinaimg.cn/large/006tKfTcly1g1pllu817jj30n209u3zm.jpg" alt="" /></figure></p>
+<p>7．消息转发</p>
+<p><figure><img src="https://ws4.sinaimg.cn/large/006tKfTcly1g1plm6xjxcj30n20ae75n.jpg" alt="" /></figure></p>
+<p>七、 RunLoop</p>
+<ol>
+<li>运行循环:在程序运行过程中循环做一些事情
+应用范畴:定时器（Timer）、PerformSelector；GCD Async Main Queue；事件响应、手势识别、界面刷新；网络请求；AutoreleasePool</li>
+<li>RunLoop的基本作用</li>
+</ol>
+<p><figure><img src="https://ws3.sinaimg.cn/large/006tKfTcly1g1plmlvm81j30oo07wmyd.jpg" alt="" /></figure></p>
+<ol start="3">
+<li>RunLoop与线程
+每条线程都有唯一的一个与之对应的RunLoop对象
+RunLoop保存在一个全局的Dictionary里，线程作为key，RunLoop作为value
+线程刚创建时并没有RunLoop对象，RunLoop会在第一次获取它时创建
+RunLoop会在线程结束时销毁
+主线程的RunLoop已经自动获取（创建），子线程默认没有开启RunLoop</li>
+<li>RunLoop相关的类</li>
+</ol>
+<p><figure><img src="https://ws4.sinaimg.cn/large/006tKfTcly1g1plmxf2m4j30n20ag765.jpg" alt="" /></figure></p>
+<p>CFRunLoopModeRef代表RunLoop的运行模式
+一个RunLoop包含若干个Mode，每个Mode又包含若干个Source0/Source1/Timer/Observer
+RunLoop启动时只能选择其中一个Mode，作为currentMode
+如果需要切换Mode，只能退出当前Loop，再重新选择一个Mode进入
+不同组的Source0/Source1/Timer/Observer能分隔开来，互不影响
+如果Mode里没有任何Source0/Source1/Timer/Observer，RunLoop会立马退出
+常见的2种Mode：
+kCFRunLoopDefaultMode（NSDefaultRunLoopMode）：App的默认Mode，通常主线程是在这个Mode下运行
+UITrackingRunLoopMode：界面跟踪 Mode，用于 ScrollView 追踪触摸滑动，保证界面滑动时不受其他 Mode 影响
+5. 添加Observer监听RunLoop的所有状态
+<figure><img src="https://ws2.sinaimg.cn/large/006tKfTcly1g1pln4lkk5j30n2096myf.jpg" alt="" /></figure>
+6. RunLoop的运行逻辑
+<figure><img src="https://ws1.sinaimg.cn/large/006tKfTcly1g1plne9o4uj30n20b0jtn.jpg" alt="" /></figure>
+八、 多线程</p>
+<ol>
+<li>常见的多线程
+<figure><img src="https://ws4.sinaimg.cn/large/006tKfTcly1g1plnmf2nkj30n20butaj.jpg" alt="" /></figure></li>
+<li>GCD中有2个用来执行任务的函数
+用同步的方式执行任务：dispatch_sync(dispatch_queue_t queue, dispatch_block_t block);
+queue：队列   block：任务
+用异步的方式执行任务：dispatch_async(dispatch_queue_t queue, dispatch_block_t block);
+GCD的队列可以分为2大类型
+并发队列（Concurrent Dispatch Queue）：可以让多个任务并发（同时）执行（自动开启多个线程同时执行任务）  并发功能只有在异步（dispatch_async）函数下才有效
+串行队列（Serial Dispatch Queue）让任务一个接着一个地执行（一个任务执行完毕后，再执行下一个任务）
+同步和异步主要影响：能不能开启新的线程
+同步：在当前线程中执行任务，不具备开启新线程的能力
+异步：在新的线程中执行任务，具备开启新线程的能力
+并发和串行主要影响：任务的执行方式
+并发：多个任务并发（同时）执行
+串行：一个任务执行完毕后，再执行下一个任务
+<figure><img src="https://ws2.sinaimg.cn/large/006tKfTcly1g1plo2dlvtj30gm052wf7.jpg" alt="" /></figure></li>
+</ol>
+<p>使用sync函数往当前串行队列中添加任务，会卡住当前的串行队列（产生死锁）
+3. 加锁的类型
+OSSpinLock、os_unfair_lock、pthread_mutex、dispatch_semaphore、dispatch_queue(DISPATCH_QUEUE_SERIAL)、NSLock、NSRecursiveLock、NSCondition、NSConditionLock、@synchronized</p>
+<ol>
+<li>
+<p>OSSpinLock
+OSSpinLock叫做”自旋锁”，等待锁的线程会处于忙等（busy-wait）状态，一直占用着CPU资源
+目前已经不再安全，可能会出现优先级反转问题
+如果等待锁的线程优先级较高，它会一直占用着CPU资源，优先级低的线程就无法释放锁
+需要导入头文件#import &lt;libkern/OSAtomic.h&gt;
+<figure><img src="https://ws1.sinaimg.cn/large/006tKfTcly1g1plof35gkj30n204wgmc.jpg" alt="" /></figure></p>
+</li>
+<li>
+<p>os_unfair_lock
+os_unfair_lock用于取代不安全的OSSpinLock ，从iOS10开始才支持
+从底层调用看，等待os_unfair_lock锁的线程会处于休眠状态，并非忙等
+需要导入头文件#import &lt;os/lock.h&gt;
+<figure><img src="https://ws4.sinaimg.cn/large/006tKfTcly1g1plokx2fbj30ee03sglx.jpg" alt="" /></figure></p>
+</li>
+<li>
+<p>pthread_mutex
+mutex叫做”互斥锁”，等待锁的线程会处于休眠状态 需要导入头文件#import &lt;pthread.h&gt;
+<figure><img src="https://ws1.sinaimg.cn/large/006tKfTcly1g1qcly4gfzj30f407qq3v.jpg" alt="" /></figure>
+<figure><img src="https://ws2.sinaimg.cn/large/006tKfTcly1g1qcm5n3p2j30n203et97.jpg" alt="" /></figure>
+pthread_mutex ? 条件
+<figure><img src="https://ws3.sinaimg.cn/large/006tKfTcly1g1qcmm4gg5j30gi0b075w.jpg" alt="" /></figure></p>
+</li>
+<li>
+<p>NSLock、NSRecursiveLock
+NSLock是对mutex普通锁的封装
+<figure><img src="https://ws3.sinaimg.cn/large/006tKfTcly1g1qcmxn5mbj30n204wwf7.jpg" alt="" /></figure>
+NSRecursiveLock也是对mutex递归锁的封装，API跟NSLock基本一致</p>
+</li>
+<li>
+<p>NSCondition
+NSCondition是对mutex和cond的封装
+<figure><img src="https://ws2.sinaimg.cn/large/006tKfTcly1g1qcn1aelvj30n203474q.jpg" alt="" /></figure></p>
+</li>
+<li>
+<p>NSConditionLock
+NSConditionLock是对NSCondition的进一步封装，可以设置具体的条件值</p>
+</li>
+<li>
+<p>dispatch_semaphore
+semaphore叫做”信号量”
+信号量的初始值，可以用来控制线程并发访问的最大数量
+信号量的初始值为1，代表同时只允许1条线程访问资源，保证线程同步</p>
+</li>
+</ol>
+<p>8&gt;.@synchronized
+@synchronized是对mutex递归锁的封装
+源码查看：objc4中的objc-sync.mm文件
+@synchronized(obj)内部会生成obj对应的递归锁，然后进行加锁、解锁操作</p>
+<ol start="4">
+<li>自旋锁、互斥锁比较</li>
+</ol>
+<p>什么情况使用自旋锁比较划算？
+预计线程等待锁的时间很短
+加锁的代码（临界区）经常被调用，但竞争情况很少发生
+CPU资源不紧张
+多核处理器
+什么情况使用互斥锁比较划算？
+预计线程等待锁的时间较长
+单核处理器
+临界区有IO操作
+临界区代码复杂或者循环量大
+临界区竞争非常激烈</p>
+<ol start="5">
+<li>
+<p>atomic用于保证属性setter、getter的原子性操作，相当于在getter和setter内部加了线程同步的锁
+可以参考源码objc4的objc-accessors.mm
+它并不能保证使用属性的过程是线程安全的
+九、 内存管理</p>
+</li>
+<li>
+<p>CADisplayLink、NSTimer会对target产生强引用，如果target又对它们产生强引用，那么就会引发循环引用，解决方案：使用block</p>
+</li>
+<li>
+<p>NSTimer依赖于RunLoop，如果RunLoop的任务过于繁重，可能会导致NSTimer不准时
+而GCD的定时器会更加准时</p>
+</li>
+<li>
+<p>Tagged Pointer
+从64bit开始，iOS引入了Tagged Pointer技术，用于优化NSNumber、NSDate、NSString等小对象的存储
+在没有使用Tagged Pointer之前， NSNumber等对象需要动态分配内存、维护引用计数等，NSNumber指针存储的是堆中NSNumber对象的地址值
+使用Tagged Pointer之后，NSNumber指针里面存储的数据变成了：Tag + Data，也就是将数据直接存储在了指针中
+当指针不够存储数据时，才会使用动态分配内存的方式来存储数据
+objc_msgSend能识别Tagged Pointer，比如NSNumber的intValue方法，直接从指针提取数据，节省了以前的调用开销
+如何判断一个指针是否为Tagged Pointer？
+iOS平台，最高有效位是1（第64bit）  Mac平台，最低有效位是1</p>
+</li>
+<li>
+<p>oc对象内存管理
+在iOS中，使用引用计数来管理OC对象的内存
+一个新创建的OC对象引用计数默认是1，当引用计数减为0，OC对象就会销毁，释放其占用的内存空间
+调用retain会让OC对象的引用计数+1，调用release会让OC对象的引用计数-1
+内存管理的经验总结
+当调用alloc、new、copy、mutableCopy方法返回了一个对象，在不需要这个对象时，要调用release或者autorelease来释放它
+想拥有某个对象，就让它的引用计数+1；不想再拥有某个对象，就让它的引用计数-1
+可以通过以下私有函数来查看自动释放池的情况
+extern void _objc_autoreleasePoolPrint(void);</p>
+</li>
+<li>
+<p>copy和mutableCopy</p>
+</li>
+</ol>
+<p>6． 自动释放池
+自动释放池的主要底层数据结构是：__AtAutoreleasePool、AutoreleasePoolPage
+调用了autorelease的对象最终都是通过AutoreleasePoolPage对象来管理的
+每个AutoreleasePoolPage对象占用4096字节内存，除了用来存放它内部的成员变量，剩下的空间用来存放autorelease对象的地址
+所有的AutoreleasePoolPage对象通过双向链表的形式连接在一起
+AutoreleasePoolPage的结构
+调用push方法会将一个POOL_BOUNDARY入栈，并且返回其存放的内存地址
+调用pop方法时传入一个POOL_BOUNDARY的内存地址，会从最后一个入栈的对象开始发送release消息，直到遇到这个POOL_BOUNDARY
+id *next指向了下一个能存放autorelease对象地址的区域<br />
+7.  Runloop和Autorelease
+iOS在主线程的Runloop中注册了2个Observer
+第1个Observer监听了kCFRunLoopEntry事件，会调用objc_autoreleasePoolPush()
+第2个Observer
+监听了kCFRunLoopBeforeWaiting事件，会调用objc_autoreleasePoolPop()、objc_autoreleasePoolPush()
+监听了kCFRunLoopBeforeExit事件，会调用objc_autoreleasePoolPop()
+十、 性能优化</p>
+<ol>
+<li>在屏幕成像的过程中，CPU和GPU起着至关重要的作用
+CPU（Central Processing Unit，中央处理器）：对象的创建和销毁、对象属性的调整、布局计算、文本的计算和排版、图片的格式转换和解码、图像的绘制（Core Graphics）
+GPU（Graphics Processing Unit，图形处理器）：纹理的渲染
+在iOS中是双缓冲机制，有前帧缓存、后帧缓存</li>
+<li>卡顿产生：当GPU和CPU的时间总和大于垂直信号来的过程
+卡顿解决的主要思路
+尽可能减少CPU、GPU资源消耗
+按照60FPS的刷帧率，每隔16ms就会有一次VSync信号</li>
+<li>卡顿优化 ? CPU
+尽量用轻量级的对象，比如用不到事件处理的地方，可以考虑使用CALayer取代UIView
+不要频繁地调用UIView的相关属性，比如frame、bounds、transform等属性，尽量减少不必要的修改
+尽量提前计算好布局，在有需要时一次性调整对应的属性，不要多次修改属性
+Autolayout会比直接设置frame消耗更多的CPU资源
+图片的size最好刚好跟UIImageView的size保持一致
+控制一下线程的最大并发数量
+尽量把耗时的操作放到子线程
+文本处理（尺寸计算、绘制）
+图片处理（解码、绘制）
+卡顿优化 ? GPU
+尽量避免短时间内大量图片的显示，尽可能将多张图片合成一张进行显示
+GPU能处理的最大纹理尺寸是4096x4096，一旦超过这个尺寸，就会占用CPU资源进行处理，所以纹理尽量不要超过这个尺寸
+尽量减少视图数量和层次
+减少透明的视图（alpha&lt;1），不透明的就设置opaque为YES
+尽量避免出现离屏渲染</li>
+<li>离屏渲染
+在OpenGL中，GPU有2种渲染方式
+On-Screen Rendering：当前屏幕渲染，在当前用于显示的屏幕缓冲区进行渲染操作
+Off-Screen Rendering：离屏渲染，在当前屏幕缓冲区以外新开辟一个缓冲区进行渲染操作
+离屏渲染消耗性能的原因
+需要创建新的缓冲区
+离屏渲染的整个过程，需要多次切换上下文环境，先是从当前屏幕（On-Screen）切换到离屏（Off-Screen）；等到离屏渲染结束以后，将离屏缓冲区的渲染结果显示到屏幕上，又需要将上下文环境从离屏切换到当前屏幕
+哪些操作会触发离屏渲染？
+光栅化，layer.shouldRasterize = YES
+遮罩，layer.mask
+圆角，同时设置layer.masksToBounds = YES、layer.cornerRadius大于0
+考虑通过CoreGraphics绘制裁剪圆角，或者叫美工提供圆角图片
+阴影，layer.shadowXXX
+如果设置了layer.shadowPath就不会产生离屏渲染
+5．耗电
+来源：CPU处理，Processing、网络，Networking、定位，Location、图像，Graphics
+优化：尽可能降低CPU、GPU功耗；少用定时器
+优化I/O操作
+尽量不要频繁写入小数据，最好批量一次性写入
+读写大量重要数据时，考虑用dispatch_io，其提供了基于GCD的异步操作文件I/O的API。用dispatch_io系统会优化磁盘访问
+数据量比较大的，建议使用数据库（比如SQLite、CoreData）
+网络优化
+减少、压缩网络数据，如果多次请求的结果是相同的，尽量使用缓存
+使用断点续传，否则网络不稳定时可能多次传输相同的内容
+网络不可用时，不要尝试执行网络请求
+让用户可以取消长时间运行或者速度很慢的网络操作，设置合适的超时时间
+批量传输，比如，下载视频流时，不要传输很小的数据包，直接下载整个文件或者一大块一大块地下载。如果下载广告，一次性多下载一些，然后再慢慢展示。如果下载电子邮件，一次下载多封，不要一封一封地下载
+定位优化
+如果只是需要快速确定用户位置，最好用CLLocationManager的requestLocation方法。定位完成后，会自动让定位硬件断电
+如果不是导航应用，尽量不要实时更新位置，定位完毕就关掉定位服务
+尽量降低定位精度，比如尽量不要使用精度最高的kCLLocationAccuracyBest
+需要后台定位时，尽量设置pausesLocationUpdatesAutomatically为YES，如果用户不太可能移动的时候系统会自动暂停位置更新
+尽量不要使用startMonitoringSignificantLocationChanges，优先考虑startMonitoringForRegion:
+硬件检测优化
+用户移动、摇晃、倾斜设备时，会产生动作(motion)事件，这些事件由加速度计、陀螺仪、磁力计等硬件检测。在不需要检测的场合，应该及时关闭这些硬件</li>
+<li>启动APP时，runtime所做的事情有
+调用map_images进行可执行文件内容的解析和处理
+在load_images中调用call_load_methods，调用所有Class和Category的+load方法
+进行各种objc结构的初始化（注册Objc类牎⒊跏蓟喽韵蟮鹊龋
+调用C++静态初始化器和__attribute__((constructor))修饰的函数
+到此为止，可执行文件和动态库中所有的符号(Class，Protocol，Selector，IMP，)都已经按格式成功加载到内存中，被runtime 所管理</li>
+<li>启动APP时，main
+APP的启动由dyld主导，将可执行文件加载到内存，顺便加载所有依赖的动态库
+并由runtime负责加载成objc定义的结构
+所有初始化工作结束后，dyld就会调用main函数
+接下来就是UIApplicationMain函数，AppDelegate的application:didFinishLaunchingWithOptions:方法</li>
+<li>APP的启动优化
+按照不同的阶段
+Dyld：减少动态库、合并一些动态库（定期清理不必要的动态库）
+减少Objc类、分类的数量、减少Selector数量（定期清理不必要的类、分类）
+减少C++虚函数数量
+Swift尽量使用struct
+Runtime：用+initialize方法和dispatch_once取代所有的__attribute__((constructor))、C++静态构造器、ObjC的+load
+Main：在不影响用户体验的前提下，尽可能将一些操作延迟，不要全部都放在finishLaunching方法中
+按需加载</li>
+</ol>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      钉钉机器人 - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/16336618777988.html" />
+      <meta property="og:title" content="钉钉机器人" />
+      
+        <meta property="og:description" content="钉钉机器人" />
+        <meta name="description" content="钉钉机器人" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2021-10-08T10:57:57+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="16336618777988.html">钉钉机器人</a></div>
+              <div class="subtitle">钉钉机器人</div>
+              <div class="meta"><span class="time">$[timeformat('2021-10-08T10:57:57+08:00')]</span><br><span class="tags"></span></div>
+              <div class="body">
+                  <pre><code class="language-plain_text">curl 'https://oapi.dingtalk.com/robot/send?access_token=8c022fd6586126b80994e1b551ce31ab6ee56ed045c47c51c8ab0192c723cb1e' \
+   -H 'Content-Type: application/json' \
+   -d '{
+			&quot;msgtype&quot;: &quot;text&quot;,
+			&quot;text&quot;: {
+             &quot;content&quot;: &quot;高考iOS最新安装包 ipa--https://fir.im/lgk&quot;
+        },
+			&quot;at&quot;: {
+        	&quot;atMobiles&quot;: [
+                &quot;15718808963&quot;,
+                &quot;13241411941&quot;,
+                &quot;13466778405&quot;,
+                &quot;13716307872&quot;
+        ],
+        &quot;isAtAll&quot;: false
+		}
+      }'
+</code></pre>
+<p>参数说明：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>参数类型</th>
+<th>必须</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>msgtype</td>
+<td>String</td>
+<td>是</td>
+<td>消息类型，此时固定为：text</td>
+</tr>
+<tr>
+<td>content</td>
+<td>String</td>
+<td>是</td>
+<td>消息内容</td>
+</tr>
+<tr>
+<td>atMobiles</td>
+<td>Array</td>
+<td>否</td>
+<td>被@人的手机号(在content里添加@人的手机号)</td>
+</tr>
+<tr>
+<td>isAtAll</td>
+<td>bool</td>
+<td>否</td>
+<td>@所有人时：true，否则为：false</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-bash">#!/bin/sh
+
+
+# -----------------&gt; 基本信息配置区
+# 工程名称
+kProjectName=&quot;ipa.xcodeproj&quot;
+# scheme名称
+kSchemeName=&quot;ipa&quot;
+# target 这里scheme只对应了一个target运行；如果有多个target需要制定target
+kTargetName=&quot;ipa&quot;
+# APP环境配置
+kConfiguration=&quot;Release&quot;
+# archive导出路径
+kArchivePath=&quot;./ipaOutput/${kSchemeName}.xcarchive&quot;
+# ipa导出路径
+kExport_ipa_Path=&quot;./ipaOutput/${kSchemeName}&quot;
+# 不同的打包方式这个导出文件不同
+kExportOptionsPlist=&quot;./ipaOutput/ExportOptions.plist&quot;
+
+kAppChangelog=&quot;kael-我是版本更新信息&quot;
+
+# ------------------&gt; 打包区
+# clean
+xcodebuild  clean -configuration &quot;$configuration&quot; -alltargets
+
+# archive project
+xcodebuild archive -project &quot;$kProjectName&quot; -scheme &quot;$kSchemeName&quot; -configuration &quot;$kConfiguration&quot; -archivePath &quot;$kArchivePath&quot;
+
+# archive workspace
+# #xcodebuild  archive  -workspace &quot;$workspaceName&quot; -scheme &quot;$scheme&quot; -configuration  &quot;$kConfiguration&quot;  -archivePath &quot;$kArchivePath&quot;  
+
+# 导出ipa
+xcodebuild -exportArchive -archivePath &quot;$kArchivePath&quot; -exportOptionsPlist &quot;$kExportOptionsPlist&quot; -exportPath &quot;$kExport_ipa_Path&quot;
+
+# --------------&gt; 检测IPA存在否
+ipa_path=&quot;${kExport_ipa_Path}/${kSchemeName}.ipa&quot;
+
+if [ -f &quot;$ipa_path&quot; ]
+	then
+		echo &quot;------------ipa存在😁......&quot;
+	else
+		echo &quot;------------ipa不存在😭......&quot;
+		exit 1
+fi
+
+# --------- firm 上传配置
+
+echo &quot;请选择登录账户名：\n 1）kael 自己的fir账户（默认） \n 2）公司的fir账户&quot;
+
+read fir_token
+
+if [[ $fir_token == 2 ]]; then
+  #公司账号
+  fir_token=&quot;bab4a513ef576e49dceb3abe9e9b028a&quot;
+else
+  # 自己的账号
+  fir_token=&quot;b3bb54eca50a2545d0a6044cb19a616a&quot;
+fi
+# 钉钉机器人🤖
+DD_access_token=&quot;8c022fd6586126b80994e1b551ce31ab6ee56ed045c47c51c8ab0192c723cb1e&quot;
+
+fir publish ${ipa_path} -T $fir_token -c $kAppChangelog -D $DD_access_token
+
+# -------- pgy 上传
+
+echo &quot;------------准备发布蒲公英------------&quot;
+#&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;蒲公英
+#蒲公英账号
+pgy_API_Key=&quot;ed34bd49e37a2a2943918d18b1489a71&quot;
+pgy_User_Key=&quot;878381aa4356d997c1c4c7bb27649807&quot;
+
+
+#蒲公英发布
+curl -F &quot;file=@$ipa_path&quot; \
+-F &quot;uKey=$pgy_User_Key&quot; \
+-F &quot;_api_key=$pgy_API_Key&quot; \
+-F &quot;updateDescription=$kAppChangelog&quot; \
+https://www.pgyer.com/apiv1/app/upload
+
+
+#钉钉群通知相关人员
+curl 'https://oapi.dingtalk.com/robot/send?access_token=8c022fd6586126b80994e1b551ce31ab6ee56ed045c47c51c8ab0192c723cb1e' \
+   -H 'Content-Type: application/json' \
+   -d '{
+            &quot;msgtype&quot;: &quot;text&quot;,
+            &quot;text&quot;: {
+             &quot;content&quot;: &quot;高考iOS最新安装包 ipa&quot;
+        },
+            &quot;at&quot;: {
+            &quot;atMobiles&quot;: [
+                &quot;15718808963&quot;,
+                &quot;13241411941&quot;,
+                &quot;13466778405&quot;,
+                &quot;13716307872&quot;
+        ],
+        &quot;isAtAll&quot;: false
+        }
+      }'
+
+</code></pre>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

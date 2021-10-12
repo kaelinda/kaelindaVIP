@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      数组排序之 NSOrderedAscending 和 NSOrderedDescending - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/16322770901249.html" />
+      <meta property="og:title" content="数组排序之 NSOrderedAscending 和 NSOrderedDescending" />
+      
+        <meta property="og:description" content="数组排序之 NSOrderedAscending 和 NSOrderedDescending" />
+        <meta name="description" content="数组排序之 NSOrderedAscending 和 NSOrderedDescending" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2021-09-22T10:18:10+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="16322770901249.html">数组排序之 NSOrderedAscending 和 NSOrderedDescending</a></div>
+              <div class="subtitle">数组排序之 NSOrderedAscending 和 NSOrderedDescending</div>
+              <div class="meta"><span class="time">$[timeformat('2021-09-22T10:18:10+08:00')]</span><br><span class="tags"></span></div>
+              <div class="body">
+                  <h1><a id="%E7%9C%8B%E6%BA%90%E7%A0%81" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>看源码</h1>
+<pre><code class="language-objc">/*
+ These constants are used to indicate how items in a request are ordered, from the first one given in a method invocation or function call to the last (that is, left to right in code).
+ 
+ Given the function:
+   NSComparisonResult f(int a, int b)
+ 
+ If:
+    a &lt; b   then return NSOrderedAscending. The left operand is smaller than the right operand.
+    a &gt; b   then return NSOrderedDescending. The left operand is greater than the right operand.
+    a == b  then return NSOrderedSame. The operands are equal.
+*/
+// 注意！！ 这里的升序降序指的是 按照 index 升序降序
+typedef NS_CLOSED_ENUM(NSInteger, NSComparisonResult) {
+    NSOrderedAscending = -1L,// 升序排列
+    NSOrderedSame,// 相等
+    NSOrderedDescending// 降序排列
+};
+
+typedef NSComparisonResult (^NSComparator)(id obj1, id obj2);
+</code></pre>
+<span id="more"></span><!-- more -->
+<h1><a id="%E6%8E%A2%E7%B4%A2" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>探索</h1>
+<pre><code class="language-objc">[self testSortedArrayFuntoinWithType:NSOrderedAscending];
+[self testSortedArrayFuntoinWithType:NSOrderedSame];
+[self testSortedArrayFuntoinWithType:NSOrderedDescending];
+
+- (void)testSortedArrayFuntoinWithType:(NSComparisonResult)type {
+    NSLog(@&quot;------&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&quot;);
+    NSArray *array = @[@1,@8,@4,@5,@2,@3];
+    NSMutableArray *mutableArray1 = [NSMutableArray arrayWithArray:array];
+    NSMutableArray *mutableArray2 = [NSMutableArray arrayWithArray:array];
+    NSMutableArray *mutableArray3 = [NSMutableArray arrayWithArray:array];
+    NSArray *stringArray = @[@&quot;name&quot;,@&quot;age&quot;,@&quot;sex&quot;,@&quot;height&quot;,@&quot;weight&quot;,@&quot;namy&quot;];
+    NSArray *mixArray = @[@&quot;name&quot;,@8,@1,@&quot;age&quot;,@&quot;sex&quot;,@5,@&quot;height&quot;,@&quot;2&quot;,@&quot;3&quot;];
+    NSArray *numArray = @[@&quot;1&quot;,@&quot;8&quot;,@&quot;4&quot;,@&quot;5&quot;,@&quot;2&quot;,@&quot;3&quot;];
+
+    NSArray *mixArray1 = [mixArray sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        return type;
+    }];
+    
+    NSArray *numArray1 = [numArray sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        return type;
+    }];
+    
+    NSLog(@&quot;字符传+数值 混合顺序：mixArray1%@\n--String数值顺序：numArray1%@&quot;,mixArray1,numArray1);
+    
+    NSArray *sourtArray1 = [stringArray sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        //        将数组中的字符串升序排列
+        return type;
+    }];
+    
+    NSLog(@&quot;字符串顺序：sourArray1%@&quot;,sourtArray1);
+    
+    [mutableArray1 sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        //        将数组中的对象升序排列
+        return type;
+    }];
+    
+    NSLog(@&quot;NSNumber 顺序：mutableArray1%@&quot;,mutableArray1);
+    NSLog(@&quot;------&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&quot;);
+}
+</code></pre>
+<h2><a id="nsorderedascending%E5%92%8C-nsorderedsame" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>NSOrderedAscending 和 NSOrderedSame</h2>
+<p><code>NSOrderedAscending</code> 和 <code>NSOrderedSame</code> 保持数组的<strong>排序不变</strong>.</p>
+<h2><a id="nsordereddescending" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>NSOrderedDescending</h2>
+<p>当返回值为<code>NSOrderedDescending</code>时，会<strong>按照index降序排列</strong>，或者说是将数组<strong>逆序</strong>。</p>
+<blockquote>
+<p>综上所述，<code>NSComparisonResult</code>类型的枚举值 会根据index进行排序，并不是根据 value进行排序。</p>
+</blockquote>
+<p><strong>那我们如果想根据 value 进行 升序 或者 降序排列 该如何操作？</strong></p>
+<h1><a id="%E9%92%88%E5%AF%B9value%E6%8E%92%E5%BA%8F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>针对 value 排序</h1>
+<pre><code class="language-objc">// 升序
+[mutableArray3 sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+    if ([obj1 compare:obj2] == NSOrderedAscending) {
+        return NSOrderedAscending;
+    }else {
+        return NSOrderedDescending;
+    }
+}];
+NSLog(@&quot;NSNumber 数值升序：mutableArray3%@&quot;,mutableArray3);
+
+// 降序
+[mutableArray3 sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+    if ([obj1 compare:obj2] != NSOrderedAscending) {
+        return NSOrderedAscending;
+    }else {
+        return NSOrderedDescending;
+    }
+    
+}];
+NSLog(@&quot;NSNumber 数值降序：mutableArray3%@&quot;,mutableArray3);
+
+// 针对字符串 升序排列
+NSArray *sourtArray2 = [stringArray sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+    return [obj1 compare:obj2];
+}];
+    
+NSLog(@&quot;字符串排序 ：sourArray2%@&quot;,sourtArray2);
+</code></pre>
+<p>打印结果</p>
+<hr />
+<pre><code class="language-objc">NSNumber 数值升序：mutableArray3(
+    1,
+    2,
+    3,
+    4,
+    5,
+    8
+)
+NSNumber 数值降序：mutableArray3(
+    8,
+    5,
+    4,
+    3,
+    2,
+    1
+)
+字符串排序 ：sourArray2(
+    age,
+    height,
+    name,
+    namy,
+    sex,
+    weight
+)
+</code></pre>
+<h1><a id="%E9%81%BF%E5%9D%91" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>避坑</h1>
+<p>需要注意的是，当数组内的数据元素是混合类型（并非单一一种数据类型）时，这里会出现<strong>crash</strong>！</p>
+<pre><code class="language-objc">NSArray *mixArray = @[@3,@&quot;name&quot;,@8,@1,@&quot;age&quot;,@&quot;sex&quot;,@5,@&quot;height&quot;,@&quot;2&quot;,@&quot;3&quot;];
+    
+NSArray *sourtArray2 = [mixArray sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+    return [obj1 compare:obj2];
+}];
+
+// crash 打印结果
+[__NSCFConstantString objCType]: unrecognized selector sent to instance 0x104b98268
+Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: '-[__NSCFConstantString objCType]: unrecognized selector sent to instance 0x104b98268'
+*** First throw call stack:
+(0x18ae9b298 0x19ebf5480 0x18adaa2a8 0x18ae9d8f4 0x18ae9f89c 0x18c1dbd28 0x104b90a68 0x18ae2d978 0x18ae2da08 0x18ae2da08 0x18ae2d4e8 0x18ad84414 0x104b905fc 0x104b9027c 0x18d074e80 0x18d079438 0x18cfc0f3c 0x18cfc1248 0x18cfc210c 0x18cfc3490 0x18cfa64c4 0x18dc3e6d4 0x18e0b4424 0x18e0babac 0x18e0c616c 0x18e00e578 0x18e0392c8 0x18d75c6c8 0x18ae1a650 0x18ae198e4 0x18ae14074 0x18ae13818 0x1a1519570 0x18d73f0e8 0x18d744664 0x104b929e8 0x18aaf2140)
+libc++abi: terminating with uncaught exception of type NSException
+*** Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: '-[__NSCFConstantString objCType]: unrecognized selector sent to instance 0x104b98268'
+terminating with uncaught exception of type NSException
+</code></pre>
+<p>所以我们在使用该方法进行数组元素排序时，记得<strong>判断下数据类型</strong>。</p>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

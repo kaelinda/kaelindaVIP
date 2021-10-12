@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      Kaelinda
+      
+    </title>
+    <meta name="keywords" content="Kaelinda" />
+    
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="category">
+  
+    
+      <div class="article huge">
+        <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+        <div class="row content">
+          <div class="col-md-2"></div>
+          <div class="col-md-10 main">
+            <div class="row">
+              <div class="col-md-10 post">
+                <div class="headline"><a href="15261167596297.html">OC 多线程之 GCD知识从基础到进阶 （1）</a></div>
+                <div class="subtitle">OC 多线程之 GCD知识从基础到进阶 （1）</div>
+                <div class="meta"><span class="time">$[timeformat('2018-05-12T17:19:19+08:00')]</span></div>
+                <div class="body">
+                    <h2><a id="%E6%A6%82%E5%BF%B5%E8%AE%A4%E7%9F%A5" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>概念认知</h2>
+<p>基本概念：</p>
+<ul>
+<li>
+<p>GCD 全称 (Grand Center Dispatch),翻译成通俗中文“牛B的中心调度机制”</p>
+</li>
+<li>
+<p>线程：执行任务调度的最小单位</p>
+</li>
+<li>
+<p>任务：就是一段代码，GCD中就是block中的内容。执行任务有两种方式：同步执行（sync）和异步执行（async）。两者的主要区别是：是否等待队列的任务执行结束，以及是否具备开启新线程的能力</p>
+</li>
+<li>
+<p>队列：用来存放任务的线性结构，采用 FIFO（先进先出）的原则。</p>
+</li>
+</ul>
+
+                </div>
+                <div class="bottom">
+                  <a href="15261167596297.html" class="continue float-right">
+                    继续阅读
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="otherposts row">
+    
+  
+    
+        <div class="col-md-6">
+          <a href="15257437237715.html" class="item">
+            <div class="article normal">
+              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+              <div class="articleinfo">
+                <div class="headline">OC中的各种遍历</div>
+                <div class="subtitle">OC中的各种遍历</div>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+  
+    
+        <div class="col-md-6">
+          <a href="15253400374602.html" class="item">
+            <div class="article normal">
+              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+              <div class="articleinfo">
+                <div class="headline">多线程 之 NSThread</div>
+                <div class="subtitle">多线程 之 NSThread</div>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+  
+    
+        <div class="col-md-6">
+          <a href="15222179789382.html" class="item">
+            <div class="article normal">
+              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+              <div class="articleinfo">
+                <div class="headline">iOS GCD&&多线程</div>
+                <div class="subtitle">iOS GCD&&多线程 </div>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+  
+    
+        <div class="col-md-6">
+          <a href="15200726964422.html" class="item">
+            <div class="article normal">
+              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+              <div class="articleinfo">
+                <div class="headline">iOS Block 知识点拾遗</div>
+                <div class="subtitle">iOS Block 知识点拾遗</div>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+  
+    
+        <div class="col-md-6">
+          <a href="15200715202464.html" class="item">
+            <div class="article normal">
+              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+              <div class="articleinfo">
+                <div class="headline">iOS 离屏渲染</div>
+                <div class="subtitle">iOS 离屏渲染</div>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+  
+    
+        <div class="col-md-6">
+          <a href="15198022156700.html" class="item">
+            <div class="article normal">
+              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+              <div class="articleinfo">
+                <div class="headline">iOS 面试题总结</div>
+                <div class="subtitle">iOS 面试题总结</div>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+  
+    
+        <div class="col-md-6">
+          <a href="15193944679783.html" class="item">
+            <div class="article normal">
+              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+              <div class="articleinfo">
+                <div class="headline">iOS 项目组件化</div>
+                <div class="subtitle">iOS 项目组件化</div>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+  
+    
+        <div class="col-md-6">
+          <a href="15193931556096.html" class="item">
+            <div class="article normal">
+              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+              <div class="articleinfo">
+                <div class="headline">iOS APP性能优化方向分析</div>
+                <div class="subtitle">iOS APP性能优化方向分析</div>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+  
+    
+        <div class="col-md-6">
+          <a href="15174544275720.html" class="item">
+            <div class="article normal">
+              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+              <div class="articleinfo">
+                <div class="headline">DLNA DMR</div>
+                <div class="subtitle">DLNA DMR</div>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+   
+  </div>
+  <div class="pagenavi">
+    <div class="item"><a href="all_7.html">更新文章</a></div>
+    <div class="item"> · </div>
+    <div class="item"><a href="all_9.html">旧有文章</a></div>
+  </div>
+ </div>
+ <script>
+   let category = new Vue({
+    el: '#category',
+    data: {},
+    methods: {
+      indexOddandEven(index) {
+        return index%2 ? 'odd' : 'even';
+      },
+      timeformat(raw) {
+        return moment(raw).format("YYYY 年 MM 月 DD 日");
+      }
+    },
+    delimiters: ['$[', ']']
+  })
+ </script>
+      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      可选型 Optional - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/15117133773045.html" />
+      <meta property="og:title" content="可选型 Optional" />
+      
+        <meta property="og:description" content="可选型 Optional" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2017-11-27T00:22:57+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="15117133773045.html">可选型 Optional</a></div>
+              
+              <div class="meta"><span class="time">$[timeformat('2017-11-27T00:22:57+08:00')]</span><br><span class="tags"></span></div>
+              <div class="body">
+                  <h3><a id="%E5%AE%9A%E4%B9%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>定义</h3>
+<ul>
+<li>当数据可能接收nil的时候，使用optional是比较合适的</li>
+<li>当非可选型被赋值为nil的时候 系统会崩溃</li>
+<li>当可选型被赋值为nil的时候 系统会首先判断值是否为nil，如果为nil 则会赋值nil;如果不为nil，那就正常操作。</li>
+</ul>
+<h3><a id="optional%E5%8F%AF%E9%80%89%E5%9E%8B%E5%86%99%E6%B3%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Optional 可选型 写法</h3>
+<p><code>var sexy : String? = &quot;boy&quot;</code></p>
+<h3><a id="%E5%BC%BA%E5%88%B6%E8%A7%A3%E5%8C%85" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>强制解包</h3>
+<pre><code class="language-plain_text">if sexy != nil {
+    print(&quot;i am a \(String(describing: sexy))&quot;)
+}else{
+    print(&quot;none&quot;)
+}
+</code></pre>
+<span id="more"></span><!-- more -->
+<h3><a id="%E5%AE%98%E6%96%B9%E6%8E%A8%E8%8D%90%E8%A7%A3%E5%8C%85%E6%96%B9%E5%BC%8F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>官方推荐解包方式</h3>
+<pre><code class="language-plain_text">if let ksex = sexy {
+    print(&quot;i am a \(ksex)&quot;)
+}else{
+    print(&quot;none&quot;)
+}
+</code></pre>
+<h3><a id="%E9%9A%90%E5%BC%8F%E8%A7%A3%E5%8C%85%E5%AE%9A%E4%B9%89%E6%97%B6%E5%80%99%E5%90%8E%E9%9D%A2%E8%B7%9F%E7%9D%80%EF%BC%81%E5%B0%B1%E5%8F%AF%E4%BB%A5%E9%9A%90%E5%BC%8F%E8%A7%A3%E5%8C%85" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>隐式解包 定义时候后面跟着！就可以隐式解包</h3>
+<pre><code class="language-plain_text">var sexy2 : String!
+var sexy3 : String = sexy2 ?? &quot;boy&quot;//使用的时候不需要进行解包 并且可以通过 ?? 给变量赋一个默认值
+</code></pre>
+<h3><a id="%E4%BD%BF%E7%94%A8optional%E7%9A%84%E5%8F%98%E9%87%8F%E9%A6%96%E5%85%88%E8%A6%81%E8%A7%A3%E5%8C%85" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>使用Optional的变量 首先要解包</h3>
+<pre><code class="language-plain_text">if...else
+guard ... else{}
+</code></pre>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

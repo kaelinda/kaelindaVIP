@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      iOS - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="Kaelinda" />
+    
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="category">
+  
+    
+      <div class="article huge">
+        <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+        <div class="row content">
+          <div class="col-md-2"></div>
+          <div class="col-md-10 main">
+            <div class="row">
+              <div class="col-md-10 post">
+                <div class="headline"><a href="15200726964422.html">iOS Block 知识点拾遗</a></div>
+                <div class="subtitle">iOS Block 知识点拾遗</div>
+                <div class="meta"><span class="time">$[timeformat('2018-03-03T18:24:56+08:00')]</span></div>
+                <div class="body">
+                    <ol>
+<li>
+<p>Block为什么要用copy</p>
+<ul>
+<li>block在创建的时候默认分配的内存是在栈上，而不是在堆上。这样的话其本身的作用域是属于创建时候的作用域，一旦在创建的作用域之外调用就会导致程序的崩溃。所以使用了copy将其拷贝到堆内存上。</li>
+<li>block创建在栈上，而block的代码中可能会用到本地的一些变量，在栈上可能随时会被系统释放掉，只有将其拷贝到堆上，才能一直保持Block的存在，并用这些外部变量</li>
+</ul>
+</li>
+<li>
+<p>Block为什么不用retain</p>
+<ul>
+<li>retain只是增加了一次引用计数，block的内存还是在栈上，并没有存在堆上，存在栈上的block可能随时被系统回收</li>
+</ul>
+</li>
+<li>
+<p>为什么进入block中的对象引用计数需要自动加1？</p>
+<ul>
+<li>Block执行的是回调，因此block并不知道其中的对象obj创建后会在什么时候被释放，为了不在block使用obj之前，对象已经被释放，block就retain了obj一次</li>
+</ul>
+</li>
+<li>
+<p>block和函数的关系</p>
+<ul>
+<li>Block的使用很<strong>像函数指针</strong>，不过与函数最大的不同是Block可以访问函数以外、词法作用域以内的外部变量的值。换句话说，Block不仅 实现函数的功能，还能<strong>携带函数的执行环境</strong>。</li>
+<li>函数指针 <code>void(*fun)(int)</code></li>
+<li>block <code>void(^fun)(int)</code></li>
+</ul>
+</li>
+<li>
+<p>block本质（对于block的理解）<a href="https://www.cnblogs.com/yoon/p/4953618.html">请查阅Block实现原理</a></p>
+<ul>
+<li>block实际上是: 指向结构体的指针</li>
+<li>编译器会将block的内部代码生成对应的函数</li>
+</ul>
+</li>
+<li>
+<p>对于基本数据类型，进入到block中会被当做常量处理。对象 retain 会一次</p>
+ 
+                </div>
+                <div class="bottom">
+                  <a href="15200726964422.html" class="continue float-right">
+                    继续阅读
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="otherposts row">
+    
+  
+    
+        <div class="col-md-6">
+          <a href="15200715202464.html" class="item">
+            <div class="article normal">
+              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+              <div class="articleinfo">
+                <div class="headline">iOS 离屏渲染</div>
+                <div class="subtitle">iOS 离屏渲染</div>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+  
+    
+        <div class="col-md-6">
+          <a href="15198022156700.html" class="item">
+            <div class="article normal">
+              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+              <div class="articleinfo">
+                <div class="headline">iOS 面试题总结</div>
+                <div class="subtitle">iOS 面试题总结</div>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+  
+    
+        <div class="col-md-6">
+          <a href="15193944679783.html" class="item">
+            <div class="article normal">
+              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+              <div class="articleinfo">
+                <div class="headline">iOS 项目组件化</div>
+                <div class="subtitle">iOS 项目组件化</div>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+  
+    
+        <div class="col-md-6">
+          <a href="15193931556096.html" class="item">
+            <div class="article normal">
+              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+              <div class="articleinfo">
+                <div class="headline">iOS APP性能优化方向分析</div>
+                <div class="subtitle">iOS APP性能优化方向分析</div>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+  
+    
+        <div class="col-md-6">
+          <a href="15174544275720.html" class="item">
+            <div class="article normal">
+              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+              <div class="articleinfo">
+                <div class="headline">DLNA DMR</div>
+                <div class="subtitle">DLNA DMR</div>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+  
+    
+        <div class="col-md-6">
+          <a href="15173790393385.html" class="item">
+            <div class="article normal">
+              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+              <div class="articleinfo">
+                <div class="headline">DLNA DMC</div>
+                <div class="subtitle">DLNA DMC</div>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+  
+    
+        <div class="col-md-6">
+          <a href="15173774932057.html" class="item">
+            <div class="article normal">
+              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+              <div class="articleinfo">
+                <div class="headline">DLNA DMS</div>
+                <div class="subtitle">DLNA DMS</div>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+  
+    
+        <div class="col-md-6">
+          <a href="15172908985351.html" class="item">
+            <div class="article normal">
+              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+              <div class="articleinfo">
+                <div class="headline">iOS设备上实现DLNA功能 Platinum 篇</div>
+                <div class="subtitle">iOS设备上实现DLNA功能 Platinum 篇</div>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+  
+    
+        <div class="col-md-6">
+          <a href="15145327105445.html" class="item">
+            <div class="article normal">
+              <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+              <div class="articleinfo">
+                <div class="headline">佛祖镇楼 bug辟易</div>
+                <div class="subtitle">佛祖镇楼 bug辟易</div>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+   
+  </div>
+  <div class="pagenavi">
+    <div class="item"><a href="ios_5.html">更新文章</a></div>
+    <div class="item"> · </div>
+    <div class="item"><a href="ios_7.html">旧有文章</a></div>
+  </div>
+ </div>
+ <script>
+   let category = new Vue({
+    el: '#category',
+    data: {},
+    methods: {
+      indexOddandEven(index) {
+        return index%2 ? 'odd' : 'even';
+      },
+      timeformat(raw) {
+        return moment(raw).format("YYYY 年 MM 月 DD 日");
+      }
+    },
+    delimiters: ['$[', ']']
+  })
+ </script>
+      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

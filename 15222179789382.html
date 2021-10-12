@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      iOS GCD&&多线程 - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/15222179789382.html" />
+      <meta property="og:title" content="iOS GCD&&多线程" />
+      
+        <meta property="og:description" content="iOS GCD&&多线程 " />
+        <meta name="description" content="iOS GCD&&多线程 " />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2018-03-28T14:19:38+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="15222179789382.html">iOS GCD&&多线程</a></div>
+              <div class="subtitle">iOS GCD&&多线程 </div>
+              <div class="meta"><span class="time">$[timeformat('2018-03-28T14:19:38+08:00')]</span><br><span class="tags"></span></div>
+              <div class="body">
+                  <h2><a id="%E5%9F%BA%E7%A1%80%E7%AF%87" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>基础篇</h2>
+<h3><a id="gcd%E7%94%A8%E9%80%94" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>GCD用途</h3>
+<blockquote>
+<p>GCD 是 Grand Central Dispatch 的缩写。</p>
+</blockquote>
+<ul>
+<li>GCD 可用于多核的并行运算</li>
+<li>GCD 会自动利用更多的 CPU 内核（比如双核、四核）</li>
+<li>GCD 会自动管理线程的生命周期（创建线程、调度任务、销毁线程）</li>
+<li>程序员只需要告诉 GCD 想要执行什么任务，不需要编写任何线程管理代码</li>
+</ul>
+<span id="more"></span><!-- more -->
+<h3><a id="gcd%E4%BB%BB%E5%8A%A1%E5%92%8C%E9%98%9F%E5%88%97" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>GCD 任务和队列</h3>
+<ul>
+<li>
+<p>任务：就是要执行的操作，要做的事情，要执行的代码块，比如GCD中Block代码块</p>
+<ul>
+<li>
+<p>同步执行：</p>
+<ul>
+<li>会 <strong>等待</strong> 队列前面的任务完成后继续往下执行，</li>
+<li>只能在 <strong>当前线程</strong> 中执行，</li>
+<li>不具备 <strong>开辟新线程的能力</strong></li>
+</ul>
+</li>
+<li>
+<p>异步执行：</p>
+<ul>
+<li>不等待</li>
+<li>具备开辟新线程的能力，可以开辟线程执行任务，也可以不开辟新线程</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>队列：一种特殊的线性表，采用 FIFO（先进先出）的原则</p>
+<ul>
+<li>
+<p>串行队列：每次只有一个任务被执行。让任务一个接着一个地执行。（只开启一个线程，一个任务执行完毕后，再执行下一个任务）</p>
+</li>
+<li>
+<p>并发队列：可以让多个任务并发（同时）执行。（可以开启多个线程，并且同时执行任务）</p>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>并发队列的并发功能只有在异步（dispatch_async）函数下才有效
+如果并发队列再同步函数下，依旧会按顺序执行，并没能体现出并发功能</p>
+</blockquote>
+<h3><a id="gcd%E4%BD%BF%E7%94%A8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>GCD 使用</h3>
+<h4><a id="gcd%E6%AD%A5%E9%AA%A4" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>GCD 步骤</h4>
+<ol>
+<li>创建队列（串行队列或者并行队列）</li>
+<li>将任务追加到队列中</li>
+</ol>
+<h4><a id="%E9%98%9F%E5%88%97%E7%9A%84%E5%88%9B%E5%BB%BA" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>队列的创建</h4>
+<ul>
+<li>
+<p>串行队列的创建方法</p>
+<pre><code class="language-plain_text">dispatch_queue_t queue = dispatch_queue_create(&quot;net.bujige.testQueue&quot;, DISPATCH_QUEUE_SERIAL);
+</code></pre>
+</li>
+<li>
+<p>并发队列的创建方法</p>
+<pre><code class="language-plain_text">dispatch_queue_t queue = dispatch_queue_create(&quot;net.bujige.testQueue&quot;, DISPATCH_QUEUE_CONCURRENT);
+</code></pre>
+</li>
+<li>
+<p>主队列的获取方法</p>
+<pre><code class="language-plain_text">dispatch_queue_t queue = dispatch_get_main_queue();
+</code></pre>
+<p><strong>划重点： 所有放在主队列中的任务，都会放到主线程中执行!!!!!!!!</strong></p>
+</li>
+<li>
+<p>全局并发队列创建</p>
+<pre><code class="language-plain_text">/**
+* 默认并发队列
+* DISPATCH_QUEUE_PRIORITY_DEFAULT 默认优先级
+* 第二个参数没什么用（预留字段） 默认0
+*/
+
+dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+</code></pre>
+</li>
+</ul>
+<h4><a id="%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%88%9B%E5%BB%BA" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>任务的创建</h4>
+<ul>
+<li>同步执行任务创建方法</li>
+</ul>
+<pre><code class="language-plain_text">dispatch_sync(queue, ^{
+    // 这里放同步执行任务代码
+});
+</code></pre>
+<ul>
+<li>异步执行任务创建方法</li>
+</ul>
+<pre><code class="language-plain_text">dispatch_async(queue, ^{
+    // 这里放异步执行任务代码
+});
+</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align: center">区别</th>
+<th style="text-align: center">并发队列</th>
+<th style="text-align: center">串行队列</th>
+<th style="text-align: center">主队列</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center">同步(sync)</td>
+<td style="text-align: center">当前线程，串行执行</td>
+<td style="text-align: center">当前线程，串行执行</td>
+<td style="text-align: center">死锁</td>
+</tr>
+<tr>
+<td style="text-align: center">异步(async)</td>
+<td style="text-align: center">能开辟新线程(多个)，并发执行任务</td>
+<td style="text-align: center">新线程(一个)中执行，串行执行任务</td>
+<td style="text-align: center">为开辟新线程，串行执行任务</td>
+</tr>
+</tbody>
+</table>
+<h3><a id="gcd%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>GCD 基本使用</h3>
+<ul>
+<li>
+<p>同步 串行</p>
+<blockquote>
+<p>所有任务都是在当前线程（主线程）中执行的，并没有开启新的线程（同步执行不具备开启新线程的能力）。
+所有任务都在打印的syncConcurrent---begin和syncConcurrent---end之间执行（同步任务需要等待队列的任务执行结束）。
+任务是按顺序执行的（串行队列每次只有一个任务被执行，任务一个接一个按顺序执行）。</p>
+</blockquote>
+</li>
+<li>
+<p>同步 并发</p>
+<blockquote>
+<p>所有任务都是在当前线程（主线程）中执行的，没有开启新的线程（同步执行不具备开启新线程的能力）。
+所有任务都在打印的syncConcurrent---begin和syncConcurrent---end之间执行的（同步任务需要等待队列的任务执行结束）。
+任务按顺序执行的。按顺序执行的原因：虽然并发队列可以开启多个线程，并且同时执行多个任务。但是因为本身不能创建新线程，只有当前线程这一个线程（同步任务不具备开启新线程的能力），所以也就不存在并发。而且当前线程只有等待当前队列中正在执行的任务执行完毕之后，才能继续接着执行下面的操作（同步任务需要等待队列的任务执行结束）。所以任务只能一个接一个按顺序执行，不能同时被执行。</p>
+</blockquote>
+</li>
+<li>
+<p>异步 串行</p>
+<blockquote>
+<p>开启了一条新线程（异步执行具备开启新线程的能力，串行队列只开启一个线程）。
+所有任务是在打印的syncConcurrent---begin和syncConcurrent---end之后才开始执行的（异步执行不会做任何等待，可以继续执行任务）。
+任务是按顺序执行的（串行队列每次只有一个任务被执行，任务一个接一个按顺序执行）。</p>
+</blockquote>
+</li>
+<li>
+<p>异步 并发</p>
+<blockquote>
+<p>除了当前线程（主线程），系统又开启了3个线程，并且任务是交替/同时执行的。（异步执行具备开启新线程的能力。且并发队列可开启多个线程，同时执行多个任务）。
+所有任务是在打印的syncConcurrent---begin和syncConcurrent---end之后才执行的。说明当前线程没有等待，而是直接开启了新线程，在新线程中执行任务（异步执行不做等待，可以继续执行任务）。</p>
+</blockquote>
+</li>
+<li>
+<p>同步 主队列</p>
+<blockquote>
+<p>在不同线程中调用结果也是不一样，在主线程中调用会出现死锁，而在其他线程中则不会。</p>
+</blockquote>
+</li>
+<li>
+<p>异步 主队列</p>
+<blockquote>
+<p>所有任务都是在当前线程（主线程）中执行的，并没有开启新的线程（虽然异步执行具备开启线程的能力，但因为是主队列，所以所有任务都在主线程中）。
+所有任务是在打印的syncConcurrent---begin和syncConcurrent---end之后才开始执行的（异步执行不会做任何等待，可以继续执行任务）。
+任务是按顺序执行的（因为主队列是串行队列，每次只有一个任务被执行，任务一个接一个按顺序执行）。</p>
+</blockquote>
+</li>
+</ul>
+<h3><a id="gcd%E5%85%B6%E4%BB%96%E6%93%8D%E4%BD%9C" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>GCD 其他操作</h3>
+<h4><a id="%E6%A0%85%E6%A0%8F%E5%87%BD%E6%95%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>栅栏函数</h4>
+<ul>
+<li>栅栏函数：<code>dispatch_barrier_async</code></li>
+</ul>
+<blockquote>
+<p>先执行barrier之前的任务，再执行barrier任务,最后执行barrier之后的任务</p>
+</blockquote>
+<h4><a id="%E5%BB%B6%E6%97%B6" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>延时</h4>
+<ul>
+<li>
+<p>延时函数：<code>dispatch_after</code></p>
+<pre><code class="language-plain_text"></code></pre>
+</li>
+</ul>
+<p>dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+// 2.0秒后异步追加任务代码到主队列，并开始执行
+NSLog(@&quot;after---%@&quot;,[NSThread currentThread]);  // 打印当前线程
+});</p>
+<pre><code class="language-plain_text">
+#### 一次性代码
+
+* 一次性代码
+
+    ```
+ static dispatch_once_t onceToken;
+    dispatch_once(&amp;onceToken, ^{
+        // 只执行1次的代码(这里面默认是线程安全的)
+    });
+</code></pre>
+<h4><a id="%E5%BF%AB%E9%80%9F%E8%BF%AD%E4%BB%A3" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>快速迭代</h4>
+<ul>
+<li>GCD 快速迭代 <code>dispatch_apply</code></li>
+</ul>
+<pre><code class="language-plain_text">dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    
+    NSLog(@&quot;apply---begin&quot;);
+    dispatch_apply(6, queue, ^(size_t index) {
+        NSLog(@&quot;%zd---%@&quot;,index, [NSThread currentThread]);
+    });\
+</code></pre>
+<h4><a id="%E9%98%9F%E5%88%97%E7%BB%84" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>队列组</h4>
+<ul>
+<li>队列组 <code>dispatch_group</code></li>
+</ul>
+<pre><code class="language-plain_text">dispatch_group_async
+</code></pre>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

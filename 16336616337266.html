@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      Runtime - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/16336616337266.html" />
+      <meta property="og:title" content="Runtime" />
+      
+        <meta property="og:description" content="Runtime相关基础知识" />
+        <meta name="description" content="Runtime相关基础知识" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2021-10-08T10:53:53+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="16336616337266.html">Runtime</a></div>
+              <div class="subtitle">Runtime相关基础知识</div>
+              <div class="meta"><span class="time">$[timeformat('2021-10-08T10:53:53+08:00')]</span><br><span class="tags"></span></div>
+              <div class="body">
+                  <h2><a id="%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>数据结构</h2>
+<h3><a id="objc-object" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>objc_object</h3>
+<p>id ==》 objc_object 结构体</p>
+<ul>
+<li>继承自 objc_class</li>
+<li>isa指针指向 objc_class</li>
+<li>实例对象的isa指针指向类对象；类对象isa指针 指向元类</li>
+</ul>
+<p><strong>结构作用</strong></p>
+<ul>
+<li>isa_t</li>
+<li>isa相关操作</li>
+<li>弱引用相关</li>
+<li>关联对象相关</li>
+<li>内存管理相关</li>
+</ul>
+<h3><a id="objc-class" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>objc_class</h3>
+<p>Class ==  objc_class
+objc_class 继承自 objc_object</p>
+<ul>
+<li><strong>superClass</strong> superClass 指向一个 Class</li>
+<li><strong>cache_t</strong> 方法缓存 cache bucket list 里面存的是 key：IMP</li>
+<li><strong>class_data_bits_t</strong> bits 类的变量/属性/方法</li>
+</ul>
+<h3><a id="isa%E6%8C%87%E9%92%88" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>isa指针</h3>
+<p>共用体 isa_t</p>
+<ol>
+<li>指针型isa:isa的值代表Class的地址</li>
+<li>非指针型isa:isa的值的部分代表Class的地址</li>
+</ol>
+<p>实例对象  ---&gt;&gt; 类对象Class
+类对象 --&gt;&gt; 元类</p>
+<h3><a id="cache-t" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>cache_t</h3>
+<ul>
+<li>快速查询方法查询</li>
+<li>可增量扩展的哈希结构</li>
+<li>局部性原理的最佳应用</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Bucket_t</th>
+<th>Bucket_t</th>
+<th>Bucket_t</th>
+<th>Bucket_t</th>
+</tr>
+</thead>
+</table>
+<ul>
+<li>bucket_t: key : IMP</li>
+</ul>
+<h3><a id="class-data-bits-t" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>class_data_bits_t</h3>
+<p>class_data_bits_t  是 class_rw_t
+class_rw_t  类的属性  协议 read-write
+class_ro_t read-only 只读信息</p>
+<h3><a id="class-rw-rt" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>class_rw_rt</h3>
+<ul>
+<li>class_ro_t
+<ul>
+<li>name 类名</li>
+<li>ivars 成员变量 一维数组 里面是  method_t 只读</li>
+<li>propertyes 属性 一维数组 只读</li>
+<li>protocols 协议 一维数组 只读</li>
+<li>methodList 一维数组 只读</li>
+</ul>
+</li>
+<li>protocols  list_array_tt 二维数组 可写</li>
+<li>propertyes list_array_tt 二维数组 可写</li>
+<li>methods list_array_tt 二维数组 里面是  method_t 可写</li>
+</ul>
+<p>函数四要素：</p>
+<ul>
+<li>函数名称</li>
+<li>函数返回值</li>
+<li>函数参数</li>
+<li>函数体</li>
+</ul>
+<h4><a id="method-t" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>method_t</h4>
+<ul>
+<li>SEL  name 函数名</li>
+<li>const char* types  传参 和 返回值</li>
+<li>IMP imp 函数体</li>
+</ul>
+<p><a href="https://www.jianshu.com/p/bcd36ba92550">Types encodings 请参考</a></p>
+<p>const char* types</p>
+<table>
+<thead>
+<tr>
+<th>返回值</th>
+<th>参数1</th>
+<th>参数2</th>
+<th>参数n</th>
+</tr>
+</thead>
+</table>
+<p>-(void)aMethod; &lt;===&gt; v@:</p>
+<table>
+<thead>
+<tr>
+<th>V</th>
+<th>@</th>
+<th>:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>void</td>
+<td>id(消息接收者 self)</td>
+<td>SEL</td>
+</tr>
+</tbody>
+</table>
+<h3><a id="%E6%95%B4%E4%BD%93%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>整体数据结构</h3>
+<p><figure><img src="https://tva1.sinaimg.cn/large/00831rSTly1gdc1nnwccoj313y0n4afh.jpg" alt="整体数据结构" /><figcaption>整体数据结构<figcaption></figure></p>
+<h2><a id="%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%AF%B9%E8%B1%A1%E5%85%83%E7%B1%BB" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>对象 类对象 元类</h2>
+<ul>
+<li>
+<p>类对象 ： 存储实例方法列表等信息</p>
+</li>
+<li>
+<p>元类对象 ： 存储类方法列表等信息</p>
+</li>
+</ul>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

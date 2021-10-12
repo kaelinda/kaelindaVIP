@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      WKWebView从入门到放弃 (二 OC&JS交互) - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/16336612231246.html" />
+      <meta property="og:title" content="WKWebView从入门到放弃 (二 OC&JS交互)" />
+      
+        <meta property="og:description" content="OC&&JS交互" />
+        <meta name="description" content="OC&&JS交互" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2021-10-08T10:47:03+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="16336612231246.html">WKWebView从入门到放弃 (二 OC&JS交互)</a></div>
+              <div class="subtitle">OC&&JS交互</div>
+              <div class="meta"><span class="time">$[timeformat('2021-10-08T10:47:03+08:00')]</span><br><span class="tags"></span></div>
+              <div class="body">
+                  <h1><a id="oc%E8%B0%83%E7%94%A8js" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>OC调用JS</h1>
+<h2><a id="%E6%9C%AA%E7%BA%A6%E5%AE%9A%E5%A5%BD%E7%9A%84%E6%96%B9%E6%B3%95%E5%BE%80js%E4%B8%8A%E4%B8%8B%E6%96%87%E6%B3%A8%E5%85%A5js%E6%96%B9%E6%B3%95%EF%BC%8C%E4%BB%A5%E5%A4%87oc%E8%B0%83%E7%94%A8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>未约定好的方法 往JS上下文注入JS方法，以备OC调用</h2>
+<pre><code class="language-plain_text">/// 往HTML 中 注入 JS代码字符串 源代码
+/// @param scriptString script内容
+- (void)insertScriptWithString:(NSString *)scriptSctring{
+    //用于进行JavaScript注入
+    WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:scriptSctring injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+    [self.webConfig.userContentController addUserScript:wkUScript];
+}
+</code></pre>
+<h2><a id="%E5%B7%B2%E7%BB%8F%E7%BA%A6%E5%AE%9A%E5%A5%BD%E6%96%B9%E6%B3%95%E7%9B%B4%E6%8E%A5%E8%B0%83%E7%94%A8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>已经约定好方法直接调用</h2>
+<p>WKWebView 调用JS 方法比较单一：</p>
+<pre><code class="language-plain_text">/// OC 调用 JS 代码
+/// @param script 脚本 [NSString stringWithFormat:@&quot;changeColor('%@')&quot;, @&quot;Js参数&quot;];
+/// @param completionHandler 回调
+- (void)OCHandleJSWithScriptString:(NSString *)script completionHandler:(void (^ _Nullable)(_Nullable id, NSError * _Nullable error))completionHandler{
+    /// OC 调 JS
+    [_webView evaluateJavaScript:script completionHandler:completionHandler];
+    
+}
+</code></pre>
+<p>UIWebView 使用下面的方法  OC 调用 JS</p>
+<pre><code class="language-plain_text">JSContext *context = [self.webView valueForKeyPath:@&quot;documentView.webView.mainFrame.javaScriptContext&quot;];
+NSString *textJS = @&quot;showAlert('这里是JS中alert弹出的message')&quot;;
+[context evaluateScript:textJS];
+</code></pre>
+<h1><a id="js%E8%B0%83%E7%94%A8-oc" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>JS 调用OC</h1>
+<h2><a id="wkusercontentcontroller" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>WKUserContentController</h2>
+<h3><a id="%E5%BC%80%E5%90%AFjs%E4%BA%A4%E4%BA%92%E5%BC%80%E5%85%B3%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>开启 JS交互开关 设置代理</h3>
+<p>设置代理 遵守协议 <code>&lt;WKScriptMessageHandler&gt;</code></p>
+<pre><code class="language-plain_text">// 直接设置config对象中的preferences属性
+_webConfig.preferences.javaScriptEnabled = YES;//打开js交互
+
+//或者 单独设置自定义的 WKPreferences对象
+_webPreference.javaScriptEnabled = YES;
+
+// 设置交互代理
+_webConfig.userContentController = self.webUserContentController;
+</code></pre>
+<h3><a id="%E8%A7%82%E5%AF%9Fjs%E8%B0%83%E7%94%A8oc%E6%96%B9%E6%B3%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>观察JS调用OC方法</h3>
+<pre><code class="language-plain_text">//注册一个name为jsToOcNoPrams的js方法
+[_webUserContentController addScriptMessageHandler:self  name:@&quot;jsToOcNoPrams&quot;];
+[_webUserContentController addScriptMessageHandler:self  name:@&quot;jsToOcWithPrams&quot;];
+</code></pre>
+<h3><a id="%E6%8E%A5%E6%94%B6%E5%9B%9E%E8%B0%83" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>接收回调</h3>
+<pre><code class="language-plain_text">#pragma mark ------- 交互的 delegate
+/// 通过接收JS传出消息的name进行捕捉的回调方法  js调OC
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message{
+    NSLog(@&quot;name:%@\\\\n body:%@\\\\n frameInfo:%@\\\\n&quot;,message.name,message.body,message.frameInfo);
+    
+}
+</code></pre>
+<h3><a id="%E7%A7%BB%E9%99%A4%E6%B3%A8%E5%86%8C" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>移除注册</h3>
+<p><strong>界面退出、销毁时需要一处下方法的注册！！</strong></p>
+<pre><code class="language-plain_text">-(void)removeAllScriptMsgHandle{
+    WKUserContentController *controller = self.webView.configuration.userContentController;
+    [controller removeScriptMessageHandlerForName:@&quot;jsToOcNoPrams&quot;];
+    [controller removeScriptMessageHandlerForName:@&quot;jsToOcWithPrams&quot;];
+}
+</code></pre>
+<h2><a id="scheme%E6%96%B9%E5%BC%8F%E4%BA%A4%E4%BA%92" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>scheme方式交互</h2>
+<h3><a id="%E9%81%B5%E5%AE%88%E5%8D%8F%E8%AE%AE%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>遵守协议 &amp; 设置代理</h3>
+<p>遵守协议 ：<code>&lt;WKNavigationDelegate&gt;</code></p>
+<pre><code class="language-plain_text">// 设置代理
+ _webView.navigationDelegate = self;
+</code></pre>
+<h3><a id="%E6%8D%95%E8%8E%B7scheme" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>捕获Scheme</h3>
+<pre><code class="language-plain_text">// 根据WebView对于即将跳转的HTTP请求头信息和相关信息来决定是否跳转
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    NSLog(@&quot;发送跳转请求：%@&quot;,urlStr);
+    // 根据自定义的scheme进行拦截
+    if ([urlStr hasPrefix:schemeHeader]) {
+        [ControllerUtils showViewWithURL:urlStr];
+        decisionHandler(WKNavigationActionPolicyCancel);
+        return;
+    }
+}
+</code></pre>
+<h2><a id="%E5%90%8C%E5%B1%8F%E6%B8%B2%E6%9F%93%E5%BE%85%E5%AE%8C%E5%96%84" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>同屏渲染 待完善</h2>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

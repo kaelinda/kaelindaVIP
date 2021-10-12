@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      iOS OpenURL方式吊起APP - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="openURL, Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/16337448805296.html" />
+      <meta property="og:title" content="iOS OpenURL方式吊起APP" />
+      
+        <meta property="og:description" content="iOS OpenURL方式吊起APP" />
+        <meta name="description" content="iOS OpenURL方式吊起APP" />
+      
+      
+        <meta property="og:image" content="https://feng-bbs-att-1255531212.image.myqcloud.com/2021/10/07/105645mvq8zfwfkm922idb.1-Feature-Green-1.jpg?imageMogr2/format/jpg/interlace/0/quality/100" />
+        <meta name="twitter:image" content="https://feng-bbs-att-1255531212.image.myqcloud.com/2021/10/07/105645mvq8zfwfkm922idb.1-Feature-Green-1.jpg?imageMogr2/format/jpg/interlace/0/quality/100" />
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('https://feng-bbs-att-1255531212.image.myqcloud.com/2021/10/07/105645mvq8zfwfkm922idb.1-Feature-Green-1.jpg?imageMogr2/format/jpg/interlace/0/quality/100')"></div>
+    <img src="https://feng-bbs-att-1255531212.image.myqcloud.com/2021/10/07/105645mvq8zfwfkm922idb.1-Feature-Green-1.jpg?imageMogr2/format/jpg/interlace/0/quality/100" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2021-10-09T10:01:20+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="16337448805296.html">iOS OpenURL方式吊起APP</a></div>
+              <div class="subtitle">iOS OpenURL方式吊起APP</div>
+              <div class="meta"><span class="time">$[timeformat('2021-10-09T10:01:20+08:00')]</span><br><span class="tags"><a href="tag_openURL.html">#openURL</a></span></div>
+              <div class="body">
+                  <p>[toc]</p>
+<h1><a id="%E8%83%8C%E6%99%AF%E6%8F%8F%E8%BF%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>背景描述</h1>
+<p>假如我们有两个项目，一个是我们的主项目<code>MainProject</code>，要通过系统提供的API <code>OpenURL：</code>方式吊起另外的项目<code>OtherProject</code>。</p>
+<h1><a id="otherproject%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>OtherProject项目配置</h1>
+<p><a href="https://www.jianshu.com/p/7a308f5b89fc">参考：iOS App 唤醒另一个App</a></p>
+<span id="more"></span><!-- more -->
+<h2><a id="%E9%85%8D%E7%BD%AE%E6%94%AF%E6%8C%81%E7%9A%84scheme" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>配置支持的scheme</h2>
+<p>可以在info的 URL Type中配置,也可以直接在info.plist文件中修改</p>
+<p><figure><img src="https://upload-images.jianshu.io/upload_images/664334-1e373d2a61fad1d7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp" alt="" /></figure></p>
+<p><figure><img src="https://upload-images.jianshu.io/upload_images/664334-b76eec163e50ba46.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/486/format/webp" alt="" /></figure></p>
+<ul>
+<li><code>URL identifier</code>只是一个区分不同scheme的唯一标示符，只要能唯一区分可随意填写，建议写成：<code>com.tencent.wechat</code>反转域名的方法保证该名字的唯一性</li>
+<li><code>URL Scheme</code> 就是你用来通信的命令前缀,用来定位一个应用。</li>
+</ul>
+<h2><a id="%E9%85%8D%E7%BD%AE%E6%8E%A5%E6%94%B6%E4%BF%A1%E6%81%AF%E7%9A%84%E4%BB%A3%E7%A0%81" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>配置接收信息的代码</h2>
+<pre><code class="language-objc">- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url 
+        sourceApplication:(NSString *)sourceApplication annotation:(id)annotation 
+{ 
+  NSLog(@&quot;Calling Application Bundle ID: %@&quot;, sourceApplication); 
+  NSLog(@&quot;URL scheme:%@&quot;, [url scheme]); 
+  NSLog(@&quot;URL query: %@&quot;, [url query]); 
+ 
+// Customer Code
+  return YES; 
+} 
+</code></pre>
+<ul>
+<li>A: <code>- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url NS_DEPRECATED_IOS(2_0, 9_0, &quot;Please use application:openURL:options:&quot;) __TVOS_PROHIBITED</code>;</li>
+<li>B: <code>- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation NS_DEPRECATED_IOS(4_2, 9_0, &quot;Please use application:openURL:options:&quot;) __TVOS_PROHIBITED;</code></li>
+<li>C: <code>- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary&lt;NSString*, id&gt; *)options NS_AVAILABLE_IOS(9_0);</code> // no equiv. notification. return NO if the application can't open for some reason</li>
+</ul>
+<p>3个回调的功能基本一样，都是在别人通过URL Schemes打开应用的时候会执行的。
+这几个回调是有优先级的。C&gt;B&gt;A。也就是说，如果你3个回调都实现了，那么程序只会执行C回调。其他回调是不会执行的。（当然，iOS9以下只会执行B回调）。</p>
+<p>由于目前市面上的绝大多数APP都是支持到iOS7.0以上的 所以 推荐 实现B接口，A可以忽略。</p>
+<h1><a id="mainproject%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E5%92%8C%E6%93%8D%E4%BD%9C" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>MainProject项目配置和操作</h1>
+<h2><a id="%E5%94%A4%E8%B5%B7%E7%9B%AE%E6%A0%87app%E7%9A%84%E4%BB%A3%E7%A0%81" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>唤起目标APP的代码</h2>
+<pre><code class="language-objc">/// 是否能打开指定scheme的APP
++ (BOOL)_isInstalled_iPadeAppWithOpenURL {
+    return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:kAppSchemeForIPad]];
+}
+/// 呼起APP
++ (void)_callUpHDAppWithOpenURL:(NSString *)openURL {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:openURL]];
+}
+</code></pre>
+<h2><a id="%E7%99%BD%E5%90%8D%E5%8D%95%E9%85%8D%E7%BD%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>白名单配置</h2>
+<ul>
+<li><code>LSApplicationQueriesSchemes</code> iOS9之后提高了app的安全性，需要给出一个类似白名单的东西，在白名单里面的才能打开app。不然报错：</li>
+</ul>
+<blockquote>
+<p>-canOpenURL: failed for URL: &quot;OpenAppTest://mark?id=007&quot; - error: &quot;This app is not allowed to query for scheme OpenAppTest&quot;</p>
+</blockquote>
+<ul>
+<li><code>LSApplicationQueriesSchemes</code>顺序问题，iOS 15前50个scheme白名单有效。所以，可以通过调整顺序的方式将重要的scheme放到前面。</li>
+</ul>
+<blockquote>
+<p>经测试，目前只影响 <code>canOpenURL:</code> 的判断 不配置 LSApplicationQueriesSchemes 或者 放置的顺序 &gt;= 50 ,<code>canOpenURL</code> return NO；不影响 <code>openURL:</code> 对 <code>OtherProject</code> 的吊起。</p>
+</blockquote>
+<p><figure><img src="https://upload-images.jianshu.io/upload_images/664334-a6a13ba493d4b249.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/439/format/webp" alt="LSApplicationQueriesSchemes配置" /><figcaption>LSApplicationQueriesSchemes配置<figcaption></figure></p>
+<p><figure><img src="https://upload-images.jianshu.io/upload_images/412206-55a3d996e5b825da.png?imageMogr2/auto-orient/strip%257CimageView2/2/w/1240" alt="iOS 15前50个scheme白名单有效" /><figcaption>iOS 15前50个scheme白名单有效<figcaption></figure></p>
+<p>常用URL Scheme</p>
+<table>
+<thead>
+<tr>
+<th>APP</th>
+<th>scheme</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WIFT</td>
+<td>prefs:root=WIFI</td>
+</tr>
+<tr>
+<td>蜂窝数据</td>
+<td>prefs:root=MOBILE_DATA_SETTINGS_ID://</td>
+</tr>
+<tr>
+<td>电池</td>
+<td>prefs:root=BATTERY_USAGE://</td>
+</tr>
+<tr>
+<td>VPN</td>
+<td>prefs:root=General&amp;path=VPN://</td>
+</tr>
+<tr>
+<td>QQ</td>
+<td>mqq://</td>
+</tr>
+<tr>
+<td>WeiBo</td>
+<td>weibo://</td>
+</tr>
+<tr>
+<td>Wechat</td>
+<td>wechat://</td>
+</tr>
+<tr>
+<td>支付宝</td>
+<td>alipay://</td>
+</tr>
+<tr>
+<td>Facebook</td>
+<td>fb://</td>
+</tr>
+<tr>
+<td>Twitter</td>
+<td>twitter://</td>
+</tr>
+<tr>
+<td>Google Chrome</td>
+<td>googlechrome://</td>
+</tr>
+<tr>
+<td>Medium</td>
+<td>medium://</td>
+</tr>
+<tr>
+<td>Quora</td>
+<td>quora://</td>
+</tr>
+<tr>
+<td>知乎</td>
+<td>zhihu://</td>
+</tr>
+<tr>
+<td>Uber</td>
+<td>uber://</td>
+</tr>
+<tr>
+<td>简书</td>
+<td>jianshu://</td>
+</tr>
+</tbody>
+</table>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

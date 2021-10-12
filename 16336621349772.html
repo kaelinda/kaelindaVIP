@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      Xcode 11 Xib `_UITextLayoutView` 崩溃 - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/16336621349772.html" />
+      <meta property="og:title" content="Xcode 11 Xib `_UITextLayoutView` 崩溃" />
+      
+        <meta property="og:description" content="Xcode 11 Xib `_UITextLayoutView` 崩溃" />
+        <meta name="description" content="Xcode 11 Xib `_UITextLayoutView` 崩溃" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2021-10-08T11:02:14+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="16336621349772.html">Xcode 11 Xib `_UITextLayoutView` 崩溃</a></div>
+              <div class="subtitle">Xcode 11 Xib `_UITextLayoutView` 崩溃</div>
+              <div class="meta"><span class="time">$[timeformat('2021-10-08T11:02:14+08:00')]</span><br><span class="tags"></span></div>
+              <div class="body">
+                  <p>崩溃信息如下：</p>
+<pre><code class="language-plain_text">*** Terminating app due to uncaught exception 
+'NSInvalidUnarchiveOperationException', 
+reason: 'Could not instantiate class named _UITextLayoutView because no class named _UITextLayoutView was found; 
+the class needs to be defined in source code or linked in from a library (ensure the class is part of the correct target)'
+</code></pre>
+<p>解决方案：</p>
+<h2><a id="%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B8%80" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>解决方案 一</h2>
+<p>xib的部分视图改用硬核手写，以避坑。</p>
+<h2><a id="%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%BA%8C" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>解决方案 二</h2>
+<p><a href="https://developer.apple.com/download/more">下载其他版本Xcode 传送门</a></p>
+<h2><a id="%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B8%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>解决方案 三</h2>
+<p>OC 黑魔法 <code>Runtime</code>。</p>
+<ul>
+<li>
+<p>创建 文件 <code>UITextViewWorkaround</code></p>
+</li>
+<li>
+<p>UITextViewWorkaround.h</p>
+</li>
+</ul>
+<pre><code class="language-plain_text">#import &lt;Foundation/Foundation.h&gt;
+
+@interface UITextViewWorkaround : NSObject
++ (void)executeWorkaround; 
+@end
+
+</code></pre>
+<ul>
+<li>UITextViewWorkaround.m</li>
+</ul>
+<pre><code class="language-plain_text">#import &quot;UITextViewWorkaround.h&quot;
+#import  &lt;objc/runtime.h&gt;
+
+
+
+@implementation UITextViewWorkaround
+
++ (void)executeWorkaround {
+    if (@available(iOS 13.2, *)) {
+
+    }
+    else {
+        const char *className = &quot;_UITextLayoutView&quot;;
+        Class cls = objc_getClass(className);
+        if (cls == nil) {
+            cls = objc_allocateClassPair([UIView class], className, 0);
+            objc_registerClassPair(cls);
+#if DEBUG
+            printf(&quot;added %s dynamically\n&quot;, className);
+#endif
+        }
+    }
+}
+
+@end
+</code></pre>
+<ul>
+<li>使用该静态方法</li>
+</ul>
+<pre><code class="language-plain_text">#import &quot;UITextViewWorkaround.h&quot;
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // Override point for customization after application launch.
+
+    [UITextViewWorkaround executeWorkaround];
+    return yes;
+}
+</code></pre>
+<ul>
+<li>swift 版本请客观收下：</li>
+</ul>
+<pre><code class="language-plain_text">import UIKit
+
+@objc
+class UITextViewWorkaround : NSObject {
+
+    static func executeWorkaround() {
+        if #available(iOS 13.2, *) {
+        } else {
+            let className = &quot;_UITextLayoutView&quot;
+            let theClass = objc_getClass(className)
+            if theClass == nil {
+                let classPair: AnyClass? = objc_allocateClassPair(UIView.self, className, 0)
+                objc_registerClassPair(classPair!)
+            }
+        }
+    }
+
+}
+</code></pre>
+<p><a href="https://stackoverflow.com/questions/58657087/after-upgrading-to-xcode-11-2-from-xcode-11-1-app-crashes-due-to-uitextlayoutv">参考</a></p>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

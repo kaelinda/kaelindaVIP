@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      MacOS 安装CocoaPods/Fastlane/Homebrew/Rvm/Ruby/Gem - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/16336610129581.html" />
+      <meta property="og:title" content="MacOS 安装CocoaPods/Fastlane/Homebrew/Rvm/Ruby/Gem" />
+      
+        <meta property="og:description" content="MacOS 安装CocoaPods/Fastlane/Homebrew/Rvm/Ruby/Gem" />
+        <meta name="description" content="MacOS 安装CocoaPods/Fastlane/Homebrew/Rvm/Ruby/Gem" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2021-10-08T10:43:32+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="16336610129581.html">MacOS 安装CocoaPods/Fastlane/Homebrew/Rvm/Ruby/Gem</a></div>
+              <div class="subtitle">MacOS 安装CocoaPods/Fastlane/Homebrew/Rvm/Ruby/Gem</div>
+              <div class="meta"><span class="time">$[timeformat('2021-10-08T10:43:32+08:00')]</span><br><span class="tags"></span></div>
+              <div class="body">
+                  <p>当前最新macOS系统版本是Catalina 10.16，本人有幸更新 MacOS 11.0 Beta版本尝鲜....结果被坑的体无完肤！！！</p>
+<p>更新系统后，链接公司内部局域网的VPN软件不能使用了，自动打包工具 fastlane 不能用了，</p>
+<h1><a id="%E5%AE%89%E8%A3%85ruby" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装Ruby</h1>
+<p>我们安装各种环境的时候 经常会报各种各样的错误，大都是因为电脑的大环境没安装好。</p>
+<h2><a id="%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8rvm" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装 使用 rvm</h2>
+<pre><code class="language-plain_text">// 安装rvm
+curl -L get.rvm.io | bash -s stable
+</code></pre>
+<p>rvm安装完成后，让环境变量和配置文件生效：</p>
+<pre><code class="language-plain_text">source ~/.bashrc
+source ~/.bash_profile
+source ~/.profile
+</code></pre>
+<p>查看rvm版本：</p>
+<pre><code class="language-plain_text">rvm -v
+</code></pre>
+<p>查看</p>
+<pre><code class="language-plain_text">rvm list known
+</code></pre>
+<p>结果如下：</p>
+<pre><code class="language-plain_text"># MRI Rubies
+[ruby-]1.8.6[-p420]
+[ruby-]1.8.7[-head] # security released on head
+[ruby-]1.9.1[-p431]
+[ruby-]1.9.2[-p330]
+[ruby-]1.9.3[-p551]
+[ruby-]2.0.0[-p648]
+[ruby-]2.1[.10]
+[ruby-]2.2[.10]
+[ruby-]2.3[.8]
+[ruby-]2.4[.9]
+[ruby-]2.5[.7]
+[ruby-]2.6[.5]
+[ruby-]2.7[.0]
+ruby-head
+</code></pre>
+<h2><a id="%E9%87%8D%E7%82%B9%E6%93%8D%E4%BD%9C%EF%BC%81%EF%BC%81" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>重点操作！！</h2>
+<p><strong>XXXXXXX为电脑账户名：<code>source /Users/XXXXXX/.rvm/scripts/rvm</code></strong></p>
+<pre><code class="language-plain_text">rvm install
+</code></pre>
+<ul>
+<li>使用rvm安装<code>rvm install 2.6.5</code>这里的版本是你查到的适合自己的ruby版本，这里你也可以直接安装最新版本 <code>rvm install ruby-head</code></li>
+</ul>
+<pre><code class="language-plain_text">rvm use ruby-2.6
+</code></pre>
+<ul>
+<li>使用自己已安装的ruby版本<code>rvm use ruby-2.6</code> （这里的ruby-2.6 是  <code>ruby -v</code> 查出来的）</li>
+</ul>
+<h1><a id="%E5%AE%89%E8%A3%85gem%E7%8E%AF%E5%A2%83" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装Gem环境</h1>
+<h2><a id="gem%E6%BA%90%E9%95%9C%E5%83%8F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Gem源 &amp; 镜像</h2>
+<ul>
+<li>国外镜像源 <code>http://rubygems.org/</code></li>
+<li><del>国内淘宝镜像源 (已停止维护) <code>https://ruby.taobao.org/</code></del></li>
+<li><del>国内镜像 <code>https://gems.ruby-china.org/</code></del></li>
+<li>现在可以使用的国内镜像源 <code>http://gems.github.com</code></li>
+</ul>
+<h2><a id="%E6%9F%A5%E7%9C%8Bgem%E9%95%9C%E5%83%8F%E6%BA%90" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>查看Gem镜像源</h2>
+<pre><code class="language-plain_text">// 查看当前镜像源
+gem sources -l
+// 或者
+gem sources
+</code></pre>
+<h3><a id="%E6%B7%BB%E5%8A%A0%E9%95%9C%E5%83%8F%E6%BA%90" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>添加镜像源</h3>
+<pre><code class="language-plain_text">gem source --add XXX
+// 或者
+gem source -a XXX
+</code></pre>
+<h3><a id="%E5%88%A0%E9%99%A4%E9%95%9C%E5%83%8F%E6%BA%90" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>删除镜像源</h3>
+<pre><code class="language-plain_text">gem sources --remove XXX
+// 或者
+gem sources -r XXX
+</code></pre>
+<h3><a id="%E6%9B%B4%E6%96%B0%E9%95%9C%E5%83%8F%E6%BA%90" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>更新镜像源</h3>
+<pre><code class="language-plain_text">gem sources --update
+gem soruces -u
+</code></pre>
+<h2><a id="gem%E6%93%8D%E4%BD%9C" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Gem操作</h2>
+<p>添加新的gem源;
+remove掉 之前的gem源;
+更新源；
+(gem 的命令 是可以连续使用的)</p>
+<p><code>gem source -a http://gems.github.com/ -r http://rubygems.org/ -u</code></p>
+<p>也可以拆分：</p>
+<pre><code class="language-plain_text">gem source -a http://gems.github.com/
+gem sources -r http://rubygems.org/
+gem soources -u
+</code></pre>
+<h3><a id="%E5%AE%B6%E6%9F%A5%E4%B8%8Bgem%E7%89%88%E6%9C%AC%E6%9B%B4%E6%96%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>家查下Gem版本更新</h3>
+<pre><code class="language-plain_text">sudo gem update --system // 这个命令用于更新gem自身
+</code></pre>
+<p>===</p>
+<p>到此为止，安装开发工具的大环境就已经搭好了。
+<code>gem update</code> 更新所有gem安装过的安装包。</p>
+<p>然后 开启我们的新征程:</p>
+<h1><a id="xcode%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Xcode 命令行工具配置</h1>
+<h2><a id="%E5%AE%89%E8%A3%85%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装命令行工具</h2>
+<pre><code class="language-plain_text">xcode-select --install
+</code></pre>
+<p><a href="https://developer.apple.com/download/more/">Apple 官方下载命令行工具入口</a></p>
+<h2><a id="%E5%88%87%E6%8D%A2%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7%E7%89%88%E6%9C%AC" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>切换命令行工具版本</h2>
+<h3><a id="xcode-select%E5%91%BD%E4%BB%A4%E5%88%87%E6%8D%A2" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>xcode-select 命令切换</h3>
+<pre><code class="language-plain_text">sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
+or
+sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+</code></pre>
+<h3><a id="xcode%E7%9B%B4%E6%8E%A5%E5%88%87%E6%8D%A2" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Xcode 直接切换</h3>
+<p>如果你安装了 多个版本的Xcode，那么你会经常用到这种切换方式：
+选中Xcode，CMD + ，---&gt; Locations ----&gt; Command Line Tool
+选择相对应版本即可。</p>
+<p><figure><img src="https://upload-images.jianshu.io/upload_images/412206-c8da04353b7640c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Xcode-内部设置" /><figcaption>Xcode-内部设置<figcaption></figure></p>
+<h1><a id="%E5%AE%89%E8%A3%85fastlane" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装Fastlane</h1>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

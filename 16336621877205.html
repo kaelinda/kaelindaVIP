@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      iOS 之 自动打包 fastlane + fir + pgy 【进阶使用】 - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/16336621877205.html" />
+      <meta property="og:title" content="iOS 之 自动打包 fastlane + fir + pgy 【进阶使用】" />
+      
+        <meta property="og:description" content="iOS 之 自动打包 fastlane + fir + pgy 【进阶使用】" />
+        <meta name="description" content="iOS 之 自动打包 fastlane + fir + pgy 【进阶使用】" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2021-10-08T11:03:07+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="16336621877205.html">iOS 之 自动打包 fastlane + fir + pgy 【进阶使用】</a></div>
+              <div class="subtitle">iOS 之 自动打包 fastlane + fir + pgy 【进阶使用】</div>
+              <div class="meta"><span class="time">$[timeformat('2021-10-08T11:03:07+08:00')]</span><br><span class="tags"></span></div>
+              <div class="body">
+                  <h2><a id="%E5%AE%89%E8%A3%85fastlane" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装 fastlane</h2>
+<p><a href="https://www.jianshu.com/p/88b9a3e378db">fastlane 安装使用指南</a></p>
+<h2><a id="fastlane%E9%85%8D%E7%BD%AE%E9%A1%B9%E7%9B%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>fastlane 配置项目</h2>
+<ul>
+<li>
+<p>cd 到项目根目录下</p>
+</li>
+<li>
+<p><code>fastlane init</code></p>
+</li>
+<li>
+<p><a href="https://docs.fastlane.tools/advanced/actions/">fastlane action</a></p>
+</li>
+<li>
+<p><a href="https://docs.fastlane.tools/plugins/using-plugins/#fastlane-plugins">fastlane plugin</a></p>
+</li>
+<li>
+<p>gym 请参考：<a href="https://docs.fastlane.tools/actions/gym/">gym官方文档</a></p>
+</li>
+</ul>
+<p><strong>有一点比较坑：每个项目都需要为fastlane配置下环境,关联开发账户</strong></p>
+<h2><a id="%E5%AE%89%E8%A3%85%E6%89%93%E5%8C%85%E5%B9%B3%E5%8F%B0%E5%91%BD%E4%BB%A4%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装打包平台命令工具</h2>
+<ul>
+<li>安装firim</li>
+</ul>
+<pre><code class="language-bash">fastlane add_plugin versioning
+fastlane add_plugin firim
+</code></pre>
+<p><code>versioning</code> 需要输入电脑密码，以获取<code>sudo</code>权限.</p>
+<p>firim 相关参数可参考：<a href="https://github.com/whlsxl/firim/blob/master/lib/firim/options.rb">firim 源码说明</a></p>
+<ul>
+<li>安装 fir_cli</li>
+</ul>
+<pre><code class="language-plain_text">fastlane add_plugin versioning
+fastlane add_plugin fir_cli
+</code></pre>
+<p>fir_cli相关参数可参考 ：<a href="https://github.com/FIRHQ/fastlane-plugin-fir_cli">fir_cli使用说明</a></p>
+<ul>
+<li>安装蒲公英</li>
+</ul>
+<p><a href="http://www.pgyer.com/doc/view/fastlane">蒲公英官方文档说明</a>
+<a href="https://github.com/shishirui/fastlane-plugin-pgyer">蒲公英插件API说明</a></p>
+<pre><code class="language-bash">fastlane add_plugin pgyer
+</code></pre>
+<p>需要输入 y,以确认安装.</p>
+<ul>
+<li>
+<p>Pluginfile</p>
+<p>此时 fastlane/Pluginfile 文件内应该是这样子的：</p>
+<pre><code class="language-bash">gem 'fastlane-plugin-pgyer'
+gem 'fastlane-plugin-versioning'
+gem 'fastlane-plugin-firim'
+</code></pre>
+</li>
+<li>
+<p>fastlane action</p>
+</li>
+</ul>
+<p>定义一个 Action 叫 <code>PY_release</code>:</p>
+<pre><code class="language-plain_text">lane :PY_release do |options|
+    gym(
+      clean:true, #打包前clean项目
+      silent:true,
+      export_method: &quot;development&quot;, #导出方式
+      scheme:&quot;LXPeiyou&quot;, #scheme
+      configuration: options[:configuration],#环境
+      output_directory:&quot;./AppOutput&quot;,#ipa的存放目录
+      output_name:&quot;********&quot;#输出ipa的文件名为当前的build号
+      )
+    
+    # 自己的fir账号
+    # firim(firim_api_token:'*****', app_changelog:options[:update_info])
+    
+    #蒲公英的配置 替换为自己的api_key和user_key
+    # pgyer(api_key: &quot;******&quot;, user_key: &quot;******&quot;,update_description: options[:update_info])
+  end
+</code></pre>
+<p><strong>外部调用</strong>
+执行Action 并传参：</p>
+<pre><code class="language-bash">fastlane PY_release configuration:$configuration update_info:$update_info
+</code></pre>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

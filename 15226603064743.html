@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      每天学习一个shell技能（6） - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/15226603064743.html" />
+      <meta property="og:title" content="每天学习一个shell技能（6）" />
+      
+        <meta property="og:description" content="每天学习一个shell技能（6）" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2018-04-02T17:11:46+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="15226603064743.html">每天学习一个shell技能（6）</a></div>
+              
+              <div class="meta"><span class="time">$[timeformat('2018-04-02T17:11:46+08:00')]</span><br><span class="tags"></span></div>
+              <div class="body">
+                  <h2><a id="test" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>test</h2>
+<h3><a id="test%E6%96%87%E4%BB%B6" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>test文件</h3>
+<pre><code class="language-plain_text">if test -e ./test.sh
+then
+    echo '文件已存在!'
+else
+    echo '文件不存在!'
+fi
+</code></pre>
+<ul>
+<li>-e fileName ： 如果文件存在则为真</li>
+<li>-r  fileName : 如果文件存在且可读则为真</li>
+<li>-w fileName : 如果文件存在且可写则为真</li>
+<li>-x fileName : 如果文件存在且可执行则为真</li>
+<li>-s fileName: 文件存在且至少有一个字符</li>
+<li>-d fileName : 文件存在且为目录</li>
+<li>-f fileName: 文件存在且为文件</li>
+<li>-c fileName:文件存在，且为字符型特殊文件</li>
+<li>-b fileName: 如果文件存在且为块特殊文件则为真</li>
+</ul>
+<span id="more"></span><!-- more -->
+<h3><a id="test%E5%AD%97%E7%AC%A6%E4%B8%B2" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>test字符串</h3>
+<ul>
+<li>= ：等于则为真</li>
+<li>!= :不等于则为真</li>
+<li>-z : 字符串长度为零则为真</li>
+<li>-n : 字符串长度不为零则为真</li>
+</ul>
+<h3><a id="%E6%95%B0%E5%80%BC%E6%B5%8B%E8%AF%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>数值测试</h3>
+<ul>
+<li>-eq :等于</li>
+<li>-ne : 不等于</li>
+<li>-gt:大于</li>
+<li>-lt:小于</li>
+<li>-ge:大于等于</li>
+<li>-le: 小于等于</li>
+</ul>
+<h2><a id="%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E6%9D%A1%E4%BB%B6" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>流程控制(条件)</h2>
+<h3><a id="if" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>if</h3>
+<pre><code class="language-plain_text">if condition
+then
+    command1 
+    command2
+    ...
+    commandN 
+fi
+</code></pre>
+<h3><a id="if-else" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>if else</h3>
+<pre><code class="language-plain_text">if condition
+then
+    command1 
+    command2
+    ...
+    commandN
+else
+    command
+fi
+</code></pre>
+<h3><a id="if-else-if-else" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>if else-if else</h3>
+<pre><code class="language-plain_text">if condition1
+then
+    command1
+elif condition2 
+then 
+    command2
+else
+    commandN
+fi
+</code></pre>
+<p>实例 用法：</p>
+<pre><code class="language-plain_text">a=10
+b=20
+if [ $a == $b ]
+then
+   echo &quot;a 等于 b&quot;
+elif [ $a -gt $b ]
+then
+   echo &quot;a 大于 b&quot;
+elif [ $a -lt $b ]
+then
+   echo &quot;a 小于 b&quot;
+else
+   echo &quot;没有符合的条件&quot;
+fi
+</code></pre>
+<h2><a id="%E6%8E%A7%E5%88%B6%E6%B5%81%EF%BC%88for%E5%BE%AA%E7%8E%AF%EF%BC%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>控制流（for 循环）</h2>
+<pre><code class="language-plain_text">for var in item1 item2 ... itemN
+do
+    command1
+    command2
+    ...
+    commandN
+done
+</code></pre>
+<p>改成一行：</p>
+<pre><code class="language-plain_text">for var in item1 item2 ... itemN; do command1; command2… done;
+</code></pre>
+<h2><a id="while" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>while</h2>
+<pre><code class="language-plain_text">while condition
+do
+    command
+done
+</code></pre>
+<pre><code class="language-plain_text">int=1
+while(( $int&lt;=5 ))
+do
+    echo $int
+    let &quot;int++&quot;
+done
+</code></pre>
+<p>无限循环：</p>
+<pre><code class="language-plain_text">while :
+do
+    command
+done
+
+// 或者
+while true
+do
+    command
+done
+
+// 或者
+for (( ; ; ))
+
+</code></pre>
+<h2><a id="until%E5%BE%AA%E7%8E%AF" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>until 循环</h2>
+<pre><code class="language-plain_text">until condition
+do
+    command
+done
+</code></pre>
+<h2><a id="case-in" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>case in</h2>
+<pre><code class="language-plain_text">case 值 in
+模式1)
+    command1
+    command2
+    ...
+    commandN
+    ;;
+模式2）
+    command1
+    command2
+    ...
+    commandN
+    ;;
+esac
+</code></pre>
+<h2><a id="%E8%B7%B3%E5%87%BA%E5%BE%AA%E7%8E%AF" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>跳出循环</h2>
+<h3><a id="break" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>break</h3>
+<blockquote>
+<p>break命令允许跳出所有循环（终止执行后面的所有循环）</p>
+</blockquote>
+<h3><a id="continue" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>continue</h3>
+<blockquote>
+<p>continue命令与break命令类似，只有一点差别，它不会跳出所有循环，仅仅跳出当前循环</p>
+</blockquote>
+<pre><code class="language-plain_text">while :
+do
+    echo -n &quot;输入 1 到 5 之间的数字: &quot;
+    read aNum
+    case $aNum in
+        1|2|3|4|5) echo &quot;你输入的数字为 $aNum!&quot;
+        ;;
+        *) echo &quot;你输入的数字不是 1 到 5 之间的!&quot;
+            continue
+            echo &quot;游戏结束&quot;
+        ;;
+    esac
+done
+</code></pre>
+<h3><a id="esac" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>esac</h3>
+<blockquote>
+<p>case的语法和C family语言差别很大，它需要一个esac（就是case反过来）作为结束标记，每个case分支用右圆括号，用两个分号表示break。</p>
+</blockquote>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

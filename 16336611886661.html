@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      WKWebView从入门到放弃 之 【性能优化】 - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/16336611886661.html" />
+      <meta property="og:title" content="WKWebView从入门到放弃 之 【性能优化】" />
+      
+        <meta property="og:description" content="WKWebView从入门到放弃 之 【性能优化】" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2021-10-08T10:46:28+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="16336611886661.html">WKWebView从入门到放弃 之 【性能优化】</a></div>
+              
+              <div class="meta"><span class="time">$[timeformat('2021-10-08T10:46:28+08:00')]</span><br><span class="tags"></span></div>
+              <div class="body">
+                  <p><a href="https://juejin.im/post/5da4363ef265da5bb065e357#heading-1">iOS WKWebView的基本使用</a>
+<a href="https://juejin.im/post/5eba5f626fb9a0433d7637aa">WKWebView完美网络请求拦截</a>
+<a href="https://juejin.im/post/5e6b4109f265da576429a4b7#heading-22">WKWebview使用二三事</a>
+<a href="https://zhuanlan.zhihu.com/p/58681116">史上最全的WKWebView问题优化指南</a>
+<a href="https://tech.meituan.com/2017/06/09/webviewperf.html">美团 WebView性能、体验分析与优化</a>
+<a href="https://www.jianshu.com/p/030aadc6a10a">WKWebView 的性能优化</a>
+<a href="https://www.jianshu.com/p/7092536b91cb">WKWebview的坑和优化</a>
+<a href="https://blog.cnbang.net/tech/3477/">移动 H5 首屏秒开优化方案探讨</a></p>
+<h1><a id="wkwebview%E5%8A%A0%E8%BD%BD%E6%B5%81%E7%A8%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>WKWebView 加载流程</h1>
+<p>要想优化Web就需要了解其加载流程，并针对每个流程进行优化：</p>
+<ol>
+<li>初始化 webview</li>
+<li>请求页面 、下载数据</li>
+<li>解析HTML</li>
+<li>请求 js/css 资源</li>
+<li>dom 渲染</li>
+<li>解析执行  JS 脚本</li>
+<li>JS 请求数据</li>
+<li>解析渲染</li>
+<li>下载渲染图片等资源</li>
+</ol>
+<h2><a id="%E5%88%9D%E5%A7%8B%E5%8C%96webview" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>初始化 webview</h2>
+<p>APP启动后，UIWebView 和 WKWebView的浏览器内核并不会自动初始化，而是当你首次调用WKWebView/UIWebView 相关页面或者功能时才进行 类似于<code>懒加载</code>的初始化过程。这个过程只能Native来优化。</p>
+<blockquote>
+<p>市面上表较多的两种优化方案如下：</p>
+</blockquote>
+<h3><a id="%E6%96%B9%E6%A1%88%E4%B8%80%E9%A2%84%E5%88%9D%E5%A7%8B%E5%8C%96wkwebviewuiwebview" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>方案一 预初始化 WKWebView/UIWebView</h3>
+<p>APP启动后 预先初始化一个暂时用不到的WebView，牺牲性能 换取首次加载WebView时间。
+这里需要注意的是，一个成熟的APP 在启动时都会进行各种初始化和预配置操作，所以 webview的预初始化需要根据业务，找一个合适的时机。</p>
+<h3><a id="%E6%96%B9%E6%A1%88%E4%BA%8C%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BB%A3%E7%90%86%E6%95%B0%E6%8D%AE%E8%AF%B7%E6%B1%82" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>方案二 客户端代理数据请求</h3>
+<p>自定义 NSURLProtocol子类，拦截webview内的网络请求，让Native 开启子线程去代理这个过程。因为webview内的网络操作是一个单线程操作。这样就能节省一部分时间了。</p>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

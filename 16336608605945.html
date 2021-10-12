@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      AsyncTaskTrigger - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/16336608605945.html" />
+      <meta property="og:title" content="AsyncTaskTrigger" />
+      
+        <meta property="og:description" content="AsyncTaskTrigger使用说明" />
+        <meta name="description" content="AsyncTaskTrigger使用说明" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2021-10-08T10:41:00+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="16336608605945.html">AsyncTaskTrigger</a></div>
+              <div class="subtitle">AsyncTaskTrigger使用说明</div>
+              <div class="meta"><span class="time">$[timeformat('2021-10-08T10:41:00+08:00')]</span><br><span class="tags"></span></div>
+              <div class="body">
+                  <p><a href="https://travis-ci.org/zuosong/AsyncTaskTrigger"><figure><img src="https://img.shields.io/travis/zuosong/AsyncTaskTrigger.svg?style=flat" alt="CI Status" /><figcaption>CI Status<figcaption></figure></a>
+<a href="https://cocoapods.org/pods/AsyncTaskTrigger"><figure><img src="https://img.shields.io/cocoapods/v/AsyncTaskTrigger.svg?style=flat" alt="Version" /><figcaption>Version<figcaption></figure></a>
+<a href="https://cocoapods.org/pods/AsyncTaskTrigger"><figure><img src="https://img.shields.io/cocoapods/l/AsyncTaskTrigger.svg?style=flat" alt="License" /><figcaption>License<figcaption></figure></a>
+<a href="https://cocoapods.org/pods/AsyncTaskTrigger"><figure><img src="https://img.shields.io/cocoapods/p/AsyncTaskTrigger.svg?style=flat" alt="Platform" /><figcaption>Platform<figcaption></figure></a>
+<a href="https://gitee.com/kaelinda/async-task-trigger/stargazers"><figure><img src="https://gitee.com/kaelinda/async-task-trigger/badge/star.svg?theme=dark" alt="Star" /><figcaption>Star<figcaption></figure></a></p>
+<h2><a id="example" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h2>
+<p>To run the example project, clone the repo, and run <code>pod install</code> from the Example directory first.</p>
+<h2><a id="requirements" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h2>
+<h2><a id="installation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+<p>AsyncTaskTrigger is available through <a href="https://cocoapods.org">CocoaPods</a>. To install
+it, simply add the following line to your Podfile:</p>
+<pre><code class="language-ruby">pod 'AsyncTaskTrigger'
+</code></pre>
+<h2><a id="%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>使用方法</h2>
+<h3><a id="%E5%BC%82%E6%AD%A5%E4%B8%B2%E8%A1%8C%E4%BB%BB%E5%8A%A1" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>异步串行任务</h3>
+<pre><code class="language-plain_text">// ---------1、获取触发器单利
+AsyncTaskTrigger *trigger = [AsyncTaskTrigger shareTrigger];
+__weak typeof (&amp;*trigger)wtrigger = trigger;
+
+// 每一组任务 都需要有一个GroupKey
+NSString *groupKey = @&quot;serial_group_serial&quot;;
+
+// --------添加任务A
+[trigger addTaskAction:^{
+    // 开始执行任务A
+    [self actionBlockAWithComplet:^{
+        // 任务完成后 需要向指定 groupKey 对应的任务组 发送信号量；
+        [wtrigger sendSemaphoreToGroupKey:groupKey];
+        // 如果某些异步任务是通过代理的方式回调 可以在完成处这样标记下
+        // [[AsyncTaskTrigger shareTrigger]sendSemaphoreToGroupKey:groupKey];
+
+    }];
+} asyncType:LXTaskAsyncTypeSerial groupKey:groupKey completBlock:^{
+    // 本次任务完成后的回调
+}];
+
+// -----------添加任务B
+[trigger addTaskAction:^{
+    // 执行任务B
+    [self actionBlockBWithComplet:^{
+        [wtrigger sendSemaphoreToGroupKey:groupKey];
+    }];
+} asyncType:LXTaskAsyncTypeSerial groupKey:groupKey completBlock:nil];
+
+// Block回调发送信号量 另外一种方式
+[trigger addTaskHandlerAction:^(LXTaskActionBlock  _Nullable semaphoreHandle) {
+    [self actionBlockAWithComplet:^{
+        // 可以直接在这里调用这个Block即可
+        semaphoreHandle();
+    }];
+} asyncType:LXTaskAsyncTypeSerial groupKey:groupKey completBlock:nil];
+
+[trigger startTaskActionWithGroupKey:groupKey completBlock:^{
+    NSLog(@&quot;kael -- 所有的任务都完成了&quot;);
+}];
+</code></pre>
+<h3><a id="%E5%BC%82%E6%AD%A5%E5%B9%B6%E8%A1%8C%E4%BB%BB%E5%8A%A1" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>异步并行任务</h3>
+<p>异步任务只需要更改asyncType类型LXTaskAsyncTypeSerial --&gt; LXTaskAsyncTypeParallel</p>
+<pre><code class="language-plain_text">[trigger addTaskAction:^{
+    [self actionBlockAWithComplet:^{
+        [wtrigger sendSemaphoreToGroupKey:groupKey];
+    }];
+} asyncType:LXTaskAsyncTypeParallel groupKey:groupKey completBlock:nil];
+    
+[trigger addTaskAction:^{
+    [self actionBlockBWithComplet:^{
+        [wtrigger sendSemaphoreToGroupKey:groupKey];
+    }];
+} asyncType:LXTaskAsyncTypeParallel groupKey:groupKey completBlock:nil];
+
+[trigger addTaskHandlerAction:^(LXTaskActionBlock  _Nullable semaphoreHandle) {
+    [self actionBlockAWithComplet:^{
+        semaphoreHandle();
+    }];
+} asyncType:LXTaskAsyncTypeParallel groupKey:groupKey completBlock:nil];
+        
+[trigger startTaskActionWithGroupKey:groupKey completBlock:^{
+    NSLog(@&quot;kael -- 所有的任务都完成了&quot;);
+}];
+</code></pre>
+<h2><a id="author" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Author</h2>
+<p>Kael, zhouzuosong_kael@<a href="mailto:163.com@163.com">163.com@163.com</a></p>
+<h2><a id="license" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+<p>AsyncTaskTrigger is available under the MIT license. See the LICENSE file for more info.</p>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

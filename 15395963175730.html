@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      iOS 转场动画 全解析 - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/15395963175730.html" />
+      <meta property="og:title" content="iOS 转场动画 全解析" />
+      
+        <meta property="og:description" content="iOS 转场动画 全解析" />
+        <meta name="description" content="iOS 转场动画 全解析" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2018-10-15T17:38:37+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="15395963175730.html">iOS 转场动画 全解析</a></div>
+              <div class="subtitle">iOS 转场动画 全解析</div>
+              <div class="meta"><span class="time">$[timeformat('2018-10-15T17:38:37+08:00')]</span><br><span class="tags"></span></div>
+              <div class="body">
+                  <h2><a id="%E8%BD%AC%E5%9C%BA%E4%BB%A3%E7%90%86transition-delegate%EF%BC%9A" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>转场代理(Transition Delegate)：</h2>
+<pre><code class="language-plain_text">&lt;UINavigationControllerDelegate&gt; //UINavigationController 的 delegate 属性遵守该协议。
+&lt;UITabBarControllerDelegate&gt; //UITabBarController 的 delegate 属性遵守该协议。
+&lt;UIViewControllerTransitioningDelegate&gt; //UIViewController 的 transitioningDelegate 属性遵守该协议。
+</code></pre>
+<h2><a id="%E5%8A%A8%E7%94%BB%E6%8E%A7%E5%88%B6%E5%99%A8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>动画控制器</h2>
+<p>负责添加视图以及执行动画；遵守<code>&lt;UIViewControllerAnimatedTransitioning&gt;</code>协议；</p>
+<h2><a id="%E4%BA%A4%E4%BA%92%E6%8E%A7%E5%88%B6" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>交互控制</h2>
+<p>通过交互手段，通常是手势来驱动动画控制器实现的动画，使得用户能够控制整个过程；遵守<code>&lt;UIViewControllerInteractiveTransitioning&gt;</code>协议；系统已经打包好现成的类供我们使用。</p>
+<h2><a id="%E8%BD%AC%E5%9C%BA%E7%8E%AF%E5%A2%83transition-context" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>转场环境(Transition Context):</h2>
+<p>提供转场中需要的数据；遵守<code>&lt;UIViewControllerContextTransitioning&gt;</code>协议；由 UIKit 在转场开始前生成并提供给我们提交的动画控制器和交互控制器使用。</p>
+<h2><a id="%E8%BD%AC%E5%9C%BA%E5%8D%8F%E8%B0%83%E5%99%A8transition-coordinator%EF%BC%9A" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>转场协调器(Transition Coordinator)：</h2>
+<p>可在转场动画发生的同时并行执行其他的动画，其作用与其说协调不如说辅助，主要在 Modal 转场和交互转场取消时使用，其他时候很少用到；遵守<code>&lt;UIViewControllerTransitionCoordinator&gt;</code>协议；由 UIKit 在转场时生成，UIViewController 在 iOS 7 中新增了方法transitionCoordinator()返回一个遵守该协议的对象，且该方法只在该控制器处于转场过程中才返回一个此类对象，不参与转场时返回 nil。</p>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

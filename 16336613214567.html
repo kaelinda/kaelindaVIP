@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      infer使用 -- 代码静态检测 - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/16336613214567.html" />
+      <meta property="og:title" content="infer使用 -- 代码静态检测" />
+      
+        <meta property="og:description" content="infer使用" />
+        <meta name="description" content="infer使用" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2021-10-08T10:48:41+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="16336613214567.html">infer使用 -- 代码静态检测</a></div>
+              <div class="subtitle">infer使用</div>
+              <div class="meta"><span class="time">$[timeformat('2021-10-08T10:48:41+08:00')]</span><br><span class="tags"></span></div>
+              <div class="body">
+                  <h2><a id="%E5%AE%89%E8%A3%85" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装</h2>
+<p><strong>1.安装brew</strong></p>
+<pre><code class="language-js">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+</code></pre>
+<p><strong>2.安装infer</strong></p>
+<pre><code class="language-js">brew install infer
+</code></pre>
+<h2><a id="%E5%88%86%E6%9E%90%E5%91%BD%E4%BB%A4" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>分析命令</h2>
+<p><strong>1.分析单个文件</strong></p>
+<ul>
+<li>cd InferTest.m 所在的目录</li>
+<li>infer -- clang -c InferTest.m</li>
+<li>No issues found   代表没有问题</li>
+</ul>
+<p><strong>2.分析整个项目</strong></p>
+<ul>
+<li>cd 到项目所在的目录 (KooApp)为工程名称</li>
+</ul>
+<pre><code class="language-js">infer -- xcodebuild -target KooApp -configuration Debug -sdk iphonesimulator
+</code></pre>
+<p><strong>3.分析带cocoapods的整个项目</strong></p>
+<ul>
+<li>cd 到项目所在目录</li>
+<li>KooApp代表项目名或者scheme名</li>
+</ul>
+<pre><code class="language-js">infer --  xcodebuild -workspace ./KooApp.xcworkspace -configuration Debug -scheme KooApp
+</code></pre>
+<ul>
+<li>忽略过滤文件  （in-path后面跟的是一个忽略文件或者文件夹的路径数组。(clang也可以去掉)）</li>
+</ul>
+<pre><code class="language-js">INFER_ARGS=&quot;--skip-clang-analysis-in-path^[\&quot;Pods\&quot;]&quot; infer -- xcodebuild -workspace ./KooApp.xcworkspace -configuration Debug -scheme KooApp
+</code></pre>
+<p>注意：如果infer分析编译报错，忽略错误继续分析</p>
+<pre><code class="language-js">infer --keep-going
+</code></pre>
+<p><strong>4.工程清理命令</strong>
+注意：有时候发现编译分析结果不全，此时可以先清理一下，然后再编译</p>
+<pre><code class="language-js">xcodebuild -target KooApp -configuration Debug -sdk iphonesimulator clean
+</code></pre>
+<p><strong>5.cocoapods的项目清理命令</strong></p>
+<pre><code class="language-js">xcodebuild -workspace ./KooApp.xcworkspace -configuration Debug -scheme KooApp clean
+</code></pre>
+<p><figure><img src="media/15604798122070/15621404742524.jpg" alt="" style="width:1384px;" /></figure></p>
+<h2><a id="%E9%97%AE%E9%A2%98%E5%88%86%E7%B1%BB%E6%80%BB%E7%BB%93" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>问题分类总结</h2>
+<p>1.<code>DIRECT_ATOMIC_PROPERTY_ACCESS</code></p>
+<p>在代码中使用了使用了一个atomic的成员变量，infer建议我们将atomic修改为nonatomic。由于OC中，属性会被默认设置为atomic属性，我们需要显示将属性声明为nonatomic。</p>
+<p>2.<code>ASSIGN_POINTER_WARNING</code></p>
+<p>由于在mrc时代，没有weak指针，所以一些view的属性声明是_、unsafe__unretain__的形式，在arc中，这个属性被判断为assign，需要将其修改为weak或者strong</p>
+<p>3.<code>NULL_DEREFERENCE</code></p>
+<p>空指针</p>
+<p>4.<code>IVAR_NOT_NULL_CHECKED</code></p>
+<p>在代码中调用block，运行代码时，没有做判空处理。即需要改动为，
+if(block){block()}</p>
+<p>5.<code>BAD_POINTER_COMPARISON</code></p>
+<p>Implicitly checking whether NSNumber pointer is nil。没有判断一个  NSNumber类型的对象是不是空？此处应该是误报。</p>
+<p>6.<code>TAINTED_VALUE_REACHING_SENSITIVE_FUNCTION</code></p>
+<p>代码中使用了cookie的value。可以理解为误报</p>
+<p>7.<code>PARAMETER_NOT_NULL_CHECKED</code></p>
+<p>传参时没有判断是否为null，加一次判断就可以了</p>
+<p>8.<code>STRONG_DELEGATE_WARNING</code></p>
+<p>将一个delegate属性设置为strong的类型。</p>
+<p>9.<code>PREMATURE_NIL_TERMINATION_ARGUMENT</code></p>
+<p>没有判断是否为空</p>
+<p>10.<code>REGISTERED_OBSERVER_BEING_DEALLOCATED</code></p>
+<p>创建一个对象后，监听了某些通知，但是没有在dealloc中释放该通知。项目中出现这种问题的类，基本都是单例，不会被销毁。</p>
+<p>11.<code>MEMORY_LEAK</code></p>
+<p>内存泄露。项目代码全面启动了ARC进行内存管理，在OC层没有扫描出内存泄露。目前扫描出的内存泄露问题都是使用了malloc或者ralloc等c语言内存申请函数，在函数提前return前没有及时free。</p>
+<h2><a id="%E6%A3%80%E6%B5%8B%E5%8F%AF%E8%83%BD%E4%BC%9A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>检测可能会遇到的问题</h2>
+<p>1.分析某一个文件报错（fatal error: 'UIKit/UIKit.h' file not found）
+解决方案：
+在命令中加</p>
+<pre><code class="language-js">-isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk
+</code></pre>
+<p>举例：</p>
+<pre><code class="language-js">infer -- clang -c -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk Hellow.m
+</code></pre>
+<p>2.分析带ARC特有的修饰(如weak或者__weak)或者其他的情况(命令行中加-fobjc-arc)</p>
+<pre><code class="language-js">infer -- clang -c -fobjc-arc InferTest.m
+</code></pre>
+<p>3.如果infer分析编译报错，忽略错误继续分析</p>
+<pre><code class="language-js">infer --keep-going
+</code></pre>
+<p>4.有时候发现编译分析结果不全，此时可以先清理一下，然后再编译：</p>
+<blockquote>
+<p>工程清理命令</p>
+</blockquote>
+<pre><code class="language-js">xcodebuild -target InferTest -configuration Debug -sdk iphonesimulator clean
+</code></pre>
+<blockquote>
+<p>或者带cocoapods的项目清理命令</p>
+</blockquote>
+<pre><code class="language-js">xcodebuild -workspace ./InferTest.xcworkspace -configuration Debug -scheme InferTest clean
+</code></pre>
+<p>然后再运行Infer分析的命令</p>
+<h2><a id="%E8%BF%87%E6%BB%A4%E6%8E%89%E6%88%91%E4%BB%AC%E5%BC%95%E5%85%A5%E7%9A%84%E7%AC%AC%E4%B8%89%E5%BA%93%E7%AD%89%E4%B8%8D%E6%83%B3%E5%81%9A%E5%88%86%E6%9E%90%E7%9A%84%E6%96%87%E4%BB%B6" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>过滤掉我们引入的第三库等不想做分析的文件</h2>
+<ul>
+<li>方法一：
+而当我们在项目中使用了很多第三方的时候，其实我们只想让Infer分析我们的代码，而不想分析第三方的代码，不然分析报告中会有很多第三方的issue，看着混乱，这时我们可以用命令行过滤掉关于不想分析的文件。比如用到cocoapods的项目，我们想过滤掉Pods引入的第三方库，命令行如下：</li>
+</ul>
+<pre><code class="language-js">INFER_ARGS=&quot;--skip-clang-analysis-in-path^[\&quot;Pods\&quot;]&quot; infer -- xcodebuild -workspace ./KooApp.xcworkspace -configuration Debug -scheme KooApp
+</code></pre>
+<p>注：in-path后面跟的是一个忽略文件或者文件夹的路径数组。 （clang可能会去掉）</p>
+<ul>
+<li>方法二：
+在项目的根目录创建一个.inferconfig类型的配置文件  skip-analysis-in-path是一个数组, 想要过滤其他文件, 只需要增加路径即可。</li>
+</ul>
+<p><figure><img src="media/15604798122070/15623183298914.png" alt="111" /><figcaption>111<figcaption></figure></p>
+<h2><a id="%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>参考资料</h2>
+<ul>
+<li><a href="https://www.jianshu.com/p/53ad11e6f0c5">https://www.jianshu.com/p/53ad11e6f0c5</a></li>
+<li><a href="https://www.jianshu.com/p/4667e36aadea">https://www.jianshu.com/p/4667e36aadea</a></li>
+</ul>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

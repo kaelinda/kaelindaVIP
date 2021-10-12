@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      iOS APP静态检测实践之 -- OCLint - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="静态检测, 代码检测, Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/16336606772972.html" />
+      <meta property="og:title" content="iOS APP静态检测实践之 -- OCLint" />
+      
+        <meta property="og:description" content="iOS APP静态检测实践之 -- OCLint" />
+        <meta name="description" content="iOS APP静态检测实践之 -- OCLint" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2021-10-08T10:37:57+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="16336606772972.html">iOS APP静态检测实践之 -- OCLint</a></div>
+              <div class="subtitle">iOS APP静态检测实践之 -- OCLint</div>
+              <div class="meta"><span class="time">$[timeformat('2021-10-08T10:37:57+08:00')]</span><br><span class="tags"><a href="tag_%E9%9D%99%E6%80%81%E6%A3%80%E6%B5%8B.html">#静态检测</a><a href="tag_%E4%BB%A3%E7%A0%81%E6%A3%80%E6%B5%8B.html">#代码检测</a></span></div>
+              <div class="body">
+                  <p>[toc]</p>
+<p><span id = "jumpID">跳转位置jumpID</span></p>
+<p><a href="OCLint%E6%8C%87%E4%BB%A4%E9%9B%86%E6%96%87%E6%A1%A3#jumpID">点我跳转</a></p>
+<blockquote>
+<p>参考文章</p>
+</blockquote>
+<p><a href="https://juejin.cn/post/6844904046281621512">iOS使用OCLint做静态代码分析</a>
+<a href="https://juejin.cn/post/6844903853775650830#heading-9">OCLint 实现 Code Review - 给你的代码提提质量</a></p>
+<h2><a id="%E5%AE%89%E8%A3%85" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装</h2>
+<ul>
+<li>安装xcpretty</li>
+</ul>
+<pre><code class="language-plain_text">sudo gem install xcpretty
+</code></pre>
+<ul>
+<li>
+<p>安装OCLint</p>
+<pre><code class="language-plain_text">brew tap oclint/formulae
+
+brew install oclint
+</code></pre>
+</li>
+</ul>
+<h2><a id="%E5%8F%82%E6%95%B0%E4%BB%8B%E7%BB%8D" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>参数介绍</h2>
+<ul>
+<li>
+<p>-R &lt;路径&gt; ： 检测所用的规则的路径，默认路径$(/path/to/bin/oclint)/../lib/oclint/rules</p>
+</li>
+<li>
+<p>-disable-rule &lt;规则名&gt;： 让相对应的规则失效（OCLint 规则列表）。</p>
+</li>
+<li>
+<p>-rc &lt;参数&gt;=&lt;值&gt; ：修改阈值</p>
+</li>
+<li>
+<p>-report-type &lt;报告类型&gt;，有&quot;text&quot;、“html”、“json”、“pmd”、“xcode”几个类型</p>
+</li>
+<li>
+<p>-o &lt;路径&gt; 报告生成路径。</p>
+</li>
+</ul>
+<h3><a id="oclint-json-compilation-database%E6%8C%87%E4%BB%A4" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>oclint-json-compilation-database 指令</h3>
+<ul>
+<li>-i ：包含进某些文件</li>
+<li>-e ： 过滤掉某些文件</li>
+</ul>
+<pre><code class="language-plain_text"># 排除Pods 里的文件
+oclint-json-compilation-database -e Pods 
+# 包含进Pods里的文件
+oclint-json-compilation-database -i Pods
+</code></pre>
+<p><a href="https://oclint-docs.readthedocs.io/en/v0.6/usage/oclint-json-compilation-database.html">OCLint 官方文档</a>
+<a href="https://www.dazhuanlan.com/2020/03/03/5e5d602b31b74/">参考文章1</a></p>
+<h3><a id="%E6%A3%80%E6%9F%A5%E5%8D%95%E4%B8%AA%E6%96%87%E4%BB%B6" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>检查单个文件</h3>
+<pre><code class="language-plain_text">oclint [options] &lt;source&gt; -- [compiler flags]
+oclint sample.cpp -- -c
+</code></pre>
+<p>想要改变oclint 的行为，options参数 需要 在文件资源前面添加，比如 导出报告：<code>-html -o report.html</code>
+想要改变 编译行为，需要在 -- 后面添加参数</p>
+<pre><code class="language-plain_text">oclint -html -o report.html sample.cpp -- -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS -I/usr/include -I/usr/local/include -c
+</code></pre>
+<pre><code class="language-bash">kIsysroot=&quot;/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.4.sdk&quot;
+kFilePath=&quot;LXCategory/AppDelegate.m&quot;
+# 编译文件
+clang -x objective-c -arch armv7 -std=gnu99 -fobjc-arc -O0 -isysroot $kIsysroot -g -I./Pods/Headers -c $kFilePath
+# 分析文件
+oclint -report-type=html -o=report.html $kFilePath -- -x objective-c -arch armv7 -std=gnu99 -fobjc-arc -O0  -isysroot $kIsysroot -g -I ./Pods/Headers -c
+</code></pre>
+<h3><a id="%E6%A3%80%E6%9F%A5%E6%95%B4%E4%B8%AAios%E9%A1%B9%E7%9B%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>检查整个iOS项目</h3>
+<h4><a id="%E7%BC%96%E8%AF%91%E5%AF%BC%E5%87%BA" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>编译导出</h4>
+<ul>
+<li>编译之前先 clean一下，然后再build</li>
+<li>导出日志文件 <code>xcodebuild.log</code></li>
+<li>xcpretty导出json文件</li>
+</ul>
+<pre><code class="language-plain_text">xcodebuild clean build -project $kProjectName -target $kTargetName -configuration $kConfigurationType -sdk $kSDKName | tee xcodebuild.log | xcpretty --report json-compilation-database 
+</code></pre>
+<blockquote>
+<p>workspace项目 可以参考xcodebuild的使用方法:
+<code>xcodebuild  archive  -workspace &quot;$workspaceName&quot; -scheme &quot;$scheme&quot; -configuration  &quot;$kConfiguration&quot;</code></p>
+</blockquote>
+<h4><a id="%E5%88%86%E6%9E%90%E9%A1%B9%E7%9B%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>分析项目</h4>
+<ul>
+<li>命令添加分析规则</li>
+</ul>
+<pre><code class="language-plain_text">oclint-json-compilation-database -e LXCategory/Third -e  LXCategory/test -- \
+-report-type html -o ./AppOutput/oclint-out/oclint_report.html \
+-max-priority-1=100000 \
+-max-priority-2=100000 -max-priority-3=100000 \
+-disable-rule=InvertedLogic \
+-disable-rule=CollapsibleIfStatements \
+-disable-rule=UnusedMethodParameter \
+-disable-rule=LongVariableName \
+-disable-rule=ShortVariableName \
+-disable-rule=UselessParentheses \
+-disable-rule=IvarAssignmentOutsideAccessorsOrInit \
+</code></pre>
+<ul>
+<li>配置文件添加分析规则</li>
+</ul>
+<blockquote>
+<ol>
+<li>我们需要在项目根目录下创建一个名为<code>.oclint</code>的配置文件</li>
+<li>在配置文件中添加规则</li>
+<li>添加忽略文件等...</li>
+</ol>
+</blockquote>
+<p><strong>命令如下：</strong></p>
+<pre><code class="language-plain_text">oclint-json-compilation-database -e LXCategory/Third -e LXCategory/test
+</code></pre>
+<p><strong>.oclint配置文件内容如下：</strong></p>
+<pre><code class="language-plain_text">rule-configurations:
+  - key: CYCLOMATIC_COMPLEXITY # Cyclomatic complexity of a method 10
+    value: 30
+  - key: LONG_LINE
+    value: 110
+  - key: NCSS_METHOD # Number of non-commenting source statements of a method 30
+    value: 50
+  - key: LONG_VARIABLE_NAME
+    value: 40
+  - key: NESTED_BLOCK_DEPTH
+    value: 6
+  - key: MINIMUM_CASES_IN_SWITCH
+    value: 2
+  - key: SHORT_VARIABLE_NAME
+    value: 1
+  - key: TOO_MANY_METHODS
+    value: 50
+  - key: LONG_METHOD
+    value: 100
+disable-rules:
+  - RedundantLocalVariable 
+  - SHORT_VARIABLE_NAME 
+  - LongVariableName
+  - UnnecessaryElseStatement 
+  - RedundantNilCheck 
+  - RedundantIfStatement
+  - InvertedLogic
+  - AssignIvarOutsideAccessors
+  - UseObjectSubscripting
+  - BitwiseOperatorInConditional
+  - PreferEarlyExit
+  - UnusedMethodParameter
+
+max-priority-1: 1000
+max-priority-2: 1000
+max-priority-3: 1000
+enable-clang-static-analyzer: false
+
+output: AppOutput/oclint-out/oclint_report.html
+report-type: html
+</code></pre>
+<ul>
+<li>个人Demo项目脚本如下</li>
+</ul>
+<pre><code class="language-bash">kTargetName=&quot;LXCategory&quot;
+kProjectName=&quot;LXCategory.xcodeproj&quot;
+kConfigurationType=&quot;Debug&quot;
+kSDKName=&quot;iphonesimulator&quot;
+kOuptputPath=&quot;AppOutput/oclint-out&quot;
+
+# html 报告导出路径
+kHTML_Report_Name=&quot;oclint_report.html&quot;
+# 分析结果json文件名
+kJSON_Data_Name=&quot;compile_commands.json&quot;
+
+# 清理、编译 -- 格式化导出json 1------------------
+xcodebuild clean build -project $kProjectName -target $kTargetName -configuration $kConfigurationType -sdk $kSDKName | tee xcodebuild.log | xcpretty --report json-compilation-database 
+
+echo &quot;准备复制json文件 到目录:${kOuptputPath}...&quot;
+# 必须要复制到项目根目录下 才能分析成功
+cp &quot;build/reports/compilation_db.json&quot; $kJSON_Data_Name
+cp &quot;build/reports/compilation_db.json&quot; &quot;${kOuptputPath}/${kJSON_Data_Name}&quot;
+
+echo &quot;复制完毕...&quot;
+
+echo &quot;准备进入导出文件目录: AppOutput/oclint-out  ...&quot;
+
+# 分析项目 2--------------------------------
+# 方案一：
+# 如果过不在命令里配置规则，就默认读取规则里的规则 配置文件里无法配置忽略文件😂
+# oclint-json-compilation-database -e LXCategory/Third -e LXCategory/test
+
+# 方案二：
+# 命令里设置参数 读取命令里的规则
+oclint-json-compilation-database -e LXCategory/Third -e  LXCategory/test -- \
+-report-type html -o AppOutput/oclint-out/oclint_report.html \
+-max-priority-1=100000 \
+-max-priority-2=100000 -max-priority-3=100000 \
+-disable-rule=InvertedLogic \
+-disable-rule=CollapsibleIfStatements \
+-disable-rule=UnusedMethodParameter \
+-disable-rule=LongVariableName \
+-disable-rule=ShortVariableName \
+-disable-rule=UselessParentheses \
+-disable-rule=IvarAssignmentOutsideAccessorsOrInit \
+
+# 处理报告文件 3--------------------------
+echo &quot;准备打开 报告文件:😁&quot;
+pwd
+sleep 2.0
+# 打开 HTML 格式的报告文件
+open &quot;${kOuptputPath}/${kHTML_Report_Name}&quot;
+# 删除项目根目录下的json分析文件
+rm $kJSON_Data_Name
+</code></pre>
+<h2><a id="%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>注意事项</h2>
+<ul>
+<li>忽略文件</li>
+</ul>
+<p>忽略文件配置  <code>-e Pods -e Pods</code>,这个只能在命令中设置，配置文件中配置不了。</p>
+<ul>
+<li>检查文件</li>
+</ul>
+<p>忽略文件配置  <code>-i Pods -i Pods</code>，这个只能在命令中设置，配置文件中配置不了。</p>
+<ul>
+<li>配置文件</li>
+</ul>
+<p>配置文件的设置，会和命令设置 有冲突，二者选其一。</p>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

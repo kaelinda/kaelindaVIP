@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      UIButton 点击事件响应延迟 问题解决 - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="UIButton, Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/16336626850108.html" />
+      <meta property="og:title" content="UIButton 点击事件响应延迟 问题解决" />
+      
+        <meta property="og:description" content="UIButton 点击事件响应延迟 问题解决" />
+        <meta name="description" content="UIButton 点击事件响应延迟 问题解决" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2021-10-08T11:11:25+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="16336626850108.html">UIButton 点击事件响应延迟 问题解决</a></div>
+              <div class="subtitle">UIButton 点击事件响应延迟 问题解决</div>
+              <div class="meta"><span class="time">$[timeformat('2021-10-08T11:11:25+08:00')]</span><br><span class="tags"><a href="tag_UIButton.html">#UIButton</a></span></div>
+              <div class="body">
+                  <ul>
+<li>问题表现</li>
+</ul>
+<blockquote>
+<p>我在UITableView的Header上添加了一个视图（FiltersView），FiltersView上面添加了不定数量的 UIButton。点击UIButton 字体颜色和 layer 的 border 颜色发生改变。但是，当我快速点击快速抬起的时候，发现按钮颜色和border的颜色并没有发生改变；只有在手指停留在屏幕上的时间稍长一点的时候才会有响应事件触发。</p>
+</blockquote>
+<ul>
+<li>点击之前的效果</li>
+</ul>
+<p><figure><img src="https://ws1.sinaimg.cn/large/006tKfTcly1g1o488onwdj30f803qgln.jpg" alt="这是点击前的效果" /><figcaption>这是点击前的效果<figcaption></figure></p>
+<ul>
+<li>点击之后应该有的效果
+<figure><img src="https://ws1.sinaimg.cn/large/006tKfTcly1g1o48y5ck6j30fc03a3yj.jpg" alt="点击之后应该有的效果" /><figcaption>点击之后应该有的效果<figcaption></figure></li>
+</ul>
+<ul>
+<li>问题分析
+响应事件延迟有两种情况：</li>
+</ul>
+<span id="more"></span><!-- more -->
+<ul>
+<li>
+<p>#####1. UIButton 的event事件调用错误</p>
+<p>在这个网友的日志里看到一些内容，大体如下：</p>
+</li>
+</ul>
+<pre><code class="language-plain_text">UIControlEventTouchDown  
+单点触摸按下事件：用户点触屏幕，或者又有新手指落下的时候。
+UIControlEventTouchDownRepeat  
+多点触摸按下事件，点触计数大于1：用户按下第二、三、或第四根手指的时候。
+UIControlEventTouchDragInside  
+当一次触摸在控件窗口内拖动时。  
+UIControlEventTouchDragOutside  
+当一次触摸在控件窗口之外拖动时。  
+UIControlEventTouchDragEnter  
+当一次触摸从控件窗口之外拖动到内部时。  
+UIControlEventTouchDragExit  
+当一次触摸从控件窗口内部拖动到外部时。  
+  
+
+	  
+	UIControlEventTouchUpInside  
+所有在控件之内触摸抬起事件。  
+UIControlEventTouchUpOutside  
+所有在控件之外触摸抬起事件(点触必须开始与控件内部才会发送通知)。  
+UIControlEventTouchCancel  
+所有触摸取消事件，即一次触摸因为放上了太多手指而被取消，或者被上锁或者电话呼叫打断。  
+UIControlEventTouchChanged  
+当控件的值发生改变时，发送通知。用于滑块、分段控件、以及其他取值的控件。你可以配置滑块控件何时发送通知，在滑块被放下时发送，或者在被拖动时发送。  
+UIControlEventEditingDidBegin  
+当文本控件中开始编辑时发送通知。  
+UIControlEventEditingChanged  
+当文本控件中的文本被改变时发送通知。  
+UIControlEventEditingDidEnd  
+当文本控件中编辑结束时发送通知。  
+UIControlEventEditingDidOnExit  
+当文本控件内通过按下回车键（或等价行为）结束编辑时，发送通知。  
+UIControlEventAlltouchEvents  
+通知所有触摸事件。  
+UIControlEventAllEditingEvents  
+通知所有关于文本编辑的事件。  
+UIControlEventAllEvents  
+通知所有事件。
+</code></pre>
+<ul>
+<li>####2.父试图拦截了触摸事件 （手势冲突，或者交互的别的什么原因）<br />
+经过多方查证，可能造成父试图拦截的情况分别是 UIScrollVIew 和UITableView。系统默认<em><strong>delaysTouchesBegan</strong></em> 属性为YES, 设置 <em><strong>delaysTouchesBegan</strong></em> 属性 为NO即可解决延时响应问题。</li>
+</ul>
+<p>####<strong>原因</strong>：
+iOS 7+系统 ，手触摸到屏幕后系统会有 150ms的时间去反应并判断，你是否是正常点击和不经意间的点击。手触摸屏幕时间超过 150ms UIScrollView 或者UITableView  才会把触摸事件分发给各个子视图。否则，会被其拦截。</p>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

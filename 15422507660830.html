@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      使用Masonry，布局UIScrollViewView - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/15422507660830.html" />
+      <meta property="og:title" content="使用Masonry，布局UIScrollViewView" />
+      
+        <meta property="og:description" content="使用Masonry，布局UIScrollViewView" />
+        <meta name="description" content="使用Masonry，布局UIScrollViewView" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2018-11-15T10:59:26+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="15422507660830.html">使用Masonry，布局UIScrollViewView</a></div>
+              <div class="subtitle">使用Masonry，布局UIScrollViewView</div>
+              <div class="meta"><span class="time">$[timeformat('2018-11-15T10:59:26+08:00')]</span><br><span class="tags"></span></div>
+              <div class="body">
+                  <p><code>UIScrollView</code>比较特殊，frame布局时我们需要设置<code>contentSize</code>属性</p>
+<ol>
+<li>
+<p>初始化ScrollView并添加到父视图 并 进行约束</p>
+<pre><code class="language-plain_text">// ------ 初始化ScrollView
+UIScrollView *scrollView = UIScrollView.new;
+self.scrollView = scrollView;
+scrollView.backgroundColor = [UIColor grayColor];
+
+// ------ 添加到父视图
+[self addSubview:scrollView];
+
+// ------ 对ScrollView进行约束
+[self.scrollView makeConstraints:^(MASConstraintMaker *make) {
+    make.edges.equalTo(self);
+}];
+</code></pre>
+</li>
+<li>
+<p>初始化ContentView 并进行约束</p>
+<pre><code class="language-plain_text">UIView* contentView = UIView.new;
+
+// 添加contentView 到ScrollView上
+[self.scrollView addSubview:contentView];
+
+// 约束contentView
+[contentView makeConstraints:^(MASConstraintMaker *make) {
+    make.edges.equalTo(self.scrollView);
+    make.width.equalTo(self.scrollView);
+}];
+</code></pre>
+</li>
+<li>
+<p>添加子视图到contentView上 并再次对contentView进行约束</p>
+<pre><code class="language-plain_text">UIView *lastView;
+CGFloat height = 25;
+
+for (int i = 0; i &lt; 10; i++) {
+    UIView *view = UIView.new;
+    view.backgroundColor = [self randomColor];
+
+    // 注意！！！ 这里是添加视图到 contentView上
+    [contentView addSubview:view];
+    
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTap:)];
+    [view addGestureRecognizer:singleTap];
+    
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(lastView ? lastView.bottom : @0);
+        make.left.equalTo(@0);
+        make.width.equalTo(contentView.width);
+        make.height.equalTo(@(height));
+    }];
+    
+    height += 25;
+    lastView = view;
+}
+// ------&gt;&gt;&gt;&gt;&gt;&gt;: 这里 很关键！！！！
+[contentView makeConstraints:^(MASConstraintMaker *make) {
+    make.bottom.equalTo(lastView.bottom);
+}];
+</code></pre>
+</li>
+</ol>
+<blockquote>
+<p>讲解</p>
+</blockquote>
+<p>第一次约束是这样的：
+先设置下edgs 让contentView能撑起scrollView来。
+然后,如果竖直方向高度不固定，就先约束下相对固定的宽度；
+如果水平方向宽度不固定，就需要先约束下高度；</p>
+<pre><code class="language-plain_text">// 约束contentView
+    [contentView makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.scrollView);
+        make.width.equalTo(self.scrollView);
+    }];
+</code></pre>
+<p>再次更新 加强约束时：
+如果竖直方向高度不固定，则需要在此时约束下bottom 或者 top
+如果水平方向不固定，则需要在此时约束下 left 或者 right</p>
+<pre><code class="language-plain_text">// ------&gt;&gt;&gt;&gt;&gt;&gt;: 这里 很关键！！！！
+    [contentView makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(lastView.bottom);
+    }];
+</code></pre>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

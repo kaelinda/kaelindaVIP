@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      音视频学习笔记 1 - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/16340038102685.html" />
+      <meta property="og:title" content="音视频学习笔记 1" />
+      
+        <meta property="og:description" content="我要学音视频！" />
+        <meta name="description" content="我要学音视频！" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2021-10-12T09:56:50+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="16340038102685.html">音视频学习笔记 1</a></div>
+              <div class="subtitle">我要学音视频！</div>
+              <div class="meta"><span class="time">$[timeformat('2021-10-12T09:56:50+08:00')]</span><br><span class="tags"></span></div>
+              <div class="body">
+                  <h2><a id="%E9%9F%B3%E8%A7%86%E9%A2%91%E6%A6%82%E5%BF%B5" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>音视频概念</h2>
+<h3><a id="%E5%A3%B0%E9%9F%B3%E7%9A%84%E7%89%A9%E7%90%86%E6%80%A7%E8%B4%A8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>声音的物理性质</h3>
+<ul>
+<li>
+<p>声波三要素：频率、振幅、波形</p>
+</li>
+<li>
+<p>人耳听到的频率范围 20Hz-20KHz</p>
+</li>
+<li>
+<p>声音在空气中的传播速度 340m/s、蒸馏水中1497m/s、铁棒5200m/s</p>
+</li>
+<li>
+<p>一般声音的采样频率为 44.1KHz---&gt; 一秒钟采样44100次，这样 超过人耳听到的最大频率--20KHz的频率也能被数字化</p>
+</li>
+<li>
+<p>音频的裸数据格式 脉冲编码调制  PCM （Pluse Code Modulation）</p>
+</li>
+<li>
+<p>PCM 相关概念：</p>
+<ul>
+<li>量化格式(sampleFormate):有的地方称作 <strong>位深度</strong>，这个描述的是一个采样的大小，一般为2字节</li>
+<li>采样频率(sampleRate)：一般为44.1kHz</li>
+<li>声道数(channel):声道数通常为 2 声道</li>
+</ul>
+</li>
+</ul>
+<!--more-->
+<blockquote>
+<p>一般CD的音质描述：量化格式为16比特（2字节），采样频率44100Hz,声道数2。</p>
+</blockquote>
+<p>声音格式我们可以用<strong>数据比特率</strong>来描述其大小：每秒占用空间大小。</p>
+<blockquote>
+<p>44100 * 16 * 2 = 1378.125kbps</p>
+</blockquote>
+<p>一分钟里这种音质的CD占据多大存储空间？</p>
+<blockquote>
+<p>1378.125 * 60 / 8 / 1024 = 10.09MB</p>
+</blockquote>
+<p>量化格式如果更精确，每一个采样所携带的信息就越多，占用的存储空间就会越大，能描述的声音细节就越精细。</p>
+<ul>
+<li>分贝：是描述声音强度的单位。</li>
+</ul>
+<h3><a id="%E9%9F%B3%E9%A2%91%E7%BC%96%E7%A0%81" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>音频编码</h3>
+<p>音频压缩编码的指标：压缩比，通常小于1，否则就没有压缩的必要了。</p>
+<p>音频压缩编码算法有：PCM、WAV、AAC、MP3、Ogg。</p>
+<ul>
+<li>WAV：音频质量好，大多数软件都支持，但是占用空间大；适合当做多媒体开发的中间文件，保存音乐、音效素材</li>
+<li>MP3：不错的压缩比，LAME编码中高码率文件。音质在128Kbit/s 以上表现不错，压缩比高，大多数软件都支持。适合高比特率下对兼容性有要求的音乐欣赏。</li>
+<li>AAC：包括LC-AAC、HE-AAC、HE-AAC v2,小于128Kbit/s表现优异。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: center">LC-AAC</th>
+<th style="text-align: center">HE-AAC</th>
+<th style="text-align: center">HE-AAC v2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center">中高码率&gt;80Kbit/s</td>
+<td style="text-align: center">中低码率&lt;=80Kbit/s</td>
+<td style="text-align: center">低码率&lt;48Kbit/s</td>
+</tr>
+</tbody>
+</table>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

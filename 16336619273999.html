@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      ios 之 自动打包 一键打包脚本 【bash优化版本】 - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/16336619273999.html" />
+      <meta property="og:title" content="ios 之 自动打包 一键打包脚本 【bash优化版本】" />
+      
+        <meta property="og:description" content="ios 之 自动打包 一键打包脚本 【bash优化版本】" />
+        <meta name="description" content="ios 之 自动打包 一键打包脚本 【bash优化版本】" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2021-10-08T10:58:47+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="16336619273999.html">ios 之 自动打包 一键打包脚本 【bash优化版本】</a></div>
+              <div class="subtitle">ios 之 自动打包 一键打包脚本 【bash优化版本】</div>
+              <div class="meta"><span class="time">$[timeformat('2021-10-08T10:58:47+08:00')]</span><br><span class="tags"></span></div>
+              <div class="body">
+                  <h2><a id="%E9%80%89%E6%8B%A9%E6%89%93%E5%8C%85scheme" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>选择打包scheme</h2>
+<pre><code class="language-bash"># 选择打包环境
+function selectedScheme() {
+  #statements
+  echo &quot;请选择打包对象: \n 1) GaoKao(**高考) \n 2) Zhongkao(**中考)&quot;
+  read app_scheme
+
+  if [[ $app_scheme == 1 ]]; then
+    echo &quot;您选择的是：GaoKao(**高考)&quot;
+    app_scheme=&quot;GaoKao&quot;
+  elif [[ $app_scheme == 2 ]]; then
+    echo &quot;您选择的是：Zhongkao(**中考)&quot;
+    app_scheme=&quot;Zhongkao&quot;
+  else
+    selectedScheme
+  fi
+}
+</code></pre>
+<h2><a id="%E9%80%89%E6%8B%A9%E6%89%93%E5%8C%85%E7%8E%AF%E5%A2%83" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>选择打包环境</h2>
+<pre><code class="language-bash">function selectedConfiguration() {
+  #statements
+  echo &quot;-- 😁 --\n&quot;
+  echo &quot;--\n&quot;
+  echo &quot;请选择打包环境:\n 1)Release \n 2)LXRelease_dev \n 3)LXRelease_kfc \n 4)LXRelease_tsl&quot;
+
+  read configuration
+
+  if [[ $configuration == 1 ]]; then
+    echo &quot;您选择的是Release环境&quot;
+    configuration=&quot;Release&quot;
+  elif [[ $configuration == 2 ]]; then
+    echo &quot;您选择的是LXRelease_dev环境&quot;
+    configuration=&quot;LXRelease_dev&quot;
+  elif [[ $configuration == 3 ]]; then
+    echo &quot;您选择的是LXRelease_kfc环境&quot;
+    configuration=&quot;LXRelease_kfc&quot;
+  elif [[ $configuration == 4 ]]; then
+    echo &quot;您选择的是LXRelease_tsl环境&quot;
+    configuration=&quot;LXRelease_tsl&quot;
+  else
+    selectedConfiguration
+  fi
+}
+</code></pre>
+<h2><a id="%E8%AF%BB%E5%8F%96%E6%9B%B4%E6%96%B0%E4%BF%A1%E6%81%AF" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>读取更新信息</h2>
+<pre><code class="language-bash">function readUpdateInfo() {
+  echo &quot;-\n&quot;
+  echo &quot;--\n&quot;
+  echo &quot;请输入您当前版本更新信息:&quot;
+
+  read update_info
+}
+</code></pre>
+<h2><a id="%E6%89%93%E5%8D%B0%E6%89%93%E5%8C%85%E4%BF%A1%E6%81%AF" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>打印打包信息</h2>
+<pre><code class="language-bash">function logPackageInfo() {
+  echo &quot;打包信息----------&gt;:\n&quot;
+  echo &quot;打包scheme是   --&gt;: ${app_scheme}&quot;
+  echo &quot;您选择的是     --&gt;: ${configuration}&quot;
+  echo &quot;版本更新信息   --&gt;: ${update_info}&quot;
+}
+</code></pre>
+<h2><a id="%E4%B8%8A%E4%BC%A0dsym%E5%88%B0bugly%E8%BF%9B%E8%A1%8C%E5%88%86%E6%9E%90" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>上传dSYM到bugly进行分析</h2>
+<pre><code class="language-bash"># --------------------&gt;&gt; 上传 dSYM 文件
+function uploaddSYMFile() {
+  #statements
+  echo &quot;bugly --- start......&quot;
+
+  output_file_name=&quot;&quot;
+  bugly_appName=&quot;&quot;
+  bugly_configName=&quot;&quot;
+
+  if [[ ${app_scheme} = &quot;GaoKao&quot; ]]; then
+    bugly_appName=&quot;**高考&quot;
+  elif [[ ${app_scheme} == &quot;Zhongkao&quot; ]]; then
+    bugly_appName=&quot;**中考&quot;
+  fi
+
+  if [[ ${configuration} = &quot;LXRelease&quot; ]]; then
+    bugly_configName=&quot;&quot;
+  elif [[ ${configuration} = &quot;LXRelease_dev&quot; ]]; then
+    bugly_configName=&quot;dev&quot;
+  elif [[ ${configuration} = &quot;LXRelease_tsl&quot; ]]; then
+    bugly_configName=&quot;tsl&quot;
+  elif [[ ${configuration} = &quot;LXRelease_kfc&quot; ]]; then
+    bugly_configName=&quot;kfc&quot;
+  fi
+
+  output_file_name=&quot;${app_scheme}_${configuration}&quot;
+
+  bugly_dsym_zip_path=&quot;./AppOutput/${output_file_name}.app.dSYM.zip&quot;
+
+  echo &quot;kael ------rm&quot;
+  # rm &quot;./AppOutput/dsym_upload/&quot;
+  find &quot;./AppOutput/dsym_upload/&quot; -name &quot;*.dSYM&quot; | xargs rm -rf
+  find &quot;./AppOutput/&quot; -name &quot;dsym_upload.zip&quot; | xargs rm -rf
+  echo &quot;kael ------rm -- end&quot;
+
+  # 解压文件
+  echo &quot;kael ------unzip&quot;
+  echo &quot;path -- $bugly_dsym_zip_path&quot;
+  unzip ${bugly_dsym_zip_path} -d &quot;./AppOutput/dsym_upload/&quot;
+
+  bugly_java_path=&quot;./buglySymboliOS/buglySymboliOS.jar&quot;
+  bugly_dsym_path=&quot;./AppOutput/dsym_upload/&quot;
+  echo &quot;${bugly_dsym_path}&quot;
+
+  echo &quot;kael ------upload start&quot;
+  java -jar $bugly_java_path -i $bugly_dsym_path -dsym -u -id 900058462 -key f8V5dgJO5em0CPPk -package com.lexue.lexuegaokao -version 3.3.3
+
+}
+</code></pre>
+<h2><a id="%E6%99%AE%E9%80%9A%E6%89%93%E5%8C%85" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>普通打包</h2>
+<pre><code class="language-bash"># --------------------&gt;&gt;  普通打包任务
+function normal_archive() {
+  #statements
+  selectedScheme
+  # # 等待 沉睡
+  # sleep 0.5s
+  # 选择打包环境
+  selectedConfiguration
+  # 等待 沉睡
+  sleep 0.5s
+  # 读取版本更新信息
+  readUpdateInfo
+  # 等待 沉睡
+  sleep 0.5s
+  # 打印更新信息
+  logPackageInfo
+
+  fastlane ipa_release scheme:$app_scheme configuration:$configuration update_info:$update_info
+
+  logPackageInfo
+
+  uploaddSYMFile
+
+}
+</code></pre>
+<h2><a id="%E5%A4%9A%E7%8E%AF%E5%A2%83%E5%A4%9Ascheme%E6%89%93%E5%8C%85" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>多环境 多scheme 打包</h2>
+<pre><code class="language-bash"># --------------------&gt;&gt; 单个打包任务
+function one_serial_archive() {
+  app_scheme=$1
+  configuration=$2
+  update_info=$3
+  #打印信息
+  logPackageInfo
+  # 打包导出
+  fastlane ipa_release scheme:$app_scheme configuration:$configuration update_info:$update_info
+  # 打印信息
+  logPackageInfo
+  # 上传dSYM
+  uploaddSYMFile
+} 
+# --------------------&gt;&gt; 多个打包任务
+function serial_archive() {
+  readUpdateInfo
+
+  # 中考
+  one_serial_archive &quot;Zhongkao&quot; &quot;Release&quot; $update_info
+  one_serial_archive &quot;Zhongkao&quot; &quot;LXRelease_dev&quot; $update_info
+  one_serial_archive &quot;Zhongkao&quot; &quot;LXRelease_kfc&quot; $update_info
+  one_serial_archive &quot;Zhongkao&quot; &quot;LXRelease_tsl&quot; $update_info
+  # 高考
+  one_serial_archive &quot;GaoKao&quot; &quot;Release&quot; $update_info
+  one_serial_archive &quot;GaoKao&quot; &quot;LXRelease_dev&quot; $update_info
+  one_serial_archive &quot;GaoKao&quot; &quot;LXRelease_kfc&quot; $update_info
+  one_serial_archive &quot;GaoKao&quot; &quot;LXRelease_tsl&quot; $update_info
+}
+</code></pre>
+<h2><a id="%E8%84%9A%E6%9C%AC%E4%BD%BF%E7%94%A8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>脚本使用</h2>
+<pre><code class="language-bash"># 打包一系列环境的包
+serial_archive
+</code></pre>
+<p>命令行工具中输入<code>sh ipa.sh</code>即可</p>
+<h2><a id="%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>文件共享</h2>
+<p>buly文件链接:<a href="https://pan.baidu.com/s/13jaP6Jggp6DcDwqXYeEjHg">https://pan.baidu.com/s/13jaP6Jggp6DcDwqXYeEjHg</a>  密码:lowx
+JDK(java环境安装文件)链接:<a href="https://pan.baidu.com/s/1NtGdP0cANQz7TtyYU2mycg">https://pan.baidu.com/s/1NtGdP0cANQz7TtyYU2mycg</a>  密码:f6af</p>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

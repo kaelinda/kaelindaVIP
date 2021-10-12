@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      DLNA DMS - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/15173774932057.html" />
+      <meta property="og:title" content="DLNA DMS" />
+      
+        <meta property="og:description" content="DLNA DMS" />
+        <meta name="description" content="DLNA DMS" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2018-01-31T13:44:53+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="15173774932057.html">DLNA DMS</a></div>
+              <div class="subtitle">DLNA DMS</div>
+              <div class="meta"><span class="time">$[timeformat('2018-01-31T13:44:53+08:00')]</span><br><span class="tags"></span></div>
+              <div class="body">
+                  <p>上源码：</p>
+<pre><code class="language-plain_text">#if defined(TARGET_OS_IPHONE)
+#import &lt;UIKit/UIKit.h&gt;
+#else
+#import &lt;Foundation/NSArray.h&gt;
+#import &lt;Foundation/NSString.h&gt;
+#endif
+
+#import &lt;CyberLink/UPnP.h&gt;
+
+@class CGUpnpAvContentDirectory;
+@class CGUpnpAvObject;
+@class CGUpnpAvContainer;
+@class CGUpnpAvServer;
+
+#if !defined(_CG_CLINKCAV_SERVER_H_)
+typedef void CgUpnpAvServer;
+#endif
+
+@protocol CGUpnpAvServerDelegate &lt;NSObject&gt;
+@optional
+- (void)upnpAvServer:(CGUpnpAvServer *)upnpAvServer browse:(CGUpnpAction *)browseAction avObject:(CGUpnpAvObject *)avObject;
+- (void)upnpAvServer:(CGUpnpAvServer *)upnpAvServer search:(CGUpnpAction *)searchAction avObject:(CGUpnpAvObject *)avObject;
+@end
+
+/**
+ * The CGUpnpAvServer class is a UPnP/AV media server class.
+ * 这个 CGUpnpAvServer 类是UPnP/AV 谜题资源服务类
+ */
+@interface CGUpnpAvServer : CGUpnpDevice
+{
+}
+
+@property(readonly) CGUpnpAvContentDirectory *contentDirectory;
+// DMS 可以持有子服务作为属性
+@property(readonly) CgUpnpAvServer *cAvObject;
+// 设置代理
+@property(assign) id&lt;CGUpnpAvServerDelegate&gt; delegate;
+
+#if defined(TARGET_OS_IPHONE)
+@property(retain) UIImage *thumbnailImage;
+#endif
+
+/*
+ * Create a new UPnP/AV server.
+ * 
+ * @return New instance if successfull; otherwise nil.
+ */
+- (id)init;
+/**
+ * Create a new UPnP/AV server with the C instance.
+ * 
+ * @return New instance if successfull; otherwise nil.
+ */
+- (id)initWithCObject:(CgUpnpDevice *)cobj;
+- (void)setUserObject:(id)aUserObj;
+- (id)userObject;
+// 浏览某一个CGUpnpAvObject 的ID 是否成功
+- (BOOL)browse:(NSString *)aObjectId browseFlag:(NSString *)aBrowseFlag options:(NSDictionary *)options;
+// 浏览二进制
+- (CGUpnpAvObject *)browseMetadata:(NSString *)aObjectId;
+// 所有子对象个数
+- (NSArray *)browseDirectChildren:(NSString *)aObjectId;
+// 获取指定个数的子对象
+- (NSArray *)browseDirectChildren:(NSString *)aObjectId requestedCount:(NSUInteger) aRequestedCount;
+// 获取指定个数的子对象
+- (NSArray *)browseDirectChildren:(NSString *)aObjectId requestedCount:(NSUInteger)aRequestedCount startingIndex:(NSUInteger)aStartingIndex;
+// 浏览行为
+- (CGUpnpAction *)browseAction;
+// 查找某个东西
+- (NSArray *)search:(NSString *)aSearchCriteria;
+// 同上
+- (NSArray *)searchByBrowse:(NSString *)aSearchCriteria;
+- (NSArray *)searchByBrowse:(NSString *)aSearchCriteria objectId:(NSString *)objectId;
+// 查找UPnPAction
+- (CGUpnpAction *)searchAction;
+// 跟对象 （对象可以持有别的对象作为属性）
+- (CGUpnpAvContainer *)rootObject;
+// 通过ID获取AVObject
+- (CGUpnpAvObject *)objectForId:(NSString *)aObjectId;
+// 通过titlePath 获取AVObject对象
+- (CGUpnpAvObject *)objectForTitlePath:(NSString *)aTitlePath;
+// 开始
+- (BOOL)start;
+// 停止
+- (BOOL)stop;
+// 锁定
+- (void)lock;
+// 解锁
+- (void)unlock;
+@end
+</code></pre>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

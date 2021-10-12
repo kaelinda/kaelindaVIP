@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      iOS Block 知识点拾遗 - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="面试, Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/15200726964422.html" />
+      <meta property="og:title" content="iOS Block 知识点拾遗" />
+      
+        <meta property="og:description" content="iOS Block 知识点拾遗" />
+        <meta name="description" content="iOS Block 知识点拾遗" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2018-03-03T18:24:56+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="15200726964422.html">iOS Block 知识点拾遗</a></div>
+              <div class="subtitle">iOS Block 知识点拾遗</div>
+              <div class="meta"><span class="time">$[timeformat('2018-03-03T18:24:56+08:00')]</span><br><span class="tags"><a href="tag_%E9%9D%A2%E8%AF%95.html">#面试</a></span></div>
+              <div class="body">
+                  <ol>
+<li>
+<p>Block为什么要用copy</p>
+<ul>
+<li>block在创建的时候默认分配的内存是在栈上，而不是在堆上。这样的话其本身的作用域是属于创建时候的作用域，一旦在创建的作用域之外调用就会导致程序的崩溃。所以使用了copy将其拷贝到堆内存上。</li>
+<li>block创建在栈上，而block的代码中可能会用到本地的一些变量，在栈上可能随时会被系统释放掉，只有将其拷贝到堆上，才能一直保持Block的存在，并用这些外部变量</li>
+</ul>
+</li>
+<li>
+<p>Block为什么不用retain</p>
+<ul>
+<li>retain只是增加了一次引用计数，block的内存还是在栈上，并没有存在堆上，存在栈上的block可能随时被系统回收</li>
+</ul>
+</li>
+<li>
+<p>为什么进入block中的对象引用计数需要自动加1？</p>
+<ul>
+<li>Block执行的是回调，因此block并不知道其中的对象obj创建后会在什么时候被释放，为了不在block使用obj之前，对象已经被释放，block就retain了obj一次</li>
+</ul>
+</li>
+<li>
+<p>block和函数的关系</p>
+<ul>
+<li>Block的使用很<strong>像函数指针</strong>，不过与函数最大的不同是Block可以访问函数以外、词法作用域以内的外部变量的值。换句话说，Block不仅 实现函数的功能，还能<strong>携带函数的执行环境</strong>。</li>
+<li>函数指针 <code>void(*fun)(int)</code></li>
+<li>block <code>void(^fun)(int)</code></li>
+</ul>
+</li>
+<li>
+<p>block本质（对于block的理解）<a href="https://www.cnblogs.com/yoon/p/4953618.html">请查阅Block实现原理</a></p>
+<ul>
+<li>block实际上是: 指向结构体的指针</li>
+<li>编译器会将block的内部代码生成对应的函数</li>
+</ul>
+</li>
+<li>
+<p>对于基本数据类型，进入到block中会被当做常量处理。对象 retain 会一次</p>
+ <span id="more"></span><!-- more -->
+<pre><code class="language-plain_text">//如果需要在block中对num进行修改，需要加上关键字__block
+</code></pre>
+</li>
+</ol>
+<p>//(我们也可以用static关键字进行修饰)
+int  num1 = 10;
+void(^block1)() = ^{
+NSLog(@&quot;num1 is %d&quot;,num1);
+};
+num1 = 20;
+block1(); //输出10</p>
+<p>//改进:使用block,使进入到block块中的变量不被当做常量来使用
+__block int  num2 = 10;
+void(^block2)() = ^{
+NSLog(@&quot;num2 is %d&quot;,num2);
+};
+num2 = 20;
+block2(); //输出20
+```</p>
+<ol start="7">
+<li>
+<p>Block中self的循环引用</p>
+<ul>
+<li>block默认创建在栈上，所以对要对其进行执行copy操作，将其拷贝到堆区，便于更好的操作对象。但是执行了copy操作之后，block中使用self，此对象会被retain一次（注意：block在堆区上时才会起到retain作用），会造成循环引用。</li>
+<li>解决方法：
+<ul>
+<li>在MRC下，使用__block修饰</li>
+<li>在ARC下，使用__unsafe_unretained\weak修饰</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Block 在内存中的分类</p>
+<ul>
+<li>全局block --&gt; GlobalBlock &lt;==&gt; 相当于全局变量, 系统会自动释放</li>
+<li>栈block --&gt; StackBlock &lt;==&gt; 相当于局部变量, 系统会自动释放</li>
+<li>堆block --&gt; MallocBlock &lt;==&gt; (需要手动释放内存)</li>
+</ul>
+</li>
+<li>
+<p>block类型区分方法</p>
+<ul>
+<li>如果block实现中没有访问任何&quot;外部&quot;变量(包括局部和全局), 该block为GlobalBlock</li>
+<li>如果block实现中访问了任何&quot;外部&quot;变量(包括局部和全局), 该block为StackBlock</li>
+<li>对StackBlock进行拷贝(copy/Block_copy), 该block为MallocBlock</li>
+</ul>
+</li>
+<li>
+<p>block内如何修改block外 的变量?</p>
+<pre><code class="language-plain_text"> __block int a = 0;
+   void (^foo)(void) = ^{ 
+       a = 1; 
+   };
+   foo(); 
+   //这里，a的值被修改为1
+</code></pre>
+<p>默认情况下，block内访问的变量是 copy  该变量到堆后的变量，而非变量本身。
+所以：<strong>读写操作对原变量不生效</strong></p>
+<blockquote>
+<p>我们知道：Block不允许修改外部变量的值，这里所说的外部变量的值，指的是栈中指针的内存地址。__block 所起到的作用就是只要观察到该变量被 block 所持有，就将“外部变量”在栈中的内存地址放到了堆中。进而在block内部也可以修改外部变量的值</p>
+</blockquote>
+<pre><code class="language-plain_text">__block int a = 0;
+   NSLog(@&quot;定义前：%p&quot;, &amp;a);         //栈区
+   void (^foo)(void) = ^{
+       a = 1;
+       NSLog(@&quot;block内部：%p&quot;, &amp;a);    //堆区
+   };
+   NSLog(@&quot;定义后：%p&quot;, &amp;a);         //堆区
+   foo();
+</code></pre>
+<p>打印输出：</p>
+<pre><code class="language-plain_text">2016-05-17 02:03:33.559 LeanCloudChatKit-iOS[1505:713679] 定义前：0x16fda86f8
+2016-05-17 02:03:33.559 LeanCloudChatKit-iOS[1505:713679] 定义后：0x155b22fc8
+2016-05-17 02:03:33.559 LeanCloudChatKit-iOS[1505:713679] block内部： 0x155b22fc8
+</code></pre>
+</li>
+<li>
+<p>block个人理解</p>
+<pre><code class="language-plain_text"></code></pre>
+</li>
+</ol>
+<p>NSMutableString *kName = [NSMutableString stringWithString:@&quot;kael&quot;];
+__block NSMutableString *myname = kName;
+NSLog(@&quot;block 前%p&quot;,&amp;myname);</p>
+<pre><code class="language-plain_text">void (^foo)(void) = ^(){
+    NSLog(@&quot;block 中1：%p&quot;,&amp;myname);
+    myname = [NSMutableString stringWithString:@&quot;kaelinda&quot;];
+    NSLog(@&quot;block 中2：%p&quot;,&amp;myname);
+};
+
+foo();
+NSLog(@&quot;block 后%p&quot;,&amp;myname);
+
+/**
+ * __block 修饰之前
+ * 外部变量的内存地址是存到了栈
+ * block 是在堆内，不清楚栈内的变量是否已经被释放，所以连引用的准确性都是问题，更谈不上是修改了
+ * 所以，block 不允许修改栈中的变量（或者栈中指针的内存地址）
+ */
+
+/**
+ * __block 修饰之后
+ * 初始化的时候，内存地址在栈内（因为并不确定block内是否会用到），
+ * 当检测到block内引用到了该对象，不管block有没有被调用，都会 从栈内 copy 内存地址到 堆内，
+ * 再操作的时候 操作的是堆内的内存地址
+ */
+```
+</code></pre>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

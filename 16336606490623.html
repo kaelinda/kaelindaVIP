@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      OCLint指令集文档 - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="代码检测, 静态检测, Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/16336606490623.html" />
+      <meta property="og:title" content="OCLint指令集文档" />
+      
+        <meta property="og:description" content="OCLint指令集文档" />
+        <meta name="description" content="OCLint指令集文档" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2021-10-08T10:37:29+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="16336606490623.html">OCLint指令集文档</a></div>
+              <div class="subtitle">OCLint指令集文档</div>
+              <div class="meta"><span class="time">$[timeformat('2021-10-08T10:37:29+08:00')]</span><br><span class="tags"><a href="tag_%E4%BB%A3%E7%A0%81%E6%A3%80%E6%B5%8B.html">#代码检测</a><a href="tag_%E9%9D%99%E6%80%81%E6%A3%80%E6%B5%8B.html">#静态检测</a></span></div>
+              <div class="body">
+                  <p>[toc]</p>
+<p><span id = "jump">跳转位置</span></p>
+<h2><a id="oclint%E6%8C%87%E4%BB%A4%E9%9B%86" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>oclint指令集</h2>
+<p>基本使用：<code>oclint [options] &lt;source0&gt; [... &lt;sourceN&gt;]</code></p>
+<pre><code class="language-plain_text">oclint [oclint options] &lt;source0&gt; [... &lt;sourceN&gt;] -- [compiler options]
+</code></pre>
+<p>想要改变oclint 的行为，options参数 需要 在文件资源前面添加，比如 导出报告：<code>-html -o report.html</code>
+想要改变 编译行为，需要在 -- 后面添加参数.</p>
+<p>以我的项目为例：</p>
+<pre><code class="language-bash">kIsysroot=&quot;/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.4.sdk&quot;
+kFilePath=&quot;LXCategory/AppDelegate.m&quot;
+# 编译文件
+clang -x objective-c -arch armv7 -std=gnu99 -fobjc-arc -O0 -isysroot $kIsysroot -g -I./Pods/Headers -c $kFilePath
+# 分析文件
+oclint -report-type=html -o=report.html $kFilePath -- -x objective-c -arch armv7 -std=gnu99 -fobjc-arc -O0  -isysroot $kIsysroot -g -I ./Pods/Headers -c
+</code></pre>
+<p><figure><img src="https://cdn.nlark.com/yuque/0/2021/png/1495953/1619527468738-5d8a1a3d-b620-4813-ab9c-6d017d67b338.png?x-oss-process=image%2Fresize%2Cw_2062" alt="编译报告" /><figcaption>编译报告<figcaption></figure></p>
+<blockquote>
+<p>参数说明:</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>使用说明</th>
+<th style="text-align: left">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-R=<directory></td>
+<td>添加指定的规则加载路径</td>
+<td style="text-align: left">默认是项目根目录</td>
+</tr>
+<tr>
+<td>-fatal-assembler-warnings</td>
+<td>将警告视为错误</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td>-help</td>
+<td></td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td>-max-priority-1=<threshold></td>
+<td>第一优先级错误最大个数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td>-max-priority-2=<threshold></td>
+<td></td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td>-max-priority-3=<threshold></td>
+<td></td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td>-o=<path></td>
+<td>报告文件导出路径</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td>-p=<string></td>
+<td>build路径</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td>-rc=<paramemter>=<value></td>
+<td>覆盖默认的行为规则</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td>-stats</td>
+<td>启用程序的统计输出</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td>-text</td>
+<td>纯文本报告类型输出</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td>-html</td>
+<td>HTML格式类型报告输出</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td>-version</td>
+<td>oclint版本信息</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td>-p <build-path></td>
+<td>用于读取编译命令数据库</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td><source0></td>
+<td>待分析的资源文件</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody>
+</table>
+<h3><a id="%E8%A7%84%E5%88%99%E5%8A%A0%E8%BD%BD%E9%80%89%E9%A1%B9" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>规则加载选项</h3>
+<ul>
+<li>-R <directory> :通过-R参数可以修改规则加载路径。可以从多个路径中加载多个规则。默认从 <code>$(/path/to/bin/oclint)/../lib/oclint/rules</code> 加载规则。</li>
+<li>-rc <paramemter>=<value> ： 某些规则具有确定是否发出违规行为的阈值。这些阈值可以通过带有 <code>-rc key=value</code> 的兼职对进行更改。</li>
+</ul>
+<h3><a id="%E7%BC%96%E8%AF%91%E9%80%89%E9%A1%B9" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>编译选项</h3>
+<p>例如你平时编译一个文件：</p>
+<pre><code class="language-plain_text">clang -x objective-c -arch armv7 -std=gnu99 -fobjc-arc -O0 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.4.sdk -g -I./Pods/Headers -c RPActivityIndicatorManager.m
+</code></pre>
+<p>当你分析这个代码时的OCLint命令将是：</p>
+<pre><code class="language-plain_text">oclint [oclint options] RPActivityIndicatorManager.m -- -x objective-c -arch armv7 -std=gnu99 -fobjc-arc -O0 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.4.sdk -g -I./Pods/Headers -c
+</code></pre>
+<ul>
+<li>-p : 重定向build路径。这个路径内需要包含名为compile_commands.json的文件。如果未指定构建路径，则将尝试通过第一个输入文件的所有父路径搜索compile_commands.json。</li>
+</ul>
+<h3><a id="%E6%A3%80%E6%9F%A5%E5%88%86%E6%9E%90%E9%80%89%E9%A1%B9" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>检查分析选项</h3>
+<h3><a id="%E5%AF%BC%E5%87%BA%E6%8A%A5%E5%91%8A%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>导出报告相关参数</h3>
+<ul>
+<li>
+<p>-o <path> ： 指定导出文件的路径和文件名</p>
+</li>
+<li>
+<p>-text : 导出纯文本报告</p>
+</li>
+<li>
+<p>-html : 导出HTML 格式报告</p>
+<p><code>-report-type=html -o=./oclint_report.html</code></p>
+</li>
+</ul>
+<h3><a id="%E9%80%80%E5%87%BA%E7%8A%B6%E6%80%81%E9%80%89%E9%A1%B9" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>退出状态选项</h3>
+<ul>
+<li><code>-max-priority-1 &lt;threshold&gt;</code>
+一级违例最大数量</li>
+<li><code>-max-priority-2 &lt;threshold&gt;</code>
+二级违例最大数量</li>
+<li><code>-max-priority-3 &lt;threshold&gt;</code>
+三级违例最大数量</li>
+</ul>
+<p>OCLint返回以下四个退出代码之一:</p>
+<ol>
+<li>
+<ul>
+<li>SUCCESS</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>RULE_NOT_FOUND</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>ERROR_WHILE_PROCESSING</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>VIOLATIONS_EXCEED_THRESHOLD</li>
+</ul>
+</li>
+</ol>
+<h2><a id="oclint-json-compilation-database%E6%8C%87%E4%BB%A4%E9%9B%86" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>oclint-json-compilation-database 指令集</h2>
+<pre><code class="language-bash"># 使用方法
+oclint-json-compilation-database [&lt;filter0&gt; ... &lt;filterN&gt;] -- [oclint options]
+
+# 使用实例
+oclint-json-compilation-database -e LXCategory/Third -i  LXCategory/test -- \
+-report-type html -o ./AppOutput/oclint-out/oclint_report.html \
+-max-priority-1=100000 \
+-max-priority-2=100000 -max-priority-3=100000 \
+-disable-rule=InvertedLogic \
+-disable-rule=CollapsibleIfStatements \
+-disable-rule=UnusedMethodParameter \
+-disable-rule=LongVariableName \
+-disable-rule=ShortVariableName \
+-disable-rule=UselessParentheses \
+-disable-rule=IvarAssignmentOutsideAccessorsOrInit \
+</code></pre>
+<ul>
+<li>-i INCLUDES, -include INCLUDES, –include INCLUDES
+Extract files matching pattern from compile_commands.json or prior matching result</li>
+<li>-e EXCLUDES, -exclude EXCLUDES, –exclude EXCLUDES
+Remove files matching pattern from compile_commands.json or prior matching result</li>
+<li>-v show invocation command with arguments</li>
+</ul>
+<h2><a id="oclint-xcodebuild%E6%8C%87%E4%BB%A4%E9%9B%86" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>oclint-xcodebuild 指令集</h2>
+<blockquote>
+<p>该指令集已经不维护 使用xcpretty代替</p>
+</blockquote>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

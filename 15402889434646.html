@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      Swift中类（Class）和 结构体（Struct） - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/15402889434646.html" />
+      <meta property="og:title" content="Swift中类（Class）和 结构体（Struct）" />
+      
+        <meta property="og:description" content="Swift中类（Class）和 结构体（Struct）" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2018-10-23T18:02:23+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="15402889434646.html">Swift中类（Class）和 结构体（Struct）</a></div>
+              
+              <div class="meta"><span class="time">$[timeformat('2018-10-23T18:02:23+08:00')]</span><br><span class="tags"></span></div>
+              <div class="body">
+                  <h2><a id="%E5%88%86%E6%9E%90" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>分析</h2>
+<p>共同点：</p>
+<ul>
+<li>定义属性用于存储值</li>
+<li>定义方法用于提供功能</li>
+<li>定义下标操作使得可以通过下标语法来访问实例所包含的值</li>
+<li>定义构造器用于生成初始化值</li>
+<li>通过扩展以增加默认实现的功能</li>
+<li>实现协议以提供某种标准功能</li>
+</ul>
+<p>与结构体相比，类还有如下的附加功能：</p>
+<ul>
+<li>继承允许一个类继承另一个类的特征</li>
+<li>类型转换允许在运行时检查和解释一个类实例的类型</li>
+<li>析构器允许一个类实例释放任何其所被分配的资源</li>
+<li>引用计数允许对一个类的多次引用（对象引用）结构体总是通过被复制的方式在代码中传递，不使用引用计数。</li>
+</ul>
+<h2><a id="%E9%80%90%E4%B8%80%E5%AF%B9%E6%AF%94" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>逐一对比</h2>
+<h3><a id="%E5%AE%9A%E4%B9%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>定义</h3>
+<pre><code class="language-plain_text">//: ### 定义
+class StudentClass{ }
+struct StudebtStruct{ }
+</code></pre>
+<h3><a id="%E5%AE%9A%E4%B9%89%E5%AD%98%E5%82%A8%E5%B1%9E%E6%80%A7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>定义存储属性</h3>
+<pre><code class="language-plain_text">//: &gt; 类中定义的存储属性，如果不是可选类型，需要进行初始化；结构体则默认带有初始化方法
+class StudentC01{
+    var name: String!
+}
+struct StudebtS01{
+    var name: String!
+}
+</code></pre>
+<h3><a id="%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7%E5%87%BD%E6%95%B0function" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>定义属性函数function</h3>
+<p>关于@objc 请参考 <a href="https://blog.csdn.net/qq_35612929/article/details/79563110">Swift 4.0学习之：@objc的使用</a></p>
+<pre><code class="language-plain_text">//: ### 定义属性函数function
+//: &gt; 类中可以使用 static 和 class两种修饰符；但是结构体中只能使用static修饰
+class StudentC02{
+    static var des:String = &quot;学生的类&quot;
+    var name:String!
+    @objc class func objc_describe()-&gt;String{
+        return des
+    }
+    class func class_describe()-&gt;String{
+        return des
+    }
+    static func static_describe()-&gt;String{
+        return des
+    }
+}
+struct StudentS02{
+    static var des:String = &quot;学生的结构体&quot;
+    var name:String!
+    static func describe()-&gt;String{
+        return &quot;这是一个定义学生的类&quot;
+    }
+}
+</code></pre>
+<h3><a id="%E6%89%A9%E5%B1%95%E4%B8%8B%E6%A0%87" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>扩展下标</h3>
+<pre><code class="language-plain_text">//: ### 扩展下标
+//: &gt; *subscript*
+class StudentC003{
+    var names:[String] = [&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;]
+    subscript (index:Int)-&gt;String?{
+        get{
+            if names.count &lt;= index{
+                return nil
+            }
+            return names[index]
+        }
+    }
+}
+struct StudentS003{
+    var names:[String] = [&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;]
+    subscript (index:Int)-&gt;String?{
+        get{
+            if names.count &lt;= index{
+                return nil
+            }
+            return names[index]
+        }
+    }
+}
+let sc003 = StudentC003()
+sc003[1]// 2
+let ss003 = StudentS003()
+ss003[1]// 2
+</code></pre>
+<h3><a id="%E5%88%9D%E5%A7%8B%E5%8C%96" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>初始化</h3>
+<pre><code class="language-plain_text">//: ### 初始化
+//: &gt; 结构体自带初始化方法（可以不写初始化方法）;
+//: &gt; 类必须手写init方法，否则报错；
+class StudentC004{
+    var name:String
+    init(name:String) {
+        self.name = name
+    }
+}
+struct StudentS004 {
+    var name:String
+    
+}
+let studentc004 = StudentC004(name: &quot;行走在北方&quot;)
+let students004 = StudentS004(name: &quot;行走在北方&quot;)
+</code></pre>
+<h3><a id="%E6%89%A9%E5%B1%95%E5%8A%9F%E8%83%BDextention" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>扩展功能 Extention</h3>
+<pre><code class="language-plain_text">//: ### 扩展功能 Extention
+extension StudentC004{
+    func discribe() -&gt; String {
+        return &quot;student class:&quot;+self.name
+    }
+}
+extension StudentS004{
+    func discribe() -&gt; String {
+        return &quot;student struct:&quot; + self.name
+    }
+}
+</code></pre>
+<h3><a id="%E5%AE%9E%E7%8E%B0%E5%8D%8F%E8%AE%AEprotocol" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>实现协议 protocol</h3>
+<pre><code class="language-plain_text">//: ### 实现协议 protocol
+//: * 定义协议
+protocol Capacity {
+    func draw()//协议方法
+}
+//: * 实现协议方法
+class StudentC05:Capacity{
+    internal func draw() {
+        
+    }
+    var name:String
+    init(name:String) {
+        self.name = name
+    }
+}
+struct StudentS05:Capacity{
+    internal func draw() {
+        
+    }
+    var name:String
+}
+</code></pre>
+<h3><a id="mutating%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>mutating 关键字的使用</h3>
+<p>科普下:</p>
+<ul>
+<li>
+<p>枚举和结构体都是值类型，Swift默认值类型的对象方法不能修改属性值,但是如果一定要修改 那就在函数前面添加mutating关键字</p>
+</li>
+<li>
+<p>计算属性setter方法中不需要更改属性值的时候，不需要添加mutating关键字;</p>
+</li>
+<li>
+<p>计算属性setter方法中更改属性值的时候，必须要添加mutating关键字</p>
+</li>
+</ul>
+<pre><code class="language-plain_text">protocol Action{
+    var myY:Int{
+        mutating get
+    }
+}
+struct Point {
+    var x:Int
+    var y:Int
+    mutating func modifyX(x: Int){
+        self.x = x
+    }
+    var myY:Int{
+        mutating get {//getter方法前面添加mutating关键字
+            self.y = self.y*2
+            return y
+        }
+    }
+}
+class ActionClass {
+    var name:String?
+    init(name:String) {
+        self.name = name
+    }
+    var myName:String? {
+        get {// class 是对象类型 可以直接修改
+            self.name = &quot;666 -&gt; :&quot; + self.name!
+            return self.name
+        }
+    }
+    
+}
+let actionclass = ActionClass(name: &quot;NB&quot;)
+</code></pre>
+<h2><a id="%E5%88%A4%E6%96%AD%E4%B8%A4%E4%B8%AA%E5%AF%B9%E8%B1%A1%E5%9C%B0%E5%9D%80%E6%98%AF%E5%90%A6%E7%9B%B8%E5%90%8C%EF%BC%88%E9%AA%8C%E8%AF%81%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC%E7%B1%BB%E5%9E%8B%EF%BC%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>判断两个对象地址是否相同（验证 引用类型 和 值类型）</h2>
+<pre><code class="language-plain_text">//: ### 判断两个对象地址是否相同
+//: &gt; 类是引用类型；结构体是值类型；结构体不能通过=== 、！==类判断比较
+//: &gt;
+class StudentC07{
+    var name: String
+    init(name:String) {
+        self.name = name
+    }
+}
+
+let studentc071 = StudentC07(name: &quot;原始名字&quot;)
+var studentc072 = studentc071
+studentc071.name = &quot;新名字&quot;
+print(&quot;student071:\(studentc071.name)\nstudent072:\(studentc072.name)&quot;)
+if studentc071 === studentc072 {
+    print(&quot;类是引用类型，最终指向同一块内存&quot;)
+}
+struct StudentS07{
+    var name: String
+    init(name:String) {
+        self.name = name
+    }
+}
+let students071 = StudentS07(name: &quot;结构体：原始名字&quot;)
+var students072 = students071
+students072.name = &quot;结构体：新名字&quot;
+print(&quot;students071:\(students071.name)\nstudents072\(students072.name)&quot;)
+</code></pre>
+<h3><a id="deinit%E9%87%8A%E6%94%BE%E8%B5%84%E6%BA%90" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>deinit 释放资源</h3>
+<p><a href="https://www.jianshu.com/p/9e725362eeb1">Swift中的deinit方法</a></p>
+<pre><code class="language-plain_text">//: ### deinit 释放资源
+//: &gt; 类有deinit方法；结构体中没有deinit方法。
+class StudentC08{
+    var name: String
+    init(name:String) {
+        self.name = name
+    }
+    deinit {
+        //这里释放资源
+    }
+}
+</code></pre>
+<h3><a id="lazy%EF%BC%9A%E5%BB%B6%E8%BF%9F%E5%B1%9E%E6%80%A7%EF%BC%88%E6%87%92%E5%8A%A0%E8%BD%BD%EF%BC%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>lazy：延迟属性（懒加载）</h3>
+<p>class 有延迟属性；struct没有延迟属性</p>
+<pre><code class="language-plain_text">//: &gt; 延迟存储属性是指当第一次被调用的时候才会计算其初始值的属性。在属性声明前使用 lazy 来标示一个延迟存储属性
+class Importor{
+    var fileName = &quot;data.txt&quot;
+}
+class DataManager{
+    lazy var importor = Importor()
+    var Data = [String]()
+}
+</code></pre>
+<h3><a id="%E7%BB%A7%E6%89%BF" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>继承</h3>
+<pre><code class="language-plain_text">//: ### 继承
+//: &gt; 类能继承；结构体不能继承。
+class Person{
+    var name:String
+    init(name:String) {
+        self.name = name
+    }
+}
+class Student06: Person {
+    var score : Float
+    init(name: String, score: Float){
+        self.score = score//先给父类中没有的属性赋值，再调用父类init方法
+        super.init(name: name)
+    }
+}   
+</code></pre>
+<ul>
+<li>
+<p>继承之后 可重写父类方法/属性</p>
+<ol>
+<li>
+<p>重写计算属性：只能增加功能不能减少功能——&gt;父类中有setter getter,那么子类重写计算属性 setter getter都必须要有。父类中只有setter  子类中可以在重写setter的同时增加getter</p>
+</li>
+<li>
+<p>final 关键字可以让属性不被重写 或者 继承</p>
+</li>
+</ol>
+</li>
+</ul>
+<pre><code class="language-plain_text">//: * 重写计算属性
+//: * 重写对象方法
+//: * 重写类方法
+//: * 重写初始化方法
+//: * 重写存储属性
+
+//: _父类_
+class Person{
+    //存储属性
+    var name:String = &quot;person&quot;
+    //计算属性
+    var rename:String{
+        return self.name
+    }
+    //初始化方法
+    init(_ name:String) {
+        self.name = name
+    }
+    //对象方法
+    func describe() -&gt; String {
+        return self.name
+    }
+    //类方法
+    class func describeClass()-&gt;String{
+        return &quot;这是一个描述人的类&quot;
+    }
+}
+//: _子类_
+class Man: Person {
+    //重写存储属性
+    override var name: String{
+        didSet{
+            print(&quot;man 对象中 name 的原始值：\(self.name)&quot;)
+            self.name = &quot;man:&quot;+self.name
+        }
+    }
+    var score : Double
+    //重写setter getter
+    override var rename: String{
+        set{
+            self.name = &quot;man:&quot;+newValue
+        }
+        get{
+            return &quot;_&quot;+self.name
+        }
+    }
+    //重写初始化方法
+    override init(_ name: String) {
+        self.score = 0.0
+        super.init(name)
+    }
+    //重写对象方法
+    override func describe() -&gt; String {
+        return self.name + &quot;_score:\(self.score)&quot;
+    }
+    // 重写类方法
+    override class func describeClass() -&gt; String {
+        return &quot;我是描述男人的类&quot;
+    }
+}
+var man00 = Man(&quot;kael&quot;)
+print(man00.name)
+</code></pre>
+<h3><a id="class%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%B5%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>class 的类型检测</h3>
+<ol>
+<li>首先在自己的初始化方法中先给自己的属性初始化</li>
+<li>然后调用父类的初始化</li>
+<li>最后修改父类的属性</li>
+</ol>
+<pre><code class="language-plain_text">//: ### 类型检测  is  as?
+var person01 = Person(&quot;person01&quot;)
+var man01 = Man(&quot;man01&quot;)
+
+if person01 is Person {
+    print(&quot;person01：我是Person&quot;)
+}else{
+    print(&quot;person01：我不是Person&quot;)
+}
+if person01 is Man {
+    print(&quot;person01：我是Man&quot;)
+}else{
+    print(&quot;person01：我不是Man&quot;)
+}
+if man01 is Person {
+    print(&quot;man01：我是Person&quot;)
+}else{
+    print(&quot;man01：我不是Person&quot;)
+}
+if man01 is Man {
+    print(&quot;man01：我是Man&quot;)
+}else{
+    print(&quot;man01：我不是Man&quot;)
+}
+
+if let p = person01 as? Person {
+    print(&quot;person01 是 Person&quot;)
+}
+if let p = person01 as? Man{
+    print(&quot;person01 是Man&quot;)
+}else{
+    print(&quot;person01 不是Man&quot;)
+}
+if let p = man01 as? Person {
+    print(&quot;man01 是 Person&quot;)
+}
+if let p = man01 as? Man{
+    print(&quot;man01 是Man&quot;)
+}else{
+    print(&quot;man01 不是Man&quot;)
+}
+
+
+</code></pre>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

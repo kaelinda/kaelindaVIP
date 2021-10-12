@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      iOS底层 之 RunLoop攻坚 - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/16336618031940.html" />
+      <meta property="og:title" content="iOS底层 之 RunLoop攻坚" />
+      
+        <meta property="og:description" content="iOS底层 之 RunLoop攻坚" />
+        <meta name="description" content="iOS底层 之 RunLoop攻坚" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2021-10-08T10:56:43+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="16336618031940.html">iOS底层 之 RunLoop攻坚</a></div>
+              <div class="subtitle">iOS底层 之 RunLoop攻坚</div>
+              <div class="meta"><span class="time">$[timeformat('2021-10-08T10:56:43+08:00')]</span><br><span class="tags"></span></div>
+              <div class="body">
+                  <h2><a id="%E4%BB%80%E4%B9%88%E6%98%AFrunloop" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>什么是RunLoop</h2>
+<p>顾名思义，RunLoop就是一个保证程序或者线程持续运行的循环。</p>
+<h2><a id="runloop%E4%BD%9C%E7%94%A8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>runloop 作用</h2>
+<ul>
+<li><strong>保持程序持续运行</strong>。</li>
+<li><strong>处理各种事件</strong> ：触摸事件、定时器时间、selector事件、网络请求等</li>
+<li><strong>节省CPU资源，提高程序性能</strong>：该干活儿时干活儿，该休息时休息</li>
+</ul>
+<p><strong>每一个线程，只对应唯一一个Runloop</strong>
+iOS开发中，UIApplicationMain 函数启动了主线程的 <code>主RunLoop</code>，保证程序的主线程的运行状态，这样UI就不会卡顿。主线程中的runloop是系统主动开启的，开发者手动开启的子线程内的runloop如果不手动开启，子线程执行完就结束了，线程就销毁了。所以，要想手动开启的主线程执行完任务后不被销毁，就需要手动启动<code>RunLoop</code>.</p>
+<pre><code class="language-c">int main(int argc, char * argv[]) {
+    @autoreleasepool {
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+    }
+}
+</code></pre>
+<h2><a id="runloop%E7%9A%84%E4%BA%94%E4%B8%AA%E6%A8%A1%E5%BC%8F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>RunLoop的五个模式</h2>
+<ul>
+<li><code>kCFRunLoopDefaultMode</code>：APP默认的模式，通常主线程就是在这个模式下运行</li>
+<li><code>UITrackingRunLoopMode</code>: 界面跟踪模式，用于scrollView跟踪触摸滚动，保证滚动时候 不受其他线程影响</li>
+<li><code>kCFRunLoopCommonModes</code> : 占位用的mode，不是一个真正的mode</li>
+<li><code>NSRunLoopCommonModes</code>: 相当于 <code>NSDefaultRunLoopMode</code> + <code>UITrackingRunLoopMode</code></li>
+<li><code>UIInitializationRunLoopMode</code>: 刚启动APP时，进入的第一个mode启动完后不再使用</li>
+<li><code>GSEventReceiveRunLoopMode</code>:接受系统事件的内部mode，通常用不到</li>
+</ul>
+<p><strong>模式使用总结：</strong></p>
+<blockquote>
+<ol>
+<li>一个RunLoop包含多个mode，每个mode包含若干source0、source1、observer、timer</li>
+<li>RunLoop 只能选择一个mode作为currentRunLoop的mode。</li>
+<li>如果想要切换mode，需要先退出当前mode，再重新选择一个mode进入</li>
+<li>不同组的Source、timer、observer 互不影响</li>
+<li>如果Mode里面没有任何的source、timer、observer， RunLoop会立马退出，</li>
+</ol>
+</blockquote>
+<h2><a id="runloop%E5%AF%B9%E8%B1%A1" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>RunLoop 对象</h2>
+<blockquote>
+<p>iOS开发中有两套API来访问和使用RunLoop</p>
+</blockquote>
+<ul>
+<li><strong>&lt; Foundation &gt;</strong>：<code>NSRunLoop</code></li>
+<li><strong>&lt; Core Foundation &gt;</strong>：<code>CFRunLoopRef</code></li>
+</ul>
+<p>NSRunLoop 和 CFRunLoopRef 都代表RunLoop对象。
+NSRunLoop 是基于CFRunLoopRef的一层OC封装。</p>
+<h2><a id="%E8%8E%B7%E5%8F%96runloop%E7%9A%84-api%E4%BD%BF%E7%94%A8%EF%BC%9A" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>获取RunLoop 的 API 使用：</h2>
+<pre><code class="language-c">Foundation
+[NSRunLoop currentRunLoop]; // 获得当前线程的RunLoop对象
+[NSRunLoop mainRunLoop]; // 获得主线程的RunLoop对象
+
+Core Foundation
+CFRunLoopGetCurrent(); // 获得当前线程的RunLoop对象
+CFRunLoopGetMain(); // 获得主线程的RunLoop对象
+</code></pre>
+<h2><a id="runloop%E5%92%8C%E7%BA%BF%E7%A8%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>RunLoop 和 线程之间的关系</h2>
+<ul>
+<li>每个线程都有对应一个唯一的RunLoop对象</li>
+<li>RunLoop保存在一个全局键值对里，线程作为key,RunLoop作为value</li>
+<li>主线程的RunLoop系统创建并启动好了，子线程的RunLoop需要手动创建</li>
+<li>RunLoop在第一次获取时创建，在线程结束时销毁</li>
+<li>线程创建时候，并没有RunLoop对象，所以，执行完代码线程就销毁了。第一次获取线程对象时候创建RunLoop对象，这时候才会循环等待，保证线程不结束，不被销毁。</li>
+<li>RunLoop会在线程结束时销毁</li>
+</ul>
+<h2><a id="runloop%E6%BA%90%E7%A0%81" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>RunLoop源码</h2>
+<h3><a id="runloop%E7%BB%93%E6%9E%84%E4%BD%93" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>RunLoop 结构体</h3>
+<pre><code class="language-objc">struct __CFRunLoop {
+    CFRuntimeBase _base;
+    pthread_mutex_t _lock;          /* locked for accessing mode list */
+    __CFPort _wakeUpPort;           // used for CFRunLoopWakeUp 
+    Boolean _unused;
+    volatile _per_run_data *_perRunData;              // reset for runs of the run loop
+    pthread_t _pthread;
+    uint32_t _winthread;
+    CFMutableSetRef _commonModes;
+    CFMutableSetRef _commonModeItems;
+    CFRunLoopModeRef _currentMode;
+    CFMutableSetRef _modes;
+    struct _block_item *_blocks_head;
+    struct _block_item *_blocks_tail;
+    CFAbsoluteTime _runTime;
+    CFAbsoluteTime _sleepTime;
+    CFTypeRef _counterpart;
+};
+</code></pre>
+<h3><a id="runloop%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0%E6%BA%90%E7%A0%81" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>runloop 内部实现源码</h3>
+<pre><code class="language-c">// 拿到当前Runloop 调用_CFRunLoopGet0
+CFRunLoopRef CFRunLoopGetCurrent(void) {
+    CHECK_FOR_FORK();
+    CFRunLoopRef rl = (CFRunLoopRef)_CFGetTSD(__CFTSDKeyRunLoop);
+    if (rl) return rl;
+    return _CFRunLoopGet0(pthread_self());
+}
+
+// 查看_CFRunLoopGet0方法内部
+CF_EXPORT CFRunLoopRef _CFRunLoopGet0(pthread_t t) {
+    if (pthread_equal(t, kNilPthreadT)) {
+    t = pthread_main_thread_np();
+    }
+    __CFLock(&amp;loopsLock);
+    if (!__CFRunLoops) {
+        __CFUnlock(&amp;loopsLock);
+    CFMutableDictionaryRef dict = CFDictionaryCreateMutable(kCFAllocatorSystemDefault, 0, NULL, &amp;kCFTypeDictionaryValueCallBacks);
+    // 根据传入的主线程获取主线程对应的RunLoop
+    CFRunLoopRef mainLoop = __CFRunLoopCreate(pthread_main_thread_np());
+    // 保存主线程 将主线程-key和RunLoop-Value保存到字典中
+    CFDictionarySetValue(dict, pthreadPointer(pthread_main_thread_np()), mainLoop);
+    if (!OSAtomicCompareAndSwapPtrBarrier(NULL, dict, (void * volatile *)&amp;__CFRunLoops)) {
+        CFRelease(dict);
+    }
+    CFRelease(mainLoop);
+        __CFLock(&amp;loopsLock);
+    }
+    
+    // 从字典里面拿，将线程作为key从字典里获取一个loop
+    CFRunLoopRef loop = (CFRunLoopRef)CFDictionaryGetValue(__CFRunLoops, pthreadPointer(t));
+    __CFUnlock(&amp;loopsLock);
+    
+    // 如果loop为空，则创建一个新的loop，所以runloop会在第一次获取的时候创建
+    if (!loop) {  
+    CFRunLoopRef newLoop = __CFRunLoopCreate(t);
+        __CFLock(&amp;loopsLock);
+    loop = (CFRunLoopRef)CFDictionaryGetValue(__CFRunLoops, pthreadPointer(t));
+    
+    // 创建好之后，以线程为key runloop为value，一对一存储在键值对中，下次获取的时候，则直接返回字典内的runloop
+    if (!loop) { 
+        CFDictionarySetValue(__CFRunLoops, pthreadPointer(t), newLoop);
+        loop = newLoop;
+    }
+        // don't release run loops inside the loopsLock, because CFRunLoopDeallocate may end up taking it
+        __CFUnlock(&amp;loopsLock);
+    CFRelease(newLoop);
+    }
+    if (pthread_equal(t, pthread_self())) {
+        _CFSetTSD(__CFTSDKeyRunLoop, (void *)loop, NULL);
+        if (0 == _CFGetTSD(__CFTSDKeyRunLoopCntr)) {
+            _CFSetTSD(__CFTSDKeyRunLoopCntr, (void *)(PTHREAD_DESTRUCTOR_ITERATIONS-1), (void (*)(void *))__CFFinalizeRunLoop);
+        }
+    }
+    return loop;
+}
+</code></pre>
+<h3><a id="runloop%E4%B8%AD%E7%9A%84%E4%BA%94%E4%B8%AA%E7%B1%BB" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>RunLoop 中的五个类</h3>
+<ul>
+<li>CFRunLoopRef</li>
+<li>CFRunLoopModeRef</li>
+<li>CFRunLoopSourceRef</li>
+<li>CFRunLoopTimerRef</li>
+<li>CFRunLoopObserverRef</li>
+</ul>
+<p><figure><img src="https://tva1.sinaimg.cn/large/0082zybply1gbnw55ovroj30bc04v74q.jpg" alt="CFRunLoopRef" /><figcaption>CFRunLoopRef<figcaption></figure></p>
+<p><figure><img src="https://tva1.sinaimg.cn/large/0082zybply1gbnwqpdabdj30dw054t99.jpg" alt="CFRunLoopModeRef" /><figcaption>CFRunLoopModeRef<figcaption></figure></p>
+<h3><a id="cfrunloopactivity" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>CFRunLoopActivity</h3>
+<pre><code class="language-c">/* Run Loop Observer Activities */
+typedef CF_OPTIONS(CFOptionFlags, CFRunLoopActivity) {
+    kCFRunLoopEntry = (1UL &lt;&lt; 0),           // 即将进入RunLoop
+    kCFRunLoopBeforeTimers = (1UL &lt;&lt; 1),    // 即将处理Timer
+    kCFRunLoopBeforeSources = (1UL &lt;&lt; 2),   // 即将处理source
+    kCFRunLoopBeforeWaiting = (1UL &lt;&lt; 5),   // 即将进入休眠
+    kCFRunLoopAfterWaiting = (1UL &lt;&lt; 6),    // 唤醒后
+    kCFRunLoopExit = (1UL &lt;&lt; 7),            // 即将推出RunLoop
+    kCFRunLoopAllActivities = 0x0FFFFFFFU   
+};
+</code></pre>
+<h3><a id="%E7%9B%91%E5%90%ACrunloop%E7%9A%84%E6%89%80%E6%9C%89%E7%8A%B6%E6%80%81" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>监听RunLoop的所有状态</h3>
+<pre><code class="language-c">CFRunLoopObserverRef observer = CFRunLoopObserverCreateWithHandler(kCFAllocatorDefault, kCFRunLoopAllActivities, YES, 0, ^(CFRunLoopObserverRef observer, CFRunLoopActivity activity) {
+        switch (activity) {
+            case kCFRunLoopEntry:
+            {// 刚进入RunLoop
+            }
+                break;
+            case kCFRunLoopBeforeTimers:
+            {// 即将处理timer
+            }
+                break;
+            case kCFRunLoopBeforeSources:
+            {// 即将处理source
+            }
+                break;
+            case kCFRunLoopBeforeWaiting:
+            {// 即将进入休眠
+            }
+                break;
+            case kCFRunLoopAfterWaiting:
+            {// 唤醒后
+            }
+                break;
+            case kCFRunLoopExit:
+            {// 即将退出RunLoop
+            }
+                break;
+            default:
+                break;
+        }
+    });
+
+CFRunLoopAddObserver(CFRunLoopGetCurrent(), observer, kCFRunLoopCommonModes);
+
+CFRelease(observer);
+</code></pre>
+<p><figure><img src="https://tva1.sinaimg.cn/large/0082zybply1gc2mtkcfafj30xc0pon2x.jpg" alt="" /></figure></p>
+<h3><a id="runloop%E8%BF%90%E8%A1%8C%E9%80%BB%E8%BE%91" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>RunLoop运行逻辑</h3>
+<p><figure><img src="https://tva1.sinaimg.cn/large/0082zybply1gc2msdkn6xj30pa0jutb3.jpg" alt="" /></figure></p>
+<p><figure><img src="https://tva1.sinaimg.cn/large/0082zybply1gbnw30rmhij30zk0igqan.jpg" alt="RunLoop运行逻辑" /><figcaption>RunLoop运行逻辑<figcaption></figure></p>
+<p><figure><img src="https://tva1.sinaimg.cn/large/0082zybply1gbnz5lvpqtj319s0mqagn.jpg" alt="" /></figure></p>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

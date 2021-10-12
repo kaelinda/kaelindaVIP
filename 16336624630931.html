@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      iOS 之 APP安全 - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/16336624630931.html" />
+      <meta property="og:title" content="iOS 之 APP安全" />
+      
+        <meta property="og:description" content="iOS 之 APP安全" />
+        <meta name="description" content="iOS 之 APP安全" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2021-10-08T11:07:43+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="16336624630931.html">iOS 之 APP安全</a></div>
+              <div class="subtitle">iOS 之 APP安全</div>
+              <div class="meta"><span class="time">$[timeformat('2021-10-08T11:07:43+08:00')]</span><br><span class="tags"></span></div>
+              <div class="body">
+                  <h2><a id="%E6%A3%80%E6%B5%8B%E8%AE%BE%E5%A4%87%E6%98%AF%E5%90%A6%E8%B6%8A%E7%8B%B1" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>检测设备是否越狱</h2>
+<pre><code class="language-plain_text">+ (BOOL)isJailBreak {
+	if ([[NSFileManager defaultManager] fileExistsAtPath:@&quot;/Applications/Cydia.app&quot;]){
+		return YES;
+	}
+	
+	if ([[NSFileManager defaultManager] fileExistsAtPath:@&quot;/Library/MobileSubstrate/MobileSubstrate.dylib&quot;]){
+		return YES;
+	}
+	
+	if ([[NSFileManager defaultManager] fileExistsAtPath:@&quot;/bin/bash&quot;]){
+		return YES;
+	}
+	
+	if ([[NSFileManager defaultManager] fileExistsAtPath:@&quot;/usr/sbin/sshd&quot;]){
+		return YES;
+	}
+	
+	if ([[NSFileManager defaultManager] fileExistsAtPath:@&quot;/etc/apt&quot;]){
+		return YES;
+	}
+	if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@&quot;cydia://&quot;]]) {
+		return YES;
+	}
+	return NO;
+}
+</code></pre>
+<h2><a id="%E6%A3%80%E6%B5%8B%E8%AE%BE%E5%A4%87%E7%BD%91%E7%BB%9C%E7%8E%AF%E5%A2%83%E6%98%AF%E5%90%A6%E5%BC%80%E5%90%AF%E4%BB%A3%E7%90%86" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>检测设备网络环境是否开启代理</h2>
+<pre><code class="language-plain_text">NSDictionary *proxySettings = (__bridge NSDictionary *)(CFNetworkCopySystemProxySettings());
+NSArray *proxies = (__bridge NSArray *)(CFNetworkCopyProxiesForURL((__bridge CFURLRef _Nonnull)([NSURL URLWithString:@&quot;https://www.baidu.com&quot;]), (__bridge CFDictionaryRef _Nonnull)(proxySettings)));
+
+NSLog(@&quot;\n%@&quot;,proxies);
+NSDictionary *settings = proxies[0];
+NSLog(@&quot;%@&quot;,[settings objectForKey:(NSString *)kCFProxyHostNameKey]);
+NSLog(@&quot;%@&quot;,[settings objectForKey:(NSString *)kCFProxyPortNumberKey]);
+NSLog(@&quot;%@&quot;,[settings objectForKey:(NSString *)kCFProxyTypeKey]);
+    if ([[settings objectForKey:(NSString *)kCFProxyTypeKey] isEqualToString:@&quot;kCFProxyTypeNone&quot;])
+    {
+        NSLog(@&quot;kael 没代理&quot;);
+    }
+                                                                                                     else
+    {
+        NSLog(@&quot;kael 设置了代理&quot;);
+    }
+</code></pre>
+<h2><a id="app%E7%A6%81%E6%AD%A2%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>APP 禁止动态调试</h2>
+<pre><code class="language-plain_text">#import &lt;UIKit/UIKit.h&gt; 
+#import &quot;AppDelegate.h&quot;  
+#import &lt;dlfcn.h&gt;
+
+typedef int (*ptrace_ptr_t)(int _request, pid_t _pid, caddr_t _addr, int _data);
+#if !defined(PT_DENY_ATTACH)
+#define PT_DENY_ATTACH 31
+#endif  // !defined(PT_DENY_ATTACH)
+
+void disable_gdb() {
+  void* handle = dlopen(0, RTLD_GLOBAL | RTLD_NOW);
+  ptrace_ptr_t ptrace_ptr = dlsym(handle, &quot;ptrace&quot;);
+  ptrace_ptr(PT_DENY_ATTACH, 0, 0, 0);
+  dlclose(handle);
+}
+
+int main(int argc, char * argv[]) {
+#ifndef DEBUG
+    disable_gdb();
+#endif
+    @autoreleasepool {
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+    }
+}
+</code></pre>
+<p>如果你在Xcode调试环境下，去掉#ifndef DEBUG #endif这句话，你会发现，Xcode无法调试该应用；因为动态的加载了ptrace，然后给传输的宏是PT_DENY_ATTACH 拒绝附加进程</p>
+<h2><a id="%E4%BB%A3%E7%A0%81%E6%B7%B7%E6%B7%86%E8%84%9A%E6%9C%AC" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>代码混淆 脚本</h2>
+<p><a href="https://zfj1128.blog.csdn.net/article/details/95482006">代码混淆相关 参考文章</a></p>
+<pre><code class="language-plain_text">TABLENAME=symbols
+SYMBOL_DB_FILE=&quot;$PROJECT_DIR/CodeObfuscation/symbols&quot;
+STRING_SYMBOL_FILE=&quot;$PROJECT_DIR/CodeObfuscation/func.list&quot;
+HEAD_FILE=&quot;$PROJECT_DIR/CodeObfuscation/codeObfuscation.h&quot;
+export LC_CTYPE=C
+
+#维护数据库方便日后作排重
+createTable()
+{
+echo &quot;create table $TABLENAME(src text, des text);&quot; | sqlite3 $SYMBOL_DB_FILE
+}
+
+insertValue()
+{
+echo &quot;insert into $TABLENAME values('$1' ,'$2');&quot; | sqlite3 $SYMBOL_DB_FILE
+}
+
+query()
+{
+echo &quot;select * from $TABLENAME where src='$1';&quot; | sqlite3 $SYMBOL_DB_FILE
+}
+
+ramdomString()
+{
+openssl rand -base64 64 | tr -cd 'a-zA-Z' |head -c 16
+}
+
+rm -f $SYMBOL_DB_FILE
+rm -f $HEAD_FILE
+createTable
+
+touch $HEAD_FILE
+echo '#ifndef Demo_codeObfuscation_h
+#define Demo_codeObfuscation_h' &gt;&gt; $HEAD_FILE
+echo &quot;//confuse string at `date`&quot; &gt;&gt; $HEAD_FILE
+cat &quot;$STRING_SYMBOL_FILE&quot; | while read -ra line; do
+if [[ ! -z &quot;$line&quot; ]]; then
+ramdom=`ramdomString`
+echo $line $ramdom
+insertValue $line $ramdom
+echo &quot;#define $line $ramdom&quot; &gt;&gt; $HEAD_FILE
+fi
+done
+echo &quot;#endif&quot; &gt;&gt; $HEAD_FILE
+
+
+sqlite3 $SYMBOL_DB_FILE .dump
+</code></pre>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

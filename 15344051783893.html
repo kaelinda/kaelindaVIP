@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      iOS Category 和 Extention 的本质区别【面试必备】 - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/15344051783893.html" />
+      <meta property="og:title" content="iOS Category 和 Extention 的本质区别【面试必备】" />
+      
+        <meta property="og:description" content="iOS Category 和 Extention 的本质区别【面试必备】" />
+        <meta name="description" content="iOS Category 和 Extention 的本质区别【面试必备】" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2018-08-16T15:39:38+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="15344051783893.html">iOS Category 和 Extention 的本质区别【面试必备】</a></div>
+              <div class="subtitle">iOS Category 和 Extention 的本质区别【面试必备】</div>
+              <div class="meta"><span class="time">$[timeformat('2018-08-16T15:39:38+08:00')]</span><br><span class="tags"></span></div>
+              <div class="body">
+                  <p><a href="https://blog.csdn.net/lwq718691587/article/details/60964392">感谢这位博主的博客:由category为什么不能添加属性所想到的</a></p>
+<h2><a id="%E4%B8%BA%E4%BB%80%E4%B9%88category%E4%B8%8D%E8%83%BD%E6%B7%BB%E5%8A%A0%E5%B1%9E%E6%80%A7%EF%BC%8C%E8%80%8C-extention%E8%83%BD%E6%B7%BB%E5%8A%A0%EF%BC%9F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>为什么category 不能添加属性，而Extention能添加？</h2>
+<p>这个问题从几个方面来解释下：</p>
+<ul>
+<li>
+<p>什么是OC中的属性？</p>
+<p>属性，是某个对象持有的特性。一般（注意这里的一般）都是在编译期编译的时候，对象持有的属性会决定对象的内存布局，编译期过后，在运行期，一般很少更改这个布局，因为运行期更改已经定好的布局，不仅会带来一系列的内存问题，而且内存开销会很大。</p>
+<p><strong>打个比方</strong>:就像是买房摇号有几千人排队呢，你后来的去插队，那么就会导致后面的人的位置发生变化，并且还会激起民愤！</p>
+</li>
+<li>
+<p>作用时期</p>
+<p>Extension 是在编译期决议（起作用）
+Category 是在 运行期决议（起作用）</p>
+</li>
+<li>
+<p>作用原理</p>
+<p>Extention是类的一部分，能决定类的内存布局，跟对象的生命周期一致，对象生成Extention添加的属性有效，对象释放，属性释放；
+Category并不是真正的类，他的作用是动态的给类添加方法，不改变类的内存布局。</p>
+</li>
+</ul>
+<h3><a id="%E9%82%A3%E4%B9%88%EF%BC%8C%E7%8E%B0%E5%9C%A8%E5%86%8D%E6%9D%A5%E7%9C%8B%E8%BF%99%E4%B8%AA%E9%97%AE%E9%A2%98%EF%BC%8C%E6%98%AF%E4%B8%8D%E6%98%AF%E5%BE%88%E5%A5%BD%E8%A7%A3%E9%87%8A%E4%BA%86%E5%91%A2" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>那么，现在再来看这个问题，是不是很好解释了呢</h3>
+<blockquote>
+<p>因为Extention是在编译期期决议，那么他就能决定类对象的内存布局，就能正常的给类添加属性。
+而Category是在运行期决议的，动态的更改类，如果添加了属性，那就会更改内存布局；而内存布局是在编译期就定好了的，运行期更改内存布局会引发不必要的内存风险并且会有很大的内存开销。所以，苹果为了避免这种情况，禁止类别动态添加属性更改内存布局。</p>
+</blockquote>
+<h3><a id="%E4%BD%86%E6%98%AF%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88runtime%E5%8A%A8%E6%80%81%E6%B7%BB%E5%8A%A0%E5%B1%9E%E6%80%A7%E5%91%A2%EF%BC%9F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>但是，为什么 runtime 动态添加属性呢？</h3>
+<p>那是因为 runtime关联的属性，并不是在真正的属性的位置添加的，而是在 AssociationsManager 管理的一个静态区内存 AssociationsHashMap 来存储关联对象的。所有用runtime 动态关联的属性都存在这个全局的map里面。map的key就是关联的对象的内存地址，而这个map的value又是另外一个AssociationsHashMap，里面保存了关联对象的键值对。</p>
+<p><figure><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fucjrrjsgvj312w0suq5z.jpg" alt="内存示意图" /><figcaption>内存示意图<figcaption></figure></p>
+<h3><a id="%E9%82%A3%E5%A6%82%E4%BD%95%E9%94%80%E6%AF%81runtime%E5%85%B3%E8%81%94%E7%9A%84%E5%B1%9E%E6%80%A7%E5%91%A2%EF%BC%9F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>那如何销毁RunTime关联的属性呢？</h3>
+<p>runtime的销毁对象函数objc_destructInstance里面会判断这个对象有没有关联对象，如果有，会调用_object_remove_assocations做关联对象的清理工作。</p>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

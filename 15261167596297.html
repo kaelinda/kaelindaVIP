@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      OC 多线程之 GCD知识从基础到进阶 （1） - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/15261167596297.html" />
+      <meta property="og:title" content="OC 多线程之 GCD知识从基础到进阶 （1）" />
+      
+        <meta property="og:description" content="OC 多线程之 GCD知识从基础到进阶 （1）" />
+        <meta name="description" content="OC 多线程之 GCD知识从基础到进阶 （1）" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2018-05-12T17:19:19+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="15261167596297.html">OC 多线程之 GCD知识从基础到进阶 （1）</a></div>
+              <div class="subtitle">OC 多线程之 GCD知识从基础到进阶 （1）</div>
+              <div class="meta"><span class="time">$[timeformat('2018-05-12T17:19:19+08:00')]</span><br><span class="tags"></span></div>
+              <div class="body">
+                  <h2><a id="%E6%A6%82%E5%BF%B5%E8%AE%A4%E7%9F%A5" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>概念认知</h2>
+<p>基本概念：</p>
+<ul>
+<li>
+<p>GCD 全称 (Grand Center Dispatch),翻译成通俗中文“牛B的中心调度机制”</p>
+</li>
+<li>
+<p>线程：执行任务调度的最小单位</p>
+</li>
+<li>
+<p>任务：就是一段代码，GCD中就是block中的内容。执行任务有两种方式：同步执行（sync）和异步执行（async）。两者的主要区别是：是否等待队列的任务执行结束，以及是否具备开启新线程的能力</p>
+</li>
+<li>
+<p>队列：用来存放任务的线性结构，采用 FIFO（先进先出）的原则。</p>
+</li>
+</ul>
+<span id="more"></span><!-- more -->
+<p>进阶概念：</p>
+<ul>
+<li>
+<p>同步:</p>
+<ul>
+<li>同步添加任务到指定的队列中，在添加的任务执行结束之前，会一直等待，直到队列里面的任务完成之后再继续执行后续任务。</li>
+<li>只能在当前线程中执行任务，不具备开启新线程的能力。</li>
+</ul>
+</li>
+<li>
+<p>异步:</p>
+<ul>
+<li>异步添加任务到指定的队列中，它不会做任何等待，可以继续执行任务。</li>
+<li>可以在新的线程中执行任务，具备开启新线程的能力。</li>
+</ul>
+</li>
+<li>
+<p>串行队列： 队列中的任务 按添加顺序开始执行</p>
+</li>
+<li>
+<p>并发队列： 队列中的任务可同时开始执行，可以开辟多个线程</p>
+</li>
+<li>
+<p>主队列（等待主线程内的任务完成之后再利用主线程执行任务）</p>
+</li>
+<li>
+<p>全局并发队列：本质上就是一个apple默认的并发队列</p>
+</li>
+</ul>
+<h2><a id="gcd%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%AA%A4" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>GCD 使用步骤</h2>
+<ul>
+<li>
+<p>创建队列：</p>
+<pre><code class="language-plain_text"> // 串行队列的创建方法
+ dispatch_queue_t queue = dispatch_queue_create(&quot;net.bujige.testQueue&quot;, DISPATCH_QUEUE_SERIAL);
+ // 并发队列的创建方法
+ dispatch_queue_t queue = dispatch_queue_create(&quot;net.bujige.testQueue&quot;, DISPATCH_QUEUE_CONCURRENT);
+ // 主队列的获取方法
+ dispatch_queue_t queue = dispatch_get_main_queue();
+ // 全局并发队列的获取方法
+ dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+</code></pre>
+</li>
+<li>
+<p>创建任务：</p>
+<pre><code class="language-plain_text"> // 同步执行任务创建方法
+ dispatch_sync(queue, ^{
+     // 这里放同步执行任务代码
+ });
+ // 异步执行任务创建方法
+ dispatch_async(queue, ^{
+     // 这里放异步执行任务代码
+ });
+</code></pre>
+</li>
+</ul>
+<h2><a id="%E4%B8%B2%E8%A1%8C%E5%B9%B6%E5%8F%91%E9%98%9F%E5%88%97%E5%90%8C%E6%AD%A5%E5%BC%82%E6%AD%A5%E7%BB%84%E5%90%88" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>串行并发队列 + 同步异步组合</h2>
+<blockquote>
+<p>1.同步执行 + 并发队列
+2.异步执行 + 并发队列
+3.同步执行 + 串行队列
+4.异步执行 + 串行队列
+5.同步执行 + 主队列
+6.异步执行 + 主队列</p>
+</blockquote>
+<p>各种组合：
+<figure><img src="http://cc.cocimg.com/api/uploads/20161030/1477828129712413.png" alt="串行并发队列+同步异步组合" /><figcaption>串行并发队列+同步异步组合<figcaption></figure></p>
+<p>问题：</p>
+<ul>
+<li>
+<p>死锁：在<code>主线程</code>用<code>主队列</code>执行<code>同步任务</code>就会造成线程死锁。</p>
+</li>
+<li>
+<p>主队列中的任务一定是在主线程中执行的</p>
+</li>
+<li>
+<p>全局并发队列中的任务可以开辟新线程，但不一定会去开辟</p>
+</li>
+</ul>
+<h2><a id="gcd%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>GCD 线程间通信</h2>
+<pre><code class="language-plain_text">// GCD的线程间的通信 : 常用代码
+- (void)GCDDemo
+{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSLog(@&quot;正在努力下载... %@&quot;,[NSThread currentThread]);
+        // 如果下载结束回到主线程更新UI
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@&quot;下载完成,正在更新UI... %@&quot;,[NSThread currentThread]);
+        });
+    });
+}
+</code></pre>
+<h2><a id="gcd%E7%9A%84%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>GCD 的其他方法</h2>
+<h3><a id="gcd%E6%A0%85%E6%A0%8F%E6%96%B9%E6%B3%95%EF%BC%9A-dispatch-barrier-async" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>GCD 栅栏方法：dispatch_barrier_async</h3>
+<p>对于栅栏方法的理解，我觉得下面的图片很形象：
+<figure><img src="https://upload-images.jianshu.io/upload_images/1877784-4d6d77fafd3ad007.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="" /></figure></p>
+<pre><code class="language-plain_text">dispatch_queue_t queue = dispatch_queue_create(&quot;net.bujige.testQueue&quot;, DISPATCH_QUEUE_CONCURRENT);
+    
+dispatch_async(queue, ^{
+    // 追加任务1
+    for (int i = 0; i &lt; 2; ++i) {
+        [NSThread sleepForTimeInterval:2];              // 模拟耗时操作
+        NSLog(@&quot;1---%@&quot;,[NSThread currentThread]);      // 打印当前线程
+    }
+});
+    
+dispatch_barrier_async(queue, ^{
+        // 追加任务 barrier
+        for (int i = 0; i &lt; 2; ++i) {
+            [NSThread sleepForTimeInterval:2];              // 模拟耗时操作
+            NSLog(@&quot;barrier---%@&quot;,[NSThread currentThread]);// 打印当前线程
+        }
+    });
+    
+dispatch_async(queue, ^{
+    // 追加任务2
+    for (int i = 0; i &lt; 2; ++i) {
+        [NSThread sleepForTimeInterval:2];              // 模拟耗时操作
+        NSLog(@&quot;3---%@&quot;,[NSThread currentThread]);      // 打印当前线程
+    }
+});
+
+</code></pre>
+<blockquote>
+<p>虽然是异步任务 栅栏也能把这两个任务给有先后顺序的隔离开来。</p>
+</blockquote>
+<h3><a id="gcd%E5%BB%B6%E6%97%B6%E6%89%A7%E8%A1%8C%E6%96%B9%E6%B3%95%EF%BC%9A-dispatch-after" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>GCD 延时执行方法：dispatch_after</h3>
+<blockquote>
+<p>这里需要注意的是，延迟的时间是指的 延迟将任务添加到队列中。所以这个时间并不是特别准确的</p>
+</blockquote>
+<pre><code class="language-plain_text">/**
+ * 延时执行方法 dispatch_after
+ */
+- (void)after {
+    NSLog(@&quot;currentThread---%@&quot;,[NSThread currentThread]);  // 打印当前线程
+    NSLog(@&quot;asyncMain---begin&quot;);
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        // 2.0秒后异步追加任务代码到主队列，并开始执行
+        NSLog(@&quot;after---%@&quot;,[NSThread currentThread]);  // 打印当前线程
+    });
+}
+</code></pre>
+<h3><a id="gcd%E4%B8%80%E6%AC%A1%E6%80%A7%E4%BB%A3%E7%A0%81%EF%BC%88%E5%8F%AA%E6%89%A7%E8%A1%8C%E4%B8%80%E6%AC%A1%EF%BC%89%EF%BC%9A-dispatch-once" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>GCD 一次性代码（只执行一次）：dispatch_once</h3>
+<pre><code class="language-plain_text"> static dispatch_once_t onceToken;
+    dispatch_once(&amp;onceToken, ^{
+        // 只执行1次的代码(这里面默认是线程安全的)
+    });
+</code></pre>
+<h3><a id="gcd%E5%BF%AB%E9%80%9F%E8%BF%AD%E4%BB%A3%E6%96%B9%E6%B3%95%EF%BC%9A-dispatch-apply" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>GCD 快速迭代方法：dispatch_apply</h3>
+<pre><code class="language-plain_text">dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    
+    NSLog(@&quot;apply---begin&quot;);
+    dispatch_apply(6, queue, ^(size_t index) {
+        NSLog(@&quot;%zd---%@&quot;,index, [NSThread currentThread]);
+    });
+    NSLog(@&quot;apply---end&quot;);
+</code></pre>
+<h3><a id="gcd%E9%98%9F%E5%88%97%E7%BB%84%EF%BC%9A-dispatch-group" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>GCD 队列组：dispatch_group</h3>
+<pre><code class="language-plain_text">NSLog(@&quot;currentThread---%@&quot;,[NSThread currentThread]);  // 打印当前线程
+    NSLog(@&quot;group---begin&quot;);
+    
+    dispatch_group_t group =  dispatch_group_create();
+    
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // 追加任务1
+        for (int i = 0; i &lt; 2; ++i) {
+            [NSThread sleepForTimeInterval:2];              // 模拟耗时操作
+            NSLog(@&quot;1---%@&quot;,[NSThread currentThread]);      // 打印当前线程
+        }
+    });
+    
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // 追加任务2
+        for (int i = 0; i &lt; 2; ++i) {
+            [NSThread sleepForTimeInterval:2];              // 模拟耗时操作
+            NSLog(@&quot;2---%@&quot;,[NSThread currentThread]);      // 打印当前线程
+        }
+    });
+    
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        // 等前面的异步任务1、任务2都执行完毕后，回到主线程执行下边任务
+        for (int i = 0; i &lt; 2; ++i) {
+            [NSThread sleepForTimeInterval:2];              // 模拟耗时操作
+            NSLog(@&quot;3---%@&quot;,[NSThread currentThread]);      // 打印当前线程
+        }
+        NSLog(@&quot;group---end&quot;);
+    });
+</code></pre>
+<h3><a id="gcd%E9%98%9F%E5%88%97%E7%BB%84%E7%9B%91%E5%90%AC%EF%BC%9Adispatch-group-notify" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>GCD队列组监听：dispatch_group_notify</h3>
+<pre><code class="language-plain_text">    /*
+     * 业务异步串行执行，用GCD实现的四种方式
+     * 1、dispatch_group_notify(group, queue, ^{ });
+     * 2、dispatch_group_async(group, backQueue, ^{ });
+     * 3、dispatch_group_wait(group, DISPATCH_TIME_FOREVER); 会有线程等待阻塞当前线程
+     * 4、信号量 = 0  实现；会有线程等待阻塞当前线程
+     */
+    
+    // 被监听的group
+    dispatch_group_t group = dispatch_group_create();
+    // 将要执行后续block代码的队列
+    dispatch_queue_t queue = dispatch_get_main_queue();
+    
+    
+    // ----------------- 监听group执行完毕 后，在queue队列执行block代码
+    dispatch_group_notify(group, queue, ^{
+        // 任务代码
+    });
+    
+    
+    // ---------------- 全局并发队列
+    dispatch_queue_t backQueue = dispatch_get_global_queue(0, 0);
+    // 向group中添加 在某个队列中执行的任务
+    dispatch_group_async(group, backQueue, ^{
+        // 追加的任务
+    });
+
+    /*
+     * 监听group执行完毕 之后在某个队列中执行某个任务
+     * 跟 向group中追加某个队列中执行的任务 也有类似作用，但是group不会有线程等待，只是会造成先后执行的效果，但是不会有线程等待
+     */
+
+    // ------------ 在此处等待group中的任务执行完毕 然后 执行wait后面的代码,线程等待会阻塞当前线程
+    dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
+    
+    
+    // 创建信号量 初始信号量0 线程等待
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    // 主队列中执行异步任务
+    dispatch_async(queue, ^{
+        // 信号量+1
+        dispatch_semaphore_signal(semaphore);
+    });
+    // 信号量不为0时候-1，信号量=0时候线程等待
+    // 异步任务异步执行后 直接带了wait,信号量=0 ，线程等待，等异步任务完毕时 信号量+1 不为零，此时线程不再等待，开始执行下面代码，会阻塞当前线程；
+    dispatch_semaphore_wait(semaphore, 1);
+    
+    /*
+     * semaphore = 0 时候 dispatch_semaphore_wait 等待信号量！=0，
+     * 跟 dispatch_group_wait 等待group执行完毕 有一点相似。
+     */
+</code></pre>
+<h3><a id="gcd%E4%B8%AD%E4%BB%BB%E5%8A%A1%E5%A2%9E%E5%88%A0%EF%BC%9Adispatch-group-enter%E3%80%81dispatch-group-leave" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>GCD中任务增删：dispatch_group_enter、dispatch_group_leave</h3>
+<pre><code class="language-plain_text">// 向任务组添加任务
+dispatch_group_enter(group);
+// 将要添加的任务
+dispatch_async(queue, ^{
+    // 追加任务1
+    [NSThread sleepForTimeInterval:2];              // 模拟耗时操作
+    NSLog(@&quot;1---%@&quot;,[NSThread currentThread]);      // 打印当前线程
+    // 成对出现 任务组任务执行完毕 撤销任务
+    dispatch_group_leave(group);
+});
+// 等待group五秒钟
+dispatch_group_wait(group, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5*NSEC_PER_SEC)));
+// 要么五秒内执行完毕走到这里；要么五秒后超时，group还未执行完 就走到了这里
+NSLog(@&quot;等待之后&quot;);
+    
+// 如果只有enter 没有leave那么线程会一直存在 等待group执行完毕
+</code></pre>
+<h3><a id="gcd%E4%BF%A1%E5%8F%B7%E9%87%8F%EF%BC%9Adispatch-semaphore-t" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>GCD信号量：dispatch_semaphore_t</h3>
+<pre><code class="language-plain_text">
+-(void)semaphoreLockTest{
+    
+    dispatch_semaphore_t semaphoreLock = dispatch_semaphore_create(1);
+    
+    // 创建两个购票的串行队列
+    dispatch_queue_t queue1 = dispatch_queue_create(&quot;queue1&quot;, DISPATCH_QUEUE_SERIAL);
+    dispatch_queue_t queue2 = dispatch_queue_create(&quot;queue2&quot;, DISPATCH_QUEUE_SERIAL);
+    
+    __weak typeof(&amp;*self)weakSelf = self;
+    // 第一个购票队列
+    dispatch_async(queue1, ^{
+        [weakSelf semaphoreGetTicket:semaphoreLock];
+    });
+    // 第二个购票队列
+    dispatch_async(queue2, ^{
+        [weakSelf semaphoreGetTicket:semaphoreLock];
+    });
+
+}
+
+-(void)semaphoreGetTicket:(dispatch_semaphore_t)semaphore{
+	while (1) {
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+        if (YES) {
+            // 有票
+            // 模拟购票延时
+            [NSThread sleepForTimeInterval:0.2];
+            // 相当于解锁
+            dispatch_semaphore_signal(semaphore);
+        }else{
+            // 无票
+            // 相当于解锁
+            dispatch_semaphore_signal(semaphore);
+            break;
+        }
+        
+    }
+}
+</code></pre>
+<h2><a id="%E7%BA%BF%E7%A8%8B%E9%94%81" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>线程锁</h2>
+<p><a href="https://www.jianshu.com/p/35dd92bcfe8c">iOS多线程-各种线程锁的简单介绍</a></p>
+<hr />
+<p>本文参考文章：</p>
+<ul>
+<li><a href="https://www.jianshu.com/p/2d57c72016c6">iOS多线程：『GCD』详尽总结</a></li>
+<li><a href="http://www.cocoachina.com/ios/20161031/17887.html">iOS-图文表并茂，手把手教你GCD</a></li>
+</ul>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>

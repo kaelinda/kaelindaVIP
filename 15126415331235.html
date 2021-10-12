@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>
+        
+      iOS WKWebView 本地HTML、JS、CSS文件加载详解 - Kaelinda
+      
+    </title>
+    <meta name="keywords" content="加载本地文件, ios8, iOS, WKWebView, Kaelinda" />
+    
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content="@" />
+      <meta property="og:url" content="http://kaelinda.top/15126415331235.html" />
+      <meta property="og:title" content="iOS WKWebView 本地HTML、JS、CSS文件加载详解" />
+      
+        <meta property="og:description" content="iOS WKWebView 本地HTML、JS、CSS文件加载详解" />
+        <meta name="description" content="iOS WKWebView 本地HTML、JS、CSS文件加载详解" />
+      
+      
+      <meta property="og:site_name" content="Kaelinda" />
+    
+    
+    <link href="atom.xml" rel="alternate" title="Kaelinda" type="application/atom+xml">
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--Global site tag (gtag.js) - Google Analytics>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <script src="asset/colorscheme.js"></script>
+    <div class="container">
+      <div class="head">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blogname">Kaelinda</div>
+            <nav>
+              
+                <div class="item"><a target="_self" href="index.html">最近更新</a></div>
+              
+                <div class="item"><a target="_self" href="archives.html">归档目录</a></div>
+              
+                <div class="item"><a target="_self" href="ios.html">iOS</a></div>
+              
+                <div class="item"><a target="_self" href="swift.html">Swift</a></div>
+              
+                <div class="item"><a target="_self" href="reactnative.html">RN</a></div>
+              
+                <div class="item"><a target="_self" href="js.html">JS</a></div>
+              
+                <div class="item"><a target="_self" href="shell.html">shell</a></div>
+              
+                <div class="item"><a target="_self" href="py.html">Python</a></div>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div> <div class="container" id="post">
+  <div class="article huge">
+    <div class="featureimg" style="background-image: url('asset/defaultfeaimg.jpg')"></div>
+    <img src="" style="display: none;" class="featureimgforexternal">
+    <div class="timeGTM" style="display:none;">2017-12-07T18:12:13+08:00</div>
+    <div class="row content">
+      <div class="col-md-2"></div>
+      <div class="col-md-10 main">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="post">
+              <div class="headline"><a href="15126415331235.html">iOS WKWebView 本地HTML、JS、CSS文件加载详解</a></div>
+              <div class="subtitle">iOS WKWebView 本地HTML、JS、CSS文件加载详解</div>
+              <div class="meta"><span class="time">$[timeformat('2017-12-07T18:12:13+08:00')]</span><br><span class="tags"><a href="tag_%E5%8A%A0%E8%BD%BD%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6.html">#加载本地文件</a><a href="tag_ios8.html">#ios8</a><a href="tag_iOS.html">#iOS</a><a href="tag_WKWebView.html">#WKWebView</a></span></div>
+              <div class="body">
+                  <blockquote>
+<p><strong>Tips:</strong>
+NSString类型的文件路径转换为URL的时候，一定要用
+<code>NSURL *pathURL = [NSURL fileURLWithPath:filePath];</code>方法去转换，否则资源URL不合法，APP会崩溃</p>
+</blockquote>
+<h2><a id="%E4%B8%8A%E6%BA%90%E7%A0%81%E6%8E%A5%E5%8F%A3%EF%BC%9A" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>上源码接口：</h2>
+<h3><a id="loadrequest%E6%96%B9%E5%BC%8F%E5%8A%A0%E8%BD%BD" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>loadRequest方式加载</h3>
+<ul>
+<li>
+<p>API : iOS8即可使用</p>
+<p><code>- (nullable WKNavigation *)loadRequest:(NSURLRequest *)request;</code></p>
+</li>
+<li>
+<p>用途：</p>
+<ul>
+<li>1：主要用来加载网络URL</li>
+<li>2：也可以加载本地HTML文件（本文重点）</li>
+</ul>
+  <span id="more"></span><!-- more -->
+</li>
+</ul>
+<h3><a id="loadfileurl" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>loadFileURL</h3>
+<ul>
+<li>
+<p>API: URL:文件相对路径 readAccessURL：访问文件需要引用的文件的路径 一般都是比<code>URL</code>大一级或者更高几级</p>
+<p><code>- (nullable WKNavigation *)loadFileURL:(NSURL *)URL allowingReadAccessToURL:(NSURL *)readAccessURL API_AVAILABLE(macosx(10.11), ios(9.0));</code></p>
+</li>
+<li>
+<p>用途：主要用于加载本地文件（一般指相对路径）</p>
+</li>
+</ul>
+<h3><a id="loadhtmlstring" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>loadHTMLString</h3>
+<ul>
+<li>
+<p>API:
+<code>- (nullable WKNavigation *)loadHTMLString:(NSString *)string baseURL:(nullable NSURL *)baseURL;</code></p>
+</li>
+<li>
+<p>用途：主要用于 HTML转换成的字符串（比如：编程APP）</p>
+</li>
+</ul>
+<h3><a id="loaddata" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>loadData</h3>
+<ul>
+<li>
+<p>API: 值得一提的是MIMETType,text/html、image/jpg、text/plain</p>
+<p><code>- (nullable WKNavigation *)loadData:(NSData *)data MIMEType:(NSString *)MIMEType characterEncodingName:(NSString *)characterEncodingName baseURL:(NSURL *)baseURL API_AVAILABLE(macosx(10.11), ios(9.0));</code></p>
+</li>
+<li>
+<p>用途：主要用于加载 二进制状态下的文件，主要包括HTML、Image、Text文本</p>
+</li>
+</ul>
+<h2><a id="%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84html%E6%96%87%E4%BB%B6%E4%BD%8D%E7%BD%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>开发中的HTML文件位置</h2>
+<h3><a id="html%E4%BD%8D%E4%BA%8E%E5%B7%A5%E7%A8%8B%E5%86%85%E7%9A%84%E9%BB%84%E8%89%B2%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>HTML位于工程内的黄色文件夹下</h3>
+<blockquote>
+<p>这是咱们一般的文件添加方式，这属于绝对路径的添加</p>
+</blockquote>
+<p><figure><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fmcxnu043cj313w05maan.jpg" alt="绝对路径" /><figcaption>绝对路径<figcaption></figure></p>
+<h4><a id="loadrequest%E5%8A%A0%E8%BD%BD%E6%96%B9%E5%BC%8F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><code>loadRequest</code> 加载方式</strong></h4>
+<blockquote>
+<p><strong>Tips:</strong>
+iOS8 的时候只能通过这个<code>loadRequest</code>方法去加载
+iOS8 WKWebView的加载本地文件的方式本文后面会有 <strong>详细方案</strong></p>
+</blockquote>
+<pre><code class="language-Objectiv-C">NSString *bundleStr = [[NSBundle mainBundle] pathForResource:@&quot;feedback&quot; ofType:@&quot;html&quot;];
+    
+_feedbackUrl = [NSURL fileURLWithPath:bundleStr];
+    
+[_webview loadRequest:[NSURLRequest requestWithURL:_feedbackUrl]];
+</code></pre>
+<p><figure><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fmcxsxa56jj30af0j5dgd.jpg" alt="效果" /><figcaption>效果<figcaption></figure></p>
+<p><strong>warning！！！</strong>
+页面能加载出来，但是效果是很差的，因为CSS、JS、图片资源文件没有得到正确的引用！
+那我们该通过什么方式来让这些附属的文件得到正确引用呢？
+iOS9之后新增了 <code>loadFileURL</code> 等一系列加载本地文件的方法</p>
+<h4><a id="loadfileurl%E5%8A%A0%E8%BD%BD%E6%96%B9%E5%BC%8F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong><code>loadFileURL</code>加载方式</strong></h4>
+<blockquote>
+<p>iOS9之后才出现这个加载方式</p>
+</blockquote>
+<pre><code class="language-Objectiv-C">NSString *bundleStr = [[NSBundle mainBundle] pathForResource:@&quot;feedback&quot; ofType:@&quot;html&quot;];
+_feedbackUrl = [NSURL fileURLWithPath:bundleStr];
+if (@available(iOS 9.0, *)) {
+    [_webview loadFileURL:[NSURL fileURLWithPath:bundleStr] allowingReadAccessToURL:[NSURL fileURLWithPath:[NSBundle mainBundle].bundlePath]];
+} else {
+    // Fallback on earlier versions
+}
+</code></pre>
+<p>哇塞！加载出来了耶！但是 依旧是没能加载其他资源文件啊 😰
+客观，稍安勿躁 ~</p>
+<h3><a id="html%E4%BD%8D%E4%BA%8E%E5%B7%A5%E7%A8%8B%E5%86%85%E7%9A%84%E8%93%9D%E8%89%B2%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>HTML位于工程内的蓝色文件夹下</h3>
+<blockquote>
+<p>特殊文件添加方式，尤其是文件之间有相互引用的时候用这种方式</p>
+</blockquote>
+<p><figure><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fmcxr0jl88j313w05maan.jpg" alt="相对路径添加方式" /><figcaption>相对路径添加方式<figcaption></figure></p>
+<h4><a id="loadrequest%E6%96%B9%E5%BC%8F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>loadRequest 方式</h4>
+<pre><code class="language-Objectiv-C">NSString *filePath = [[NSBundle mainBundle] pathForResource:@&quot;feedback&quot; ofType:@&quot;html&quot; inDirectory:@&quot;FeedbackH5/pages&quot;];
+NSURL *pathURL = [NSURL fileURLWithPath:filePath];
+if (@available(iOS 9.0, *)) {
+    [_webview loadRequest:[NSURLRequest requestWithURL:pathURL]];
+}
+</code></pre>
+<h4><a id="loadfileurl%E6%96%B9%E5%BC%8F%E5%8A%A0%E8%BD%BD" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>loadFileURL 方式加载</h4>
+<pre><code class="language-Objectiv-C">NSString *filePath = [[NSBundle mainBundle] pathForResource:@&quot;feedback&quot; ofType:@&quot;html&quot; inDirectory:@&quot;FeedbackH5/pages&quot;];
+    NSURL *pathURL = [NSURL fileURLWithPath:filePath];
+    if (@available(iOS 9.0, *)) {
+//        [_webview loadRequest:[NSURLRequest requestWithURL:pathURL]];
+        [_webview loadFileURL:[NSURL fileURLWithPath:filePath] allowingReadAccessToURL:[NSURL fileURLWithPath:[NSBundle mainBundle].bundlePath]];
+    }
+</code></pre>
+<p><figure><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fmcyc9pjp0j30af0j5wfp.jpg" alt="" /></figure></p>
+<blockquote>
+<p>由此可见：相对路径方式加载 是可以正常引用JS、css等资源文件的
+但是 iOS 8系统下，依旧加载不出来！！！</p>
+</blockquote>
+<h3><a id="html%E4%BD%8D%E4%BA%8Eapp%E6%B2%99%E7%9B%92%E4%B8%8Bdocument%E6%96%87%E4%BB%B6%E5%A4%B9" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>HTML位于APP沙盒下Document文件夹</h3>
+<blockquote>
+<p>iOS8既然添加到工程中引用，一直引用不到，我们可以让他从document路径下引用试试！
+这个方法可以适配 iOS8系统下WKWebView加载本地文件了？
+你还太天真！！！</p>
+</blockquote>
+<pre><code class="language-Objectiv-C">//项目中的文件夹路径
+NSString *directoryPath = [KFileManger appSourceName:@&quot;FeedbackH5&quot; andType:@&quot;&quot;];
+
+//沙盒中的document路径
+NSString *documentpath = [KFileManger documentPath];
+    
+//copy文件夹到 document 路径下
+[KFileManger copyMissingFile:directoryPath toPath:documentpath];
+
+//document 路径下的HTML文件路径
+NSString *homePath = [[KFileManger documentPath] stringByAppendingString:@&quot;/FeedbackH5/pages/feedback.html&quot;];
+
+//document 路径下的HTML文件 URL
+NSURL *docSourceURL = [NSURL fileURLWithPath:homePath];
+    
+[_webview loadRequest:[NSURLRequest requestWithURL:docSourceURL]];
+</code></pre>
+<blockquote>
+<p>果然不出所料(zhe jiu shi wo xiang yao de)，模拟器上能正常加载出界面，图片、CSS但是JS交互是不行的
+在真机 依旧加载不出任何界面！</p>
+</blockquote>
+<h3><a id="html%E4%BD%8D%E4%BA%8Eapp%E6%B2%99%E7%9B%92%E4%B8%8Btmp%E4%B8%B4%E6%97%B6%E7%BC%93%E5%AD%98%E6%96%87%E4%BB%B6%E5%A4%B9" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>HTML位于APP沙盒下tmp临时缓存文件夹</h3>
+<blockquote>
+<p>亲爱的客观们，这才是iOS8系统下加载有相互引用关系的HTML、JS、CSS以及图片资源的正确方法(当前知道的唯一方法如有新的方式私信我哦~)！😊</p>
+</blockquote>
+<pre><code class="language-Objectiv-C">//项目中的文件夹路径
+NSString *directoryPath = [KFileManger appSourceName:@&quot;FeedbackH5&quot; andType:@&quot;&quot;];
+
+//tmp缓存文件夹路径
+NSString *tmpPath = [KFileManger tmpPath];
+
+//新文件夹名字
+NSString *wwwDir =@&quot;www&quot;;
+
+//tmp文件夹下创建www文件夹
+[KFileManger createDirWithPath:tmpPath andDirectoryName: wwwDir];
+
+//tmp中的www文件夹中的路径
+NSString *tmpWWW = [tmpPath stringByAppendingString: wwwDir];
+
+//copy文件夹到 tmp/www 路径下
+[KFileManger copyMissingFile:directoryPath toPath:tmpWWW];
+
+// 字符 tmp/www/FeedbackH5/pages/feedback.html 全路径
+NSString *tmpWWWFeedback = [tmpWWW stringByAppendingString:@&quot;/FeedbackH5/pages/feedback.html&quot;];
+
+//tmp 操作，字符转换成URL
+NSURL *feedbackURL = [NSURL fileURLWithPath:tmpWWWFeedback];
+
+//WKWebView加载
+[_webview loadRequest:[NSURLRequest requestWithURL:feedbackURL]];
+</code></pre>
+
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    let post = new Vue({
+     el: '#post',
+     data: {
+       hidelikecoin: ''
+     },
+     methods: {
+       timeformat(raw) {
+         return moment(raw).format("YYYY 年 MM 月 DD 日");
+       }
+     },
+     delimiters: ['$[', ']']
+   })
+  </script>      <div class="container">
+      <hr>
+      <div class="footer" id="footer">
+        <div class="slogan">倘若我心中的山水，你眼中能看到，我便一步一莲花祈祷</div>
+        <div class="meta">
+          <p></p>
+          <p>「Kaelinda」使用 <a href="https://zh.mweb.im/" target="_blank">MWeb</a> 和 <a href="https://github.com/Astrian/reflect-white-mweb-theme" target="_blank">Reflect White</a> 搭建。</p>
+          <p class='colorScheme'>色彩模式：<span id='colorSchemeLight' onclick="changeColorScheme('light');">明亮</span> &middot; <span id='colorSchemeDark' onclick="changeColorScheme('dark')">黑暗</span> &middot; <span id='colorSchemeSystem' onclick="changeColorScheme('system')">跟随系统</span></p>
+        </div>
+      </div>
+      <script>
+        let footer = new Vue({
+          el: '#footer',
+          data: {
+            message: 'hello'
+          },
+          delimiters: ['$[', ']']
+        })
+      </script>
+    </div>
+  </div>
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<style></style>
+<script>
+  changeColorScheme()
+</script>
+</html>
